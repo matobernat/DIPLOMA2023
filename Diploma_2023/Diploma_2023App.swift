@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Diploma_2023App: App {
+    
+//    var account = MockAccount ()
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabBarView()
         }
     }
 }
