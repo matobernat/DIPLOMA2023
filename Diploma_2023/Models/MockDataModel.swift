@@ -10,174 +10,6 @@ import SwiftUI
 
 
 
-//
-//struct MockAccount{
-//    let account = Account(id: UUID(), name: "Test Account", password: "password", email: "test@example.com")
-//}
-//
-//struct MockCoaches{
-//    let coach1 = Coach(id: UUID(), name: "Coach 1", email: "coach1@example.com", accountId: MockAccount().account.id)
-//    let coach2 = Coach(id: UUID(), name: "Coach 2", email: "coach2@example.com", accountId: MockAccount().account.id)
-//}
-//
-//struct MockClients{
-//    let client1 = Client(firstName: "John", lastName: "Doe", email: "john@example.com", phone: "555-1234", accountId: MockAccount().account.id)
-//    let client2 = Client(firstName: "Jane", lastName: "Doe", email: "jane@example.com", phone: "555-5678", accountId: MockAccount().account.id)
-//    let client3 = Client(firstName: "Bob", lastName: "Smith", email: "bob@example.com", phone: "555-9012", accountId: MockAccount().account.id)
-//    let client4 = Client(firstName: "Alice", lastName: "Smith", email: "alice@example.com", phone: "555-3456", accountId: MockAccount().account.id)
-//    let client5 = Client(firstName: "Mike", lastName: "Johnson", email: "mike@example.com", phone: "555-7890", accountId: MockAccount().account.id)
-//    let client6 = Client(firstName: "Sara", lastName: "Johnson", email: "sara@example.com", phone: "555-2345", accountId: MockAccount().account.id)
-//    let client7 = Client(firstName: "Tom", lastName: "Williams", email: "tom@example.com", phone: "555-6789", accountId: MockAccount().account.id)
-//    let client8 = Client(firstName: "Amy", lastName: "Williams", email: "amy@example.com", phone: "555-0123", accountId: MockAccount().account.id)
-//}
-//
-//struct MockCategories{
-//
-//    // GLOBAL
-//    static let allClientsCategory = Category(id: UUID(),
-//                                  name: "All Clients",
-//                                  isGlobalCategory: true,
-//                                  clientIds: [],
-//                                  coachId: nil,
-//                                  accountId: MockAccount().account.id)
-//
-//    static let category1 = Category(id: UUID(),
-//                             name: "Hockey Players",
-//                             isGlobalCategory: true,
-//                             clientIds: [MockClients().client3.id,
-//                                         MockClients().client4.id,
-//                                         MockClients().client7.id,
-//                                         MockClients().client8.id],
-//                             coachId: nil,
-//                             accountId: MockAccount().account.id)
-//
-//    // LOCAL
-//    static let category2 = Category(id: UUID(),
-//                             name: "My clients",
-//                             isGlobalCategory: false,
-//                             clientIds: [MockClients().client1.id, MockClients().client2.id],
-//                             coachId: MockCoaches().coach1.id,
-//                             accountId: MockAccount().account.id)
-//
-//    static let category3 = Category(id: UUID(),
-//                             name: "My clients",
-//                             isGlobalCategory: false,
-//                             clientIds: [MockClients().client5.id, MockClients().client6.id],
-//                             coachId: MockCoaches().coach2.id,
-//                             accountId: MockAccount().account.id)
-//
-//    static let categories = [allClientsCategory, category1, category2, category3 ]
-//
-//}
-//
-
-
-
-
-
-
-struct MockCategory: Decodable, Identifiable{
-    let id: Int
-    let name: String
-    let isGlobalCategory: Bool
-    let clients: [MockClient]
-}
-
-struct MockClient: Decodable, Identifiable{
-    let id: Int
-    let name: String
-}
-
-
-class MockClientModel {
-    let categories: [MockCategory]
-
-    init(){
-        let client1 = MockClient(id: 1, name: "John")
-        let client2 = MockClient(id: 2, name: "Mary")
-        let client3 = MockClient(id: 3, name: "Bob")
-        let client4 = MockClient(id: 4, name: "Alice")
-        let client5 = MockClient(id: 5, name: "Tom")
-        let client6 = MockClient(id: 6, name: "Jane")
-        let client7 = MockClient(id: 7, name: "Mike")
-        let client8 = MockClient(id: 8, name: "Lisa")
-
-        let allClientsCategory = MockCategory(id: 1, name: "All Clients", isGlobalCategory: true, clients: [client1, client2, client3, client4, client5, client6, client7, client8])
-        let globalHockeyCategory = MockCategory(id: 2, name: "Global Hockey", isGlobalCategory: true, clients: [client1, client2, client3, client4])
-        let localMyClients = MockCategory(id: 3, name: "Local My Clients", isGlobalCategory: false, clients: [client3, client4, client5, client6])
-        let localHockeyCategory = MockCategory(id: 4, name: "Local Hockey", isGlobalCategory: false, clients: [client3, client4])
-
-        self.categories = [allClientsCategory, globalHockeyCategory, localMyClients, localHockeyCategory]
-    }
-
-    func category(id: Int?) -> MockCategory? {
-        if let id = id {
-            return categories.first(where: { $0.id == id })
-        } else {
-            return nil
-        }
-    }
-}
-
-let mockClientModel = MockClientModel()
-
-
-
-
-
-
-
-
-
-struct Item: Identifiable, Equatable, Hashable {
-    let id: Int
-    let name: String
-    let description: String = "Description"
-}
-
-
-struct Category: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let itemIds: [Int]
-    let isGlobalCategory: Bool
-}
-
-
-struct MockCategoryItemData {
-    static let categories = [
-        Category(name: "All Trainees", itemIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], isGlobalCategory: true),
-        Category(name: "Favorite Trainees", itemIds: [1, 2, 3, 4, 5, 6,], isGlobalCategory: true),
-        Category(name: "My Trainees", itemIds: [5, 6, 7, 8, 9, 10], isGlobalCategory: false),
-        Category(name: "My Hockey Players", itemIds: [5, 6, 7], isGlobalCategory: false),
-    ]
-    
-//    static let categories = [
-//        Category(name: "All Trainees", itemIds: [1, 2, 3], isGlobalCategory: true),
-//        Category(name: "Favorite Trainees", itemIds: [4, 5], isGlobalCategory: true),
-//        Category(name: "My Trainees", itemIds: [ 6, 7, 8], isGlobalCategory: false),
-//        Category(name: "My Hockey Players", itemIds: [9,10], isGlobalCategory: false),
-//    ]
-    
-    static let items = [
-        Item(id: 1, name: "John"),
-        Item(id: 2, name: "Sarah"),
-        Item(id: 3, name: "David"),
-        Item(id: 4, name: "Alex"),
-        Item(id: 5, name: "Olivia"),
-        Item(id: 6, name: "Emily"),
-        Item(id: 7, name: "Michael"),
-        Item(id: 8, name: "Daniel"),
-        Item(id: 9, name: "Isabella"),
-        Item(id: 10, name: "Noah")
-    ]
-    
-}
-
-
-//struct MockClientData {
-//    static let client = Client(id: 1, name: "Martin Bernat ", description: "Description of client 1", photoName: "client-photo")
-//}
 
 struct MockInfoRowData {
     static let cardTitles = ["AGE", "CHART", "DEVELOPER", "LANGUAGE"]
@@ -187,54 +19,26 @@ struct MockInfoRowData {
 
 
 
-struct MockItemCard{
-    let id : Int
-    let image: String
-    let date: String
-    let name: String
-    let description1: String
-    let description2: String
-}
-struct MockItemCardData {
-    static let metricCards = [
-        MockItemCard(id: 1, image: "metric-image", date: "30 MAY", name: "First Metric", description1: "14% in total", description2: "15kg of muscle"),
-        MockItemCard(id: 2, image: "metric-image", date: "31 MAY", name: "Second Metric", description1: "15% in total", description2: "16kg of muscle"),
-        MockItemCard(id: 3, image: "metric-image", date: "1 JUN", name: "Third Metric", description1: "16% in total", description2: "17kg of muscle"),
-        MockItemCard(id: 4, image: "metric-image", date: "2 JUN", name: "Fourth Metric", description1: "17% in total", description2: "18kg of muscle"),
-        MockItemCard(id: 5, image: "metric-image", date: "3 JUN", name: "Fifth Metric", description1: "18% in total", description2: "19kg of muscle")
-    ]
-    static let foodPlanCards = [
-        MockItemCard(id: 1, image: "foodplan-maintain-image", date: "30 MAY", name: "Maintain", description1: "2000kcal", description2: ""),
-        MockItemCard(id: 2, image: "foodplan-bulking-image", date: "1 JUN", name: "Hard Bulk", description1: "3000kcal", description2: ""),
-        MockItemCard(id: 3, image: "foodplan-maintain-image", date: "2 JUN", name: "Maintain", description1: "2000kcal", description2: ""),
-    ]
-    static let photosCards = [
-        MockItemCard(id: 1, image: "photo-image", date: "30 MAY", name: "Starting", description1: "", description2: ""),
-        MockItemCard(id: 2, image: "photo-image", date: "1 JUN", name: "Hypertrophy 1.0", description1: "After", description2: ""),
-        MockItemCard(id: 3, image: "photo-image", date: "2 JUN", name: "Hypertrophy 2.0", description1: "Before", description2: ""),
-    ]
-    static let trainingPlanCards = [
-        MockItemCard(id: 1, image: "peak-logo",date: "30 MAY", name: "P9 - IN SEASON", description1: "MAXIMAL STRENGTH & ACCELERATION", description2: ""),
-        MockItemCard(id: 2, image: "peak-logo",date: "30 MAY", name: "P8 - IN SEASON", description1: "MAXIMAL STRENGTH & ACCELERATION", description2: ""),
-        MockItemCard(id: 3, image: "peak-logo",date: "30 MAY", name: "P7 - IN SEASON", description1: "MAXIMAL STRENGTH & ACCELERATION", description2: ""),
-        MockItemCard(id: 4, image: "peak-logo",date: "30 MAY", name: "P6 - IN SEASON", description1: "MAXIMAL STRENGTH & ACCELERATION", description2: ""),
-        MockItemCard(id: 5, image: "peak-logo",date: "30 MAY", name: "P5 - IN SEASON", description1: "MAXIMAL STRENGTH & ACCELERATION", description2: "")
-    ]
+
+protocol DetailViewMock: View {
+    init(item: IdentifiableItemMock)
 }
 
+protocol CardViewMock: View {
+    init(item: IdentifiableItemMock)
+}
 
+protocol IdentifiableItemMock {
+    var id: Int { get set }
+    var dataType: DataType { get }
+    var title: String { get set }
+    var subTitle: String { get set }
+    var categoryIDs: [Int] { get set }
+    var imageName: String { get set }
+    
+    var clientID: Int? { get set }
 
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 // mezocycle aj phases musia byt v jednej kategorii training protocol
@@ -266,19 +70,9 @@ enum SizeModel: String {
     case small = "Small"
 }
 
-protocol IdentifiableItem {
-    var id: Int { get set }
-    var dataType: DataType { get }
-    var title: String { get set }
-    var subTitle: String { get set }
-    var categoryIDs: [Int] { get set }
-    var imageName: String { get set }
-    
-    var clientID: Int? { get set }
 
-}
 
-struct ClientMock: IdentifiableItem, Identifiable, Hashable {
+struct ClientMock: IdentifiableItemMock, Identifiable, Hashable {
     var id: Int
     var dataType: DataType { .client }
     var title: String
@@ -303,7 +97,7 @@ struct ClientMock: IdentifiableItem, Identifiable, Hashable {
     var progressAlbumIDs: [Int]
 }
 
-struct ExerciseMock: IdentifiableItem, Identifiable, Hashable {
+struct ExerciseMock: IdentifiableItemMock, Identifiable, Hashable {
     var id: Int
     var dataType: DataType { .exercise }
     var title: String
@@ -318,32 +112,23 @@ struct ExerciseMock: IdentifiableItem, Identifiable, Hashable {
     var tags: [String]
 }
 
-struct TrainingSession {
-    var date: Date
-    var sets: Int
-    var reps: Int
-    var weight: Int
-    // ... other properties and methods
-}
-
-
-struct PhaseMock: IdentifiableItem {
+struct PhaseMock: IdentifiableItemMock {
+    
+    // IdentifiableItem properties
     var id: Int
     var dataType: DataType { .phase }
     var title: String
     var subTitle: String
     var categoryIDs: [Int]
     var imageName = "peak-logo"
-    
     var clientID: Int?
-
     
     var exercisesIDs: [Int]
     var sessionsIDs: [Int]
-    // ... other properties and methods
 }
 
-struct MezocycleMock: IdentifiableItem {
+
+struct MezocycleMock: IdentifiableItemMock {
     var id: Int
     var dataType: DataType { .mezocycle }
     var title: String
@@ -353,12 +138,11 @@ struct MezocycleMock: IdentifiableItem {
     
     var clientID: Int?
 
-    
-    var protocolsIDs: [Int]
+    var phasesIDs: [Int]
     // ... other properties and methods
 }
 
-struct FoodPlanMock: IdentifiableItem {
+struct FoodPlanMock: IdentifiableItemMock {
     var id: Int
     var dataType: DataType { .foodPlan }
     var title: String
@@ -370,7 +154,7 @@ struct FoodPlanMock: IdentifiableItem {
 
 }
 
-struct MeasurementMock: IdentifiableItem {
+struct MeasurementMock: IdentifiableItemMock {
     var id: Int
     var dataType: DataType { .measurement }
     var title: String
@@ -382,7 +166,7 @@ struct MeasurementMock: IdentifiableItem {
 
 }
 
-struct ProgressAlbumMock: IdentifiableItem {
+struct ProgressAlbumMock: IdentifiableItemMock {
     var id: Int
     var dataType: DataType { .progressAlbum }
     var title: String
@@ -487,8 +271,8 @@ struct DataModelMock {
 
     // Mezocycle Data
     static let mezocycles: [MezocycleMock] = [
-        MezocycleMock(id: 400, title: "Movie Star Plan", subTitle: "3 months", categoryIDs: [9, 11, 12], protocolsIDs: [300, 301]),
-        MezocycleMock(id: 401, title: "Spartan Plan", subTitle: "6 months", categoryIDs: [9, 11], protocolsIDs: [300, 301]),
+        MezocycleMock(id: 400, title: "Movie Star Plan", subTitle: "3 months", categoryIDs: [9, 11, 12], phasesIDs: [300, 301]),
+        MezocycleMock(id: 401, title: "Spartan Plan", subTitle: "6 months", categoryIDs: [9, 11], phasesIDs: [300, 301]),
         // ... more mezocycles
     ]
 

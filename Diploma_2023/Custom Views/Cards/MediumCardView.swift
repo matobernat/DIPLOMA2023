@@ -1,15 +1,18 @@
 //
-//  FoodPlanCard.swift
+//  MediumCardView.swift
 //  Diploma_2023
 //
-//  Created by Martin Bernát on 19/03/2023.
+//  Created by Martin Bernát on 29/03/2023.
 //
 
 import SwiftUI
 
-struct ItemCard: View {
-    let item: IdentifiableItem
+struct MediumCardView: View, CardViewMock {
+    let item: IdentifiableItemMock
     
+    init(item: IdentifiableItemMock) {
+        self.item = item
+    }
     
     var body: some View {
         HStack(alignment: .center) {
@@ -41,9 +44,35 @@ struct ItemCard: View {
         .frame(width: 220, height: 100)
     }
 }
-
-struct ItemCard_Previews: PreviewProvider {
+struct MediumCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemCard(item: DataModelMock.foodPlans.first!)
+        MediumCardView(item: DataModelMock.foodPlans.first!)
+    }
+}
+
+
+struct ItemDetailView: View, DetailViewMock{
+    
+    let item: IdentifiableItemMock
+    
+    var body: some View {
+        VStack {
+            Image(item.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(9)
+                .padding(.bottom, 8)
+            Text(item.title)
+                .font(.headline)
+                .fontWeight(.bold)
+                .padding(.bottom, 4)
+            Text(item.subTitle)
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 16)
+            Spacer()
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(item.title)
     }
 }

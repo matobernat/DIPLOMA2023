@@ -28,7 +28,11 @@ struct ClientsView: View {
                 ScrollView{ // might create performance issues
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 160))], spacing: 16) {
                         ForEach(selectedClients(allClients: clients)) { client in
-                            NavigationLink(destination: ClientDetailView(client: client), tag: client, selection: $selectedClient) {
+                            NavigationLink(
+                                destination: ClientDetailView(
+                                    item: client),
+                                tag: client,
+                                selection: $selectedClient) {
                                 ClientCardView(client: client)
                             }
                         }

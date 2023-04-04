@@ -12,7 +12,6 @@ struct FoodPlansView: View {
     let foodProtocols: [FoodPlanMock] = DataModelMock.foodPlans
     let title = "Food Protocols"
     
-    @State  var  selectedType: DataType = DataType.foodPlan
     @State  var selectedCategory: CategoryMock?
     @State private var selectedItem: FoodPlanMock?
     @State private var searchText: String = ""
@@ -24,7 +23,7 @@ struct FoodPlansView: View {
         } detail: {
             NavigationStack{
                 
-//                SearchBar(searchText: $searchText)
+                SearchBar(searchText: $searchText)
                 
                 if !searchText.isEmpty {
                     FoodPlansViewDetailSearch(
@@ -43,6 +42,13 @@ struct FoodPlansView: View {
             }
             .navigationTitle(selectedCategory?.name ?? "Select a category")
         }
+        .onAppear {
+            let index = categories.firstIndex{$0.section == .foodPlan}
+            if let index = index {
+                selectedCategory = categories[index]
+            }
+            
+        }
     }
 }
 
@@ -56,13 +62,16 @@ struct FoodPlansViewDetail: View{
     
     var body: some View{
             ScrollView{ // might create performance issues
-                
-                ItemListView(
+
+                GeneralHorizontalListView(
                     title: "Food Protocols",
                     items: selectedItemsByCategory(
                         allItems: foodProtocols,
                         selectedCategory: selectedCategory),
-                    titleSize: .large)
+                    titleSize: .medium,
+                    sizeModel: .medium,
+                    dataType: .foodPlan)
+
             }
         
     }
@@ -79,18 +88,15 @@ struct FoodPlansViewDetailSearch: View{
     @Binding var searchText: String
     
     var body: some View{
-            ScrollView{ // might create performance issues
-                                    
-                LeftTitleHeader(title: "Food Protocols")
-            
-                    GridListView(
-                        items: selectedItemsSearch(
-                            allItems: foodProtocols,
-                            selectedCategory: selectedCategory,
-                            searchText: searchText),
-                            dataType: DataType.foodPlan,
-                            title: "Phases")
-            }
+        GeneralGridListView(
+            items: selectedItemsSearch(
+                allItems: foodProtocols,
+                selectedCategory: selectedCategory,
+                searchText: searchText),
+            title: nil,
+            dataType: .foodPlan,
+            sizeModel: SizeModel.medium
+        )
         
     }
     

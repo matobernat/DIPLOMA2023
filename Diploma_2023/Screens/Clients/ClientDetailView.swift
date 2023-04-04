@@ -6,7 +6,11 @@
 //
 import SwiftUI
 
-struct ClientDetailView: View {
+struct ClientDetailView: View, DetailViewMock {
+    init(item: IdentifiableItemMock) {
+        client = item as! ClientMock
+    }
+    
     @State private var progress = 0.65 // Adjust this value to represent the desired progress
     let client: ClientMock
 
@@ -32,10 +36,12 @@ struct ClientDetailView: View {
                                 cardValues: MockInfoRowData.cardValues,
                                 cardDescriptions: MockInfoRowData.cardDescriptions)
                     
-                    TrainingPlanListView(title: "TrainingPlan", titleSize: SizeModel.medium, items: DataModelMock.mezocycles + DataModelMock.trainingProtocols)
-                    ItemListView(title: "Metrics", items: DataModelMock.measurements, titleSize: .medium)
-                    ItemListView(title: "Food Plans", items: DataModelMock.foodPlans, titleSize: .medium)
-                    ItemListView(title: "Progress Photos", items: DataModelMock.progressPhotos, titleSize: .medium)
+                    GeneralHorizontalListView(title: "Phases", items: DataModelMock.trainingProtocols , titleSize: .medium
+                                              ,sizeModel: .large, dataType: .phase)
+                    GeneralHorizontalListView(title: "Measurements", items: DataModelMock.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
+                    GeneralHorizontalListView(title: "Food Protocols", items: DataModelMock.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
+                    GeneralHorizontalListView(title: "Mezocycles", items: DataModelMock.mezocycles, titleSize: .medium, sizeModel: .large, dataType: .mezocycle)
+                    GeneralHorizontalListView(title: "Progress Photos", items: DataModelMock.progressPhotos, titleSize: .medium, sizeModel: .medium, dataType: .progressAlbum)
                     
                 }
             }
@@ -192,6 +198,6 @@ struct CustomProgressViewStyle: ProgressViewStyle {
 
 struct ClientDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ClientDetailView(client: DataModelMock.clients.first!)
+        ClientDetailView(item: DataModelMock.clients.first!)
     }
 }

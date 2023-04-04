@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct WhiteboardView: View {
-    @State private var departmentId: Int?
-    @State private var employeeId: Int?
+    
+    var phases: [PhaseMock] = DataModelMock.trainingProtocols
+
+    
+    
     
     var body: some View {
-        Text("WhiteBoard")
+//        NavigationStack{
+//            GridListView(items: phases, dataType: .phase, title: "Recommended Phases")
+//        }
+//        .navigationTitle("WhiteBoard")
+        Text("whiteboard")
     }
 }
 

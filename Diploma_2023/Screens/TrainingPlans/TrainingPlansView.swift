@@ -67,50 +67,53 @@ struct TrainingPlansViewDetailSearch: View{
     let categories: [CategoryMock]
     let trainingPlans: [PhaseMock]
     let mezocycles: [MezocycleMock]
+    
     @Binding var selectedType: DataType
     @Binding var selectedCategory: CategoryMock?
     @Binding var searchText: String
     
     var body: some View{
-            ScrollView{ // might create performance issues
-                                    
-                LeftTitleHeader(title: selectedType == DataType.mezocycle ? "Mezocycles":"Phases")
-                
-                if selectedType == DataType.mezocycle{
-                    GridListView(items: selectedItemsSearch(allItems: mezocycles,
-                                                            selectedCategory: selectedCategory,
-                                                            searchText: searchText),
-                                 dataType: DataType.phase,
-                                 title: "Phases")
-                }else{
-                    GridListView(items: selectedItemsSearch(allItems: trainingPlans,
-                                                            selectedCategory: selectedCategory,
-                                                            searchText: searchText),
-                                 dataType: DataType.mezocycle,
-                                 title: "Mezocycles")
-                }
-
-                
-            }
-        
-    }
     
-    func selectedItems(allItems:[PhaseMock]) -> [PhaseMock] {
-        if let selectedCategory = selectedCategory {
-            if searchText.isEmpty {
-                return []
-            } else {
+        if selectedType == DataType.mezocycle{
+            GeneralGridListView(
+                items: selectedItemsSearch(
+                    allItems: mezocycles,
+                    selectedCategory: selectedCategory,
+                    searchText: searchText),
+                title: "Mezocycles",
+                dataType: .mezocycle,
+                sizeModel: SizeModel.large
 
-                let filteredItems = allItems
-                    .filter { selectedCategory.itemIDs.contains($0.id) }
-                    .filter { $0.title.localizedCaseInsensitiveContains(searchText) || $0.subTitle.localizedCaseInsensitiveContains(searchText) }
-
-                return filteredItems
-            }
-        } else {
-            return []
+            )
+        }else{
+            GeneralGridListView(
+                items: selectedItemsSearch(
+                    allItems: trainingPlans,
+                    selectedCategory: selectedCategory,
+                    searchText: searchText),
+                title: "Phases",
+                dataType: .phase,
+                sizeModel: SizeModel.large
+            )
         }
     }
+    
+//    func selectedItems(allItems:[PhaseMock]) -> [PhaseMock] {
+//        if let selectedCategory = selectedCategory {
+//            if searchText.isEmpty {
+//                return []
+//            } else {
+//
+//                let filteredItems = allItems
+//                    .filter { selectedCategory.itemIDs.contains($0.id) }
+//                    .filter { $0.title.localizedCaseInsensitiveContains(searchText) || $0.subTitle.localizedCaseInsensitiveContains(searchText) }
+//
+//                return filteredItems
+//            }
+//        } else {
+//            return []
+//        }
+//    }
     
 }
 
@@ -130,10 +133,9 @@ struct TrainingPlansViewDetail: View{
             ScrollView{ // might create performance issues
                 SegmentPicker(selectedType: $selectedType)
                 if selectedType == DataType.mezocycle{
-                    TrainingPlanListView(title: "Mezocycles", titleSize: SizeModel.large, items: selectedItemsByCategory(allItems: mezocycles, selectedCategory: selectedCategory))
+                    GeneralHorizontalListView(title: "Mezocycles", items: selectedItemsByCategory(allItems: mezocycles, selectedCategory: selectedCategory), titleSize: .large, sizeModel: .large, dataType: .mezocycle)
                 }else{
-                    TrainingPlanListView(title: "Phases",titleSize: SizeModel.large, items: selectedItemsByCategory(allItems: trainingProtocols, selectedCategory: selectedCategory))
-
+                    GeneralHorizontalListView(title: "Phases", items: selectedItemsByCategory(allItems: trainingProtocols, selectedCategory: selectedCategory), titleSize: .large, sizeModel: .large, dataType: .phase)
                 }
                 
             }
@@ -154,27 +156,8 @@ struct SegmentPicker: View{
                 Text("Long Period").tag(DataType.mezocycle)
             }
             .pickerStyle(.segmented)
+            .padding(.horizontal, 50)
         }
-    }
-}
-
-
-struct LeftTitleHeader: View {
-
-    var title: String
-    var body: some View {
-        
-        HStack{
-            Text(title)
-                .font(.title)
-//                .fontWeight(.bold)
-                .padding(.leading, 16)
-                .padding(.top, 16)
-                .padding(.bottom, 8)
-            Spacer()
-        }
-
-        
     }
 }
 
