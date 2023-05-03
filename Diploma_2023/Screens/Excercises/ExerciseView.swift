@@ -6,7 +6,79 @@
 //
 
 import SwiftUI
+import Combine
+// MARK: - Exercises - ViewModel
+class ExercisesViewModel: ObservableObject {
+    
+    
+    let title = "Exercises"
+    
+    
+    private let categoryDataStore: CategoryDataStore
+    @Published private(set) var categories: [Category] = []
+    @Published  var selectedCategory: Category?
+    
+    
+    private let exercisesDataStore: ExercisesDataStore
+    @Published private(set) var exercises: [Exercise] = []
+    @Published  var selectedExercise: Exercise?
+    
+    
+    private let accountDataStore: AccountDataStore
+    @Published  var loggedAccount: Account?
+    
+    @Published  var searchText: String = ""
+    @Published  var isShowingForm = false
+    
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    
+    init() {
+        
+        self.exercisesDataStore = AppDependencyContainer.shared.exercisesDataStore
+        self.exercises = exercisesDataStore.allExercises
+        
 
+        self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
+        self.categories = categoryDataStore.categoriesClients
+        
+        self.accountDataStore = AppDependencyContainer.shared.accountDataStore
+        self.loggedAccount = accountDataStore.loggedAccount
+        
+        
+        // Subscribe to changes in allClients
+        exercisesDataStore.$allExercises.sink { [weak self] newExercises in
+            self?.exercises = newExercises
+        }
+        .store(in: &cancellables)
+
+        
+        // Subscribe to changes in categories
+        categoryDataStore.$categoriesExercises.sink { [weak self] newCategories in
+            self?.categories = newCategories
+        }
+        .store(in: &cancellables)
+    }
+    
+    
+    func createExercise(exercise: Exercise){
+        exercisesDataStore.createExercise(exercise) { result in
+            // handle error
+        }
+    }
+    
+    //TODO: in the future..
+    func addCategory(){
+        
+    }
+    
+    
+    // ... other methods
+}
+    
+
+// MARK: - Exercises - View
 struct ExerciseView: View {
     let items: [ExerciseMock] = DataModelMock.exercises
     let categories: [CategoryMock] = DataModelMock.categories
@@ -16,48 +88,65 @@ struct ExerciseView: View {
     @State var selectedCategory: CategoryMock? = nil
     @State var selectedItem: ExerciseMock? = nil
     
+    @StateObject private var vm = ExercisesViewModel()
+    
     
     var body: some View {
         NavigationSplitView{
-//            CategoryList(categories: categories,
-//                         selectedCategory: $selectedCategory)
-//                .navigationTitle(mainTitle)
-            SideBar(categories: categories, title: "Exercises", section: .exercise, selectedCategory: $selectedCategory)
+            SideBar(categories: vm.categories, title: vm.title, selectedCategory: $vm.selectedCategory)
         } content: {
-            if let category = selectedCategory{
+            if let category = vm.selectedCategory{
             
                 ItemsList(
                     selectedItems: selectedItemsByCategory(
-                        allItems: items,
+                        allItems: vm.exercises,
                         selectedCategory: category),
-                    selectedCategory: selectedCategory,
-                    selectedItem: $selectedItem,
-                    searchText: $searchText)
-                    .navigationTitle(selectedCategory?.name ?? "")
-                    .searchable(text: $searchText)  
+                    selectedCategory: vm.selectedCategory,
+                    selectedItem: $vm.selectedExercise,
+                    searchText: $vm.searchText)
+                .navigationTitle(vm.selectedCategory?.name ?? "")
+                .searchable(text: $vm.searchText)
+                .navigationBarItems(trailing: Button(action: {
+                    // Add your action here
+                    vm.isShowingForm = true
+                    print("vm.isShowingForm = \(vm.isShowingForm)")
+                }, label: {
+                        Image(systemName: "plus")
+                }))
+                
+                
             } else {
                 Text("Select a category")
             }
 
                 
         } detail: {
-            if let item = selectedItem {
-                    ExerciseDetailView()
-                    .navigationTitle(item.title)
-            } else {
-                Text("No item selected")
+            NavigationStack{
+                if let selectedExercise = vm.selectedExercise {
+                        ExerciseDetailView(selectedExercise: selectedExercise)
+                } else {
+                    Text("No item selected")
+                }
+            }
+            .navigationTitle(vm.selectedExercise?.title ?? "Select an Exercise")
+
+            .sheet(isPresented: $vm.isShowingForm) {
+                NewExerciseView(parentVm: vm)
+//                        NewExerciseView(isShowingForm: $vm.isShowingForm, parentVm: vm)
+            }
+        }
+        
+        .onAppear {
+            let index = vm.categories.firstIndex { $0.section == .exercise }
+            if let index = index {
+                vm.selectedCategory = vm.categories[index]
+            }
+
+            if let selectedCategory = vm.selectedCategory {
+                vm.selectedExercise = vm.exercises.first(where: { $0.categoryIDs.contains(selectedCategory.id) })
             }
         }
 
-        .onAppear {
-            let index = categories.firstIndex{$0.section == .exercise}
-            if let index = index {
-                selectedCategory = categories[index]
-            }
-            if selectedItem == nil {
-                selectedItem = items.filter { selectedCategory?.itemIDs.contains($0.id) ?? false }.first
-            }
-        }
 
     }
     
@@ -85,9 +174,9 @@ struct ExerciseView: View {
 
 
 struct ItemsList: View {
-    let selectedItems: [ExerciseMock]
-    let selectedCategory: CategoryMock?
-    @Binding var selectedItem: ExerciseMock?
+    let selectedItems: [Exercise]
+    let selectedCategory: Category?
+    @Binding var selectedItem: Exercise?
     @Binding var searchText: String
 
 
@@ -97,18 +186,9 @@ struct ItemsList: View {
                     itemRow(item: item)
                 }
             }
-//            ScrollView(.horizontal) {
-//                HStack{
-//                    ForEach(items, id: \.id) { item in
-//                        NavigationLink(destination: ItemDetailView(item: item)) {
-//                            ItemCard(item: item)
-//                        }
-//                    }
-//                }
-//            }.padding(.leading, 16)
         }
     
-    private func itemRow(item: IdentifiableItemMock) -> some View {
+    private func itemRow(item: IdentifiableItem) -> some View {
         HStack {
             Text(verbatim: item.title)
         }

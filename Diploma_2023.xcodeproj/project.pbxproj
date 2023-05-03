@@ -22,7 +22,6 @@
 		0210C65E29AA74F2001DAD74 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 0210C65D29AA74F2001DAD74 /* SwiftUIX */; };
 		0210C66229B9EAAB001DAD74 /* RotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C66129B9EAAB001DAD74 /* RotationViewModifier.swift */; };
 		0210C66429BA6A10001DAD74 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C66329BA6A10001DAD74 /* TestModel.swift */; };
-		0210C66A29BA77EB001DAD74 /* ClientsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C66929BA77EB001DAD74 /* ClientsModel.swift */; };
 		0210C66D29BB41A7001DAD74 /* ClientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C66C29BB41A7001DAD74 /* ClientsViewModel.swift */; };
 		023BA4BF29D3024600241B2B /* AnyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4BE29D3024600241B2B /* AnyViews.swift */; };
 		023BA4C129D4320C00241B2B /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4C029D4320C00241B2B /* Headers.swift */; };
@@ -31,20 +30,50 @@
 		023BA4CB29D4CC6100241B2B /* LargeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4CA29D4CC6100241B2B /* LargeCardView.swift */; };
 		023BA4CD29D4CCA000241B2B /* MediumCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4CC29D4CCA000241B2B /* MediumCardView.swift */; };
 		023BA4CF29D4E25900241B2B /* PhaseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4CE29D4E25900241B2B /* PhaseSheet.swift */; };
-		023BA4D229D5EF8000241B2B /* PhaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4D129D5EF8000241B2B /* PhaseModel.swift */; };
 		023BA4D429D731BD00241B2B /* PhaseSheetString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4D329D731BD00241B2B /* PhaseSheetString.swift */; };
-		0243FB6E29BBF6EE003ECC8C /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243FB6D29BBF6EE003ECC8C /* AccountModel.swift */; };
 		0243FB7029BC0188003ECC8C /* MockDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243FB6F29BC0188003ECC8C /* MockDataModel.swift */; };
 		0243FB7229C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243FB7129C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift */; };
+		02817F7529EE945E0038C658 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7429EE945E0038C658 /* AuthenticationService.swift */; };
+		02817F7729EE94770038C658 /* AppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7629EE94770038C658 /* AppDependencyContainer.swift */; };
+		02817F7B29EE94DF0038C658 /* AccountDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7A29EE94DF0038C658 /* AccountDataStore.swift */; };
+		02817F8029EE95140038C658 /* ClientsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7F29EE95140038C658 /* ClientsDataStore.swift */; };
+		02817F8429EE95C00038C658 /* ClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8329EE95C00038C658 /* ClientRepository.swift */; };
+		02817F8629EE95E50038C658 /* FirestoreClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8529EE95E50038C658 /* FirestoreClientRepository.swift */; };
+		02817F8829EF1C8D0038C658 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8729EF1C8D0038C658 /* AccountView.swift */; };
+		02817F8A29EF1FDE0038C658 /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8929EF1FDE0038C658 /* AccountRepository.swift */; };
+		02817F8C29EF21620038C658 /* FirestoreAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8B29EF21620038C658 /* FirestoreAccountRepository.swift */; };
+		02C49A8129DEE67600298E13 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8029DEE67600298E13 /* SignUpView.swift */; };
+		02C49A8329E0BB4C00298E13 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8229E0BB4C00298E13 /* SignInView.swift */; };
+		02C49A8A29EAEAEB00298E13 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8929EAEAEB00298E13 /* Authentication.swift */; };
+		02C49A8C29EAEBD900298E13 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8B29EAEBD900298E13 /* DataStore.swift */; };
 		02D26F6229CF8557000A49E0 /* GGridListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D26F6129CF8557000A49E0 /* GGridListView.swift */; };
-		02D5905F29C25CC2007C6AAB /* SplitViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5905E29C25CC2007C6AAB /* SplitViewExtension.swift */; };
 		02D5906329C35AFD007C6AAB /* ClientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906229C35AFD007C6AAB /* ClientDetailView.swift */; };
 		02D5906529C36917007C6AAB /* AppDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906429C36917007C6AAB /* AppDetailView.swift */; };
 		02D5906729C4F41B007C6AAB /* InfoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906629C4F41B007C6AAB /* InfoRowView.swift */; };
 		02D5906F29C607C8007C6AAB /* NavigationSplitViewThreeX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906E29C607C8007C6AAB /* NavigationSplitViewThreeX.swift */; };
 		02D5907329C766F7007C6AAB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907229C766F7007C6AAB /* SearchBar.swift */; };
 		02D5907629C7684C007C6AAB /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907529C7684C007C6AAB /* ExerciseDetailView.swift */; };
-		02D5908029C7A795007C6AAB /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907F29C7A795007C6AAB /* SideBar.swift */; };
+		02D5908029C7A795007C6AAB /* MockSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907F29C7A795007C6AAB /* MockSideBar.swift */; };
+		02E9FCB229F04B7B000662D5 /* CategoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */; };
+		02E9FCB429F04BA1000662D5 /* FirestoreCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB329F04BA1000662D5 /* FirestoreCategoryRepository.swift */; };
+		02E9FCB629F04BAA000662D5 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB529F04BAA000662D5 /* CategoryRepository.swift */; };
+		02E9FCBC29F33534000662D5 /* ExercisesDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBB29F33534000662D5 /* ExercisesDataStore.swift */; };
+		02E9FCBE29F3358A000662D5 /* PhasesDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBD29F3358A000662D5 /* PhasesDataStore.swift */; };
+		02E9FCC029F335B1000662D5 /* MezocycleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBF29F335B1000662D5 /* MezocycleDataStore.swift */; };
+		02E9FCC229F335C4000662D5 /* ExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC129F335C4000662D5 /* ExerciseRepository.swift */; };
+		02E9FCC529F335DE000662D5 /* PhasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC429F335DE000662D5 /* PhasesRepository.swift */; };
+		02E9FCC729F335EE000662D5 /* MezocycleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC629F335EE000662D5 /* MezocycleRepository.swift */; };
+		02E9FCC929F41A50000662D5 /* FirestoreExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC829F41A50000662D5 /* FirestoreExerciseRepository.swift */; };
+		02E9FCCB29F41AED000662D5 /* FirestorePhasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCCA29F41AED000662D5 /* FirestorePhasesRepository.swift */; };
+		02E9FCCD29F41AFF000662D5 /* FirestoreMezocycleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCCC29F41AFF000662D5 /* FirestoreMezocycleRepository.swift */; };
+		02E9FCCF29F586CB000662D5 /* SmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCCE29F586CB000662D5 /* SmallCardView.swift */; };
+		02E9FCD229F83D6F000662D5 /* NewClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCD129F83D6F000662D5 /* NewClientView.swift */; };
+		02E9FCD429F9197F000662D5 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCD329F9197E000662D5 /* SideBar.swift */; };
+		02E9FCD729FAE6DF000662D5 /* AppDataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCD629FAE6DF000662D5 /* AppDataStores.swift */; };
+		02E9FCDC29FD729D000662D5 /* FirebaseStorageImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCDB29FD729D000662D5 /* FirebaseStorageImageDataStore.swift */; };
+		02E9FCDE29FDB91C000662D5 /* EditClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCDD29FDB91C000662D5 /* EditClientView.swift */; };
+		02E9FCE129FFBB94000662D5 /* NewExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCE029FFBB94000662D5 /* NewExerciseView.swift */; };
+		02E9FCE329FFBBA3000662D5 /* EditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCE229FFBBA3000662D5 /* EditExerciseView.swift */; };
 		02F06DF729DA10A4008032B5 /* CustomTextEditorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F06DF629DA10A4008032B5 /* CustomTextEditorCell.swift */; };
 		02F06DF929DB8021008032B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02F06DF829DB8021008032B5 /* GoogleService-Info.plist */; };
 		02F06DFC29DB8446008032B5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 02F06DFB29DB8446008032B5 /* FirebaseAnalytics */; };
@@ -77,7 +106,6 @@
 		0210C65A29AA6C62001DAD74 /* WhiteboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardView.swift; sourceTree = "<group>"; };
 		0210C66129B9EAAB001DAD74 /* RotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationViewModifier.swift; sourceTree = "<group>"; };
 		0210C66329BA6A10001DAD74 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
-		0210C66929BA77EB001DAD74 /* ClientsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsModel.swift; sourceTree = "<group>"; };
 		0210C66C29BB41A7001DAD74 /* ClientsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewModel.swift; sourceTree = "<group>"; };
 		023BA4BE29D3024600241B2B /* AnyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViews.swift; sourceTree = "<group>"; };
 		023BA4C029D4320C00241B2B /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
@@ -86,13 +114,23 @@
 		023BA4CA29D4CC6100241B2B /* LargeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCardView.swift; sourceTree = "<group>"; };
 		023BA4CC29D4CCA000241B2B /* MediumCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumCardView.swift; sourceTree = "<group>"; };
 		023BA4CE29D4E25900241B2B /* PhaseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSheet.swift; sourceTree = "<group>"; };
-		023BA4D129D5EF8000241B2B /* PhaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseModel.swift; sourceTree = "<group>"; };
 		023BA4D329D731BD00241B2B /* PhaseSheetString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSheetString.swift; sourceTree = "<group>"; };
-		0243FB6D29BBF6EE003ECC8C /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		0243FB6F29BC0188003ECC8C /* MockDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataModel.swift; sourceTree = "<group>"; };
 		0243FB7129C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSplitViewThreeColumn.swift; sourceTree = "<group>"; };
+		02817F7429EE945E0038C658 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		02817F7629EE94770038C658 /* AppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyContainer.swift; sourceTree = "<group>"; };
+		02817F7A29EE94DF0038C658 /* AccountDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataStore.swift; sourceTree = "<group>"; };
+		02817F7F29EE95140038C658 /* ClientsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsDataStore.swift; sourceTree = "<group>"; };
+		02817F8329EE95C00038C658 /* ClientRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientRepository.swift; sourceTree = "<group>"; };
+		02817F8529EE95E50038C658 /* FirestoreClientRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreClientRepository.swift; sourceTree = "<group>"; };
+		02817F8729EF1C8D0038C658 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		02817F8929EF1FDE0038C658 /* AccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRepository.swift; sourceTree = "<group>"; };
+		02817F8B29EF21620038C658 /* FirestoreAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreAccountRepository.swift; sourceTree = "<group>"; };
+		02C49A8029DEE67600298E13 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		02C49A8229E0BB4C00298E13 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		02C49A8929EAEAEB00298E13 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		02C49A8B29EAEBD900298E13 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		02D26F6129CF8557000A49E0 /* GGridListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GGridListView.swift; sourceTree = "<group>"; };
-		02D5905E29C25CC2007C6AAB /* SplitViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewExtension.swift; sourceTree = "<group>"; };
 		02D5906229C35AFD007C6AAB /* ClientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailView.swift; sourceTree = "<group>"; };
 		02D5906429C36917007C6AAB /* AppDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailView.swift; sourceTree = "<group>"; };
 		02D5906629C4F41B007C6AAB /* InfoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRowView.swift; sourceTree = "<group>"; };
@@ -100,7 +138,27 @@
 		02D5907129C74081007C6AAB /* ThreeColumnSplitLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeColumnSplitLayout.swift; sourceTree = "<group>"; };
 		02D5907229C766F7007C6AAB /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		02D5907529C7684C007C6AAB /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
-		02D5907F29C7A795007C6AAB /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
+		02D5907F29C7A795007C6AAB /* MockSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSideBar.swift; sourceTree = "<group>"; };
+		02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataStore.swift; sourceTree = "<group>"; };
+		02E9FCB329F04BA1000662D5 /* FirestoreCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCategoryRepository.swift; sourceTree = "<group>"; };
+		02E9FCB529F04BAA000662D5 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		02E9FCBB29F33534000662D5 /* ExercisesDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesDataStore.swift; sourceTree = "<group>"; };
+		02E9FCBD29F3358A000662D5 /* PhasesDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhasesDataStore.swift; sourceTree = "<group>"; };
+		02E9FCBF29F335B1000662D5 /* MezocycleDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MezocycleDataStore.swift; sourceTree = "<group>"; };
+		02E9FCC129F335C4000662D5 /* ExerciseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRepository.swift; sourceTree = "<group>"; };
+		02E9FCC429F335DE000662D5 /* PhasesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhasesRepository.swift; sourceTree = "<group>"; };
+		02E9FCC629F335EE000662D5 /* MezocycleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MezocycleRepository.swift; sourceTree = "<group>"; };
+		02E9FCC829F41A50000662D5 /* FirestoreExerciseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreExerciseRepository.swift; sourceTree = "<group>"; };
+		02E9FCCA29F41AED000662D5 /* FirestorePhasesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePhasesRepository.swift; sourceTree = "<group>"; };
+		02E9FCCC29F41AFF000662D5 /* FirestoreMezocycleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMezocycleRepository.swift; sourceTree = "<group>"; };
+		02E9FCCE29F586CB000662D5 /* SmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCardView.swift; sourceTree = "<group>"; };
+		02E9FCD129F83D6F000662D5 /* NewClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewClientView.swift; sourceTree = "<group>"; };
+		02E9FCD329F9197E000662D5 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
+		02E9FCD629FAE6DF000662D5 /* AppDataStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataStores.swift; sourceTree = "<group>"; };
+		02E9FCDB29FD729D000662D5 /* FirebaseStorageImageDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageImageDataStore.swift; sourceTree = "<group>"; };
+		02E9FCDD29FDB91C000662D5 /* EditClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClientView.swift; sourceTree = "<group>"; };
+		02E9FCE029FFBB94000662D5 /* NewExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExerciseView.swift; sourceTree = "<group>"; };
+		02E9FCE229FFBBA3000662D5 /* EditExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExerciseView.swift; sourceTree = "<group>"; };
 		02F06DF629DA10A4008032B5 /* CustomTextEditorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditorCell.swift; sourceTree = "<group>"; };
 		02F06DF829DB8021008032B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		02F06E0F29DC59CF008032B5 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
@@ -150,16 +208,18 @@
 		0210C63B29AA001C001DAD74 /* Diploma_2023 */ = {
 			isa = PBXGroup;
 			children = (
-				023BA4BC29D2FCBF00241B2B /* Utility */,
-				02D5905D29C25C9E007C6AAB /* Extensions */,
-				0243FB7329C0E64E003ECC8C /* Custom Views */,
-				0243FB6C29BBF6D2003ECC8C /* Account */,
-				0210C66829BA77DD001DAD74 /* Models */,
+				02817F7929EE94B00038C658 /* DataStores */,
+				02817F7829EE949D0038C658 /* Repositories */,
+				02817F7329EE94450038C658 /* Services */,
 				0210C63C29AA001C001DAD74 /* Diploma_2023App.swift */,
+				02D5908829C8EBE5007C6AAB /* Screens */,
+				0210C66829BA77DD001DAD74 /* Models */,
+				0243FB7329C0E64E003ECC8C /* Components */,
+				023BA4BC29D2FCBF00241B2B /* Utility */,
 				0210C64029AA001E001DAD74 /* Assets.xcassets */,
 				0210C64229AA001E001DAD74 /* Preview Content */,
-				02D5908829C8EBE5007C6AAB /* Screens */,
 				0210C66529BA6B1F001DAD74 /* TTEST */,
+				02C49A8929EAEAEB00298E13 /* Authentication.swift */,
 			);
 			path = Diploma_2023;
 			sourceTree = "<group>";
@@ -186,12 +246,8 @@
 		0210C66829BA77DD001DAD74 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0243FB6D29BBF6EE003ECC8C /* AccountModel.swift */,
-				0210C66929BA77EB001DAD74 /* ClientsModel.swift */,
 				0243FB6F29BC0188003ECC8C /* MockDataModel.swift */,
-				023BA4D129D5EF8000241B2B /* PhaseModel.swift */,
 				02F06E0F29DC59CF008032B5 /* DataModels.swift */,
-				02F06E1129DC7905008032B5 /* Repositories.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,6 +255,7 @@
 		0210C66B29BB4186001DAD74 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				02E9FCD029F83D4A000662D5 /* Edit Client */,
 				0210C64E29AA6B93001DAD74 /* ClientsView.swift */,
 				0210C66C29BB41A7001DAD74 /* ClientsViewModel.swift */,
 				02D5906229C35AFD007C6AAB /* ClientDetailView.swift */,
@@ -209,7 +266,6 @@
 		023BA4BC29D2FCBF00241B2B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				023BA4BE29D3024600241B2B /* AnyViews.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -219,6 +275,7 @@
 			children = (
 				023BA4CA29D4CC6100241B2B /* LargeCardView.swift */,
 				023BA4CC29D4CCA000241B2B /* MediumCardView.swift */,
+				02E9FCCE29F586CB000662D5 /* SmallCardView.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -226,38 +283,76 @@
 		0243FB6C29BBF6D2003ECC8C /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				02817F8729EF1C8D0038C658 /* AccountView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
 		};
-		0243FB7329C0E64E003ECC8C /* Custom Views */ = {
+		0243FB7329C0E64E003ECC8C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				02E9FCD529F9199F000662D5 /* SideBar */,
 				023BA4BD29D2FD2C00241B2B /* Cards */,
 				02D26F6029CA4173000A49E0 /* Builders */,
 				02D5906629C4F41B007C6AAB /* InfoRowView.swift */,
 				02D5907229C766F7007C6AAB /* SearchBar.swift */,
-				02D5907F29C7A795007C6AAB /* SideBar.swift */,
 				023BA4C029D4320C00241B2B /* Headers.swift */,
 			);
-			path = "Custom Views";
+			path = Components;
+			sourceTree = "<group>";
+		};
+		02817F6E29ED544A0038C658 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				02C49A8229E0BB4C00298E13 /* SignInView.swift */,
+				02C49A8029DEE67600298E13 /* SignUpView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		02817F7329EE94450038C658 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				02817F7429EE945E0038C658 /* AuthenticationService.swift */,
+				02817F7629EE94770038C658 /* AppDependencyContainer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		02817F7829EE949D0038C658 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				02E9FCDA29FD727A000662D5 /* FirebaseStorage */,
+				02E9FCD929FD71DF000662D5 /* Firestore */,
+				02E9FCD829FD71D0000662D5 /* Protocols */,
+				02F06E1129DC7905008032B5 /* Repositories.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		02817F7929EE94B00038C658 /* DataStores */ = {
+			isa = PBXGroup;
+			children = (
+				02C49A8B29EAEBD900298E13 /* DataStore.swift */,
+				02E9FCD629FAE6DF000662D5 /* AppDataStores.swift */,
+				02817F7A29EE94DF0038C658 /* AccountDataStore.swift */,
+				02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */,
+				02817F7F29EE95140038C658 /* ClientsDataStore.swift */,
+				02E9FCBB29F33534000662D5 /* ExercisesDataStore.swift */,
+				02E9FCBD29F3358A000662D5 /* PhasesDataStore.swift */,
+				02E9FCBF29F335B1000662D5 /* MezocycleDataStore.swift */,
+			);
+			path = DataStores;
 			sourceTree = "<group>";
 		};
 		02D26F6029CA4173000A49E0 /* Builders */ = {
 			isa = PBXGroup;
 			children = (
+				023BA4BE29D3024600241B2B /* AnyViews.swift */,
 				02D26F6129CF8557000A49E0 /* GGridListView.swift */,
 				023BA4C429D4A85400241B2B /* GHListView.swift */,
 			);
 			path = Builders;
-			sourceTree = "<group>";
-		};
-		02D5905D29C25C9E007C6AAB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				02D5905E29C25CC2007C6AAB /* SplitViewExtension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		02D5907029C73FAC007C6AAB /* Archived */ = {
@@ -271,6 +366,7 @@
 		02D5907429C7681D007C6AAB /* Excercises */ = {
 			isa = PBXGroup;
 			children = (
+				02E9FCDF29FFBB6A000662D5 /* EditExercise */,
 				0210C65029AA6BA5001DAD74 /* ExerciseView.swift */,
 				02D5907529C7684C007C6AAB /* ExerciseDetailView.swift */,
 			);
@@ -292,6 +388,7 @@
 		02D5908729C8EBC1007C6AAB /* TodayView */ = {
 			isa = PBXGroup;
 			children = (
+				0243FB6C29BBF6D2003ECC8C /* Account */,
 				0210C66129B9EAAB001DAD74 /* RotationViewModifier.swift */,
 				0210C64C29AA6B84001DAD74 /* TodayView.swift */,
 			);
@@ -301,15 +398,16 @@
 		02D5908829C8EBE5007C6AAB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				0210C64A29AA6A53001DAD74 /* TabBarView.swift */,
-				0210C65A29AA6C62001DAD74 /* WhiteboardView.swift */,
-				0210C65829AA6C54001DAD74 /* ProgressPhotosView.swift */,
-				02D5908A29C8EC2B007C6AAB /* Measurements */,
-				02D5908929C8EC0F007C6AAB /* FoodPlans */,
+				02817F6E29ED544A0038C658 /* Authentication */,
+				02E9FCB729F2A719000662D5 /* Landing Page */,
 				02D5908729C8EBC1007C6AAB /* TodayView */,
 				0210C66B29BB4186001DAD74 /* Clients */,
-				02D5907429C7681D007C6AAB /* Excercises */,
 				02D5908629C8EBB0007C6AAB /* TrainingPlans */,
+				02D5907429C7681D007C6AAB /* Excercises */,
+				02D5908A29C8EC2B007C6AAB /* Measurements */,
+				02D5908929C8EC0F007C6AAB /* FoodPlans */,
+				02E9FCB829F2A755000662D5 /* WhiteBoard */,
+				02E9FCB929F2A777000662D5 /* ProgressPhotos */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -328,6 +426,91 @@
 				0210C65629AA6C3A001DAD74 /* MeasurementsView.swift */,
 			);
 			path = Measurements;
+			sourceTree = "<group>";
+		};
+		02E9FCB729F2A719000662D5 /* Landing Page */ = {
+			isa = PBXGroup;
+			children = (
+				0210C64A29AA6A53001DAD74 /* TabBarView.swift */,
+			);
+			path = "Landing Page";
+			sourceTree = "<group>";
+		};
+		02E9FCB829F2A755000662D5 /* WhiteBoard */ = {
+			isa = PBXGroup;
+			children = (
+				0210C65A29AA6C62001DAD74 /* WhiteboardView.swift */,
+			);
+			path = WhiteBoard;
+			sourceTree = "<group>";
+		};
+		02E9FCB929F2A777000662D5 /* ProgressPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				0210C65829AA6C54001DAD74 /* ProgressPhotosView.swift */,
+			);
+			path = ProgressPhotos;
+			sourceTree = "<group>";
+		};
+		02E9FCD029F83D4A000662D5 /* Edit Client */ = {
+			isa = PBXGroup;
+			children = (
+				02E9FCD129F83D6F000662D5 /* NewClientView.swift */,
+				02E9FCDD29FDB91C000662D5 /* EditClientView.swift */,
+			);
+			path = "Edit Client";
+			sourceTree = "<group>";
+		};
+		02E9FCD529F9199F000662D5 /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				02E9FCD329F9197E000662D5 /* SideBar.swift */,
+				02D5907F29C7A795007C6AAB /* MockSideBar.swift */,
+			);
+			path = SideBar;
+			sourceTree = "<group>";
+		};
+		02E9FCD829FD71D0000662D5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				02817F8929EF1FDE0038C658 /* AccountRepository.swift */,
+				02E9FCB529F04BAA000662D5 /* CategoryRepository.swift */,
+				02817F8329EE95C00038C658 /* ClientRepository.swift */,
+				02E9FCC129F335C4000662D5 /* ExerciseRepository.swift */,
+				02E9FCC429F335DE000662D5 /* PhasesRepository.swift */,
+				02E9FCC629F335EE000662D5 /* MezocycleRepository.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		02E9FCD929FD71DF000662D5 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				02817F8B29EF21620038C658 /* FirestoreAccountRepository.swift */,
+				02E9FCB329F04BA1000662D5 /* FirestoreCategoryRepository.swift */,
+				02817F8529EE95E50038C658 /* FirestoreClientRepository.swift */,
+				02E9FCC829F41A50000662D5 /* FirestoreExerciseRepository.swift */,
+				02E9FCCA29F41AED000662D5 /* FirestorePhasesRepository.swift */,
+				02E9FCCC29F41AFF000662D5 /* FirestoreMezocycleRepository.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		02E9FCDA29FD727A000662D5 /* FirebaseStorage */ = {
+			isa = PBXGroup;
+			children = (
+				02E9FCDB29FD729D000662D5 /* FirebaseStorageImageDataStore.swift */,
+			);
+			path = FirebaseStorage;
+			sourceTree = "<group>";
+		};
+		02E9FCDF29FFBB6A000662D5 /* EditExercise */ = {
+			isa = PBXGroup;
+			children = (
+				02E9FCE029FFBB94000662D5 /* NewExerciseView.swift */,
+				02E9FCE229FFBBA3000662D5 /* EditExerciseView.swift */,
+			);
+			path = EditExercise;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,44 +601,73 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02817F8C29EF21620038C658 /* FirestoreAccountRepository.swift in Sources */,
+				02817F8429EE95C00038C658 /* ClientRepository.swift in Sources */,
 				0243FB7229C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift in Sources */,
 				02D5906529C36917007C6AAB /* AppDetailView.swift in Sources */,
 				0210C65729AA6C3A001DAD74 /* MeasurementsView.swift in Sources */,
+				02E9FCE129FFBB94000662D5 /* NewExerciseView.swift in Sources */,
+				02E9FCB629F04BAA000662D5 /* CategoryRepository.swift in Sources */,
 				02D5907629C7684C007C6AAB /* ExerciseDetailView.swift in Sources */,
 				023BA4C129D4320C00241B2B /* Headers.swift in Sources */,
 				0210C65929AA6C54001DAD74 /* ProgressPhotosView.swift in Sources */,
+				02E9FCD729FAE6DF000662D5 /* AppDataStores.swift in Sources */,
 				0210C64F29AA6B93001DAD74 /* ClientsView.swift in Sources */,
+				02817F7529EE945E0038C658 /* AuthenticationService.swift in Sources */,
 				02D26F6229CF8557000A49E0 /* GGridListView.swift in Sources */,
 				023BA4C329D48A1000241B2B /* MezocycleDetailView.swift in Sources */,
+				02C49A8329E0BB4C00298E13 /* SignInView.swift in Sources */,
 				02D5906F29C607C8007C6AAB /* NavigationSplitViewThreeX.swift in Sources */,
 				02F06DF729DA10A4008032B5 /* CustomTextEditorCell.swift in Sources */,
+				02E9FCD429F9197F000662D5 /* SideBar.swift in Sources */,
 				0210C65129AA6BA5001DAD74 /* ExerciseView.swift in Sources */,
-				023BA4D229D5EF8000241B2B /* PhaseModel.swift in Sources */,
+				02E9FCBC29F33534000662D5 /* ExercisesDataStore.swift in Sources */,
+				02C49A8129DEE67600298E13 /* SignUpView.swift in Sources */,
+				02C49A8C29EAEBD900298E13 /* DataStore.swift in Sources */,
+				02E9FCC929F41A50000662D5 /* FirestoreExerciseRepository.swift in Sources */,
 				023BA4CF29D4E25900241B2B /* PhaseSheet.swift in Sources */,
+				02817F8629EE95E50038C658 /* FirestoreClientRepository.swift in Sources */,
+				02E9FCCF29F586CB000662D5 /* SmallCardView.swift in Sources */,
+				02E9FCBE29F3358A000662D5 /* PhasesDataStore.swift in Sources */,
 				02D5907329C766F7007C6AAB /* SearchBar.swift in Sources */,
 				0210C66429BA6A10001DAD74 /* TestModel.swift in Sources */,
+				02817F7729EE94770038C658 /* AppDependencyContainer.swift in Sources */,
+				02E9FCC229F335C4000662D5 /* ExerciseRepository.swift in Sources */,
+				02E9FCCD29F41AFF000662D5 /* FirestoreMezocycleRepository.swift in Sources */,
+				02E9FCB429F04BA1000662D5 /* FirestoreCategoryRepository.swift in Sources */,
 				023BA4D429D731BD00241B2B /* PhaseSheetString.swift in Sources */,
+				02E9FCDC29FD729D000662D5 /* FirebaseStorageImageDataStore.swift in Sources */,
 				023BA4BF29D3024600241B2B /* AnyViews.swift in Sources */,
 				02D5906329C35AFD007C6AAB /* ClientDetailView.swift in Sources */,
 				023BA4C529D4A85400241B2B /* GHListView.swift in Sources */,
-				0210C66A29BA77EB001DAD74 /* ClientsModel.swift in Sources */,
+				02C49A8A29EAEAEB00298E13 /* Authentication.swift in Sources */,
 				0210C64B29AA6A53001DAD74 /* TabBarView.swift in Sources */,
+				02E9FCCB29F41AED000662D5 /* FirestorePhasesRepository.swift in Sources */,
+				02817F8A29EF1FDE0038C658 /* AccountRepository.swift in Sources */,
+				02E9FCC729F335EE000662D5 /* MezocycleRepository.swift in Sources */,
 				0243FB7029BC0188003ECC8C /* MockDataModel.swift in Sources */,
 				0210C65329AA6BBB001DAD74 /* TrainingPlansView.swift in Sources */,
 				023BA4CD29D4CCA000241B2B /* MediumCardView.swift in Sources */,
+				02E9FCC029F335B1000662D5 /* MezocycleDataStore.swift in Sources */,
 				0210C64D29AA6B84001DAD74 /* TodayView.swift in Sources */,
 				023BA4CB29D4CC6100241B2B /* LargeCardView.swift in Sources */,
+				02E9FCD229F83D6F000662D5 /* NewClientView.swift in Sources */,
 				02F06E1029DC59CF008032B5 /* DataModels.swift in Sources */,
-				02D5905F29C25CC2007C6AAB /* SplitViewExtension.swift in Sources */,
 				0210C63D29AA001C001DAD74 /* Diploma_2023App.swift in Sources */,
-				0243FB6E29BBF6EE003ECC8C /* AccountModel.swift in Sources */,
-				02D5908029C7A795007C6AAB /* SideBar.swift in Sources */,
+				02E9FCDE29FDB91C000662D5 /* EditClientView.swift in Sources */,
+				02D5908029C7A795007C6AAB /* MockSideBar.swift in Sources */,
+				02E9FCC529F335DE000662D5 /* PhasesRepository.swift in Sources */,
+				02817F7B29EE94DF0038C658 /* AccountDataStore.swift in Sources */,
+				02E9FCE329FFBBA3000662D5 /* EditExerciseView.swift in Sources */,
 				0210C66D29BB41A7001DAD74 /* ClientsViewModel.swift in Sources */,
 				0210C65B29AA6C62001DAD74 /* WhiteboardView.swift in Sources */,
+				02817F8829EF1C8D0038C658 /* AccountView.swift in Sources */,
 				0210C65529AA6BC4001DAD74 /* FoodPlansView.swift in Sources */,
 				0210C66229B9EAAB001DAD74 /* RotationViewModifier.swift in Sources */,
 				02D5906729C4F41B007C6AAB /* InfoRowView.swift in Sources */,
+				02E9FCB229F04B7B000662D5 /* CategoryDataStore.swift in Sources */,
 				02F06E1229DC7905008032B5 /* Repositories.swift in Sources */,
+				02817F8029EE95140038C658 /* ClientsDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

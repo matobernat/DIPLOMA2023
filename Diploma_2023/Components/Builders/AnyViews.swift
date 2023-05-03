@@ -11,7 +11,7 @@ import SwiftUI
 struct AnyDetailView: View {
     private let view: AnyView
 
-    init<T: DetailViewMock>(_ view: T) {
+    init<T: DetailView>(_ view: T) {
         self.view = AnyView(view)
     }
 

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MediumCardView: View, CardViewMock {
-    let item: IdentifiableItemMock
+    let item: IdentifiableItem
     
-    init(item: IdentifiableItemMock) {
+    init(item: IdentifiableItem) {
         self.item = item
     }
     
@@ -51,9 +51,9 @@ struct MediumCardView_Previews: PreviewProvider {
 }
 
 
-struct ItemDetailView: View, DetailViewMock{
+struct ItemDetailView: View, DetailView{
     
-    let item: IdentifiableItemMock
+    let item: IdentifiableItem
     
     var body: some View {
         VStack {

@@ -19,7 +19,7 @@ struct FoodPlansView: View {
     
     var body: some View {
         NavigationSplitView {
-            SideBar(categories: categories, title: "Food Protocols", section: DataType.foodPlan, selectedCategory: $selectedCategory)
+            MockSideBar(categories: categories, title: "Food Protocols", section: DataType.foodPlan, selectedCategory: $selectedCategory)
         } detail: {
             NavigationStack{
                 
@@ -65,7 +65,7 @@ struct FoodPlansViewDetail: View{
 
                 GeneralHorizontalListView(
                     title: "Food Protocols",
-                    items: selectedItemsByCategory(
+                    items: selectedItemsByCategoryMock(
                         allItems: foodProtocols,
                         selectedCategory: selectedCategory),
                     titleSize: .medium,
@@ -95,7 +95,7 @@ struct FoodPlansViewDetailSearch: View{
                 searchText: searchText),
             title: nil,
             dataType: .foodPlan,
-            sizeModel: SizeModel.medium
+            sizeModel: SizeModelMock.medium
         )
         
     }

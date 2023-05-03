@@ -9,9 +9,9 @@ import SwiftUI
 
 struct GeneralHorizontalListView: View {
     let title: String
-    let items: [IdentifiableItemMock]
-    let titleSize: SizeModel
-    let sizeModel: SizeModel
+    let items: [IdentifiableItem]
+    let titleSize: SizeModelMock
+    let sizeModel: SizeModelMock
     let dataType: DataType
 
     var body: some View {
@@ -92,12 +92,12 @@ struct GeneralHorizontalListView: View {
 
 struct ListView: View {
     let title: String
-    let items: [IdentifiableItemMock]
-    let titleSize: SizeModel
-    let sizeModel: SizeModel
+    let items: [IdentifiableItem]
+    let titleSize: SizeModelMock
+    let sizeModel: SizeModelMock
     let dataType: DataType
-    let createCardView: (IdentifiableItemMock) -> AnyCardView
-    let createDetailView: (IdentifiableItemMock) -> AnyDetailView
+    let createCardView: (IdentifiableItem) -> AnyCardView
+    let createDetailView: (IdentifiableItem) -> AnyDetailView
     
     var body: some View{
         VStack(alignment: .leading) {
@@ -127,10 +127,10 @@ struct ListView: View {
 
 struct GHListViewHeader: View {
     let title: String
-    let titleSize: SizeModel
-    let items: [IdentifiableItemMock]
+    let titleSize: SizeModelMock
+    let items: [IdentifiableItem]
     let dataType: DataType
-    let sizeModel: SizeModel
+    let sizeModel: SizeModelMock
 //    let destination: ([IdentifiableItem]) -> AnyView
     
     var body: some View {
@@ -138,7 +138,7 @@ struct GHListViewHeader: View {
         
             HStack {
                 Text(title)
-                    .font(titleSize == SizeModel.large ? .title : .headline)
+                    .font(titleSize == SizeModelMock.large ? .title : .headline)
                     .padding(.leading, 16)
                     .padding(.top, 16)
                     .padding(.bottom, 8)

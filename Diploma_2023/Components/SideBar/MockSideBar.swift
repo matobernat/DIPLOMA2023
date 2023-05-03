@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SideBar: View {
+struct MockSideBar: View {
     let categories: [CategoryMock]
     let title: String
     let section: DataType
@@ -50,7 +50,7 @@ struct SideBar: View {
 
 struct SideBarCategoryList_Previews: PreviewProvider {
     static var previews: some View {
-        SideBar(categories: DataModelMock.categories, title: "Clients", section: DataType.client, selectedCategory: Binding.constant(DataModelMock.categories.first!))
+        MockSideBar(categories: DataModelMock.categories, title: "Clients", section: DataType.client, selectedCategory: Binding.constant(DataModelMock.categories.first!))
     }
 }
 

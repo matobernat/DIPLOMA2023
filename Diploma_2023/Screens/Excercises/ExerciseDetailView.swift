@@ -8,11 +8,39 @@
 import SwiftUI
 import WebKit
 
+// MARK: - Exercise Detail - ViewModel
+
+class ExerciseDetailViewModel: ObservableObject{
+    
+    @Published var selectedExercise: Exercise
+    
+    
+    init(selectedExercise: Exercise){
+        self.selectedExercise = selectedExercise
+    }
+    
+    
+    
+}
+
+
+
+// MARK: - Exercise Detail - View
+
 struct ExerciseDetailView: View {
     
     let cardTitles = ["Body Part", "Recovery", "Base", "Difficulty"]
     let cardValues = ["Chest", "No", "Bench Press", "Easy"]
-    let link = "https://www.youtube.com/watch?v=vthMCtgVtFw&t=54s"
+//    let link = "https://www.youtube.com/watch?v=vthMCtgVtFw&t=54s"
+    
+    
+
+    @StateObject private var vm: ExerciseDetailViewModel
+    
+    
+    init(selectedExercise: Exercise){
+        _vm = StateObject(wrappedValue: ExerciseDetailViewModel(selectedExercise: selectedExercise))
+    }
     
     
     var body: some View {
@@ -21,9 +49,11 @@ struct ExerciseDetailView: View {
             Divider()
             InfoRowView(cardTitles: cardTitles, cardValues: cardValues, cardDescriptions: nil)
             Divider()
-            Link(link, destination: URL(string: link)!) // 1
+            if let url = URL(string: vm.selectedExercise.link) {
+                 Link(vm.selectedExercise.link, destination: url)
+             }
             ZStack{
-                YoutubeVideoView(link: link)
+                YoutubeVideoView(link: vm.selectedExercise.link)
                     .scaledToFit()
             }
 
@@ -65,8 +95,8 @@ struct TagList: View{
     }
 }
 
-struct ExerciseDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExerciseDetailView()
-    }
-}
+//struct ExerciseDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExerciseDetailView()
+//    }
+//}

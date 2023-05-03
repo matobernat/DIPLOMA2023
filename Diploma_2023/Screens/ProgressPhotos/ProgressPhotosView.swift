@@ -20,7 +20,7 @@ struct ProgressPhotosView: View {
     
     var body: some View {
         NavigationSplitView {
-            SideBar(
+            MockSideBar(
                 categories: categories,
                 title: "Progress Photos",
                 section: DataType.progressAlbum,
@@ -69,7 +69,7 @@ struct ProgressPhotoViewDetail: View{
             
             GeneralHorizontalListView(
                 title: "Progress Photos",
-                items: selectedItemsByCategory(
+                items: selectedItemsByCategoryMock(
                     allItems: progressAlbums,
                     selectedCategory: selectedCategory),
                 titleSize: .large,
@@ -95,7 +95,7 @@ struct ProgressPhotoViewDetailSearch: View{
                 searchText: searchText),
             title: "Progress Photos",
             dataType: .progressAlbum,
-            sizeModel: SizeModel.medium
+            sizeModel: SizeModelMock.medium
         )
     }
 }

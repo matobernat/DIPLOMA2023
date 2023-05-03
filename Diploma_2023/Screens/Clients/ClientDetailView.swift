@@ -6,35 +6,98 @@
 //
 import SwiftUI
 
-struct ClientDetailView: View, DetailViewMock {
-    init(item: IdentifiableItemMock) {
-        client = item as! ClientMock
+
+// MARK: - ClientDetail - ViewModel
+
+class ClientDetailViewModel: ObservableObject {
+    
+    // Adjust this value to represent the desired progress
+    @Published private var progress = 0.65
+    
+    @Published var isShowingForm = false
+    
+    var selectedClient: Client
+    
+    private let clientsDataStore: ClientsDataStore
+    private let categoryDataStore: CategoryDataStore
+    
+
+    
+    // Properties for Client's info row
+    let clientCardTitles: [String]
+    let clientCardValues: [String]
+    let clientCardDescriptions: [String]
+    
+    
+    
+    init(selectedClient: Client) {
+        self.selectedClient = selectedClient
+        self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
+        self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
+        
+        // UI Properties for Client's info row
+        clientCardTitles = ["Trainining style", "Injury", "Health Issues", "Payment Type"]
+        clientCardValues = [selectedClient.trainingStyle.rawValue, selectedClient.injury ?? "None", selectedClient.healthIssues ?? "None", selectedClient.paymentType.rawValue]
+        clientCardDescriptions = ["","","",""]
     }
     
-    @State private var progress = 0.65 // Adjust this value to represent the desired progress
-    let client: ClientMock
+    func archiveClient(){
+        self.selectedClient.categoryIDs = categoryDataStore.getCategoryIDs(subString: "Archived", section: .client)
+        clientsDataStore.updateClient(self.selectedClient) { result in
+            // handle error
+        }
+    }
+    
+    func updateClient(){
+        clientsDataStore.updateClient(self.selectedClient) { result in
+            // handle error
+        }
+    }
+    
+    func deleteClient(){
+        clientsDataStore.deleteClient(self.selectedClient) { result in
+            // handle error
+        }
+    }
+    
+    
+}
 
+
+// MARK: - ClientDetail - View
+struct ClientDetailView: View, DetailView {
+
+    @StateObject private var vm: ClientDetailViewModel
+    
+    init(item: IdentifiableItem) {
+        let client = item as! Client
+        self._vm = StateObject(wrappedValue: ClientDetailViewModel(selectedClient: client))
+    }
+    
+    @Environment(\.presentationMode) var presentationMode
+
+    
     var body: some View {
         NavigationStack{
             ScrollView{
                 VStack(alignment: .leading){
-                    
+                
                     ClientTitle(
-                        name: client.title,
+                        name: vm.selectedClient.title,
                         remainingSessions: 3,
                         isActive: true)
                     
                     ClientPhoto(
-                        imageUrl: client.photoName,
-                        age: 25,
-                        height: 180,
-                        weight: 77)
+                        imageUrl: vm.selectedClient.imageName,
+                        age: vm.selectedClient.age,
+                        height: vm.selectedClient.height,
+                        weight: vm.selectedClient.weight)
                     
                     Divider()
                     
-                    InfoRowView(cardTitles: MockInfoRowData.cardTitles,
-                                cardValues: MockInfoRowData.cardValues,
-                                cardDescriptions: MockInfoRowData.cardDescriptions)
+                    InfoRowView(cardTitles: vm.clientCardTitles,
+                                cardValues: vm.clientCardValues,
+                                cardDescriptions: vm.clientCardDescriptions)
                     
                     GeneralHorizontalListView(title: "Phases", items: DataModelMock.trainingProtocols , titleSize: .medium
                                               ,sizeModel: .large, dataType: .phase)
@@ -46,9 +109,49 @@ struct ClientDetailView: View, DetailViewMock {
                 }
             }
         }
-        .navigationTitle(client.title)
+        .navigationTitle(vm.selectedClient.title)
+        
+        .navigationBarItems(trailing: Button(action: {
+            // Empty action, button only used to present ContextMenu
+        }, label: {
+            Image(systemName: "ellipsis.circle") // This is the "more" button
+        }).contextMenu {
+            NavigationLink(destination: EditClientView(parentVm: self.vm)) {
+                HStack{
+                    Text("Edit Client")
+                    Spacer()
+                    Image(systemName: "pencil")
+                }
+                
+            }
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+                vm.archiveClient()
+                // Call your function to delete the client here
+            }, label: {
+                HStack{
+                    Text("Archive Client")
+                    Spacer()
+                    Image(systemName: "archivebox")
+                }
+                .foregroundColor(.red)
+            })
+            Button(role: .destructive) {
+                presentationMode.wrappedValue.dismiss()
+                vm.deleteClient()
+                // Call your function to delete the client here
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+            Button(role: .cancel) {
+                // Call your function to delete the client here
+            } label: {
+                Label("Cancel", systemImage: "xmark")
+            }
+        })
 
-//        .padding(.top, 50)
+        
+        
     }
 }
 
@@ -92,15 +195,11 @@ struct ClientTitle: View {
     }
 }
 
-
-
-
-
 struct ClientPhoto: View {
     var imageUrl: String
-    var age: Int
-    var height: Int
-    var weight: Int
+    var age: String
+    var height: String
+    var weight: String
 
     var body: some View {
         HStack(spacing: 37) {
@@ -160,23 +259,6 @@ struct ClientPhoto: View {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 struct CustomProgressViewStyle: ProgressViewStyle {
     func makeBody(configuration: Configuration) -> some View {
         ZStack(alignment: .leading) {
@@ -190,11 +272,6 @@ struct CustomProgressViewStyle: ProgressViewStyle {
         }
     }
 }
-
-
-
-
-
 
 struct ClientDetailView_Previews: PreviewProvider {
     static var previews: some View {

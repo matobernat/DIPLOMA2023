@@ -22,7 +22,7 @@ struct MeasurementsView: View {
     
     var body: some View {
         NavigationSplitView {
-            SideBar(categories: categories, title: "Measurements", section: DataType.measurement, selectedCategory: $selectedCategory)
+            MockSideBar(categories: categories, title: "Measurements", section: DataType.measurement, selectedCategory: $selectedCategory)
         } detail: {
             NavigationStack{
                 
@@ -67,7 +67,7 @@ struct MeasurementsViewDetail: View{
             
             GeneralHorizontalListView(
                 title: "Measurements",
-                items: selectedItemsByCategory(
+                items: selectedItemsByCategoryMock(
                     allItems: measurements,
                     selectedCategory: selectedCategory),
                 titleSize: .medium,
@@ -93,7 +93,7 @@ struct MeasurementsViewDetailSearch: View{
                 searchText: searchText),
             title: "Measurements",
             dataType: .measurement,
-            sizeModel: SizeModel.medium
+            sizeModel: SizeModelMock.medium
         )        
     }
 }

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct MezocycleDetailView: View, DetailViewMock {
-    init(item: IdentifiableItemMock) {
+struct MezocycleDetailView: View, DetailView {
+    init(item: IdentifiableItem) {
         mezocycle = item as! MezocycleMock
     }
     
@@ -49,7 +49,7 @@ struct MezocycleDetailView: View, DetailViewMock {
 
 struct MezocycleDetailViewHeader: View{
     
-    var mezocycle : IdentifiableItemMock
+    var mezocycle : IdentifiableItem
     
     var body: some View{
         VStack(alignment: .leading){

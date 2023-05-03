@@ -19,7 +19,7 @@ struct TrainingPlansView: View {
     
     var body: some View {
         NavigationSplitView {
-            SideBar(categories: categories, title: "Training Plans", section: DataType.trainingPlan, selectedCategory: $selectedCategory)
+            MockSideBar(categories: categories, title: "Training Plans", section: DataType.trainingPlan, selectedCategory: $selectedCategory)
         } detail: {
             NavigationStack{
                 SearchBar(searchText: $searchText)
@@ -82,7 +82,7 @@ struct TrainingPlansViewDetailSearch: View{
                     searchText: searchText),
                 title: "Mezocycles",
                 dataType: .mezocycle,
-                sizeModel: SizeModel.large
+                sizeModel: SizeModelMock.large
 
             )
         }else{
@@ -93,7 +93,7 @@ struct TrainingPlansViewDetailSearch: View{
                     searchText: searchText),
                 title: "Phases",
                 dataType: .phase,
-                sizeModel: SizeModel.large
+                sizeModel: SizeModelMock.large
             )
         }
     }
@@ -133,9 +133,9 @@ struct TrainingPlansViewDetail: View{
             ScrollView{ // might create performance issues
                 SegmentPicker(selectedType: $selectedType)
                 if selectedType == DataType.mezocycle{
-                    GeneralHorizontalListView(title: "Mezocycles", items: selectedItemsByCategory(allItems: mezocycles, selectedCategory: selectedCategory), titleSize: .large, sizeModel: .large, dataType: .mezocycle)
+                    GeneralHorizontalListView(title: "Mezocycles", items: selectedItemsByCategoryMock(allItems: mezocycles, selectedCategory: selectedCategory), titleSize: .large, sizeModel: .large, dataType: .mezocycle)
                 }else{
-                    GeneralHorizontalListView(title: "Phases", items: selectedItemsByCategory(allItems: trainingProtocols, selectedCategory: selectedCategory), titleSize: .large, sizeModel: .large, dataType: .phase)
+                    GeneralHorizontalListView(title: "Phases", items: selectedItemsByCategoryMock(allItems: trainingProtocols, selectedCategory: selectedCategory), titleSize: .large, sizeModel: .large, dataType: .phase)
                 }
                 
             }

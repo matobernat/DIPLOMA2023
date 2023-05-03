@@ -36,7 +36,7 @@ struct SearchBar: View {
 }
 
 
-func selectedItemsSearch<T: IdentifiableItemMock>(allItems: [T], selectedCategory: CategoryMock?, searchText: String, filterCondition: ((T) -> Bool)? = nil) -> [T] {
+func selectedItemsSearch<T: IdentifiableItem>(allItems: [T], selectedCategory: CategoryMock?, searchText: String, filterCondition: ((T) -> Bool)? = nil) -> [T] {
     if let selectedCategory = selectedCategory {
         if searchText.isEmpty {
             return []
@@ -56,7 +56,7 @@ func selectedItemsSearch<T: IdentifiableItemMock>(allItems: [T], selectedCategor
     }
 }
 
-func selectedItemsByCategory<T: IdentifiableItemMock>(allItems: [T], selectedCategory: CategoryMock?) -> [T] {
+func selectedItemsByCategoryMock<T: IdentifiableItem>(allItems: [T], selectedCategory: CategoryMock?) -> [T] {
     if let selectedCategory = selectedCategory {
         let filteredItems = allItems
             .filter { selectedCategory.itemIDs.contains($0.id) }
@@ -65,8 +65,17 @@ func selectedItemsByCategory<T: IdentifiableItemMock>(allItems: [T], selectedCat
     
     return []
 }
+func selectedItemsByCategory<T: IdentifiableItem>(allItems: [T], selectedCategory: Category?) -> [T] {
+    if let selectedCategory = selectedCategory {
+        let filteredItems = allItems
+            .filter { $0.categoryIDs.contains(selectedCategory.id) }
+        return filteredItems
+    }
+    
+    return []
+}
 
-func selectedItemsByClient<T: IdentifiableItemMock>(allItems: [T], selectedClient: ClientMock?, dataType: DataType) -> [T] {
+func selectedItemsByClient<T: IdentifiableItem>(allItems: [T], selectedClient: ClientMock?, dataType: DataType) -> [T] {
     switch dataType {
         
     case .foodPlan:

@@ -10,9 +10,9 @@ import SwiftUI
 
 struct LargeCardView: View, CardViewMock {
 
-    let item: IdentifiableItemMock
+    let item: IdentifiableItem
     
-    init(item: IdentifiableItemMock) {
+    init(item: IdentifiableItem) {
         self.item = item
     }
 
@@ -34,7 +34,7 @@ struct LargeCardView: View, CardViewMock {
 
 struct LargeCardImage: View{
     
-    let item: IdentifiableItemMock
+    let item: IdentifiableItem
     
     var body: some View{
         ZStack {
@@ -77,9 +77,9 @@ struct LargeCardView_Previews: PreviewProvider {
 }
 
 
-struct TrainingPlanDetailView: View, DetailViewMock {
+struct TrainingPlanDetailView: View, DetailView {
     
-    let item: IdentifiableItemMock
+    let item: IdentifiableItem
     
     var body: some View {
         PhaseSheet()
@@ -87,9 +87,9 @@ struct TrainingPlanDetailView: View, DetailViewMock {
 }
 
 
-struct GeneralMockDetailView: View, DetailViewMock {
+struct GeneralMockDetailView: View, DetailView {
     
-    let item: IdentifiableItemMock
+    let item: IdentifiableItem
     
     var body: some View {
         VStack {

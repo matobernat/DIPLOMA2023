@@ -9,10 +9,10 @@ import SwiftUI
 
 
 struct GeneralGridListView: View {
-    let items: [IdentifiableItemMock]
+    let items: [IdentifiableItem]
     let title: String?
     let dataType: DataType
-    let sizeModel: SizeModel
+    let sizeModel: SizeModelMock
 
     var body: some View {
         switch dataType {
@@ -73,11 +73,11 @@ struct GeneralGridListView: View {
 
 
 struct GridListView: View {
-    let items: [IdentifiableItemMock]
+    let items: [IdentifiableItem]
     let title: String?
-    let sizeModel: SizeModel
-    let createCardView: (IdentifiableItemMock) -> AnyCardView
-    let createDetailView: (IdentifiableItemMock) -> AnyDetailView
+    let sizeModel: SizeModelMock
+    let createCardView: (IdentifiableItem) -> AnyCardView
+    let createDetailView: (IdentifiableItem) -> AnyDetailView
 
     
     
@@ -97,10 +97,10 @@ struct GridListView: View {
 }
 
 struct Grid: View{
-    let items: [IdentifiableItemMock]
-    let createCardView: (IdentifiableItemMock) -> AnyCardView
-    let createDetailView: (IdentifiableItemMock) -> AnyDetailView
-    let sizeModel: SizeModel
+    let items: [IdentifiableItem]
+    let createCardView: (IdentifiableItem) -> AnyCardView
+    let createDetailView: (IdentifiableItem) -> AnyDetailView
+    let sizeModel: SizeModelMock
     
 
     var body: some View{
@@ -129,7 +129,7 @@ struct Grid: View{
         }
     }
     
-    func columnSize(sizeModel: SizeModel) -> CGFloat {
+    func columnSize(sizeModel: SizeModelMock) -> CGFloat {
         switch sizeModel{
             
         case .large:

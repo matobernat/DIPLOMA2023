@@ -6,8 +6,29 @@
 //
 
 import SwiftUI
+import Combine
+
+
+//class TabBarViewModel: ObservableObject {
+//    @Published var loggedID: String?
+//
+//    private let authenticationService: AuthenticationService
+//    private var cancellable: AnyCancellable?
+//
+//    init() {
+//        self.authenticationService = AppDependencyContainer.shared.authenticationService
+//        loggedID = self.authenticationService.userId
+//
+//        // subscription
+//        cancellable = self.authenticationService.$userId.sink { [weak self] userId in
+//            self?.loggedID = userId
+//        }
+//    }
+//}
+
 
 struct TabBarView: View {
+
     var body: some View {
         TabView {
             TodayView()
@@ -20,11 +41,11 @@ struct TabBarView: View {
                     Image(systemName: "person.3")
                     Text("Clients")
                 }
-            WhiteboardView()
-                .tabItem {
-                    Image(systemName: "pencil")
-                    Text("Whiteboard")
-                }
+//            WhiteboardView()
+//                .tabItem {
+//                    Image(systemName: "pencil")
+//                    Text("Whiteboard")
+//                }
             ExerciseView()
                 .tabItem {
                     Image(systemName: "figure.walk")
@@ -53,6 +74,10 @@ struct TabBarView: View {
         }
     }
 }
+
+
+
+
 
 
 struct TabBarView_Previews: PreviewProvider {
