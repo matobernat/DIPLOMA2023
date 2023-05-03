@@ -20,14 +20,7 @@ class ClientDetailViewModel: ObservableObject {
     
     private let clientsDataStore: ClientsDataStore
     private let categoryDataStore: CategoryDataStore
-    
 
-    
-    // Properties for Client's info row
-    let clientCardTitles: [String]
-    let clientCardValues: [String]
-    let clientCardDescriptions: [String]
-    
     
     
     init(selectedClient: Client) {
@@ -35,10 +28,7 @@ class ClientDetailViewModel: ObservableObject {
         self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
         self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
         
-        // UI Properties for Client's info row
-        clientCardTitles = ["Trainining style", "Injury", "Health Issues", "Payment Type"]
-        clientCardValues = [selectedClient.trainingStyle.rawValue, selectedClient.injury ?? "None", selectedClient.healthIssues ?? "None", selectedClient.paymentType.rawValue]
-        clientCardDescriptions = ["","","",""]
+
     }
     
     func archiveClient(){
@@ -60,6 +50,29 @@ class ClientDetailViewModel: ObservableObject {
         }
     }
     
+    func getInfoRowItems() -> [InfoRowItem] {
+
+        
+        var infoRowItems = [InfoRowItem]()
+        let clientCardTitles = ["Trainining style", "Injury", "Health Issues", "Payment Type"]
+        let clientCardDescriptions = ["","","",""]
+        let clientCardValues = [
+            selectedClient.trainingStyle.rawValue,
+            selectedClient.injury,
+            selectedClient.healthIssues,
+            selectedClient.paymentType.rawValue]
+
+        
+        for index in 0..<clientCardTitles.count {
+            let infoRowItem = InfoRowItem(
+                title: clientCardTitles[index],
+                value: clientCardValues[index],
+                description: clientCardDescriptions[index]
+            )
+            infoRowItems.append(infoRowItem)
+        }
+        return infoRowItems
+    }
     
 }
 
@@ -95,9 +108,7 @@ struct ClientDetailView: View, DetailView {
                     
                     Divider()
                     
-                    InfoRowView(cardTitles: vm.clientCardTitles,
-                                cardValues: vm.clientCardValues,
-                                cardDescriptions: vm.clientCardDescriptions)
+                    InfoRowView(items: vm.getInfoRowItems())
                     
                     GeneralHorizontalListView(title: "Phases", items: DataModelMock.trainingProtocols , titleSize: .medium
                                               ,sizeModel: .large, dataType: .phase)

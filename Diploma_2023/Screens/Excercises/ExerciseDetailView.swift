@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 
-// MARK: - Exercise Detail - ViewModel
+// MARK: - Exercise Detail - ViewModel  not used
 
 class ExerciseDetailViewModel: ObservableObject{
     
@@ -29,31 +29,27 @@ class ExerciseDetailViewModel: ObservableObject{
 
 struct ExerciseDetailView: View {
     
-    let cardTitles = ["Body Part", "Recovery", "Base", "Difficulty"]
-    let cardValues = ["Chest", "No", "Bench Press", "Easy"]
-//    let link = "https://www.youtube.com/watch?v=vthMCtgVtFw&t=54s"
-    
     
 
-    @StateObject private var vm: ExerciseDetailViewModel
+    @ObservedObject private var parentVm: ExercisesViewModel
     
     
-    init(selectedExercise: Exercise){
-        _vm = StateObject(wrappedValue: ExerciseDetailViewModel(selectedExercise: selectedExercise))
+    init( parentVm: ExercisesViewModel) {
+        self.parentVm = parentVm
     }
     
     
     var body: some View {
         ScrollView(.vertical){
-            TagList()
+            TagList(vm: self.parentVm)
             Divider()
-            InfoRowView(cardTitles: cardTitles, cardValues: cardValues, cardDescriptions: nil)
+            InfoRowView(items: self.parentVm.getInfoRowItems())
             Divider()
-            if let url = URL(string: vm.selectedExercise.link) {
-                 Link(vm.selectedExercise.link, destination: url)
+            if let url = URL(string: parentVm.selectedExercise!.link) {
+                 Link(parentVm.selectedExercise!.link, destination: url)
              }
             ZStack{
-                YoutubeVideoView(link: vm.selectedExercise.link)
+                YoutubeVideoView(link: parentVm.selectedExercise!.link)
                     .scaledToFit()
             }
 
@@ -84,16 +80,31 @@ struct YoutubeVideoView: UIViewRepresentable {
 
 
 
-struct TagList: View{
+struct TagList: View {
+    @ObservedObject var vm: ExercisesViewModel
+
     var body: some View {
-        HStack{
-            Text("Chest")
-            Text("Bilateral")
-            Text("Compound")
-            Text("Bench")
+        if !(self.vm.selectedExercise?.tags.isEmpty ?? true) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 50))], spacing: 8) {
+                ForEach(self.vm.selectedExercise!.tags.sorted(), id: \.self) { tag in
+                    HStack {
+                        Text(tag)
+                            .font(.footnote)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(10)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                    }
+                }
+            }
+        } else {
+            Text("No tags added")
         }
     }
 }
+
 
 //struct ExerciseDetailView_Previews: PreviewProvider {
 //    static var previews: some View {

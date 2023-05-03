@@ -195,6 +195,7 @@ struct NewClientView: View {
                 }
                 
                 Section(header: Text("Additional Information")) {
+                    // Toggle Picker
                     VStack(alignment: .leading, spacing: 8) {
                         Toggle("Active", isOn: $vm.newClient.active)
                         Text("Active user is the one that will be training in the near future")

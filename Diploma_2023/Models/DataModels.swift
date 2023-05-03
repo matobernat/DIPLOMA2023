@@ -8,6 +8,25 @@
 import SwiftUI
 
 
+// MARK: - Supportive Structure functions
+
+
+
+// MARK: - Supportive Structures
+
+struct InfoRowItem: Identifiable{
+    var id = UUID()
+    var title: String
+    var value: String
+    var description: String
+    
+}
+
+
+
+
+// MARK: - Main Data Models
+
 struct Account: Identifiable, Hashable, Codable, Equatable {
     
     var id: String // fireBase UID
@@ -182,6 +201,12 @@ struct Exercise: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable 
     var accountID: String // The associated account ID
 
 
+    
+    var bodyPart: String
+    var recovery: Bool
+    var baseMovement: String
+    var difficulty: String
+    
 
     var clientID: String? = nil
 

@@ -33,6 +33,12 @@ class NewExerciseViewModel: ObservableObject {
             categoryIDs: [],
             dateOfCreation: Date.now,
             accountID: loggedAccount.id,
+            
+            bodyPart: "",
+            recovery: false,
+            baseMovement: "",
+            difficulty: " ",
+            
             link: "",
             tags: [])
     }
@@ -97,6 +103,12 @@ class NewExerciseViewModel: ObservableObject {
             categoryIDs: getCategoryIDs(),
             dateOfCreation: Date.now,
             accountID: loggedAccount.id,
+            
+            bodyPart: muscleTypes.randomElement()!,
+            recovery: Bool.random(),
+            baseMovement: movements.randomElement()!,
+            difficulty: ["Easy","Intermediate","Hard"].randomElement()!,
+            
             link: titleLinkPair?.value ?? "Invalid Link",
             tags: Set(randomTags)
             )
@@ -167,10 +179,24 @@ struct NewExerciseView: View {
                     
                 }
                 
-                Section(header: Text("Exercise Information")) {
+                Section(header: Text("Default Information")) {
                     TextField("Name", text: $vm.newExercise.title)
-                    TextField("description", text: $vm.newExercise.subTitle)
-                    TextField("youtube link", text: $vm.newExercise.link)
+                    TextField("Description", text: $vm.newExercise.subTitle)
+                    TextField("Youtube link", text: $vm.newExercise.link)
+                }
+                
+                Section(header: Text("Exercise Information")) {
+                    // Toggle Picker
+                    VStack(alignment: .leading, spacing: 8) {
+                        Toggle("Recovery", isOn: $vm.newExercise.recovery)
+                        Text("Determine if is this exercise used for recovery")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    TextField("Body part", text: $vm.newExercise.bodyPart)
+                    TextField("Base movement", text: $vm.newExercise.baseMovement)
+                    TextField("difficulty", text: $vm.newExercise.difficulty)
                 }
                 
                 VStack {

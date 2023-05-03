@@ -10,14 +10,19 @@ import SwiftUI
 ///  NOTE  in  order to have right format of the dividers, you have to wrap it in scroll view
 struct InfoRowView: View {
     
-    let cardTitles: [String]
-    let cardValues: [String]
-    let cardDescriptions: [String]?
+//    let cardTitles: [String]
+//    let cardValues: [String]
+//    let cardDescriptions: [String]?
+    
+    let items: [InfoRowItem]
     
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(0..<cardTitles.count) { i in
-                InfoRowCard(cardTitle: cardTitles[i], cardValue: cardValues[i], cardDescription: cardDescriptions?[i] ?? "")
+            ForEach(0..<items.count) { i in
+                InfoRowCard(
+                    cardTitle: items[i].title,
+                    cardValue: items[i].value,
+                    cardDescription: items[i].description )
                 Divider()
             }
         }
@@ -51,6 +56,6 @@ struct InfoRowCard: View {
 
 struct InfoRowView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoRowView(cardTitles: MockInfoRowData.cardTitles, cardValues: MockInfoRowData.cardValues, cardDescriptions: MockInfoRowData.cardDescriptions)
+        InfoRowView(items: getMockInfoRowItems())
     }
 }

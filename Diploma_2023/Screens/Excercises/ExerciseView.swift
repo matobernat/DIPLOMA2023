@@ -33,6 +33,7 @@ class ExercisesViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+
     
     init() {
         
@@ -73,7 +74,31 @@ class ExercisesViewModel: ObservableObject {
         
     }
     
-    
+    func getInfoRowItems() -> [InfoRowItem] {
+        
+        if self.selectedExercise == nil{
+            return []
+        }
+        var infoRowItems = [InfoRowItem]()
+        let cardTitles = ["Body Part", "Recovery", "Base", "Difficulty"]
+        let cardDescriptions = ["","","",""]
+        var cardValues = [
+            self.selectedExercise!.bodyPart,
+            self.selectedExercise!.recovery == true ? "Yes":"No",
+            self.selectedExercise!.baseMovement,
+            self.selectedExercise!.difficulty
+        ]
+        
+        for index in 0..<cardTitles.count {
+            let infoRowItem = InfoRowItem(
+                title: cardTitles[index],
+                value: cardValues[index],
+                description: cardDescriptions[index]
+            )
+            infoRowItems.append(infoRowItem)
+        }
+        return infoRowItems
+    }
     // ... other methods
 }
     
@@ -123,7 +148,7 @@ struct ExerciseView: View {
         } detail: {
             NavigationStack{
                 if let selectedExercise = vm.selectedExercise {
-                        ExerciseDetailView(selectedExercise: selectedExercise)
+                    ExerciseDetailView(parentVm: self.vm)
                 } else {
                     Text("No item selected")
                 }

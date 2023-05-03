@@ -12,12 +12,24 @@ import SwiftUI
 
 
 struct MockInfoRowData {
-    static let cardTitles = ["AGE", "CHART", "DEVELOPER", "LANGUAGE"]
-    static let cardValues = ["4+", "No.3", "SF Symbol", "EN"]
-    static let cardDescriptions = ["Years Old", "Finance", "Diligent Robot", "(English)"]
+     let cardTitles = ["AGE", "CHART", "DEVELOPER", "LANGUAGE"]
+     let cardValues = ["4+", "No.3", "SF Symbol", "EN"]
+     let cardDescriptions = ["Years Old", "Finance", "Diligent Robot", "(English)"]
 }
 
-
+func getMockInfoRowItems() -> [InfoRowItem] {
+    let mockData = MockInfoRowData()
+    var infoRowItems = [InfoRowItem]()
+    for index in 0..<mockData.cardTitles.count {
+        let infoRowItem = InfoRowItem(
+            title: mockData.cardTitles[index],
+            value: mockData.cardValues[index],
+            description: mockData.cardDescriptions[index]
+        )
+        infoRowItems.append(infoRowItem)
+    }
+    return infoRowItems
+}
 
 
 //protocol MockDetailView: View {
