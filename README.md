@@ -31,7 +31,9 @@ This project uses Firebase Firestore for database operations. To set up Firebase
 For Rules: Navigate to the "Rules" tab and set up your security rules. You can include the rules in your project or simply add them in the README. For instance:
 
     * For Rules: Navigate to the "Rules" tab and set up your security rules. These are the rules:
-    rules_version = '2';
+    
+  ```
+      rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
      //Default rule for most collections
@@ -44,7 +46,7 @@ service cloud.firestore {
     }
   }
 }
-    
+    ```
     
     
 
@@ -52,7 +54,7 @@ service cloud.firestore {
 
     * For Indexes: Navigate to the "Indexes" tab and set up your indexes. You can specify the fields to index, and whether they should be ascending or descending. It's important to note that creating composite indexes in Firestore can take a few minutes.
     
-    <img width="897" alt="Screenshot 2023-05-25 at 21 06 13" src="https://github.com/matobernat/DIPLOMA2023/assets/36670189/94df7e68-57fd-47f6-9a37-b528d034ebc2">
+   ![Indexes](https://github.com/matobernat/DIPLOMA2023/assets/36670189/94df7e68-57fd-47f6-9a37-b528d034ebc2)
 
     *These rules and indexes are necessary for your application to function properly, and that they should be set up correctly.
 
