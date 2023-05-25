@@ -32,18 +32,18 @@ This project uses Firebase Firestore for database operations. To set up Firebase
     
       ```
       rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-     //Default rule for most collections
-     match /{collection}/{document} {
-       allow read, write: if request.auth != null && request.auth.uid == resource.data.accountID;
-     }
-    // Special rule for accounts collection
-    match /accounts/{id} {
-      allow read, write: if request.auth != null && request.auth.uid == resource.data.id;
-    }
-  }
-}
+      service cloud.firestore {
+        match /databases/{database}/documents {
+           //Default rule for most collections
+           match /{collection}/{document} {
+             allow read, write: if request.auth != null && request.auth.uid == resource.data.accountID;
+           }
+          // Special rule for accounts collection
+          match /accounts/{id} {
+            allow read, write: if request.auth != null && request.auth.uid == resource.data.id;
+          }
+        }
+      }
 ```
     
     
