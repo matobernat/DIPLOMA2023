@@ -28,11 +28,9 @@ This project uses Firebase Firestore for database operations. To set up Firebase
 
 4. Set up Firestore rules and indexes. After enabling Firestore, go to the Firestore database section in your Firebase project.
 
-For Rules: Navigate to the "Rules" tab and set up your security rules. You can include the rules in your project or simply add them in the README. For instance:
-
     * For Rules: Navigate to the "Rules" tab and set up your security rules. These are the rules:
     
-  ```
+      ```
       rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -46,7 +44,7 @@ service cloud.firestore {
     }
   }
 }
-    ```
+```
     
     
 
