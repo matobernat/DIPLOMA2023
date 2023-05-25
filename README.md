@@ -49,7 +49,9 @@ This project uses Firebase Firestore for database operations. To set up Firebase
     
    * For Indexes: Navigate to the "Indexes" tab and set up your indexes. You can specify the fields to index, and whether they should be ascending or descending. It's important to note that creating composite indexes in Firestore can take a few minutes.
    
-   ![Alt Text](https://github.com/matobernat/DIPLOMA2023/raw/main/assets/36670189/94df7e68-57fd-47f6-9a37-b528d034ebc2.jpg)
+   ![Alt Text](https://github.com/matobernat/DIPLOMA2023/assets/36670189/94df7e68-57fd-47f6-9a37-b528d034ebc2)
+   https://github.com/matobernat/DIPLOMA2023/assets/36670189/94df7e68-57fd-47f6-9a37-b528d034ebc2
+   
     
 
 These rules and indexes are necessary for your application to function properly, and that they should be set up correctly.
