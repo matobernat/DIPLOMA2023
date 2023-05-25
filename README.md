@@ -1,5 +1,5 @@
 # DIPLOMA2023
-Fitness Trainer Companion App
+Fitness Trainer Companion App by Martin Bernat
 
 ## Project Description
 This application is a complex solution for fitness trainers, designed to handle multiple clients and create customized fitness plans. 
