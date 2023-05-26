@@ -30,7 +30,7 @@ class NewExerciseViewModel: ObservableObject {
         newExercise = Exercise(
             title: "",
             subTitle: "",
-            categoryIDs: [],
+            categoryIDs: AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(selectedCategory: selectedCategory),
             dateOfCreation: Date.now,
             accountID: loggedAccount.id,
             
@@ -42,7 +42,6 @@ class NewExerciseViewModel: ObservableObject {
             link: "",
             tags: [])
     }
-    
     
     func createMockExercise() -> Exercise {
         
@@ -100,7 +99,7 @@ class NewExerciseViewModel: ObservableObject {
         return Exercise(
             title: titleLinkPair?.key ?? "Exercise",
             subTitle: "Add Description..",
-            categoryIDs: getCategoryIDs(),
+            categoryIDs: AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(selectedCategory: selectedCategory),
             dateOfCreation: Date.now,
             accountID: loggedAccount.id,
             
@@ -112,40 +111,6 @@ class NewExerciseViewModel: ObservableObject {
             link: titleLinkPair?.value ?? "Invalid Link",
             tags: Set(randomTags)
             )
-    }
-    
-    func getCategoryIDs() -> [String]{
-        var IDs=[String]()
-//        self.selectedCategory.id
-        
-        for category in self.categories {
-            
-            // if archived, add only to archived
-            if self.selectedCategory.name.contains("Archived"){
-                if category.name.contains("Archived"){
-                    IDs.append(category.id)
-                }
-                continue
-            }
-                
-                
-            // This is the default rule
-            if category.name.contains("All") ||
-                category.name.contains("Recent") ||
-                category.name.contains("My") {
-                
-                IDs.append(category.id)
-            }
-            
-            // Favorites is optional
-            if self.selectedCategory.name.contains("Favorite"){
-                if category.name.contains("Favorite"){
-                    IDs.append(category.id)
-                }
-            }
-            
-        }
-        return IDs
     }
     
 }
@@ -167,8 +132,7 @@ struct NewExerciseView: View {
     }
     
     var body: some View {
-        NavigationView {
-            
+        NavigationStack {
             Form {
                 
                 Button("Create mocked Exercise") {
@@ -213,8 +177,14 @@ struct NewExerciseView: View {
                 
                 
             }
+            .navigationBarTitle("New Exercise", displayMode: .inline)            .navigationBarItems(leading: Button("Cancel") {
+                parentVm.isShowingForm = false
+            }, trailing: Button("Save") {
+                // parentVm uploads client to DB and updates allClients list
+                parentVm.createExercise(exercise: vm.newExercise)
+                parentVm.isShowingForm = false
+            })
         }
-        .navigationTitle("Add new Exercise")
     }
     
     func addTag() {
@@ -229,8 +199,6 @@ struct NewExerciseView: View {
         vm.tags.removeAll { $0 == tag }
     }
 }
-
-
 
 struct TagBubble: View {
     let tag: String

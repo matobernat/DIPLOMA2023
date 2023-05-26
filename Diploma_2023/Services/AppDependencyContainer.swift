@@ -16,10 +16,12 @@ struct AppDependencyContainer {
     var authenticationService: AuthenticationService
     
     
-    var  accountRepository: AccountRepository
+    var accountRepository: AccountRepository
     var categoryRepository: CategoryRepository
     var clientRepository: ClientRepository
     let exerciseRepository: ExerciseRepository
+    let phaseRepository: PhaseRepository
+    let mezoRepository: MezoRepository
     // Add other repositories and services as needed
 
     
@@ -27,6 +29,8 @@ struct AppDependencyContainer {
     var categoryDataStore: CategoryDataStore
     var clientsDataStore: ClientsDataStore
     let exercisesDataStore: ExercisesDataStore
+    let phasesDataStore: PhasesDataStore
+    let mezoDataStore: MezoDataStore
     // Add other data stores as properties
 
     init() {
@@ -36,12 +40,17 @@ struct AppDependencyContainer {
         categoryRepository = FirestoreCategoryRepository()
         clientRepository = FirestoreClientRepository()
         exerciseRepository = FirestoreExerciseRepository()
+        phaseRepository = FirestorePhaseRepository()
+        mezoRepository = FirestoreMezoRepository()
         // Initialize other repositories and services
 
+        
         accountDataStore = AccountDataStore(accountRepository: accountRepository, authenticationService: authenticationService)
         categoryDataStore = CategoryDataStore(categoryRepository: categoryRepository, authenticationService: authenticationService)
         clientsDataStore = ClientsDataStore(clientRepository: clientRepository, authenticationService: authenticationService)
         exercisesDataStore = ExercisesDataStore(exerciseRepository: exerciseRepository, authenticationService: authenticationService)
+        phasesDataStore = PhasesDataStore(phaseRepository: phaseRepository, authenticationService: authenticationService)
+        mezoDataStore = MezoDataStore(mezoRepository: mezoRepository, authenticationService: authenticationService)
         // Initialize other data stores
     }
     

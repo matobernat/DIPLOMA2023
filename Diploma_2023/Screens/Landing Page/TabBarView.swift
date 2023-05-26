@@ -56,21 +56,21 @@ struct TabBarView: View {
                     Image(systemName: "doc.plaintext")
                     Text("Training Plans")
                 }
-            FoodPlansView()
-                .tabItem {
-                    Image(systemName: "leaf")
-                    Text("Food Plans")
-                }
-            MeasurementsView()
-                .tabItem {
-                    Image(systemName: "chart.bar")
-                    Text("Measurements")
-                }
-            ProgressPhotosView()
-                .tabItem {
-                    Image(systemName: "camera.fill")
-                    Text("Progress Photos")
-                }
+//            FoodPlansView()
+//                .tabItem {
+//                    Image(systemName: "leaf")
+//                    Text("Food Plans")
+//                }
+//            MeasurementsView()
+//                .tabItem {
+//                    Image(systemName: "chart.bar")
+//                    Text("Measurements")
+//                }
+//            ProgressPhotosView()
+//                .tabItem {
+//                    Image(systemName: "camera.fill")
+//                    Text("Progress Photos")
+//                }
         }
     }
 }

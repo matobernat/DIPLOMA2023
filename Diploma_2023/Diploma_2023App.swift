@@ -27,16 +27,15 @@ struct Diploma_2023App: App {
     private var appDependencyContainer: AppDependencyContainer
     @State private var userID: String?
 
-    // Add this line
     @StateObject private var authenticationService: AuthenticationService
-
 
     init() {
         FirebaseApp.configure()
         self.appDependencyContainer =  AppDependencyContainer()
-        // Set the StateObject to the shared instance
+        
+        // Initalize the StateObject inside of the shared instance
         self._authenticationService = StateObject(wrappedValue: AppDependencyContainer.shared.authenticationService)
-
+        
     }
 
     

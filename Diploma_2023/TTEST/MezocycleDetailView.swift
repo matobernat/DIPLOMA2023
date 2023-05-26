@@ -71,7 +71,7 @@ struct MezocycleDetailViewHeader: View{
             
             Divider()
             
-            InfoRowView(items: getMockInfoRowItems())
+            InfoRowView(infoRowItem: getMockInfoRowItems())
             
         }
     }

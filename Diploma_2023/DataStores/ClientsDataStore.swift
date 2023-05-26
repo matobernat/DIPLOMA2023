@@ -54,7 +54,9 @@ class ClientsDataStore: ObservableObject {
         }
     }
     
-    
+    func getClient(clientID: String?) -> Client?{
+        return allClients.first(where: { $0.id == clientID})
+    }
 
     func createClient(_ client: Client, completion: @escaping (Result<Void, Error>) -> Void) {
             
@@ -89,7 +91,7 @@ class ClientsDataStore: ObservableObject {
         clientRepository.updateClient(client, for: userId) { [weak self] result in
             switch result {
             case .success:
-                print("Client updated successfully")
+                print("\n Client updated successfully \n")
                 // Fetch the updated clients
                 self?.fetchClients(forUserId: userId)
                 completion(.success(()))

@@ -89,7 +89,7 @@ struct FoodPlansViewDetailSearch: View{
     
     var body: some View{
         GeneralGridListView(
-            items: selectedItemsSearch(
+            items: selectedItemsSearchMock(
                 allItems: foodProtocols,
                 selectedCategory: selectedCategory,
                 searchText: searchText),

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MediumCardView: View, CardViewMock {
+struct MediumCardView: View, CardView {
     let item: IdentifiableItem
     
     init(item: IdentifiableItem) {
@@ -52,8 +52,13 @@ struct MediumCardView_Previews: PreviewProvider {
 
 
 struct ItemDetailView: View, DetailView{
+
     
-    let item: IdentifiableItem
+    var item: IdentifiableItem
+    
+    init(item: IdentifiableItem) {
+        self.item = item
+    }
     
     var body: some View {
         VStack {

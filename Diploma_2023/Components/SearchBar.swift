@@ -36,7 +36,61 @@ struct SearchBar: View {
 }
 
 
-func selectedItemsSearch<T: IdentifiableItem>(allItems: [T], selectedCategory: CategoryMock?, searchText: String, filterCondition: ((T) -> Bool)? = nil) -> [T] {
+
+
+func selectedItemsByCategoryMock<T: IdentifiableItem>(allItems: [T], selectedCategory: CategoryMock?) -> [T] {
+    if let selectedCategory = selectedCategory {
+        let filteredItems = allItems
+            .filter { selectedCategory.itemIDs.contains($0.id) }
+        return filteredItems
+    }
+    
+    return []
+}
+func selectedItemsByCategory<T: IdentifiableItem>(allItems: [T], selectedCategory: Category?) -> [T] {
+    if let selectedCategory = selectedCategory {
+        let filteredItems = allItems
+            .filter { $0.categoryIDs.contains(selectedCategory.id) }
+        return filteredItems
+    }
+    
+    return allItems
+}
+
+
+
+func selectedItemsSearch<T: IdentifiableItem>(allItems: [T], selectedCategory: Category?, searchText: String, filterCondition: ((T) -> Bool)? = nil) -> [T] {
+    if let selectedCategory = selectedCategory {
+        if searchText.isEmpty {
+            return allItems
+        } else {
+            let filteredItems = allItems
+                .filter { $0.categoryIDs.contains(selectedCategory.id) }
+                .filter { $0.title.localizedCaseInsensitiveContains(searchText) || $0.subTitle.localizedCaseInsensitiveContains(searchText) }
+
+            if let filterCondition = filterCondition {
+                return filteredItems.filter { filterCondition($0) }
+            } else {
+                return filteredItems
+            }
+        }
+    } else {
+        if searchText.isEmpty {
+            return allItems
+        } else {
+            let filteredItems = allItems
+                .filter { $0.title.localizedCaseInsensitiveContains(searchText) || $0.subTitle.localizedCaseInsensitiveContains(searchText) }
+
+            if let filterCondition = filterCondition {
+                return filteredItems.filter { filterCondition($0) }
+            } else {
+                return filteredItems
+            }
+        }
+    }
+}
+
+func selectedItemsSearchMock<T: IdentifiableItem>(allItems: [T], selectedCategory: CategoryMock?, searchText: String, filterCondition: ((T) -> Bool)? = nil) -> [T] {
     if let selectedCategory = selectedCategory {
         if searchText.isEmpty {
             return []
@@ -56,25 +110,9 @@ func selectedItemsSearch<T: IdentifiableItem>(allItems: [T], selectedCategory: C
     }
 }
 
-func selectedItemsByCategoryMock<T: IdentifiableItem>(allItems: [T], selectedCategory: CategoryMock?) -> [T] {
-    if let selectedCategory = selectedCategory {
-        let filteredItems = allItems
-            .filter { selectedCategory.itemIDs.contains($0.id) }
-        return filteredItems
-    }
-    
-    return []
-}
-func selectedItemsByCategory<T: IdentifiableItem>(allItems: [T], selectedCategory: Category?) -> [T] {
-    if let selectedCategory = selectedCategory {
-        let filteredItems = allItems
-            .filter { $0.categoryIDs.contains(selectedCategory.id) }
-        return filteredItems
-    }
-    
-    return []
-}
 
+
+// takes client and returns it's data (training plans, food plans, measurements..)
 func selectedItemsByClient<T: IdentifiableItem>(allItems: [T], selectedClient: ClientMock?, dataType: DataType) -> [T] {
     switch dataType {
         

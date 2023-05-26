@@ -35,7 +35,7 @@ struct GeneralGridListView: View {
                          title: title,
                          sizeModel: sizeModel,
                          createCardView: { item in AnyCardView(LargeCardView(item: item)) },
-                         createDetailView: { item in AnyDetailView(MezocycleDetailView(item: item)) }
+                         createDetailView: { item in AnyDetailView(MezocycleView(item: item)) }
             )
         case .phase:
             GridListView(items: items,

@@ -33,19 +33,13 @@ class PhasesDataStore: ObservableObject {
         cancellable?.cancel()
     }
     
-    private func fetchPhases(forUserId userId: String) {
-        phaseRepository.fetchPhases(forUserId: userId) { result in
-            // Handle the result here
-        }
+    
+    func getPhase(phaseID: String?) -> Phase?{
+        return allPhases.first(where: { $0.id == phaseID})
     }
     
-    func fetchPhases() {
-        guard let userId = authenticationService.userId else {
-            print("Error: User ID is not available")
-            allPhases = []
-            return
-        }
-        
+    func fetchPhases(forUserId userId: String) {
+        print("FETCHING PHASES")
         phaseRepository.fetchPhases(forUserId: userId) { [weak self] result in
             switch result {
             case .success(let phases):
@@ -71,7 +65,7 @@ class PhasesDataStore: ObservableObject {
             switch result {
             case .success:
                 // Fetch the updated phases
-                self?.fetchPhases()
+                self?.fetchPhases(forUserId: userId)
                 completion(.success(()))
             case .failure(let error):
                 print("Error adding phase: \(error.localizedDescription)")
@@ -91,7 +85,7 @@ class PhasesDataStore: ObservableObject {
             case .success:
                 print("Phase updated successfully")
                 // Fetch the updated phases
-                self?.fetchPhases()
+                self?.fetchPhases(forUserId: userId)
                 completion(.success(()))
             case .failure(let error):
                 print("Error updating phase: \(error.localizedDescription)")
@@ -111,7 +105,7 @@ class PhasesDataStore: ObservableObject {
             case .success:
                 print("Phase deleted successfully")
                 // Fetch the updated phases
-                self?.fetchPhases()
+                self?.fetchPhases(forUserId: userId)
                 completion(.success(()))
             case .failure(let error):
                 print("Error deleting phase: \(error.localizedDescription)")

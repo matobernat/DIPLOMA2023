@@ -50,7 +50,7 @@ class NewClientViewModel: ObservableObject {
     
     // This function updates necessary properties before uploading to ClientDataStore
     func getNewClient() -> Client {
-        self.newClient.categoryIDs = self.getCategoryIDs()
+        self.newClient.categoryIDs = AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(selectedCategory: self.selectedCategory)
         self.newClient.injury = self.newClient.injury == "" ? "None" : self.newClient.injury
         self.newClient.healthIssues = self.newClient.healthIssues == "" ? "None" : self.newClient.healthIssues
         self.newClient.dateOfCreation = Date.now
@@ -58,6 +58,7 @@ class NewClientViewModel: ObservableObject {
         return self.newClient
     }
     
+    // TODO: may be deleted if  categoryDataStore.getCategoryIDs will work correctly
     func getCategoryIDs() -> [String]{
         var IDs=[String]()
 //        self.selectedCategory.id

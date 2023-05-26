@@ -33,6 +33,10 @@ class ExercisesDataStore: ObservableObject {
         cancellable?.cancel()
     }
     
+    
+    func getExercise(exerciseID: String?) -> Exercise?{
+        return allExercises.first(where: { $0.id == exerciseID})
+    }
 
     func fetchExercises(forUserId userId: String) {
         

@@ -22,6 +22,7 @@ class MezoDataStore: ObservableObject {
         
         cancellable = authenticationService.$userId.sink { [weak self] userId in
             if let userId = userId {
+                print("FETCHING MESO USER IN ")
                 self?.fetchMezos(forUserId: userId)
             } else {
                 self?.allMezos = [] // Clear the mezos when the user logs out
@@ -33,19 +34,13 @@ class MezoDataStore: ObservableObject {
         cancellable?.cancel()
     }
     
-    private func fetchMezos(forUserId userId: String) {
-        mezoRepository.fetchMezos(forUserId: userId) { result in
-            // Handle the result here
-        }
+
+    func getMezo(mezoID: String?) -> Mezocycle?{
+        return allMezos.first(where: { $0.id == mezoID})
     }
     
-    func fetchMezos() {
-        guard let userId = authenticationService.userId else {
-            print("Error: User ID is not available")
-            allMezos = []
-            return
-        }
-        
+    
+    func fetchMezos(forUserId userId: String) {
         mezoRepository.fetchMezos(forUserId: userId) { [weak self] result in
             switch result {
             case .success(let mezos):
@@ -71,7 +66,7 @@ class MezoDataStore: ObservableObject {
             switch result {
             case .success:
                 // Fetch the updated mezos
-                self?.fetchMezos()
+                self?.fetchMezos(forUserId: userId)
                 completion(.success(()))
             case .failure(let error):
                 print("Error adding mezo: \(error.localizedDescription)")
@@ -91,7 +86,7 @@ class MezoDataStore: ObservableObject {
             case .success:
                 print("Mezo updated successfully")
                 // Fetch the updated mezos
-                self?.fetchMezos()
+                self?.fetchMezos(forUserId: userId)
                 completion(.success(()))
             case .failure(let error):
                 print("Error updating mezo: \(error.localizedDescription)")
@@ -112,7 +107,7 @@ class MezoDataStore: ObservableObject {
             case .success:
                 print("Mezo deleted successfully")
                 // Fetch the updated mezos
-                self?.fetchMezos()
+                self?.fetchMezos(forUserId: userId)
                 completion(.success(()))
             case .failure(let error):
                 print("Error deleting mezo: \(error.localizedDescription)")

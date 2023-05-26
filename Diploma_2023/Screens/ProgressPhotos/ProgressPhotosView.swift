@@ -89,7 +89,7 @@ struct ProgressPhotoViewDetailSearch: View{
     
     var body: some View{
         GeneralGridListView(
-            items: selectedItemsSearch(
+            items: selectedItemsSearchMock(
                 allItems: progressAlbums,
                 selectedCategory: selectedCategory,
                 searchText: searchText),

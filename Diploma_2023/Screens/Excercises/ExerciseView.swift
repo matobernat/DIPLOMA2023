@@ -48,7 +48,7 @@ class ExercisesViewModel: ObservableObject {
         self.loggedAccount = accountDataStore.loggedAccount
         
         
-        // Subscribe to changes in allClients
+        // Subscribe to changes in allExercises
         exercisesDataStore.$allExercises.sink { [weak self] newExercises in
             self?.exercises = newExercises
         }
@@ -64,16 +64,42 @@ class ExercisesViewModel: ObservableObject {
     
     
     func createExercise(exercise: Exercise){
+        print("CREATE EXERCISE")
         exercisesDataStore.createExercise(exercise) { result in
             // handle error
         }
     }
+    
+    
+    func archiveExercise(){
+        self.selectedExercise?.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .client)
+        exercisesDataStore.updateExercise(selectedExercise!) { result in
+            // handle error
+        }
+    }
+    
+    func updateExercise(selectedExercise: Exercise){
+        exercisesDataStore.updateExercise(selectedExercise) { result in
+            // handle error
+            self.selectedExercise = selectedExercise
+        }
+    }
+    
+    func deleteExercise(selectedExercise: Exercise){
+        exercisesDataStore.deleteExercise(selectedExercise, for: loggedAccount!.id) { result in
+            // handle error
+        }
+    }
+    
+    
     
     //TODO: in the future..
     func addCategory(){
         
     }
     
+    
+    // UI func:  takes data from exercise, returns data format for UI InfoRow Component
     func getInfoRowItems() -> [InfoRowItem] {
         
         if self.selectedExercise == nil{
@@ -105,19 +131,20 @@ class ExercisesViewModel: ObservableObject {
 
 // MARK: - Exercises - View
 struct ExerciseView: View {
-    let items: [ExerciseMock] = DataModelMock.exercises
-    let categories: [CategoryMock] = DataModelMock.categories
-    let mainTitle: String = "Exercise"
-    
-    @State private var searchText: String = ""
-    @State var selectedCategory: CategoryMock? = nil
-    @State var selectedItem: ExerciseMock? = nil
+//    let items: [ExerciseMock] = DataModelMock.exercises
+//    let categories: [CategoryMock] = DataModelMock.categories
+//    let mainTitle: String = "Exercise"
+//
+//    @State private var searchText: String = ""
+//    @State var selectedCategory: CategoryMock? = nil
+//    @State var selectedItem: ExerciseMock? = nil
     
     @StateObject private var vm = ExercisesViewModel()
-    
+    @State private var columnVisibility = NavigationSplitViewVisibility.all
+
     
     var body: some View {
-        NavigationSplitView{
+        NavigationSplitView(columnVisibility: $columnVisibility){
             SideBar(categories: vm.categories, title: vm.title, selectedCategory: $vm.selectedCategory)
         } content: {
             if let category = vm.selectedCategory{
@@ -148,13 +175,14 @@ struct ExerciseView: View {
         } detail: {
             NavigationStack{
                 if let selectedExercise = vm.selectedExercise {
-                    ExerciseDetailView(parentVm: self.vm)
+                    ExerciseDetailView(vm:vm)
                 } else {
                     Text("No item selected")
                 }
             }
             .navigationTitle(vm.selectedExercise?.title ?? "Select an Exercise")
 
+            
             .sheet(isPresented: $vm.isShowingForm) {
                 NewExerciseView(parentVm: vm)
 //                        NewExerciseView(isShowingForm: $vm.isShowingForm, parentVm: vm)
@@ -162,10 +190,8 @@ struct ExerciseView: View {
         }
         
         .onAppear {
-            let index = vm.categories.firstIndex { $0.section == .exercise }
-            if let index = index {
-                vm.selectedCategory = vm.categories[index]
-            }
+            vm.selectedCategory = vm.categories[0]
+            
 
             if let selectedCategory = vm.selectedCategory {
                 vm.selectedExercise = vm.exercises.first(where: { $0.categoryIDs.contains(selectedCategory.id) })
@@ -177,6 +203,10 @@ struct ExerciseView: View {
     
     
     
+    
+    
+    
+// TODO: for future, more powerful filter
 //    func selectedItems(allItems:[ExerciseMock]) -> [ExerciseMock] {
 //        if let selectedCategory = selectedCategory {
 //            if searchText.isEmpty {

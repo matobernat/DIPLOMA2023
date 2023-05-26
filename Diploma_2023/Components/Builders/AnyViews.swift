@@ -23,7 +23,7 @@ struct AnyDetailView: View {
 struct AnyCardView: View {
     private let view: AnyView
 
-    init<T: CardViewMock>(_ view: T) {
+    init<T: CardView>(_ view: T) {
         self.view = AnyView(view)
     }
 

@@ -10,50 +10,83 @@ import WebKit
 
 // MARK: - Exercise Detail - ViewModel  not used
 
-class ExerciseDetailViewModel: ObservableObject{
-    
-    @Published var selectedExercise: Exercise
-    
-    
-    init(selectedExercise: Exercise){
-        self.selectedExercise = selectedExercise
-    }
-    
-    
-    
-}
 
 
 
 // MARK: - Exercise Detail - View
 
 struct ExerciseDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
     
     
-
-    @ObservedObject private var parentVm: ExercisesViewModel
-    
-    
-    init( parentVm: ExercisesViewModel) {
-        self.parentVm = parentVm
-    }
+    @ObservedObject var vm: ExercisesViewModel
     
     
     var body: some View {
-        ScrollView(.vertical){
-            TagList(vm: self.parentVm)
-            Divider()
-            InfoRowView(items: self.parentVm.getInfoRowItems())
-            Divider()
-            if let url = URL(string: parentVm.selectedExercise!.link) {
-                 Link(parentVm.selectedExercise!.link, destination: url)
-             }
-            ZStack{
-                YoutubeVideoView(link: parentVm.selectedExercise!.link)
-                    .scaledToFit()
-            }
+        NavigationStack{
+            if let exercise = vm.selectedExercise {
+                ScrollView(.vertical){
+                    TagList(vm: self.vm)
+                        .padding(.leading, 50)
+                    Divider()
+                    InfoRowView(infoRowItem: self.vm.getInfoRowItems())
+                    Divider()
+                    if let url = URL(string: exercise.link) {
+                         Link(exercise.link, destination: url)
+                     }
+                    ZStack{
+                        YoutubeVideoView(link: exercise.link)
+                            .scaledToFit()
+                    }
 
+                }
+            }
         }
+
+        .navigationTitle(vm.selectedExercise?.title ?? "Select Exercise")
+        
+        .navigationBarItems(trailing: Button(action: {
+            // Empty action, button only used to present ContextMenu
+        }, label: {
+            Image(systemName: "ellipsis.circle") // This is the "more" button
+        }).contextMenu {
+            NavigationLink(destination: EditExerciseView(selectedExercise: vm.selectedExercise! ,vm: self.vm)) {
+                HStack{
+                    Text("Edit Client")
+                    Spacer()
+                    Image(systemName: "slider.horizontal.3")
+                }
+                
+            }
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+                vm.archiveExercise()
+                // Call your function to delete the client here
+            }, label: {
+                HStack{
+                    Text("Archive Client")
+                    Spacer()
+                    Image(systemName: "archivebox")
+                }
+                .foregroundColor(.red)
+            })
+            Button(role: .destructive) {
+                presentationMode.wrappedValue.dismiss()
+                vm.deleteExercise(selectedExercise: vm.selectedExercise!)
+                // Call your function to delete the client here
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+            Button(role: .cancel) {
+                // Call your function to delete the client here
+            } label: {
+                Label("Cancel", systemImage: "xmark")
+            }
+        })
+
+        
+        
+        
     }
 }
 

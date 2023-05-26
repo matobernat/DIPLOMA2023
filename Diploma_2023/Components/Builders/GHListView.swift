@@ -13,6 +13,9 @@ struct GeneralHorizontalListView: View {
     let titleSize: SizeModelMock
     let sizeModel: SizeModelMock
     let dataType: DataType
+    var hideDivider: Bool?
+    
+    var addFunc: (() -> Void)? // for now implemented in Training protocols
 
     var body: some View {
         switch dataType {
@@ -22,11 +25,11 @@ struct GeneralHorizontalListView: View {
                      titleSize: titleSize,
                      sizeModel: sizeModel,
                      dataType: dataType,
+                     hideDivider: hideDivider,
                      createCardView: {
                 item in AnyCardView(MediumCardView(item: item))},
                      createDetailView: {
                 item in AnyDetailView(ClientDetailView(item: item))}
-                        
             )
             
         case .exercise:
@@ -35,6 +38,7 @@ struct GeneralHorizontalListView: View {
                      titleSize: titleSize,
                      sizeModel: sizeModel,
                      dataType: dataType,
+                     hideDivider: hideDivider,
                          createCardView: { item in AnyCardView(MediumCardView(item: item)) },
                          createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
             )
@@ -44,8 +48,11 @@ struct GeneralHorizontalListView: View {
                      titleSize: titleSize,
                      sizeModel: sizeModel,
                      dataType: dataType,
+                     hideDivider: hideDivider,
                          createCardView: { item in AnyCardView(LargeCardView(item: item)) },
-                         createDetailView: { item in AnyDetailView(MezocycleDetailView(item: item)) }
+                         createDetailView: { item in AnyDetailView(MezocycleView(item: item)) },
+                     addFunc: addFunc
+
             )
         case .phase:
             ListView(title: title,
@@ -53,8 +60,11 @@ struct GeneralHorizontalListView: View {
                      titleSize: titleSize,
                      sizeModel: sizeModel,
                      dataType: dataType,
+                     hideDivider: hideDivider,
                          createCardView: { item in AnyCardView(LargeCardView(item: item)) },
-                         createDetailView: { item in AnyDetailView(TrainingPlanDetailView(item: item)) }
+                         createDetailView: { item in AnyDetailView(TrainingPlanDetailView(item: item)) },
+                     addFunc: addFunc
+
             )
         case .foodPlan:
             ListView(title: title,
@@ -62,6 +72,7 @@ struct GeneralHorizontalListView: View {
                      titleSize: titleSize,
                      sizeModel: sizeModel,
                      dataType: dataType,
+                     hideDivider: hideDivider,
                          createCardView: { item in AnyCardView(MediumCardView(item: item)) },
                          createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
             )
@@ -71,6 +82,7 @@ struct GeneralHorizontalListView: View {
                      titleSize: titleSize,
                      sizeModel: sizeModel,
                      dataType: dataType,
+                     hideDivider: hideDivider,
                          createCardView: { item in AnyCardView(MediumCardView(item: item)) },
                          createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
             )
@@ -80,6 +92,7 @@ struct GeneralHorizontalListView: View {
                      titleSize: titleSize,
                      sizeModel: sizeModel,
                      dataType: dataType,
+                     hideDivider: hideDivider,
                          createCardView: { item in AnyCardView(MediumCardView(item: item)) },
                          createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
             )
@@ -96,21 +109,45 @@ struct ListView: View {
     let titleSize: SizeModelMock
     let sizeModel: SizeModelMock
     let dataType: DataType
+    var hideDivider: Bool?
     let createCardView: (IdentifiableItem) -> AnyCardView
     let createDetailView: (IdentifiableItem) -> AnyDetailView
     
+    var addFunc: (() -> Void)?     // If function not provided, no button needed
+    
     var body: some View{
         VStack(alignment: .leading) {
+            
+            // HEADER
             GHListViewHeader(
                 title: title,
                 titleSize: titleSize,
                 items: items,
                 dataType: dataType,
-                sizeModel: sizeModel)
+                sizeModel: sizeModel,
+                hideDivider: hideDivider)
             
             
+            // ADD BUTTON + LIST OF ITEMS
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
+
+                    // ADD BUTTON
+                    if let addFunc = addFunc {
+                        Button(action: {
+                            addFunc()
+                        }) {
+                            if sizeModel == .large{
+                                LargeCardButtonLabel(type: dataType)
+                                    .padding(.leading, 16)
+                            }
+                            else{
+                                Text("TODO CardButtonLabel")
+                            }
+                        }
+                    }
+
+                    // LIST OF ITEMS
                     ForEach(items, id: \.id) { item in
                         NavigationLink(destination:
                                         createDetailView(item)) {
@@ -131,10 +168,14 @@ struct GHListViewHeader: View {
     let items: [IdentifiableItem]
     let dataType: DataType
     let sizeModel: SizeModelMock
+    let hideDivider: Bool?
 //    let destination: ([IdentifiableItem]) -> AnyView
     
     var body: some View {
-        Divider()
+        
+        if hideDivider != true {
+            Divider()
+        }
         
             HStack {
                 Text(title)

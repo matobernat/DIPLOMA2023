@@ -6,15 +6,15 @@
 //
 import SwiftUI
 
-struct PhaseSheet: View {
+struct StaticPhaseSheetView: View {
 
-    var headerLabels = ["NAME", "PHASE", "PERIODIZATION", "INTEGRATION GOAL"]
-    var headerData = ["Add..", "Add..", "Add..", "Add.."]
+    var phaseInfoTableHeaderLabels = ["NAME", "PHASE", "PERIODIZATION", "INTEGRATION GOAL"]
+    var phaseInfoTableHeaderData = ["Add..", "Add..", "Add..", "Add.."]
     
     
-    var sheetLabels = ["Exercise", "Tempo", "Rep", "Set","Rest", "Micro","Load", "Load","Load", "Load"]
+    var phaseSheetTableHeaderLabels = ["Exercise", "Tempo", "Rep", "Set","Rest", "Micro","Load", "Load","Load", "Load"]
 
-    var sheetData = [
+    var exercisesSettingsTexfieldTexts = [
         ["Exercise1", "Add..", "Add..", "Add..", "Add..", "Add.."],
         ["Exercise2", "Add..", "Add..", "Add..", "Add..", "Add.."],
         ["Exercise3", "Add..", "Add..", "Add..", "Add..", "Add.."],
@@ -27,9 +27,9 @@ struct PhaseSheet: View {
         ScrollView {
             VStack(spacing: 20){
                 
-                Header(labels: headerLabels,data: headerData)
+                StaticHeader(labels: phaseInfoTableHeaderLabels,data: phaseInfoTableHeaderData)
             
-                Sheet(labels:sheetLabels ,data: sheetData)
+                StaticSheet(labels:phaseSheetTableHeaderLabels ,ExercisesSettings: exercisesSettingsTexfieldTexts)
                 
             }
         }
@@ -39,9 +39,9 @@ struct PhaseSheet: View {
 
 
 
-struct Sheet: View {
+struct StaticSheet: View {
     var labels: [String]
-    var data: [[String]]
+    var ExercisesSettings: [[String]]
     var height: CGFloat = 100
     var width: [CGFloat] = [300,70,70,70,70,70,200,200,200,200,]
     
@@ -51,9 +51,9 @@ struct Sheet: View {
         ScrollView(.horizontal){
             VStack(spacing: 0){
                 // LABEL HEADER
-                SheetRowBuilder(data: labels, width: width, height: height, color: Color.secondary)
+                StaticSheetRowBuilder(exerciseSettingsData: labels, width: width, height: height, color: Color.secondary)
                 // TABLE
-                SheetBuilder(data: data, width: width, height: height, color: Color.white)
+                StaticSheetBuilder(exercisesSettingsData: ExercisesSettings, width: width, height: height, color: Color.white)
             }
         }
     }
@@ -68,8 +68,8 @@ struct Sheet: View {
 
 
 
-struct SheetBuilder: View {
-    var data: [[String]]
+struct StaticSheetBuilder: View {
+    var exercisesSettingsData: [[String]]
     var width: [CGFloat]
     var height: CGFloat
     var color: Color
@@ -81,8 +81,8 @@ struct SheetBuilder: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ForEach(data.indices, id: \.self) { index in
-                SheetRowBuilder(data: data[index], textFields: $textFields[index], width: width, height: height, color: color)
+            ForEach(exercisesSettingsData.indices, id: \.self) { index in
+                StaticSheetRowBuilder(exerciseSettingsData: exercisesSettingsData[index], loadsTextFields: $textFields[index], width: width, height: height, color: color)
             }
         }
     }
@@ -90,9 +90,9 @@ struct SheetBuilder: View {
 
 
 // This Struct may have some indexing error in the future
-struct SheetRowBuilder: View {
-    var data: [String]
-    var textFields: Binding<[String]>?
+struct StaticSheetRowBuilder: View {
+    var exerciseSettingsData: [String]
+    var loadsTextFields: Binding<[String]>?
 
     var width: [CGFloat]
     var height: CGFloat
@@ -104,14 +104,14 @@ struct SheetRowBuilder: View {
         HStack(spacing: 0) {
             
             // Text Cells with data
-            ForEach(data.indices, id: \.self) { index in
-                CellBuilder(content: data[index], text: nil, width: width[index], height: height, color: color)
+            ForEach(exerciseSettingsData.indices, id: \.self) { index in
+                StaticStaticCellBuilder(content: exerciseSettingsData[index], text: nil, width: width[index], height: height, color: color)
             }
             
             // TextFields with Bindings
-            if let textFieldsBinding = textFields {
+            if let textFieldsBinding = loadsTextFields {
                 ForEach(textFieldsBinding.indices, id: \.self) { index in
-                    CellBuilder(content: nil, text: textFieldsBinding[index], width: width[index + data.count], height: height, color: color)
+                    StaticStaticCellBuilder(content: nil, text: textFieldsBinding[index], width: width[index + exerciseSettingsData.count], height: height, color: color)
                 }
             }
 
@@ -120,7 +120,7 @@ struct SheetRowBuilder: View {
 }
 
 
-struct Header: View {
+struct StaticHeader: View {
     var labels: [String]
     var data: [String]
     var height: CGFloat = 100
@@ -129,11 +129,11 @@ struct Header: View {
     var body: some View {
         ScrollView(.horizontal){
             VStack(spacing: 0){
-                HeaderRowBuilder(data: labels,
+                StaticHeaderRowBuilder(data: labels,
                              width: width,
                              height: 50,
                              color: Color.gray.opacity(0.2))
-                HeaderRowBuilder(data: data,
+                StaticHeaderRowBuilder(data: data,
                              width: width,
                              height: height,
                              color: Color.white.opacity(0.2))
@@ -151,7 +151,7 @@ struct Header: View {
     }
 }
 
-struct HeaderRowBuilder: View {
+struct StaticHeaderRowBuilder: View {
     var data: [String]
     var width: [CGFloat]
     var height: CGFloat
@@ -160,14 +160,14 @@ struct HeaderRowBuilder: View {
     var body: some View {
         HStack(spacing: 0) {
             ForEach(data.indices, id: \.self) { index in
-                CellBuilder(content: data[index], text: nil, width: width[index], height: height, color: color)
+                StaticStaticCellBuilder(content: data[index], text: nil, width: width[index], height: height, color: color)
             }
         }
     }
 }
 
 
-struct CellBuilder: View {
+struct StaticStaticCellBuilder: View {
     var content: String?
     var text: Binding<String>?
 
@@ -198,10 +198,9 @@ struct CellBuilder: View {
 
 
 
-
-struct PhaseSheet_Previews: PreviewProvider {
+struct StaticPhaseSheet_Previews: PreviewProvider {
     static var previews: some View {
-        PhaseSheet()
+        StaticPhaseSheetView()
     }
 }
 

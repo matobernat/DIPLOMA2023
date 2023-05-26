@@ -30,7 +30,7 @@ struct ClientsView: View {
                         ForEach(selectedClients(allClients: vm.clients)) { client in
                             NavigationLink(
                                 destination: ClientDetailView(
-                                    item: client),
+                                    item: client).environmentObject(self.vm),
                                 tag: client,
                                 selection: $vm.selectedClient) {
                                 SmallCardView(item: client)

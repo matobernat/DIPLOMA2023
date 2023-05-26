@@ -5,6 +5,7 @@
 //  Created by Martin Bernát on 16/03/2023.
 //
 import SwiftUI
+import Combine
 
 
 // MARK: - ClientDetail - ViewModel
@@ -12,27 +13,49 @@ import SwiftUI
 class ClientDetailViewModel: ObservableObject {
     
     // Adjust this value to represent the desired progress
-    @Published private var progress = 0.65
-    
-    @Published var isShowingForm = false
-    
-    var selectedClient: Client
-    
-    private let clientsDataStore: ClientsDataStore
-    private let categoryDataStore: CategoryDataStore
+    @Published var progress: Double = 0.0
 
-    
-    
+    @Published var shouldDismiss = false
+     @Published var isShowingForm = false
+     @Published var selectedClient: Client
+
+     private let clientsDataStore: ClientsDataStore
+     private let categoryDataStore: CategoryDataStore
+
+     private var selectedClientCancellable: AnyCancellable?
+     private var selectedClientObserver: AnyCancellable?
+     private var cancellables = Set<AnyCancellable>()
+
+        
     init(selectedClient: Client) {
         self.selectedClient = selectedClient
         self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
         self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
         
+        updateProgress()
+        // Set up the observer for the selected client
+        clientsDataStore.$allClients.sink { [weak self] newClients in
+            if let selfClient = self {
+                if let updatedClient = newClients.first(where: { $0.id == selfClient.selectedClient.id }) {
+                    // Update selectedClient to the client object in newClients that has the same id
+                    selfClient.selectedClient = updatedClient
+                }
+                // If there is no matching client in newClients, keep selectedClient as it is
 
+            }
+        }
+        .store(in: &cancellables)
     }
+
+    
+    private func updateProgress() {
+         progress = selectedClient.calculateFinishedPhasesPercentage()
+     }
+    
+    
     
     func archiveClient(){
-        self.selectedClient.categoryIDs = categoryDataStore.getCategoryIDs(subString: "Archived", section: .client)
+        self.selectedClient.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .client)
         clientsDataStore.updateClient(self.selectedClient) { result in
             // handle error
         }
@@ -80,6 +103,7 @@ class ClientDetailViewModel: ObservableObject {
 // MARK: - ClientDetail - View
 struct ClientDetailView: View, DetailView {
 
+    @EnvironmentObject private var parentVM: ClientsViewModel
     @StateObject private var vm: ClientDetailViewModel
     
     init(item: IdentifiableItem) {
@@ -98,7 +122,8 @@ struct ClientDetailView: View, DetailView {
                     ClientTitle(
                         name: vm.selectedClient.title,
                         remainingSessions: 3,
-                        isActive: true)
+                        isActive: true,
+                        progress: $vm.progress)
                     
                     ClientPhoto(
                         imageUrl: vm.selectedClient.imageName,
@@ -108,18 +133,24 @@ struct ClientDetailView: View, DetailView {
                     
                     Divider()
                     
-                    InfoRowView(items: vm.getInfoRowItems())
+                    InfoRowView(infoRowItem: vm.getInfoRowItems())
                     
-                    GeneralHorizontalListView(title: "Phases", items: DataModelMock.trainingProtocols , titleSize: .medium
+                    GeneralHorizontalListView(title: "Phases", items: vm.selectedClient.phases , titleSize: .medium
                                               ,sizeModel: .large, dataType: .phase)
                     GeneralHorizontalListView(title: "Measurements", items: DataModelMock.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
                     GeneralHorizontalListView(title: "Food Protocols", items: DataModelMock.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
-                    GeneralHorizontalListView(title: "Mezocycles", items: DataModelMock.mezocycles, titleSize: .medium, sizeModel: .large, dataType: .mezocycle)
+                    GeneralHorizontalListView(title: "Mezocycles", items: vm.selectedClient.mezocycles, titleSize: .medium, sizeModel: .large, dataType: .mezocycle)
                     GeneralHorizontalListView(title: "Progress Photos", items: DataModelMock.progressPhotos, titleSize: .medium, sizeModel: .medium, dataType: .progressAlbum)
                     
                 }
             }
         }
+        .onReceive(vm.$shouldDismiss) { shouldDismiss in
+            if shouldDismiss {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
+        
         .navigationTitle(vm.selectedClient.title)
         
         .navigationBarItems(trailing: Button(action: {
@@ -131,7 +162,7 @@ struct ClientDetailView: View, DetailView {
                 HStack{
                     Text("Edit Client")
                     Spacer()
-                    Image(systemName: "pencil")
+                    Image(systemName: "slider.horizontal.3")
                 }
                 
             }
@@ -173,8 +204,9 @@ struct ClientTitle: View {
     let name: String
     let remainingSessions: Int
     let isActive: Bool
+    @Binding var progress: Double
 
-    @State private var progress = 0.65 // Adjust this value to represent the desired progress
+//    @State private var progress = 0.65 // Adjust this value to represent the desired progress
 
     var body: some View {
         HStack(spacing: 53) {

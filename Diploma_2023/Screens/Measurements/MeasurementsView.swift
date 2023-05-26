@@ -87,7 +87,7 @@ struct MeasurementsViewDetailSearch: View{
     
     var body: some View{
         GeneralGridListView(
-            items: selectedItemsSearch(
+            items: selectedItemsSearchMock(
                 allItems: measurements,
                 selectedCategory: selectedCategory,
                 searchText: searchText),

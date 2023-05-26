@@ -14,15 +14,15 @@ struct InfoRowView: View {
 //    let cardValues: [String]
 //    let cardDescriptions: [String]?
     
-    let items: [InfoRowItem]
+    let infoRowItem: [InfoRowItem]
     
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(0..<items.count) { i in
+            ForEach(0..<infoRowItem.count) { i in
                 InfoRowCard(
-                    cardTitle: items[i].title,
-                    cardValue: items[i].value,
-                    cardDescription: items[i].description )
+                    cardTitle: infoRowItem[i].title,
+                    cardValue: infoRowItem[i].value,
+                    cardDescription: infoRowItem[i].description )
                 Divider()
             }
         }
@@ -56,6 +56,6 @@ struct InfoRowCard: View {
 
 struct InfoRowView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoRowView(items: getMockInfoRowItems())
+        InfoRowView(infoRowItem: getMockInfoRowItems())
     }
 }

@@ -49,9 +49,9 @@ class CategoryDataStore: ObservableObject {
     // Filtering
     
     private func filterCategoriesByType() -> (clients: [Category], exercises: [Category], trainingPlans: [Category]) {
-        let clients = allCategories.filter { $0.section == .client }
-        let exercises = allCategories.filter { $0.section == .exercise }
-        let trainingPlans = allCategories.filter { $0.section == .trainingPlan }
+        let clients = allCategories.filter { $0.dataType == .client }
+        let exercises = allCategories.filter { $0.dataType == .exercise }
+        let trainingPlans = allCategories.filter { $0.dataType == .trainingPlan }
         
         return (clients: clients, exercises: exercises, trainingPlans: trainingPlans)
     }
@@ -71,7 +71,7 @@ class CategoryDataStore: ObservableObject {
     
     
     // Categories functions
-    func getCategoryIDs(subString: String, section: DataType) -> [String]{
+    func getCategoryIDs(subStrings: [String], section: DataType) -> [String]{
         var categories = [Category]()
 
         switch section {
@@ -85,9 +85,10 @@ class CategoryDataStore: ObservableObject {
             categories = self.categoriesClients
             print("getCategoryID error")
         }
-        
-        return categories.filter { $0.name.contains(subString) }.map{$0.id}
-        
+                
+        return categories.filter { category in
+            subStrings.contains(where: category.name.contains)
+        }.map{$0.id}
     }
     
     // Repository functions
@@ -223,7 +224,7 @@ class CategoryDataStore: ObservableObject {
             let categoryAll = Category(
                 id: UUID().uuidString,
                 name: "All \(nameDict[dataType.rawValue] ?? "")",
-                section: dataType,
+                dataType: dataType,
                 isGlobal: true,
                 accountID: userId,
                 dateOfCreation: date.addingTimeInterval(allTimeInterval),
@@ -232,7 +233,7 @@ class CategoryDataStore: ObservableObject {
             let categoryRecent = Category(
                 id: UUID().uuidString,
                 name: "Recent \(nameDict[dataType.rawValue] ?? "")",
-                section: dataType,
+                dataType: dataType,
                 isGlobal: true,
                 accountID: userId,
                 dateOfCreation: date.addingTimeInterval(recentTimeInterval),
@@ -242,7 +243,7 @@ class CategoryDataStore: ObservableObject {
             let categoryArchived = Category(
                 id: UUID().uuidString,
                 name: "Archived \(nameDict[dataType.rawValue] ?? "")",
-                section: dataType,
+                dataType: dataType,
                 isGlobal: true,
                 accountID: userId,
                 dateOfCreation: date.addingTimeInterval(archivedTimeInterval),
@@ -332,7 +333,7 @@ class CategoryDataStore: ObservableObject {
             let categoryMy = Category(
                 id: UUID().uuidString,
                 name: "My \(nameDict[dataType.rawValue] ?? "")",
-                section: dataType,
+                dataType: dataType,
                 isGlobal: false,
                 accountID: userId,
                 dateOfCreation: date.addingTimeInterval(allTimeInterval),
@@ -342,7 +343,7 @@ class CategoryDataStore: ObservableObject {
             let categoryFavorite = Category(
                 id: UUID().uuidString,
                 name: "Favorite \(nameDict[dataType.rawValue] ?? "")",
-                section: dataType,
+                dataType: dataType,
                 isGlobal: false,
                 accountID: userId,
                 dateOfCreation: date.addingTimeInterval(recentTimeInterval),
@@ -352,7 +353,7 @@ class CategoryDataStore: ObservableObject {
             let categoryArchived = Category(
                 id: UUID().uuidString,
                 name: "Archived \(nameDict[dataType.rawValue] ?? "")",
-                section: dataType,
+                dataType: dataType,
                 isGlobal: false,
                 accountID: userId,
                 dateOfCreation: date.addingTimeInterval(archivedTimeInterval),
@@ -398,6 +399,54 @@ class CategoryDataStore: ObservableObject {
         }
     }
     
+    
+    func getCategoryIDs(selectedCategory: Category) -> [String]{
+        var IDs=[String]()
+        
+        allCategories = [Category]()
+        
+        switch selectedCategory.dataType{
+        case .client:
+            allCategories = self.categoriesClients
+        case .exercise:
+            allCategories = self.categoriesExercises
+        case .trainingPlan:
+            allCategories = self.categoriesTrainingPlans
+            
+        default:
+            print("getCategoryIDs ERROR")
+            allCategories = [Category]()
+        }
+        
+        for category in self.allCategories {
+            
+            // if archived, add only to archived
+            if selectedCategory.name.contains("Archived"){
+                if category.name.contains("Archived"){
+                    IDs.append(category.id)
+                }
+                continue
+            }
+                
+                
+            // This is the default rule
+            if category.name.contains("All") ||
+                category.name.contains("Recent") ||
+                category.name.contains("My") {
+                
+                IDs.append(category.id)
+            }
+            
+            // Favorites is optional
+            if selectedCategory.name.contains("Favorite"){
+                if category.name.contains("Favorite"){
+                    IDs.append(category.id)
+                }
+            }
+            
+        }
+        return IDs
+    }
     
     
     

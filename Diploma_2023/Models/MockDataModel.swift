@@ -8,9 +8,6 @@
 import SwiftUI
 
 
-
-
-
 struct MockInfoRowData {
      let cardTitles = ["AGE", "CHART", "DEVELOPER", "LANGUAGE"]
      let cardValues = ["4+", "No.3", "SF Symbol", "EN"]
@@ -32,9 +29,6 @@ func getMockInfoRowItems() -> [InfoRowItem] {
 }
 
 
-//protocol MockDetailView: View {
-//    init(item: IdentifiableItem)
-//}
 
 protocol CardViewMock: View {
     init(item: IdentifiableItem)
