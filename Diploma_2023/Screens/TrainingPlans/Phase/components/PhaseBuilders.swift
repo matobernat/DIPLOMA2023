@@ -90,6 +90,9 @@ struct addPhaseToClientSheet: View {
             VStack(alignment: .leading) {
                 SearchBar(searchText: $searchText)
                     .padding(.horizontal)
+                
+
+                
                 List(selectedItemsSearch(allItems: clients, selectedCategory: nil, searchText: searchText)) { client in
                     
                     HStack {
@@ -100,15 +103,16 @@ struct addPhaseToClientSheet: View {
                             vm.addPhaseToClient(phase: phase, client: client)
                         } label: {
                             Label("Add Item", systemImage: "plus")
-                                .foregroundColor(.accentColor)
                         }
                         .buttonStyle(.bordered)
                         .controlSize(.mini)
                         .tint(.accentColor)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                   
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                 }
+                
+                
             }
             .navigationBarTitle("Add Exercises", displayMode: .inline)
             .toolbar {

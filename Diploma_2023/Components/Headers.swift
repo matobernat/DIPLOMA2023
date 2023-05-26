@@ -6,27 +6,27 @@
 //
 
 import SwiftUI
-
-struct LeftSideHeader: View {
-
-    var title: String
-    var body: some View {
-        
-        HStack{
-            Text(title)
-                .font(.title)
-//                .fontWeight(.bold)
-                .padding(.leading, 16)
-                .padding(.top, 16)
-                .padding(.bottom, 8)
-            Spacer()
-        }
-
-        
-    }
-}
-struct Headers_Previews: PreviewProvider {
-    static var previews: some View {
-        LeftSideHeader(title: "LeftTitleHeader")
-    }
-}
+//
+//struct LeftSideHeader: View {
+//
+//    var title: String
+//    var body: some View {
+//
+//        HStack{
+//            Text(title)
+//                .font(.title)
+////                .fontWeight(.bold)
+//                .padding(.leading, 16)
+//                .padding(.top, 16)
+//                .padding(.bottom, 8)
+//            Spacer()
+//        }
+//
+//
+//    }
+//}
+//struct Headers_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LeftSideHeader(title: "LeftTitleHeader")
+//    }
+//}

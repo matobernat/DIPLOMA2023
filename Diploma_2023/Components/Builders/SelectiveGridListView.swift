@@ -41,7 +41,7 @@ struct SelectiveGridListViewAdd: View {
                                                                     selectedItems.removeAll(where: { $0.id == item.id })
                                                                 } else {
                                                                     isSelected[item.id] = true
-                                                                    selectedItems.append(item.setMezo(mezoID: parentItem.id))
+                                                                    selectedItems.append(item.setMezoID(mezoID: parentItem.id))
                                                                 }
                             }) {
                                 Image(systemName: isSelected[item.id] == true ? "minus.circle" : "plus.circle")
@@ -106,7 +106,7 @@ struct SelectiveGridListViewEdit: View {
                                                                     selectedItems.removeAll(where: { $0.id == item.id })
                                                                 } else {
                                                                     isSelected[item.id] = true
-                                                                    selectedItems.append(item.setMezo(mezoID: parentItem.id))
+                                                                    selectedItems.append(item.setMezoID(mezoID: parentItem.id))
                                                                 }
                             }) {
                                 Image(systemName: isSelected[item.id] == true ? "minus.circle" : "plus.circle")
@@ -135,10 +135,3 @@ struct SelectiveGridListViewEdit: View {
         }
     }
 }
-
-
-//struct SelectiveGridListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SelectiveGridListView()
-//    }
-//}

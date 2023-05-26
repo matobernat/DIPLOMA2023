@@ -115,9 +115,3 @@ struct SignInView: View {
 }
 
 
-//
-//struct SignInView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SignInView(viewModel: SignInViewModel(authenticationService: AppDependencyContainer.shared.authenticationService))
-//    }
-//}

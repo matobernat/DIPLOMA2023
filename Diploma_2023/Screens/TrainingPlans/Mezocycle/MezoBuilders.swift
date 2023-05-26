@@ -114,7 +114,7 @@ struct AddPhaseToMezoItem: View {
             
             // Add or remove item
             Button(action: {
-                isChecked ? selectedPhases = selectedPhases.filter { $0.id != selectedPhase.id } : selectedPhases.append(selectedPhase.setMezo(mezoID: newMezo.id))
+                isChecked ? selectedPhases = selectedPhases.filter { $0.id != selectedPhase.id } : selectedPhases.append(selectedPhase.setMezoID(mezoID: newMezo.id))
                 isChecked.toggle()
                     
             }) {

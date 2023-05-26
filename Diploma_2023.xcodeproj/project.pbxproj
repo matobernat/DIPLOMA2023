@@ -47,7 +47,6 @@
 		02C49A8129DEE67600298E13 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8029DEE67600298E13 /* SignUpView.swift */; };
 		02C49A8329E0BB4C00298E13 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8229E0BB4C00298E13 /* SignInView.swift */; };
 		02C49A8A29EAEAEB00298E13 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8929EAEAEB00298E13 /* Authentication.swift */; };
-		02C49A8C29EAEBD900298E13 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8B29EAEBD900298E13 /* DataStore.swift */; };
 		02D26F6229CF8557000A49E0 /* GGridListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D26F6129CF8557000A49E0 /* GGridListView.swift */; };
 		02D3BE2D2A1AE8A9007406EE /* PhaseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE2C2A1AE8A9007406EE /* PhaseSheetView.swift */; };
 		02D3BE302A1B3916007406EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE2F2A1B3916007406EE /* Extensions.swift */; };
@@ -81,7 +80,6 @@
 		02E9FCCF29F586CB000662D5 /* SmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCCE29F586CB000662D5 /* SmallCardView.swift */; };
 		02E9FCD229F83D6F000662D5 /* NewClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCD129F83D6F000662D5 /* NewClientView.swift */; };
 		02E9FCD429F9197F000662D5 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCD329F9197E000662D5 /* SideBar.swift */; };
-		02E9FCD729FAE6DF000662D5 /* AppDataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCD629FAE6DF000662D5 /* AppDataStores.swift */; };
 		02E9FCDC29FD729D000662D5 /* FirebaseStorageImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCDB29FD729D000662D5 /* FirebaseStorageImageDataStore.swift */; };
 		02E9FCDE29FDB91C000662D5 /* EditClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCDD29FDB91C000662D5 /* EditClientView.swift */; };
 		02E9FCE129FFBB94000662D5 /* NewExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCE029FFBB94000662D5 /* NewExerciseView.swift */; };
@@ -140,7 +138,6 @@
 		02C49A8029DEE67600298E13 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		02C49A8229E0BB4C00298E13 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		02C49A8929EAEAEB00298E13 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
-		02C49A8B29EAEBD900298E13 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		02D26F6129CF8557000A49E0 /* GGridListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GGridListView.swift; sourceTree = "<group>"; };
 		02D3BE2C2A1AE8A9007406EE /* PhaseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSheetView.swift; sourceTree = "<group>"; };
 		02D3BE2F2A1B3916007406EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -175,7 +172,6 @@
 		02E9FCCE29F586CB000662D5 /* SmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCardView.swift; sourceTree = "<group>"; };
 		02E9FCD129F83D6F000662D5 /* NewClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewClientView.swift; sourceTree = "<group>"; };
 		02E9FCD329F9197E000662D5 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
-		02E9FCD629FAE6DF000662D5 /* AppDataStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataStores.swift; sourceTree = "<group>"; };
 		02E9FCDB29FD729D000662D5 /* FirebaseStorageImageDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageImageDataStore.swift; sourceTree = "<group>"; };
 		02E9FCDD29FDB91C000662D5 /* EditClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClientView.swift; sourceTree = "<group>"; };
 		02E9FCE029FFBB94000662D5 /* NewExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExerciseView.swift; sourceTree = "<group>"; };
@@ -236,7 +232,7 @@
 				023BA4BC29D2FCBF00241B2B /* Utility */,
 				0210C64029AA001E001DAD74 /* Assets.xcassets */,
 				0210C64229AA001E001DAD74 /* Preview Content */,
-				0210C66529BA6B1F001DAD74 /* TTEST */,
+				0210C66529BA6B1F001DAD74 /* TEST FILES */,
 				02C49A8929EAEAEB00298E13 /* Authentication.swift */,
 			);
 			path = Diploma_2023;
@@ -250,7 +246,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		0210C66529BA6B1F001DAD74 /* TTEST */ = {
+		0210C66529BA6B1F001DAD74 /* TEST FILES */ = {
 			isa = PBXGroup;
 			children = (
 				023BA4C229D48A1000241B2B /* MezocycleDetailView.swift */,
@@ -262,7 +258,7 @@
 				02D5906429C36917007C6AAB /* AppDetailView.swift */,
 				02D5906E29C607C8007C6AAB /* NavigationSplitViewThreeX.swift */,
 			);
-			path = TTEST;
+			path = "TEST FILES";
 			sourceTree = "<group>";
 		};
 		0210C66829BA77DD001DAD74 /* Models */ = {
@@ -330,10 +326,9 @@
 		02770C262A193FB400BEE9BD /* Phase */ = {
 			isa = PBXGroup;
 			children = (
-				02D3BE312A1B78D0007406EE /* components */,
-				02770C282A1999D200BEE9BD /* NewPhaseSheetView.swift */,
-				02E9FCB829F2A755000662D5 /* WhiteBoard */,
 				02D3BE2C2A1AE8A9007406EE /* PhaseSheetView.swift */,
+				02770C282A1999D200BEE9BD /* NewPhaseSheetView.swift */,
+				02D3BE312A1B78D0007406EE /* components */,
 			);
 			path = Phase;
 			sourceTree = "<group>";
@@ -380,8 +375,6 @@
 		02817F7929EE94B00038C658 /* DataStores */ = {
 			isa = PBXGroup;
 			children = (
-				02C49A8B29EAEBD900298E13 /* DataStore.swift */,
-				02E9FCD629FAE6DF000662D5 /* AppDataStores.swift */,
 				02817F7A29EE94DF0038C658 /* AccountDataStore.swift */,
 				02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */,
 				02817F7F29EE95140038C658 /* ClientsDataStore.swift */,
@@ -458,6 +451,7 @@
 				02D5908729C8EBC1007C6AAB /* TodayView */,
 				0210C66B29BB4186001DAD74 /* Clients */,
 				02D5908629C8EBB0007C6AAB /* TrainingPlans */,
+				02E9FCB829F2A755000662D5 /* WhiteBoard */,
 				02D5907429C7681D007C6AAB /* Excercises */,
 				02D5908A29C8EC2B007C6AAB /* Measurements */,
 				02D5908929C8EC0F007C6AAB /* FoodPlans */,
@@ -663,7 +657,6 @@
 				02D3BE3B2A1FFFD1007406EE /* TrainingPlans.swift in Sources */,
 				023BA4C129D4320C00241B2B /* Headers.swift in Sources */,
 				0210C65929AA6C54001DAD74 /* ProgressPhotosView.swift in Sources */,
-				02E9FCD729FAE6DF000662D5 /* AppDataStores.swift in Sources */,
 				0210C64F29AA6B93001DAD74 /* ClientsView.swift in Sources */,
 				02817F7529EE945E0038C658 /* AuthenticationService.swift in Sources */,
 				02D26F6229CF8557000A49E0 /* GGridListView.swift in Sources */,
@@ -677,7 +670,6 @@
 				02E9FCBC29F33534000662D5 /* ExercisesDataStore.swift in Sources */,
 				02C49A8129DEE67600298E13 /* SignUpView.swift in Sources */,
 				02D3BE2D2A1AE8A9007406EE /* PhaseSheetView.swift in Sources */,
-				02C49A8C29EAEBD900298E13 /* DataStore.swift in Sources */,
 				02770C252A1931DD00BEE9BD /* NewPhaseTemplateView.swift in Sources */,
 				02E9FCC929F41A50000662D5 /* FirestoreExerciseRepository.swift in Sources */,
 				023BA4CF29D4E25900241B2B /* StaticPhaseSheetView.swift in Sources */,

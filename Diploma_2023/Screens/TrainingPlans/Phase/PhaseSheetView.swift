@@ -94,67 +94,152 @@ class PhaseSheetViewModel: ObservableObject {
 
 //MARK: CRUD operations
     func addPhaseToClient(phase: Phase, client: Client){
-    
-        let keepLoad = client.id == phase.clientID ? true : false
-        clientsDataStore.updateClient(client.addPhase(phase:phase, keepLoad: keepLoad)) { result in
+        
+        var newClient = client
+        var newPhase = phase
+        if phase.clientID == nil{
+            if phase.mezocycleID == nil{
+                newPhase = newPhase.duplicate().setClientID(clientID: client.id, clientName: client.title)
+                newClient = newClient.addPhase(phase: newPhase)
+            }else{
+                newPhase = newPhase.duplicate().clearMezoID().setClientID(clientID: client.id, clientName: client.title)
+                newClient = newClient.addPhase(phase: newPhase)
+            }
+        }
+        else{
+            newPhase = newPhase.clientID == client.id ? newPhase.setNewName(existingTitles: client.phases.map { $0.title }) : newPhase.setNewName(existingTitles: [])
+            if phase.mezocycleID == nil{
+                newPhase = newPhase.duplicate().setClientID(clientID: client.id, clientName: client.title)
+                newClient = newClient.addPhase(phase: newPhase)
+            }else{
+                newPhase = newPhase.duplicate().clearMezoID().setClientID(clientID: client.id, clientName: client.title)
+                newClient = newClient.addPhase(phase: newPhase)
+            }
+            
+        }
+        AppDependencyContainer.shared.clientsDataStore.updateClient(newClient) { result in
             // handle error
-            print(result)
-            print("CLIENT UPDATEED_______________")
         }
     }
     
+    
+    // duplicate phase, within client or mezocycle
     func duplicatePhase(selectedPhase: Phase){
-        if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
-            let allTitles = selectedClient.phases.map { $0.title }
-            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.addPhase(phase:selectedPhase.duplicate(existingTitles: allTitles), keepLoad: true)) { result in
-                // handle error
+        var newPhase = selectedPhase.duplicate()
+        if selectedPhase.mezocycleID == nil{
+            if selectedPhase.clientID == nil{
+                phasesDataStore.createPhase(newPhase.setNewName(existingTitles: AppDependencyContainer.shared.phasesDataStore.allPhases.map { $0.title })){ result in
+                    //handle result
+                }
             }
-        }else if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
-            AppDependencyContainer.shared.mezoDataStore.updateMezo(selectedMezo.addPhase(phase:selectedPhase)) { result in
-                // handle error
+            else{
+                if var newClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: newPhase.clientID) {
+                    let updatedPhase = newPhase.setNewName(existingTitles: newClient.phases.map { $0.title })
+                    newClient.addPhase(phase: updatedPhase)
+                    AppDependencyContainer.shared.clientsDataStore.updateClient(newClient) { result in
+                        // Handle result
+                    }
+                }
             }
-        }else {
-            let allTitles = AppDependencyContainer.shared.phasesDataStore.allPhases.map { $0.title }
-            phasesDataStore.createPhase(selectedPhase.duplicate(existingTitles: allTitles)) { result in
-                //handle result
+        }
+        else{
+            if selectedPhase.clientID == nil{
+                if var newMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID){
+                    newMezo = newMezo.addPhase(phase: newPhase.setNewName(existingTitles: newMezo.phases.map {$0.title}))
+                    AppDependencyContainer.shared.mezoDataStore.updateMezo(newMezo) { result in
+                        // Handle result
+                    }
+                }
+            }
+            else{
+                if var newClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: newPhase.clientID) {
+                    if var newMezo = newClient.mezocycles.first(where: { $0.id == newPhase.mezocycleID }){
+                        newPhase = newPhase.setNewName(existingTitles: newMezo.phases.map {$0.title})
+                        newClient = newClient.updateMezo(mezo: newMezo.addPhase(phase: newPhase))
+                        AppDependencyContainer.shared.clientsDataStore.updateClient(newClient) { result in
+                            // Handle result
+                        }
+                    }
+                   
+                }
             }
         }
     }
+    
+    
     
     // actually update client if not nil
     func updatePhase(selectedPhase: Phase) {
-        if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
-            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updatePhase(phase:selectedPhase)) { result in
-                // handle error
-            }
-        }else if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
-            AppDependencyContainer.shared.mezoDataStore.updateMezo(selectedMezo.updatePhase(phase:selectedPhase)) { result in
-                // handle error
-            }
-        }else{
-                phasesDataStore.updatePhase(selectedPhase) { result in
-                    // handle error
+        if selectedPhase.clientID == nil{
+            if selectedPhase.mezocycleID == nil{
+                phasesDataStore.updatePhase(selectedPhase) { resule in
+                    // Handle result
                 }
             }
-    }
-    
-    func deletePhase(selectedPhase: Phase){
-        if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
-            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.deletePhase(phaseID:selectedPhase.id)) { result in
-                // handle error
-            }
-        }else if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
-            AppDependencyContainer.shared.mezoDataStore.updateMezo(selectedMezo.deletePhase(phaseID: selectedPhase.id)) { result in
-                // handle error
+            else{
+                if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
+                    AppDependencyContainer.shared.mezoDataStore.updateMezo(selectedMezo.updatePhase(phase:selectedPhase)) { result in
+                        // handle error
+                    }
+                }
             }
         }else{
-            phasesDataStore.deletePhase(self.selectedPhase) { result in
-                // handle error
+            if selectedPhase.mezocycleID == nil{
+                if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
+                    AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updatePhase(phase:selectedPhase)) { result in
+                        // handle error
+                    }
+                }
             }
+            else{
+                if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
+                    if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
+                        AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updateMezo(mezo: selectedMezo.updatePhase(phase: selectedPhase))) { result in
+                            // handle error
+                        }
+                    }
+                }
+            }
+            
         }
-        
-
     }
+        
+    
+    func deletePhase(selectedPhase:Phase){
+        if selectedPhase.clientID == nil{
+            if selectedPhase.mezocycleID == nil{
+                phasesDataStore.deletePhase(selectedPhase) { resule in
+                    // Handle result
+                }
+            }
+            else{
+                if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
+                    AppDependencyContainer.shared.mezoDataStore.updateMezo(selectedMezo.deletePhase(phaseID: selectedPhase.id)) { result in
+                        // handle error
+                    }
+                }
+            }
+        }else{
+            if selectedPhase.mezocycleID == nil{
+                if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
+                    AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.deletePhase(phaseID:selectedPhase.id)) { result in
+                        // handle error
+                    }
+                }
+            }
+            else{
+                if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
+                    if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
+                        AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updateMezo(mezo: selectedMezo.deletePhase(phaseID: selectedPhase.id))) { result in
+                            // handle error
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
     
     func archivePhase(selectedPhase: Phase) {
         self.selectedPhase.categoryIDs = AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .trainingPlan)
@@ -217,6 +302,7 @@ struct PhaseSheetView: View, DetailView {
         }).contextMenu {
 
             Button(action: {
+                //addPhaseToClientSheet()
                 presentationMode.wrappedValue.dismiss()
                 vm.isShowingSheet = true
                 vm.isShowingClientList = true

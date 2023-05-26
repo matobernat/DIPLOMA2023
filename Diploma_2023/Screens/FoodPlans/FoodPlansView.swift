@@ -99,24 +99,6 @@ struct FoodPlansViewDetailSearch: View{
         )
         
     }
-    
-//    func selectedItems(allItems:[PhaseMock]) -> [PhaseMock] {
-//        if let selectedCategory = selectedCategory {
-//            if searchText.isEmpty {
-//                return []
-//            } else {
-//
-//                let filteredItems = allItems
-//                    .filter { selectedCategory.itemIDs.contains($0.id) }
-//                    .filter { $0.title.localizedCaseInsensitiveContains(searchText) || $0.subTitle.localizedCaseInsensitiveContains(searchText) }
-//
-//                return filteredItems
-//            }
-//        } else {
-//            return []
-//        }
-//    }
-    
 }
 
 

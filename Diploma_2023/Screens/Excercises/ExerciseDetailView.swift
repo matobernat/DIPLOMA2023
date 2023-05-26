@@ -26,8 +26,6 @@ struct ExerciseDetailView: View {
         NavigationStack{
             if let exercise = vm.selectedExercise {
                 ScrollView(.vertical){
-                    TagList(vm: self.vm)
-                        .padding(.leading, 50)
                     Divider()
                     InfoRowView(infoRowItem: self.vm.getInfoRowItems())
                     Divider()
@@ -52,7 +50,7 @@ struct ExerciseDetailView: View {
         }).contextMenu {
             NavigationLink(destination: EditExerciseView(selectedExercise: vm.selectedExercise! ,vm: self.vm)) {
                 HStack{
-                    Text("Edit Client")
+                    Text("Edit Exercise")
                     Spacer()
                     Image(systemName: "slider.horizontal.3")
                 }
@@ -64,7 +62,7 @@ struct ExerciseDetailView: View {
                 // Call your function to delete the client here
             }, label: {
                 HStack{
-                    Text("Archive Client")
+                    Text("Archive Exercise")
                     Spacer()
                     Image(systemName: "archivebox")
                 }
@@ -73,12 +71,10 @@ struct ExerciseDetailView: View {
             Button(role: .destructive) {
                 presentationMode.wrappedValue.dismiss()
                 vm.deleteExercise(selectedExercise: vm.selectedExercise!)
-                // Call your function to delete the client here
             } label: {
                 Label("Delete", systemImage: "trash")
             }
             Button(role: .cancel) {
-                // Call your function to delete the client here
             } label: {
                 Label("Cancel", systemImage: "xmark")
             }
@@ -138,9 +134,3 @@ struct TagList: View {
     }
 }
 
-
-//struct ExerciseDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExerciseDetailView()
-//    }
-//}

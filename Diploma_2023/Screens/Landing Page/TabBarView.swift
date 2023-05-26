@@ -9,22 +9,6 @@ import SwiftUI
 import Combine
 
 
-//class TabBarViewModel: ObservableObject {
-//    @Published var loggedID: String?
-//
-//    private let authenticationService: AuthenticationService
-//    private var cancellable: AnyCancellable?
-//
-//    init() {
-//        self.authenticationService = AppDependencyContainer.shared.authenticationService
-//        loggedID = self.authenticationService.userId
-//
-//        // subscription
-//        cancellable = self.authenticationService.$userId.sink { [weak self] userId in
-//            self?.loggedID = userId
-//        }
-//    }
-//}
 
 
 struct TabBarView: View {

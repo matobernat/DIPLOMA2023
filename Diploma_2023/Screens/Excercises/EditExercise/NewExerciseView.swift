@@ -162,22 +162,9 @@ struct NewExerciseView: View {
                     TextField("Base movement", text: $vm.newExercise.baseMovement)
                     TextField("difficulty", text: $vm.newExercise.difficulty)
                 }
-                
-                VStack {
-                     Label("Add Tag:", systemImage: "tag")
-                     HStack {
-                         TextField("Type tag name", text: $vm.newTag, onCommit: addTag)
-                             .textFieldStyle(.roundedBorder)
-                         Button("Add") {
-                             addTag()
-                         }
-                     }
-                    TagListView(tags: vm.tags, onDelete: removeTag)
-                 }
-                
-                
             }
-            .navigationBarTitle("New Exercise", displayMode: .inline)            .navigationBarItems(leading: Button("Cancel") {
+            .navigationBarTitle("New Exercise", displayMode: .inline)
+            .navigationBarItems(leading: Button("Cancel") {
                 parentVm.isShowingForm = false
             }, trailing: Button("Save") {
                 // parentVm uploads client to DB and updates allClients list
@@ -236,9 +223,4 @@ struct TagListView: View {
     }
 }
 
-//
-//struct NewExerciseView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NewExerciseView()
-//    }
-//}
+

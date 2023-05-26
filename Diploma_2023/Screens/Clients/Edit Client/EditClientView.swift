@@ -120,8 +120,3 @@ class EditClientViewModel: ObservableObject {
             }
     }
 
-//struct EditClientView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditClientView()
-//    }
-//}

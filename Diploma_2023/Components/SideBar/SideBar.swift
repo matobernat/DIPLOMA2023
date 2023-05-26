@@ -51,9 +51,3 @@ struct SideBar: View {
     }
 
 }
-
-//struct SideBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SideBar()
-//    }
-//}

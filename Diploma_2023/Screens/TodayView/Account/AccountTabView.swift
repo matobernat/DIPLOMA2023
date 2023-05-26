@@ -71,23 +71,6 @@ struct AccountTabView: View {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 })
-
-
-
-//                VStack {
-//                    ForEach(categoryViewModel.allCategories) { category in
-//                        HStack {
-//                            Text(category.name)
-//                            Spacer()
-//                            Text(category.section.rawValue)
-//                            Spacer()
-//                            Text(category.accountID)
-//                            Spacer()
-//                            Text(category.profileID ?? "")
-//                        }
-//                    }
-//                }
-
             }
             .padding(.horizontal)
             Spacer()

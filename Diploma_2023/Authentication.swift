@@ -9,29 +9,29 @@
 import FirebaseAuth
 
 class Authentication: ObservableObject {
-    
+
     @Published var signedIn = false
 
-    
+
     var handle: AuthStateDidChangeListenerHandle?
     var userIdChanged: ((String?) -> Void)?
-    
-    
-    
+
+
+
     init() {
         handle = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             self?.userIdChanged?(user?.uid)
         }
     }
-    
+
     deinit {
         if let handle = handle {
             Auth.auth().removeStateDidChangeListener(handle)
         }
     }
-    
-    
-    
+
+
+
     func signIn(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {

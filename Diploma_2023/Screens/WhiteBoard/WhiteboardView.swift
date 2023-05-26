@@ -15,10 +15,6 @@ struct WhiteboardView: View {
     
     
     var body: some View {
-//        NavigationStack{
-//            GridListView(items: phases, dataType: .phase, title: "Recommended Phases")
-//        }
-//        .navigationTitle("WhiteBoard")
         Text("whiteboard")
     }
 }

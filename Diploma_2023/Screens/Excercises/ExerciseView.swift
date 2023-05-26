@@ -131,13 +131,6 @@ class ExercisesViewModel: ObservableObject {
 
 // MARK: - Exercises - View
 struct ExerciseView: View {
-//    let items: [ExerciseMock] = DataModelMock.exercises
-//    let categories: [CategoryMock] = DataModelMock.categories
-//    let mainTitle: String = "Exercise"
-//
-//    @State private var searchText: String = ""
-//    @State var selectedCategory: CategoryMock? = nil
-//    @State var selectedItem: ExerciseMock? = nil
     
     @StateObject private var vm = ExercisesViewModel()
     @State private var columnVisibility = NavigationSplitViewVisibility.all
@@ -197,31 +190,7 @@ struct ExerciseView: View {
                 vm.selectedExercise = vm.exercises.first(where: { $0.categoryIDs.contains(selectedCategory.id) })
             }
         }
-
-
     }
-    
-    
-    
-    
-    
-    
-// TODO: for future, more powerful filter
-//    func selectedItems(allItems:[ExerciseMock]) -> [ExerciseMock] {
-//        if let selectedCategory = selectedCategory {
-//            if searchText.isEmpty {
-//                return allItems.filter {selectedCategory.itemIDs.contains($0.id)}
-//            } else {
-//                let filteredClients = allItems
-//                    .filter { selectedCategory.itemIDs.contains($0.id) }
-//                    .filter { $0.name.localizedCaseInsensitiveContains(searchText) }
-//                return filteredClients
-//            }
-//        } else {
-//            return []
-//        }
-//    }
-    
 }
 
 

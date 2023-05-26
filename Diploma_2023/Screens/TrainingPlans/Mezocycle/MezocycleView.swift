@@ -96,35 +96,35 @@ class MezocycleViewModel: ObservableObject {
 //MARK: CRUD operations
     
     func addMezoToClient(selectedMezo: Mezocycle, client: Client){
-        clientsDataStore.updateClient(client.addMezo(mezo: selectedMezo, existingTitles: [], keepName: false)) { result in
+        clientsDataStore.updateClient(client.addMezo(mezo: selectedMezo.duplicate())) { result in
             // handle error
             print(result)
-            print("CLIENT UPDATED_______________")
         }
     }
     
     
     func duplicateMezo(selectedMezo: Mezocycle){
         
-        if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedMezo.clientID) {
-            
-            let allTitles = selectedClient.mezocycles.map { $0.title }
-            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.addMezo(mezo: selectedMezo, existingTitles: allTitles, keepName: true)) { result in
-                // handle error
-            }
-        } else {
-            let allTitles = AppDependencyContainer.shared.mezoDataStore.allMezos.map { $0.title }
-            mezoDataStore.createMezo(selectedMezo.duplicate(existingTitles: allTitles)) { result in
+        var newMezo = selectedMezo.duplicate()
+        
+        if newMezo.clientID == nil{
+            newMezo = newMezo.setNewName(existingTitles: AppDependencyContainer.shared.mezoDataStore.allMezos.map { $0.title })
+            mezoDataStore.createMezo(newMezo) { result in
                 //handle result
+            }
+        }
+        else{
+            if var newClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedMezo.clientID) {
+                newMezo = newMezo.setNewName(existingTitles: AppDependencyContainer.shared.mezoDataStore.allMezos.map { $0.title })
+                AppDependencyContainer.shared.clientsDataStore.updateClient(newClient.addMezo(mezo: newMezo)) { result in
+                    // handle error
+                }
             }
         }
     }
     
     func updateMezo(selectedMezo: Mezocycle) {
         if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedMezo.clientID) {
-//            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updateMezo(mezo: selectedMezo)) { result in
-                // handle error
-//            }
         }
         mezoDataStore.updateMezo(selectedMezo) { result in
             // handle error
@@ -189,6 +189,7 @@ struct MezocycleView: View, DetailView {
         }).contextMenu {
             
             Button(action: {
+                //addMezoToClientSheet()
                 presentationMode.wrappedValue.dismiss()
                 vm.isShowingSheetList = true
                 vm.isShowingSheet = true
@@ -320,7 +321,7 @@ struct MezocycleViewHeader: View{
 }
 
 
-// ADD PHASE MAYBE??
+// ADD PHASE TO CLIENT
 struct addMezoToClientSheet: View {
     @ObservedObject var vm: MezocycleViewModel
     @Binding var clients: [Client]
@@ -335,8 +336,8 @@ struct addMezoToClientSheet: View {
             VStack(alignment: .leading) {
                 SearchBar(searchText: $searchText)
                     .padding(.horizontal)
+                
                 List(selectedItemsSearch(allItems: clients, selectedCategory: nil, searchText: searchText)) { client in
-                    
                     HStack {
                         Text(client.title)
                         Spacer()
@@ -344,15 +345,14 @@ struct addMezoToClientSheet: View {
                             // Action to perform when the button is tapped
                             vm.addMezoToClient(selectedMezo: mezo, client: client)
                         } label: {
-                            Label("Add ItemIIIIIK", systemImage: "plus")
-                                .foregroundColor(.accentColor)
+                            Label("Add Item", systemImage: "plus")
                         }
                         .buttonStyle(.bordered)
                         .controlSize(.mini)
                         .tint(.accentColor)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                   
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                 }
             }
             .navigationBarTitle("Add Exercises", displayMode: .inline)
@@ -379,12 +379,6 @@ struct addMezoToClientSheet: View {
         }
     }
 }
-
-//struct MezocycleView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        MezocycleView()
-//    }
-//}
 
 
 struct MezocycleHeaderForm: View{

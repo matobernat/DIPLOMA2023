@@ -19,28 +19,6 @@ struct CustomTextEditorCell: View {
             .frame(width: width, height: height)
             .background(color)
             .border(Color.gray, width: 1)
-//            .onReceive(Just(textBinding)) { newValue in
-//                let lastCharIndex = newValue.index(before: newValue.endIndex)
-//                let lastChar = newValue[lastCharIndex]
-//
-//                if lastChar == "\n" {
-//                    // Split the text into individual lines
-//                    let lines = newValue.split(separator: "\n", omittingEmptySubsequences: false)
-//
-//                    // Create a new string with numbered lines
-//                    var numberedText = ""
-//                    for (index, line) in lines.enumerated() {
-//                        numberedText += "\(index+1): \(line)\n"
-//                    }
-//
-//                    // Update the text binding with the numbered text
-//                    textBinding = numberedText
-//                }
-//            }
-//            .onSubmit {
-//                // Add a newline character to the text when the user hits the return key
-//                textBinding += "\n"
-//            }
     }
 }
 

@@ -206,14 +206,8 @@ struct ClientTitle: View {
     let isActive: Bool
     @Binding var progress: Double
 
-//    @State private var progress = 0.65 // Adjust this value to represent the desired progress
-
     var body: some View {
         HStack(spacing: 53) {
-//            Text(name)
-//                .font(.system(size: 34, weight: .bold, design: .default))
-//                .lineLimit(1)
-//                .foregroundColor(Color.black)
             Spacer()
             
             VStack(alignment: .trailing, spacing: 10) {
@@ -234,7 +228,6 @@ struct ClientTitle: View {
                     .padding(.trailing, 20)
             }
         }
-//        .padding(.leading, 16)
     }
 }
 
@@ -263,9 +256,6 @@ struct ClientPhoto: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 120, height: 120)
                     .clipShape(Circle())
-//                RoundedRectangle(cornerRadius: 60)
-//                    .fill(Color(.sRGB, red: 217/255, green: 217/255, blue: 217/255, opacity: 1))
-//                    .frame(width: 120, height: 120)
             }
             
             VStack(alignment: .leading, spacing: 10) {

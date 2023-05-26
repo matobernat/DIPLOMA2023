@@ -10,10 +10,6 @@ import SwiftUI
 ///  NOTE  in  order to have right format of the dividers, you have to wrap it in scroll view
 struct InfoRowView: View {
     
-//    let cardTitles: [String]
-//    let cardValues: [String]
-//    let cardDescriptions: [String]?
-    
     let infoRowItem: [InfoRowItem]
     
     var body: some View {

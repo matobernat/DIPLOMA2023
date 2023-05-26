@@ -148,16 +148,6 @@ struct LargeCardButtonLabel: View {
                         .frame(width: 80, height: 80)
                         .foregroundColor(Color(.systemGray2))
                         .font(.system(size: 10, weight: .thin))
-                    
-    //                Text("Add")
-    //                    .font(.system(size: 10, weight: .medium))
-    //                    .foregroundColor(.primary)
-    //
-    //                Text("Tap to Add")
-    //                    .font(.system(size: 10, weight: .bold))
-    //                    .multilineTextAlignment(.center)
-    //                    .lineSpacing(5)
-    //                    .foregroundColor(.primary)
                 }
             }
             .frame(width: 160, height: 160)

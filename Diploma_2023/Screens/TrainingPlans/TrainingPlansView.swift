@@ -136,18 +136,6 @@ struct TrainingPlansView: View {
             }
             .navigationTitle(vm.selectedCategory?.name ?? "Select a category")
         }
-//        .sheet(isPresented: $vm.isShowingForm) {
-//            NavigationStack{
-//                if vm.selectedType == .phase{
-//                    NewPhaseTemplateView(parentVm: vm)
-//                }
-//                else{
-//                    NewPhaseTemplateView(parentVm: vm)
-//                }
-//            }
-//
-//
-//        }
         .onAppear {
             let index = vm.categories.firstIndex{$0.dataType == .trainingPlan}
             if let index = index {
@@ -171,8 +159,7 @@ struct TrainingPlansViewDetail: View{
             ScrollView{ // might create performance issues
                 SegmentPicker(selectedType: $vm.selectedType)
                 if vm.selectedType == DataType.mezocycle{
-                                        
-//                    GeneralHorizontalListView(title: "Mezocycles", items: selectedItemsByCategory(allItems: vm.mezocycles, selectedCategory: vm.selectedCategory), titleSize: .large, sizeModel: .large, dataType: .mezocycle, addFunc:{vm.isShowingForm = true})
+                                    
                     GeneralHorizontalListView(title: "Mezocycles", items: selectedItemsByCategory(allItems: vm.mezocycles, selectedCategory: vm.selectedCategory), titleSize: .large, sizeModel: .large, dataType: .mezocycle, addFunc:{vm.isShowingForm = true; vm.columnVisibility = .detailOnly; vm.isShowingNewPhase = false})
                 }else{
                     
@@ -227,24 +214,6 @@ struct TrainingPlansViewDetailSearch: View{
             )
         }
     }
-    
-//    func selectedItems(allItems:[PhaseMock]) -> [PhaseMock] {
-//        if let selectedCategory = selectedCategory {
-//            if searchText.isEmpty {
-//                return []
-//            } else {
-//
-//                let filteredItems = allItems
-//                    .filter { selectedCategory.itemIDs.contains($0.id) }
-//                    .filter { $0.title.localizedCaseInsensitiveContains(searchText) || $0.subTitle.localizedCaseInsensitiveContains(searchText) }
-//
-//                return filteredItems
-//            }
-//        } else {
-//            return []
-//        }
-//    }
-    
 }
 
 

@@ -9,18 +9,6 @@ import SwiftUI
 import FirebaseCore
 
 
-
-//class AppDelegate: NSObject, UIApplicationDelegate {
-//  func application(_ application: UIApplication,
-//                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//    FirebaseApp.configure()
-//    return true
-//  }
-//}
-
-
-
-
 @main
 struct Diploma_2023App: App {
 
@@ -38,9 +26,7 @@ struct Diploma_2023App: App {
         
     }
 
-    
-//     AppDependencyContainer.shared.authenticationService.userId{ is probably not alive so
-    var body: some Scene {
+        var body: some Scene {
         WindowGroup {
             if let _ = authenticationService.userId{
                 TabBarView()
@@ -51,41 +37,3 @@ struct Diploma_2023App: App {
     }
          
 }
-
-//
-//@main
-//struct Diploma_2023App: App {
-//
-//
-//    @StateObject private var authenticationService = AuthenticationService()
-//    @State private var appDataStores: AppDataStores?
-//
-//    init() {
-//        FirebaseApp.configure()
-//
-//        authenticationService.onLogin { userId in
-//            print("LOGGED USER ID: \(userId)")
-//
-//            // Initialize AppDataStores after successful login
-//            appDataStores = AppDataStores(authenticationService: authenticationService)
-//        }
-//
-////        authenticationService.onLogout {
-////            // Clear AppDataStores after logout
-////            appDataStores = nil
-////        }
-//
-//    }
-//
-//
-//    var body: some Scene {
-//        WindowGroup {
-//            if let _ = authenticationService.userId, let appDataStores = appDataStores {
-//                TabBarView(appDataStores: appDataStores, authenticationService: authenticationService)
-//            } else {
-//                SignInView(authenticationService: authenticationService)
-//            }
-//        }
-//    }
-//}
-

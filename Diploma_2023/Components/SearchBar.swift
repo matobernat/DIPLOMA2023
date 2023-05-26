@@ -146,16 +146,6 @@ func selectedItemsByClient<T: IdentifiableItem>(allItems: [T], selectedClient: C
 }
 
 
-//let filteredItems = selectedItems(allItems: allItems, selectedCategory: selectedCategory, searchText: searchText) { item in
-//    item.name.localizedCaseInsensitiveContains(searchText) || item.description.localizedCaseInsensitiveContains(searchText)
-//}
-//
-//let filteredItems2 = selectedItems(allItems: allItems2, selectedCategory: selectedCategory2, searchText: searchText) { item in
-//    item.title.localizedCaseInsensitiveContains(searchText) || item.subtitle.localizedCaseInsensitiveContains(searchText)
-//}
-
-
-
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
         SearchBar(searchText: Binding.constant(""))

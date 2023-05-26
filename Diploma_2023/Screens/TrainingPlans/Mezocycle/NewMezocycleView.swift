@@ -228,12 +228,7 @@ struct NewMezocycleView: View {
     }
 
 }
-//
-//struct NewMezocycleView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NewMezocycleView()
-//    }
-//}
+
 
 
 struct AddPhasesToMezo: View{
