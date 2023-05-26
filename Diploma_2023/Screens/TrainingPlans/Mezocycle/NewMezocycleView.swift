@@ -135,30 +135,31 @@ struct NewMezocycleView: View {
     var body: some View {
         NavigationStack{
             
-
             ScrollView {
                 
                 // MEZOCYCLE FORM
-                Section {
-                    LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 40), count: 2), spacing: 10) {
-                        ForEach(placeholders.indices, id: \.self) { index in
-                            TextField(placeholders[index], text: vm.binding(for: index))
-                                .font(.system(size: 20))
-                                .frame(height: 10)
-                                .padding()
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(8)
-                                .keyboardType(index == 1 ? .numberPad : .default)
-                        }
-                        Button("Fill Data", action: {print("FILL"); vm.fillMezocycle()})
-                            .font(.system(size: 20))
-                            .frame(height: 10)
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(8)
-                            .keyboardType(.default)
-                    }
-                }
+//                Section {
+//                    LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 40), count: 2), spacing: 10) {
+//                        ForEach(placeholders.indices, id: \.self) { index in
+//                            TextField(placeholders[index], text: vm.binding(for: index))
+//                                .font(.system(size: 20))
+//                                .frame(height: 10)
+//                                .padding()
+//                                .background(Color.gray.opacity(0.1))
+//                                .cornerRadius(8)
+//                                .keyboardType(index == 1 ? .numberPad : .default)
+//                        }
+//                        Button("Fill Data", action: {print("FILL"); vm.fillMezocycle()})
+//                            .font(.system(size: 20))
+//                            .frame(height: 10)
+//                            .padding()
+//                            .background(Color.gray.opacity(0.1))
+//                            .cornerRadius(8)
+//                            .keyboardType(.default)
+//                    }
+//                }
+                
+                NewMezocycleHeaderForm(vm: vm)
                 .padding(.horizontal, 40)
                 // Add + Edit BUTTONS
                 Divider()
@@ -168,6 +169,7 @@ struct NewMezocycleView: View {
                     GeneralHorizontalListView(title: "Added Phases", items: vm.newMezo.phases, titleSize: .large, sizeModel: .large, dataType: .phase, hideDivider: true)
                 }
             }
+            
         
         }
         .navigationTitle("New Mezocycle")
@@ -281,3 +283,33 @@ struct AddPhasesToMezo: View{
 }
 
 
+
+struct NewMezocycleHeaderForm: View{
+    @State private var textFields: [String] = Array(repeating: "", count: 8)
+    private let placeholders = ["Mezocycle Name", "Duration (in months)", "Training Focus", "Intensity", "Progression Strategy", "Total Trainings", "Description"]
+    @ObservedObject var vm: NewMezocycleViewModel
+    var body: some View{
+        // MEZOCYCLE FORM
+        Section {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 40), count: 2), spacing: 10) {
+                ForEach(placeholders.indices, id: \.self) { index in
+                    TextField(placeholders[index], text: vm.binding(for: index))
+                        .font(.system(size: 20))
+                        .frame(height: 10)
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
+                        .keyboardType(index == 1 ? .numberPad : .default)
+                }
+                Button("Fill Data", action: {print("FILL"); vm.fillMezocycle()})
+                    .font(.system(size: 20))
+                    .frame(height: 10)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(8)
+                    .keyboardType(.default)
+            }
+        }
+    }
+    
+}

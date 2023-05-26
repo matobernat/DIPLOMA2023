@@ -10,42 +10,42 @@ import SwiftUI
 
 
 
-//
-//// PHASES - EDIT
-//struct EditPhasesListView: View {
-//    @Binding var mezo: Mezocycle
-//    @Binding var phases:[Phase]
-//    @Environment(\.presentationMode) var presentationMode
-//
-//    var body: some View {
-//        NavigationStack {
-//            SelectiveGridListViewEdit(
-//                items: phases,
-//                createCardView: { item in AnyCardView(LargeCardView(item: item)) },
-//                createDetailView:{ item in AnyDetailView(TrainingPlanDetailView(item: item)) },
-//                selectedItems: $mezo.phases,
-//                parentItem: $mezo)
-//        }
-//        .navigationBarTitle("Edit Phases", displayMode: .inline)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                Button(action: {
-//                    presentationMode.wrappedValue.dismiss()
-//                }) {
-//                    Text("Cancel")
-//                }
-//            }
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button(action: {
-//                    presentationMode.wrappedValue.dismiss()
-//                }) {
-//                    Text("Done")
-//                }
-//            }
-//        }
-//    }
-//}
-//
+
+// PHASES - EDIT
+struct EditPhasesListView: View {
+    @Binding var mezo: Mezocycle
+    @Binding var phases:[Phase]
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        NavigationStack {
+            SelectiveGridListViewEdit(
+                items: phases,
+                createCardView: { item in AnyCardView(LargeCardView(item: item)) },
+                createDetailView:{ item in AnyDetailView(TrainingPlanDetailView(item: item)) },
+                selectedItems: $mezo.phases,
+                parentItem: $mezo)
+        }
+        .navigationBarTitle("Edit Phases", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Cancel")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Done")
+                }
+            }
+        }
+    }
+}
+
 
 
 

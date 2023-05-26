@@ -51,13 +51,13 @@
 		02D26F6229CF8557000A49E0 /* GGridListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D26F6129CF8557000A49E0 /* GGridListView.swift */; };
 		02D3BE2D2A1AE8A9007406EE /* PhaseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE2C2A1AE8A9007406EE /* PhaseSheetView.swift */; };
 		02D3BE302A1B3916007406EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE2F2A1B3916007406EE /* Extensions.swift */; };
-		02D3BE332A1B78E8007406EE /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE322A1B78E8007406EE /* Builders.swift */; };
+		02D3BE332A1B78E8007406EE /* PhaseBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE322A1B78E8007406EE /* PhaseBuilders.swift */; };
 		02D3BE352A1BA484007406EE /* MezocycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE342A1BA484007406EE /* MezocycleView.swift */; };
 		02D3BE372A1BC9BB007406EE /* NewMezocycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE362A1BC9BB007406EE /* NewMezocycleView.swift */; };
 		02D3BE392A1FFF88007406EE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE382A1FFF88007406EE /* Client.swift */; };
 		02D3BE3B2A1FFFD1007406EE /* TrainingPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3A2A1FFFD1007406EE /* TrainingPlans.swift */; };
 		02D3BE3D2A20A5E6007406EE /* SelectiveGridListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3C2A20A5E6007406EE /* SelectiveGridListView.swift */; };
-		02D3BE3F2A20B70E007406EE /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3E2A20B70E007406EE /* Builders.swift */; };
+		02D3BE3F2A20B70E007406EE /* MezoBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3E2A20B70E007406EE /* MezoBuilders.swift */; };
 		02D5906329C35AFD007C6AAB /* ClientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906229C35AFD007C6AAB /* ClientDetailView.swift */; };
 		02D5906529C36917007C6AAB /* AppDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906429C36917007C6AAB /* AppDetailView.swift */; };
 		02D5906729C4F41B007C6AAB /* InfoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906629C4F41B007C6AAB /* InfoRowView.swift */; };
@@ -65,6 +65,7 @@
 		02D5907329C766F7007C6AAB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907229C766F7007C6AAB /* SearchBar.swift */; };
 		02D5907629C7684C007C6AAB /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907529C7684C007C6AAB /* ExerciseDetailView.swift */; };
 		02D5908029C7A795007C6AAB /* MockSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907F29C7A795007C6AAB /* MockSideBar.swift */; };
+		02E0BCBE2A20C760007B5CEF /* AccountTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0BCBD2A20C760007B5CEF /* AccountTabView.swift */; };
 		02E9FCB229F04B7B000662D5 /* CategoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */; };
 		02E9FCB429F04BA1000662D5 /* FirestoreCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB329F04BA1000662D5 /* FirestoreCategoryRepository.swift */; };
 		02E9FCB629F04BAA000662D5 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB529F04BAA000662D5 /* CategoryRepository.swift */; };
@@ -143,13 +144,13 @@
 		02D26F6129CF8557000A49E0 /* GGridListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GGridListView.swift; sourceTree = "<group>"; };
 		02D3BE2C2A1AE8A9007406EE /* PhaseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSheetView.swift; sourceTree = "<group>"; };
 		02D3BE2F2A1B3916007406EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		02D3BE322A1B78E8007406EE /* Builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
+		02D3BE322A1B78E8007406EE /* PhaseBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseBuilders.swift; sourceTree = "<group>"; };
 		02D3BE342A1BA484007406EE /* MezocycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MezocycleView.swift; sourceTree = "<group>"; };
 		02D3BE362A1BC9BB007406EE /* NewMezocycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMezocycleView.swift; sourceTree = "<group>"; };
 		02D3BE382A1FFF88007406EE /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		02D3BE3A2A1FFFD1007406EE /* TrainingPlans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingPlans.swift; sourceTree = "<group>"; };
 		02D3BE3C2A20A5E6007406EE /* SelectiveGridListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveGridListView.swift; sourceTree = "<group>"; };
-		02D3BE3E2A20B70E007406EE /* Builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
+		02D3BE3E2A20B70E007406EE /* MezoBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MezoBuilders.swift; sourceTree = "<group>"; };
 		02D5906229C35AFD007C6AAB /* ClientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailView.swift; sourceTree = "<group>"; };
 		02D5906429C36917007C6AAB /* AppDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailView.swift; sourceTree = "<group>"; };
 		02D5906629C4F41B007C6AAB /* InfoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRowView.swift; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		02D5907229C766F7007C6AAB /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		02D5907529C7684C007C6AAB /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
 		02D5907F29C7A795007C6AAB /* MockSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSideBar.swift; sourceTree = "<group>"; };
+		02E0BCBD2A20C760007B5CEF /* AccountTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTabView.swift; sourceTree = "<group>"; };
 		02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataStore.swift; sourceTree = "<group>"; };
 		02E9FCB329F04BA1000662D5 /* FirestoreCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCategoryRepository.swift; sourceTree = "<group>"; };
 		02E9FCB529F04BAA000662D5 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				02817F8729EF1C8D0038C658 /* AccountView.swift */,
+				02E0BCBD2A20C760007B5CEF /* AccountTabView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			children = (
 				02D3BE312A1B78D0007406EE /* components */,
 				02770C282A1999D200BEE9BD /* NewPhaseSheetView.swift */,
+				02E9FCB829F2A755000662D5 /* WhiteBoard */,
 				02D3BE2C2A1AE8A9007406EE /* PhaseSheetView.swift */,
 			);
 			path = Phase;
@@ -339,7 +343,7 @@
 			children = (
 				02D3BE342A1BA484007406EE /* MezocycleView.swift */,
 				02D3BE362A1BC9BB007406EE /* NewMezocycleView.swift */,
-				02D3BE3E2A20B70E007406EE /* Builders.swift */,
+				02D3BE3E2A20B70E007406EE /* MezoBuilders.swift */,
 			);
 			path = Mezocycle;
 			sourceTree = "<group>";
@@ -403,7 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				02F06DF629DA10A4008032B5 /* CustomTextEditorCell.swift */,
-				02D3BE322A1B78E8007406EE /* Builders.swift */,
+				02D3BE322A1B78E8007406EE /* PhaseBuilders.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -457,7 +461,6 @@
 				02D5907429C7681D007C6AAB /* Excercises */,
 				02D5908A29C8EC2B007C6AAB /* Measurements */,
 				02D5908929C8EC0F007C6AAB /* FoodPlans */,
-				02E9FCB829F2A755000662D5 /* WhiteBoard */,
 				02E9FCB929F2A777000662D5 /* ProgressPhotos */,
 			);
 			path = Screens;
@@ -678,10 +681,11 @@
 				02770C252A1931DD00BEE9BD /* NewPhaseTemplateView.swift in Sources */,
 				02E9FCC929F41A50000662D5 /* FirestoreExerciseRepository.swift in Sources */,
 				023BA4CF29D4E25900241B2B /* StaticPhaseSheetView.swift in Sources */,
-				02D3BE3F2A20B70E007406EE /* Builders.swift in Sources */,
+				02D3BE3F2A20B70E007406EE /* MezoBuilders.swift in Sources */,
 				02817F8629EE95E50038C658 /* FirestoreClientRepository.swift in Sources */,
 				02E9FCCF29F586CB000662D5 /* SmallCardView.swift in Sources */,
 				02E9FCBE29F3358A000662D5 /* PhasesDataStore.swift in Sources */,
+				02E0BCBE2A20C760007B5CEF /* AccountTabView.swift in Sources */,
 				02D5907329C766F7007C6AAB /* SearchBar.swift in Sources */,
 				02D3BE3D2A20A5E6007406EE /* SelectiveGridListView.swift in Sources */,
 				0210C66429BA6A10001DAD74 /* TestModel.swift in Sources */,
@@ -714,7 +718,7 @@
 				02E9FCDE29FDB91C000662D5 /* EditClientView.swift in Sources */,
 				02D5908029C7A795007C6AAB /* MockSideBar.swift in Sources */,
 				02E9FCC529F335DE000662D5 /* PhasesRepository.swift in Sources */,
-				02D3BE332A1B78E8007406EE /* Builders.swift in Sources */,
+				02D3BE332A1B78E8007406EE /* PhaseBuilders.swift in Sources */,
 				02817F7B29EE94DF0038C658 /* AccountDataStore.swift in Sources */,
 				02E9FCE329FFBBA3000662D5 /* EditExerciseView.swift in Sources */,
 				0210C66D29BB41A7001DAD74 /* ClientsViewModel.swift in Sources */,

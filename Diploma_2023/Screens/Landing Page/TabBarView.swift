@@ -31,11 +31,11 @@ struct TabBarView: View {
 
     var body: some View {
         TabView {
-            TodayView()
-                .tabItem {
-                    Image(systemName: "calendar")
-                    Text("Today")
-                }
+//            TodayView()
+//                .tabItem {
+//                    Image(systemName: "calendar")
+//                    Text("Today")
+//                }
             ClientsView()
                 .tabItem {
                     Image(systemName: "person.3")
@@ -46,16 +46,22 @@ struct TabBarView: View {
 //                    Image(systemName: "pencil")
 //                    Text("Whiteboard")
 //                }
-            ExerciseView()
-                .tabItem {
-                    Image(systemName: "figure.walk")
-                    Text("Exercise")
-                }
             TrainingPlansView()
                 .tabItem {
                     Image(systemName: "doc.plaintext")
                     Text("Training Plans")
                 }
+            ExerciseView()
+                .tabItem {
+                    Image(systemName: "figure.walk")
+                    Text("Exercise")
+                }
+            AccountTabView()
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    Text("Account")
+                }
+            
 //            FoodPlansView()
 //                .tabItem {
 //                    Image(systemName: "leaf")

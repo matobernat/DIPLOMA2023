@@ -10,15 +10,28 @@ import Combine
 // MARK: - Mezocycle - ViewModel
 class MezocycleViewModel: ObservableObject {
     
+    
+    //FORM MEZO PROPERTIES
+    @Published var title: String = ""
+    @Published var durationInMonths: String = ""
+    @Published var trainingFocus: String = ""
+    @Published var intensity: String = ""
+    @Published var progressionStrategy: String = ""
+    @Published var totalTrainings: String = ""
+    @Published var description: String = ""
+    
+    
+    
+    
     private let mezoDataStore: MezoDataStore
     @Published var selectedMezo:Mezocycle
     private var selectedClient: Client? = nil
     @Published var isEditing = false
     @Published var isShowingSheet: Bool = false
-    @Published var isShowingSheetList = true
-    @Published var  isShowingClientList = true
+    @Published var isShowingSheetList = false
+    @Published var isShowingEditPhases = false
+    @Published var isShowingClientList = false
 
-    @Published var isShowingEditExercises: Bool = false
     @Published var searchText = ""
 
     private let clientsDataStore: ClientsDataStore
@@ -57,6 +70,29 @@ class MezocycleViewModel: ObservableObject {
     }
 
     
+    func binding(for index: Int) -> Binding<String> {
+        switch index {
+        case 0: return Binding(get: { self.title }, set: { self.title = $0 })
+        case 1: return Binding(get: { self.durationInMonths }, set: { self.durationInMonths = $0 })
+        case 2: return Binding(get: { self.trainingFocus }, set: { self.trainingFocus = $0 })
+        case 3: return Binding(get: { self.intensity }, set: { self.intensity = $0 })
+        case 4: return Binding(get: { self.progressionStrategy }, set: { self.progressionStrategy = $0 })
+        case 5: return Binding(get: { self.totalTrainings }, set: { self.totalTrainings = $0 })
+        case 6: return Binding(get: { self.description }, set: { self.description = $0 })
+        default: return Binding.constant("")
+        }
+    }
+    
+    func fillMezocycle(){
+        self.title = self.selectedMezo.title
+        self.durationInMonths  = self.selectedMezo.durationInMonths
+        self.trainingFocus = self.selectedMezo.trainingFocus
+        self.intensity  = self.selectedMezo.intensity
+        self.progressionStrategy = self.selectedMezo.progressionStrategy
+        self.totalTrainings = self.selectedMezo.totalTrainings
+        self.description = self.selectedMezo.description
+    }
+    
 //MARK: CRUD operations
     
     func addMezoToClient(selectedMezo: Mezocycle, client: Client){
@@ -86,9 +122,9 @@ class MezocycleViewModel: ObservableObject {
     
     func updateMezo(selectedMezo: Mezocycle) {
         if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedMezo.clientID) {
-            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updateMezo(mezo: selectedMezo)) { result in
+//            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updateMezo(mezo: selectedMezo)) { result in
                 // handle error
-            }
+//            }
         }
         mezoDataStore.updateMezo(selectedMezo) { result in
             // handle error
@@ -222,22 +258,33 @@ struct MezocycleView: View, DetailView {
             }
         }
         .sheet(isPresented: $vm.isShowingSheet) {
-            
+
             if vm.isShowingSheetList{
                 addMezoToClientSheet(vm: vm, clients: $vm.clients, mezo: $vm.selectedMezo)
             }
-            //            if vm.isShowingEditExercises {
-            //                EditExersiseListPhase(phase: $vm.selectedPhase)
-            
-            //            } else if
-            //            else {
-            //                AddExercisesPhaseView(exercises: $vm.exercises, phase: $vm.selectedPhase)
-            //            }
-            //        }
-            
         }
-        
-        
+    }
+    func buttonsView() -> some View {
+        HStack {
+            Button(action: {
+                vm.isShowingEditPhases = false
+                vm.isShowingSheet = true
+            }) {
+                Label("Add Phase", systemImage: "plus.circle.fill")
+                    .padding(.leading, 10)
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                vm.isShowingEditPhases = true
+                vm.isShowingSheet = true
+            }) {
+                Label("Edit Phase", systemImage: "slider.vertical.3")
+                    .padding(.leading, 10)
+                    .foregroundColor(.gray)
+            }
+        }
     }
 }
 
@@ -338,3 +385,34 @@ struct addMezoToClientSheet: View {
 ////        MezocycleView()
 //    }
 //}
+
+
+struct MezocycleHeaderForm: View{
+    @State private var textFields: [String] = Array(repeating: "", count: 8)
+    private let placeholders = ["Mezocycle Name", "Duration (in months)", "Training Focus", "Intensity", "Progression Strategy", "Total Trainings", "Description"]
+    @ObservedObject var vm: MezocycleViewModel
+    var body: some View{
+        // MEZOCYCLE FORM
+        Section {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 40), count: 2), spacing: 10) {
+                ForEach(placeholders.indices, id: \.self) { index in
+                    TextField(placeholders[index], text: vm.binding(for: index))
+                        .font(.system(size: 20))
+                        .frame(height: 10)
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
+                        .keyboardType(index == 1 ? .numberPad : .default)
+                }
+                Button("Fill Data", action: {print("FILL"); vm.fillMezocycle()})
+                    .font(.system(size: 20))
+                    .frame(height: 10)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(8)
+                    .keyboardType(.default)
+            }
+        }
+    }
+    
+}
