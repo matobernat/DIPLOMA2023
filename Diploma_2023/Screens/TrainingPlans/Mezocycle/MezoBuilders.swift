@@ -11,7 +11,7 @@ import SwiftUI
 
 
 
-// PHASES - EDIT
+// MEZOCYCLE - PHASES - EDIT
 struct EditPhasesListView: View {
     @Binding var mezo: Mezocycle
     @Binding var phases:[Phase]
@@ -25,21 +25,21 @@ struct EditPhasesListView: View {
                 createDetailView:{ item in AnyDetailView(TrainingPlanDetailView(item: item)) },
                 selectedItems: $mezo.phases,
                 parentItem: $mezo)
-        }
-        .navigationBarTitle("Edit Phases", displayMode: .inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Cancel")
+            .navigationBarTitle("Edit Phases", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Cancel")
+                    }
                 }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Done")
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Done")
+                    }
                 }
             }
         }
@@ -53,7 +53,7 @@ struct EditPhasesListView: View {
 
 // MEZOCYCLE - ADD PHASE ITEM LIST
 struct AddPhasesToMezoListView: View {
-    @ObservedObject var vm: TrainingPlansViewModel
+//    @ObservedObject var vm: TrainingPlansViewModel
     @Binding var mezo: Mezocycle
     @Binding var phases: [Phase]
     @State var selectedPhases = [Phase]()
@@ -68,7 +68,7 @@ struct AddPhasesToMezoListView: View {
         NavigationStack{
             VStack(alignment: .leading) {
                 SelectiveGridListViewAdd(
-                    items: phases,
+                    items: phases.filter{ !mezo.phases.contains($0)} ,
                     createCardView: { item in AnyCardView(LargeCardView(item: item)) },
                     createDetailView:{ item in AnyDetailView(TrainingPlanDetailView(item: item)) },
                     selectedItems: $selectedPhases,

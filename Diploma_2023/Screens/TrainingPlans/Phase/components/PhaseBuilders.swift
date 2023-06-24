@@ -79,6 +79,7 @@ struct SheetHeaderBuilder: View {
 struct addPhaseToClientSheet: View {
     @ObservedObject var vm: PhaseSheetViewModel
     @Binding var clients: [Client]
+    @State var addedClientsIDs = Set<String>()
     @Binding var phase: Phase
     @State var searchText = ""
 
@@ -98,15 +99,29 @@ struct addPhaseToClientSheet: View {
                     HStack {
                         Text(client.title)
                         Spacer()
-                        Button {
-                            // Action to perform when the button is tapped
-                            vm.addPhaseToClient(phase: phase, client: client)
-                        } label: {
-                            Label("Add Item", systemImage: "plus")
+                        
+                        if addedClientsIDs.contains(client.id){
+                            Button {
+                            } label: {
+                                Label("Added to Client", systemImage: "person.fill.checkmark")
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.mini)
+                            .tint(.green)
                         }
-                        .buttonStyle(.bordered)
-                        .controlSize(.mini)
-                        .tint(.accentColor)
+                        else{
+                            Button {
+                                // Action to perform when the button is tapped
+                                vm.addPhaseToClient(phase: phase, client: client)
+                                addedClientsIDs.insert(client.id)
+                                
+                            } label: {
+                                Label("Add to Client", systemImage: "person.badge.plus")
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.mini)
+                            .tint(.accentColor)
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
@@ -114,7 +129,7 @@ struct addPhaseToClientSheet: View {
                 
                 
             }
-            .navigationBarTitle("Add Exercises", displayMode: .inline)
+            .navigationBarTitle("Add Phase To Client", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {

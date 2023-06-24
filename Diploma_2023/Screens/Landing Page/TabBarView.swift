@@ -15,11 +15,11 @@ struct TabBarView: View {
 
     var body: some View {
         TabView {
-//            TodayView()
-//                .tabItem {
-//                    Image(systemName: "calendar")
-//                    Text("Today")
-//                }
+            TodayView()
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Today")
+                }
             ClientsView()
                 .tabItem {
                     Image(systemName: "person.3")

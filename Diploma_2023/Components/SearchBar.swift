@@ -62,7 +62,10 @@ func selectedItemsByCategory<T: IdentifiableItem>(allItems: [T], selectedCategor
 func selectedItemsSearch<T: IdentifiableItem>(allItems: [T], selectedCategory: Category?, searchText: String, filterCondition: ((T) -> Bool)? = nil) -> [T] {
     if let selectedCategory = selectedCategory {
         if searchText.isEmpty {
-            return allItems
+            let filteredItems = allItems
+                .filter { $0.categoryIDs.contains(selectedCategory.id) }
+            return filteredItems
+            
         } else {
             let filteredItems = allItems
                 .filter { $0.categoryIDs.contains(selectedCategory.id) }

@@ -14,6 +14,7 @@ class ClientDetailViewModel: ObservableObject {
     
     // Adjust this value to represent the desired progress
     @Published var progress: Double = 0.0
+    @Published var remainingSessions: Int = 0
 
     @Published var shouldDismiss = false
      @Published var isShowingForm = false
@@ -50,9 +51,9 @@ class ClientDetailViewModel: ObservableObject {
     
     private func updateProgress() {
          progress = selectedClient.calculateFinishedPhasesPercentage()
+         remainingSessions = selectedClient.getTotalAvailableSessions() - selectedClient.getTotalFinishedSessions()
+        
      }
-    
-    
     
     func archiveClient(){
         self.selectedClient.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .client)
@@ -61,7 +62,8 @@ class ClientDetailViewModel: ObservableObject {
         }
     }
     
-    func updateClient(){
+    func updateClient(editClient: Client){
+        self.selectedClient = editClient
         clientsDataStore.updateClient(self.selectedClient) { result in
             // handle error
         }
@@ -121,7 +123,7 @@ struct ClientDetailView: View, DetailView {
                 
                     ClientTitle(
                         name: vm.selectedClient.title,
-                        remainingSessions: 3,
+                        remainingSessions: $vm.remainingSessions,
                         isActive: true,
                         progress: $vm.progress)
                     
@@ -137,10 +139,10 @@ struct ClientDetailView: View, DetailView {
                     
                     GeneralHorizontalListView(title: "Phases", items: vm.selectedClient.phases , titleSize: .medium
                                               ,sizeModel: .large, dataType: .phase)
-//                    GeneralHorizontalListView(title: "Measurements", items: DataModelMock.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
-//                    GeneralHorizontalListView(title: "Food Protocols", items: DataModelMock.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
                     GeneralHorizontalListView(title: "Mezocycles", items: vm.selectedClient.mezocycles, titleSize: .medium, sizeModel: .large, dataType: .mezocycle)
-//                    GeneralHorizontalListView(title: "Progress Photos", items: DataModelMock.progressPhotos, titleSize: .medium, sizeModel: .medium, dataType: .progressAlbum)
+                    GeneralHorizontalListView(title: "Food Protocols", items: DataModelMock.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
+                    GeneralHorizontalListView(title: "Measurements", items: DataModelMock.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
+                    GeneralHorizontalListView(title: "Progress Photos", items: DataModelMock.progressPhotos, titleSize: .medium, sizeModel: .medium, dataType: .progressAlbum)
                     
                 }
             }
@@ -202,7 +204,7 @@ struct ClientDetailView: View, DetailView {
 
 struct ClientTitle: View {
     let name: String
-    let remainingSessions: Int
+    @Binding var  remainingSessions: Int
     let isActive: Bool
     @Binding var progress: Double
 
@@ -222,7 +224,7 @@ struct ClientTitle: View {
                 }
                 .padding(.trailing, 20)
                 
-                ProgressView(value: progress)
+                ProgressView(value: progress/100)
                     .progressViewStyle(CustomProgressViewStyle())
                     .frame(width: 450)
                     .padding(.trailing, 20)
@@ -292,16 +294,19 @@ struct ClientPhoto: View {
     }
 }
 
+
 struct CustomProgressViewStyle: ProgressViewStyle {
     func makeBody(configuration: Configuration) -> some View {
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 2)
-                .frame(height: 4)
-                .foregroundColor(Color(.sRGB, red: 120/255, green: 120/255, blue: 128/255, opacity: 0.2))
-            
-            RoundedRectangle(cornerRadius: 2)
-                .frame(width: CGFloat(configuration.fractionCompleted ?? 0) * 224, height: 4)
-                .foregroundColor(Color(.systemGreen))
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 2)
+                    .frame(height: 4)
+                    .foregroundColor(Color(.sRGB, red: 120/255, green: 120/255, blue: 128/255, opacity: 0.2))
+                
+                RoundedRectangle(cornerRadius: 2)
+                    .frame(width: CGFloat(configuration.fractionCompleted ?? 0) * geometry.size.width, height: 4)
+                    .foregroundColor(Color(.systemGreen))
+            }
         }
     }
 }

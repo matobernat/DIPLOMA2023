@@ -12,128 +12,37 @@ import Combine
 class NewClientViewModel: ObservableObject {
     
     // passed data from parent VM to set new Client
-    var categories: [Category]
     var selectedCategory: Category
     var loggedAccount: Account
+    let categoryDataStore: CategoryDataStore
     
     @Published var newClient: Client
 
     
-    init(categories: [Category], selectedCategory: Category, loggedAccount: Account){
-        self.categories = categories
-        self.selectedCategory = selectedCategory
+    init(selectedCategory: Category, loggedAccount: Account){
         self.loggedAccount = loggedAccount
+        self.selectedCategory = selectedCategory
+        self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
         
-        self.newClient = Client(
-            categoryIDs: [],
-            dateOfCreation: .now,
-            accountID: loggedAccount.id,
-            profileID: loggedAccount.loggedProfile?.id ?? "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            age: "",
-            weight: "",
-            height: "",
-            active: true,
-            trainingStyle: .inPerson,
-            injury: "",
-            healthIssues: "",
-            paymentType: .perSession,
-            phases: [],
-            mezocycles: [],
-            foodPlanIDs: [],
-            measurementIDs: [],
-            progressAlbumIDs: [])
+        // Create Empty Client
+        let categories = categoryDataStore.getCategoryIDs(selectedCategory: selectedCategory)
+        self.newClient = Client.getNewClient(categoryIDs: categories, accountID: loggedAccount.id, profileID: loggedAccount.loggedProfile?.id ?? "")
     }
+    
+    
     
     // This function updates necessary properties before uploading to ClientDataStore
     func getNewClient() -> Client {
-        self.newClient.categoryIDs = AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(selectedCategory: self.selectedCategory)
         self.newClient.injury = self.newClient.injury == "" ? "None" : self.newClient.injury
         self.newClient.healthIssues = self.newClient.healthIssues == "" ? "None" : self.newClient.healthIssues
-        self.newClient.dateOfCreation = Date.now
-        
         return self.newClient
     }
     
-    // TODO: may be deleted if  categoryDataStore.getCategoryIDs will work correctly
-    func getCategoryIDs() -> [String]{
-        var IDs=[String]()
-//        self.selectedCategory.id
-        
-        for category in self.categories {
-            
-            // if archived, add only to archived
-            if self.selectedCategory.name.contains("Archived"){
-                if category.name.contains("Archived"){
-                    IDs.append(category.id)
-                }
-                continue
-            }
-                
-                
-            // This is the default rule
-            if category.name.contains("All") ||
-                category.name.contains("Recent") ||
-                category.name.contains("My") {
-                
-                IDs.append(category.id)
-            }
-            
-            // Favorites is optional
-            if self.selectedCategory.name.contains("Favorite"){
-                if category.name.contains("Favorite"){
-                    IDs.append(category.id)
-                }
-            }
-            
-        }
-        return IDs
-    }
-
-
+    
+    
     func createMockClient() -> Client {
-        let firstNames = ["John", "Jane", "Michael", "Mary", "James", "Emily", "David", "Emma", "Robert", "Olivia"]
-        let lastNames = ["Smith", "Johnson", "Brown", "Williams", "Jones", "Miller", "Davis", "Garcia", "Taylor", "Martinez"]
-
-        let randomFirstName = firstNames.randomElement()!
-        let randomLastName = lastNames.randomElement()!
-        let randomEmail = "\(randomFirstName.lowercased()).\(randomLastName.lowercased())@gmail.com"
-        let randomPhoneNumber = String(format: "%03d-%03d-%04d", Int.random(in: 100...999), Int.random(in: 100...999), Int.random(in: 1000...9999))
-        let randomAge = Int.random(in: 18...65)
-        let randomWeight = Int.random(in: 100...250)
-        let randomHeight = Int.random(in: 150...200)
-
-        return Client(
-            categoryIDs: self.getCategoryIDs(),
-            dateOfCreation: Date.now,
-            accountID: loggedAccount.id,
-            profileID: loggedAccount.loggedProfile?.id ?? "",
-
-            firstName: randomFirstName,
-            lastName: randomLastName,
-
-            email: randomEmail,
-            phone: randomPhoneNumber,
-
-            age: String(randomAge),
-            weight: String(randomWeight),
-            height: String(randomHeight),
-
-            active: Bool.random(),
-            trainingStyle: TrainingStyle.allCases.randomElement()!,
-            injury: "None",
-            healthIssues: "None",
-            paymentType: PaymentType.allCases.randomElement()!,
-
-            phases: [],
-            mezocycles: [],
-            foodPlanIDs: [],
-            measurementIDs: [],
-            progressAlbumIDs: []
-        )
+        let categories = categoryDataStore.getCategoryIDs(selectedCategory: selectedCategory)
+        return Client.createMockClient(categoryIDs: categories, accountID: loggedAccount.id, profileID: loggedAccount.loggedProfile?.id ?? "")
     }
     
 
@@ -148,8 +57,7 @@ struct NewClientView: View {
     
     init( parentVm: ClientsViewModel) {
         self.parentVm = parentVm
-        self.vm = NewClientViewModel(categories: parentVm.categories,
-                                     selectedCategory: parentVm.selectedCategory!,
+        self.vm = NewClientViewModel(selectedCategory: parentVm.selectedCategory!,
                                      loggedAccount: parentVm.loggedAccount!)
         
     }

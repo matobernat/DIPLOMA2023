@@ -67,21 +67,15 @@ class NewMezocycleViewModel: ObservableObject {
     }// init
     
     
-    func fillMockMezocycle() {
-        self.newMezo = Mezocycle(
-            title: title,
-            categoryIDs: AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(selectedCategory: self.selectedCategory),
-            dateOfCreation: .now,
-            accountID: loggedAccount.id,
-            profileID: loggedAccount.loggedProfile?.id ?? "",
-            clientName: "",
-            phases: [Phase](),
-            durationInMonths: durationInMonths,
-            trainingFocus: trainingFocus,
-            intensity: intensity,
-            progressionStrategy: progressionStrategy,
-            totalTrainings: totalTrainings,
-            description: description)
+    func getUpdatedMezo() -> Mezocycle{
+        self.newMezo.title = self.title
+        self.newMezo.durationInMonths  = self.durationInMonths
+        self.newMezo.trainingFocus = self.trainingFocus
+        self.newMezo.intensity  = self.intensity
+        self.newMezo.progressionStrategy = self.progressionStrategy
+        self.newMezo.totalTrainings = self.totalTrainings
+        self.newMezo.description = self.description
+        return self.newMezo
 
     }
     
@@ -185,7 +179,7 @@ struct NewMezocycleView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    parentVm.addMezocyle(newMezocycle: vm.newMezo)
+                    parentVm.addMezocyle(newMezocycle: vm.getUpdatedMezo())
                     presentationMode.wrappedValue.dismiss()
                     print("SAVE")
                 }) {
@@ -199,7 +193,7 @@ struct NewMezocycleView: View {
                 EditPhasesListView( mezo: $vm.newMezo, phases: $vm.newMezo.phases)
 
             } else {
-                AddPhasesToMezoListView(vm: parentVm, mezo: $vm.newMezo, phases: $vm.phases)
+                AddPhasesToMezoListView(mezo: $vm.newMezo, phases: $vm.phases)
             }
         }
     }

@@ -135,7 +135,7 @@ class PhaseSheetViewModel: ObservableObject {
             else{
                 if var newClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: newPhase.clientID) {
                     let updatedPhase = newPhase.setNewName(existingTitles: newClient.phases.map { $0.title })
-                    newClient.addPhase(phase: updatedPhase)
+                    newClient = newClient.addPhase(phase: updatedPhase)
                     AppDependencyContainer.shared.clientsDataStore.updateClient(newClient) { result in
                         // Handle result
                     }
@@ -243,7 +243,7 @@ class PhaseSheetViewModel: ObservableObject {
     
     func archivePhase(selectedPhase: Phase) {
         self.selectedPhase.categoryIDs = AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .trainingPlan)
-        self.updatePhase(selectedPhase: selectedPhase)
+        self.updatePhase(selectedPhase: self.selectedPhase)
     }
     
     
@@ -325,18 +325,20 @@ struct PhaseSheetView: View, DetailView {
                 }
                 .foregroundColor(.red)
             })
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-                vm.archivePhase(selectedPhase: vm.selectedPhase)
-                // Call your function to delete the client here
-            }, label: {
-                HStack{
-                    Text("Archive")
-                    Spacer()
-                    Image(systemName: "archivebox")
-                }
-                .foregroundColor(.red)
-            })
+            if vm.selectedPhase.clientID == nil {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                    vm.archivePhase(selectedPhase: vm.selectedPhase)
+                    // Call your function to delete the client here
+                }, label: {
+                    HStack{
+                        Text("Archive")
+                        Spacer()
+                        Image(systemName: "archivebox")
+                    }
+                    .foregroundColor(.red)
+                })
+            }
             Button(role: .destructive) {
                 presentationMode.wrappedValue.dismiss()
                 vm.deletePhase(selectedPhase: vm.selectedPhase)

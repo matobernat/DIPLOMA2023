@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020460832A2EE02D00A08CC1 /* EditMezocycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020460822A2EE02D00A08CC1 /* EditMezocycleView.swift */; };
 		0210C63D29AA001C001DAD74 /* Diploma_2023App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C63C29AA001C001DAD74 /* Diploma_2023App.swift */; };
 		0210C64129AA001E001DAD74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0210C64029AA001E001DAD74 /* Assets.xcassets */; };
 		0210C64429AA001E001DAD74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0210C64329AA001E001DAD74 /* Preview Assets.xcassets */; };
@@ -98,6 +99,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		020460822A2EE02D00A08CC1 /* EditMezocycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMezocycleView.swift; sourceTree = "<group>"; };
 		0210C63929AA001C001DAD74 /* Diploma_2023.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diploma_2023.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0210C63C29AA001C001DAD74 /* Diploma_2023App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diploma_2023App.swift; sourceTree = "<group>"; };
 		0210C64029AA001E001DAD74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				02D3BE342A1BA484007406EE /* MezocycleView.swift */,
 				02D3BE362A1BC9BB007406EE /* NewMezocycleView.swift */,
 				02D3BE3E2A20B70E007406EE /* MezoBuilders.swift */,
+				020460822A2EE02D00A08CC1 /* EditMezocycleView.swift */,
 			);
 			path = Mezocycle;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				02D3BE3D2A20A5E6007406EE /* SelectiveGridListView.swift in Sources */,
 				0210C66429BA6A10001DAD74 /* TestModel.swift in Sources */,
 				02817F7729EE94770038C658 /* AppDependencyContainer.swift in Sources */,
+				020460832A2EE02D00A08CC1 /* EditMezocycleView.swift in Sources */,
 				02E9FCC229F335C4000662D5 /* ExerciseRepository.swift in Sources */,
 				02E9FCCD29F41AFF000662D5 /* FirestoreMezocycleRepository.swift in Sources */,
 				02E9FCB429F04BA1000662D5 /* FirestoreCategoryRepository.swift in Sources */,

@@ -37,15 +37,15 @@ struct SelectiveGridListViewAdd: View {
                             }
                             Button(action: {
                                 if isSelected[item.id] == true {
-                                                                    isSelected[item.id] = false
+                                                                    isSelected[item.id] = true
                                                                     selectedItems.removeAll(where: { $0.id == item.id })
                                                                 } else {
                                                                     isSelected[item.id] = true
-                                                                    selectedItems.append(item.setMezoID(mezoID: parentItem.id))
+                                                                    selectedItems.append(item.duplicate().setMezoID(mezoID: parentItem.id))
                                                                 }
                             }) {
-                                Image(systemName: isSelected[item.id] == true ? "minus.circle" : "plus.circle")
-                                                                    .foregroundColor(isSelected[item.id] == true ? .red : .blue)
+                                Image(systemName: isSelected[item.id] == true ? "plus.circle" : "plus.circle")
+                                                                    .foregroundColor(isSelected[item.id] == true ? .gray : .green)
                                                                     .padding(8)
                             }
                         }
@@ -101,17 +101,11 @@ struct SelectiveGridListViewEdit: View {
                                 createCardView(item)
                             }
                             Button(action: {
-                                if isSelected[item.id] == true {
-                                                                    isSelected[item.id] = false
-                                                                    selectedItems.removeAll(where: { $0.id == item.id })
-                                                                } else {
-                                                                    isSelected[item.id] = true
-                                                                    selectedItems.append(item.setMezoID(mezoID: parentItem.id))
-                                                                }
+                                selectedItems.removeAll(where: { $0.id == item.id })
                             }) {
-                                Image(systemName: isSelected[item.id] == true ? "minus.circle" : "plus.circle")
-                                                                    .foregroundColor(isSelected[item.id] == true ? .red : .blue)
-                                                                    .padding(8)
+                                Image(systemName: "minus.circle" )
+                                    .foregroundColor( .red)
+                                    .padding(8)
                             }
                         }
                     }

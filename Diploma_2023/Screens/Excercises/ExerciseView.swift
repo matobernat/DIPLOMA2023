@@ -72,7 +72,7 @@ class ExercisesViewModel: ObservableObject {
     
     
     func archiveExercise(){
-        self.selectedExercise?.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .client)
+        self.selectedExercise?.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .exercise)
         exercisesDataStore.updateExercise(selectedExercise!) { result in
             // handle error
         }
@@ -143,9 +143,10 @@ struct ExerciseView: View {
             if let category = vm.selectedCategory{
             
                 ItemsList(
-                    selectedItems: selectedItemsByCategory(
+                    selectedItems: selectedItemsSearch(
                         allItems: vm.exercises,
-                        selectedCategory: category),
+                        selectedCategory: category,
+                        searchText: vm.searchText),
                     selectedCategory: vm.selectedCategory,
                     selectedItem: $vm.selectedExercise,
                     searchText: $vm.searchText)

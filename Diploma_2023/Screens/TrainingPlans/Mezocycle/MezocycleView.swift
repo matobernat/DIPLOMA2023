@@ -96,7 +96,7 @@ class MezocycleViewModel: ObservableObject {
 //MARK: CRUD operations
     
     func addMezoToClient(selectedMezo: Mezocycle, client: Client){
-        clientsDataStore.updateClient(client.addMezo(mezo: selectedMezo.duplicate())) { result in
+        clientsDataStore.updateClient(client.addMezo(mezo: selectedMezo.duplicate().setClientID(clientID: client.id, clientName: client.title))) { result in
             // handle error
             print(result)
         }
@@ -125,6 +125,9 @@ class MezocycleViewModel: ObservableObject {
     
     func updateMezo(selectedMezo: Mezocycle) {
         if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedMezo.clientID) {
+            AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updateMezo(mezo: selectedMezo)) { result in
+                // handle error
+            }
         }
         mezoDataStore.updateMezo(selectedMezo) { result in
             // handle error
@@ -144,8 +147,9 @@ class MezocycleViewModel: ObservableObject {
     }
     
     func archiveMezo(selectedMezo: Mezocycle) {
-        self.selectedMezo.categoryIDs = AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .trainingPlan)
-        self.updateMezo(selectedMezo: selectedMezo)
+        let categoryIDs = AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .trainingPlan)
+        self.selectedMezo.categoryIDs = categoryIDs
+        self.updateMezo(selectedMezo: self.selectedMezo)
     }
 
     
@@ -214,18 +218,21 @@ struct MezocycleView: View, DetailView {
                 }
                 .foregroundColor(.red)
             })
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-                vm.archiveMezo(selectedMezo: vm.selectedMezo)
-                // Call your function to delete the client here
-            }, label: {
-                HStack{
-                    Text("Archive Mezocycle")
-                    Spacer()
-                    Image(systemName: "archivebox")
-                }
-                .foregroundColor(.red)
-            })
+            if vm.selectedMezo.clientID == nil {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                    vm.archiveMezo(selectedMezo: vm.selectedMezo)
+                    // Call your function to delete the client here
+                }, label: {
+                    HStack{
+                        Text("Archive Mezocycle")
+                        Spacer()
+                        Image(systemName: "archivebox")
+                    }
+                    .foregroundColor(.red)
+                })
+            }
+            
             Button(role: .destructive) {
                 presentationMode.wrappedValue.dismiss()
                 vm.deleteMezo(selectedMezo: vm.selectedMezo)
@@ -242,19 +249,11 @@ struct MezocycleView: View, DetailView {
         
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                if vm.isEditing {
-                    Button(action: {
-                        vm.isEditing = false
-                        vm.updateMezo(selectedMezo: vm.selectedMezo)
-                    }) {
-                        Text("Done")
-                    }
-                } else {
-                    Button(action: {
-                        vm.isEditing = true
-                    }) {
+                NavigationLink(destination: EditMezocycleView(parentVm: self.vm)) {
+                    HStack{
                         Text("Edit")
                     }
+                    
                 }
             }
         }
@@ -263,6 +262,7 @@ struct MezocycleView: View, DetailView {
             if vm.isShowingSheetList{
                 addMezoToClientSheet(vm: vm, clients: $vm.clients, mezo: $vm.selectedMezo)
             }
+
         }
     }
     func buttonsView() -> some View {
@@ -327,6 +327,7 @@ struct addMezoToClientSheet: View {
     @Binding var clients: [Client]
     @Binding var mezo: Mezocycle
     @State var searchText = ""
+    @State var addedClientsIDs = Set<String>()
 
     
     @Environment(\.presentationMode) var presentationMode
@@ -341,21 +342,35 @@ struct addMezoToClientSheet: View {
                     HStack {
                         Text(client.title)
                         Spacer()
-                        Button {
-                            // Action to perform when the button is tapped
-                            vm.addMezoToClient(selectedMezo: mezo, client: client)
-                        } label: {
-                            Label("Add Item", systemImage: "plus")
+                        
+                        if addedClientsIDs.contains(client.id){
+                            Button {
+                            } label: {
+                                Label("Added to Client", systemImage: "person.fill.checkmark")
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.mini)
+                            .tint(.green)
                         }
-                        .buttonStyle(.bordered)
-                        .controlSize(.mini)
-                        .tint(.accentColor)
+                        else{
+                            Button {
+                                // Action to perform when the button is tapped
+                                vm.addMezoToClient(selectedMezo: mezo, client: client)
+                                addedClientsIDs.insert(client.id)
+                                
+                            } label: {
+                                Label("Add to Client", systemImage: "person.badge.plus")
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.mini)
+                            .tint(.accentColor)
+                        }   
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
                 }
             }
-            .navigationBarTitle("Add Exercises", displayMode: .inline)
+            .navigationBarTitle("Add Mezocycle To Client", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {

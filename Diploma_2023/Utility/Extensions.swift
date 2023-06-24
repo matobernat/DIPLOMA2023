@@ -132,8 +132,6 @@ extension Mezocycle{
     func addPhase(phase: Phase) -> Mezocycle{
         var copy = self
         copy.phases.append(phase)
-//        let newPhase = phase.setMezo(mezoID: copy.id, existingTitles: existingTitles) // duplicate and add mezoID
-//        copy.phases.append(newPhase.setClient(clientID: copy.clientID, clientName: copy.clientName)) // add ClientID and name if any
         return copy
     }
     
@@ -165,102 +163,9 @@ extension Mezocycle{
 
 
 
-extension Client{
-    
-    //MARK: Client - Mezocycle related func
-    /// This function add mezocycle to the client.
-    func addMezo(mezo: Mezocycle) -> Client{
-        var copy = self
-        copy.mezocycles.append(mezo)
-//        var newMezo = mezo.duplicate(existingTitles: existingTitles, keepName: true) // get mezo with new ID
-//        copy.mezocycles.append(newMezo.AddMezoToClient(clientID: copy.id, clientName: copy.title))
-        return copy
-    }
-    /// This function updates its mezocycle based on ID
-    /// - Returns: The client with the updated mezocycle
-    func updateMezo(mezo: Mezocycle) -> Client {
-        guard let index = self.mezocycles.firstIndex(where: { $0.id == mezo.id }) else {
-            // Mezocycle with the given ID not found, return the original client
-            return self
-        }
-        var copy = self
-        copy.mezocycles[index] = mezo
-        
-        return copy
-    }
-    /// This function deletes a mezocycle based on ID
-    /// - Returns: The client with the deleted mezocycle
-    func deleteMezo(mezoID: String) -> Client {
-        var copy = self
-        copy.mezocycles.removeAll(where: { $0.id == mezoID })
-        
-        return copy
-    }
-    
-    
-    //MARK: Client - Phase related func
-    /// This function add phase to the client.
-    /// - Returns: returned client have phase client ID and client name also set
-    func addPhase(phase: Phase) -> Client{
-        var copy = self
-        copy.phases.append(phase)
-        return copy
-//        if keepLoad{
-//            let newPhase = phase.duplicate(existingTitles: existingTitles, keepName: true) // get phase with new ID
-//            copy.phases.append(newPhase.setClient(clientID: copy.id, clientName: copy.title))
-//            return copy
-//        }
-//        else{
-//            let newPhase = phase.duplicateWithClearedLoads(existingTitles: [], keepName: true) // get phase with new ID
-//            copy.phases.append(newPhase.setClient(clientID: copy.id, clientName: copy.title))
-//            return copy
-//        }
-
-    }
-    
-    /// This function updates its phase based on ID
-    /// - Returns: The client with the updated phase
-    func updatePhase(phase: Phase) -> Client {
-        guard let index = self.phases.firstIndex(where: { $0.id == phase.id }) else {
-            // Mezocycle with the given ID not found, return the original client
-            return self
-        }
-        var copy = self
-        copy.phases[index] = phase
-        
-        return copy
-    }
-    /// This function deletes a phase based on ID
-    /// - Returns: The client with the deleted phase
-    func deletePhase(phaseID: String) -> Client {
-        var copy = self
-        copy.phases.removeAll(where: { $0.id == phaseID })
-        
-        return copy
-    }
-}
 
 
 
-
-
-
-extension Client{
-    
-    func calculateFinishedPhasesPercentage() -> Double {
-        let totalAvailableSessions = self.phases.reduce(0) { $0 + $1.getNumberOfAllAvailableSessions() } +
-        self.mezocycles.reduce(0) { $0 + $1.getNumberOfAllAvailableSessions() }
-        let totalFinishedSessions = self.phases.reduce(0) { $0 + $1.getNumberOfAllFinishedSessions() } +
-        self.mezocycles.reduce(0) { $0 + $1.getNumberOfAllFinishedSessions() }
-        
-        if totalAvailableSessions == 0 {
-            return 0 // Avoid division by zero
-        }
-        
-        let finishedPercentage = Double(totalFinishedSessions) / Double(totalAvailableSessions) * 100.0
-        return finishedPercentage
-    }
-}
 
 
 

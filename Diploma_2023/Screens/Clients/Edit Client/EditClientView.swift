@@ -11,6 +11,15 @@ import Combine
 // MARK: - EditClient - ViewModel
 class EditClientViewModel: ObservableObject {
     
+    
+    @Published var editClient: Client
+
+    init(selectedClient: Client){
+        // duplicate selectedClient
+        self.editClient = selectedClient
+    }
+    
+    
 }
         
         
@@ -22,13 +31,14 @@ class EditClientViewModel: ObservableObject {
         @Environment(\.presentationMode) var presentationMode
         
         @ObservedObject var parentVm: ClientDetailViewModel
+        @ObservedObject var vm: EditClientViewModel
 
         
         init(parentVm: ClientDetailViewModel) {
             self.parentVm = parentVm
+            self.vm = EditClientViewModel(selectedClient: parentVm.selectedClient)
         }
         
-
         
         var body: some View {
             
@@ -37,39 +47,39 @@ class EditClientViewModel: ObservableObject {
                     
                     
                     Section(header: Text("Contact Information")) {
-                        TextField("First Name", text: $parentVm.selectedClient.firstName)
-                        TextField("Last Name", text: $parentVm.selectedClient.lastName)
-                        TextField("Email", text: $parentVm.selectedClient.email)
+                        TextField("First Name", text: $vm.editClient.firstName)
+                        TextField("Last Name", text: $vm.editClient.lastName)
+                        TextField("Email", text: $vm.editClient.email)
                             .keyboardType(.emailAddress)
-                        TextField("Phone Number", text: $parentVm.selectedClient.phone)
+                        TextField("Phone Number", text: $vm.editClient.phone)
                             .keyboardType(.numberPad)
-                            .onReceive(Just(parentVm.selectedClient.phone)) { newValue in
+                            .onReceive(Just(vm.editClient.phone)) { newValue in
                                 let filtered = newValue.filter { "0123456789".contains($0) }
                                 if filtered != newValue {
-                                    parentVm.selectedClient.phone = filtered
+                                    vm.editClient.phone = filtered
                                 }
                             }
                     }
                     
                     Section(header: Text("Health Information")) {
-                        TextField("Age", text: $parentVm.selectedClient.age)
+                        TextField("Age", text: $vm.editClient.age)
                             .keyboardType(.numberPad)
-                        TextField("Weight", text: $parentVm.selectedClient.weight)
+                        TextField("Weight", text: $vm.editClient.weight)
                             .keyboardType(.numberPad)
-                        TextField("Height", text: $parentVm.selectedClient.height)
+                        TextField("Height", text: $vm.editClient.height)
                             .keyboardType(.numberPad)
-                        TextField("Injury", text: $parentVm.selectedClient.injury)
-                        TextField("Health Issues", text: $parentVm.selectedClient.healthIssues)
+                        TextField("Injury", text: $vm.editClient.injury)
+                        TextField("Health Issues", text: $vm.editClient.healthIssues)
                     }
                     
                     Section(header: Text("Additional Information")) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Toggle("Active", isOn: $parentVm.selectedClient.active)
+                            Toggle("Active", isOn: $vm.editClient.active)
                             Text("Active user is the one that will be training in the near future")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
-                        Picker("Training Style", selection: $parentVm.selectedClient.trainingStyle) {
+                        Picker("Training Style", selection: $vm.editClient.trainingStyle) {
                             ForEach(TrainingStyle.allCases, id: \.id) { style in
                                 Text(style.rawValue)
                                     .tag(style)
@@ -78,7 +88,7 @@ class EditClientViewModel: ObservableObject {
                     }
                     
                     Section(header: Text("Other Information")) {
-                        Picker("Payment Type", selection: $parentVm.selectedClient.paymentType) {
+                        Picker("Payment Type", selection: $vm.editClient.paymentType) {
                             ForEach(PaymentType.allCases, id: \.self) { type in
                                 Text(type.rawValue).tag(type)
                             }
@@ -87,17 +97,7 @@ class EditClientViewModel: ObservableObject {
                     
                     
                 }
-                //            .navigationBarTitle("New Client", displayMode: .inline)
-                //            .navigationBarItems(leading: Button("Cancel") {
-                //                isShowingForm = false
-                //            }, trailing: Button("Save") {
-                //                // parentVm uploads client to DB and updates allClients list
-                //                parentVm.createClient(client: vm.getNewClient())
-                //                isShowingForm = false
-                //            })
-                //        }
-                
-                
+
                 .navigationBarTitle(Text("Edit Client"))
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(
@@ -110,7 +110,7 @@ class EditClientViewModel: ObservableObject {
                     },
                     trailing: Button(action: {
                         // Save the changes and dismiss the view
-                        parentVm.updateClient()
+                        parentVm.updateClient(editClient: vm.editClient)
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Save")
