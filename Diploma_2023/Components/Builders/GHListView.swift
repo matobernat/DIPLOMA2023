@@ -66,6 +66,17 @@ struct GeneralHorizontalListView: View {
                      addFunc: addFunc
 
             )
+        case .progressAlbum:
+            ListView(title: title,
+                     items: items,
+                     titleSize: titleSize,
+                     sizeModel: sizeModel,
+                     dataType: dataType,
+                     hideDivider: hideDivider,
+                         createCardView: { item in AnyCardView(ProgressAlbumCard(item: item)) },
+                         createDetailView: { item in AnyDetailView(ProgressAlbumsDetail(item: item)) },
+                     addFunc: addFunc
+            )
         case .foodPlan:
             ListView(title: title,
                      items: items,
@@ -77,16 +88,6 @@ struct GeneralHorizontalListView: View {
                          createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
             )
         case .measurement:
-            ListView(title: title,
-                     items: items,
-                     titleSize: titleSize,
-                     sizeModel: sizeModel,
-                     dataType: dataType,
-                     hideDivider: hideDivider,
-                         createCardView: { item in AnyCardView(MediumCardView(item: item)) },
-                         createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
-            )
-        case .progressAlbum:
             ListView(title: title,
                      items: items,
                      titleSize: titleSize,

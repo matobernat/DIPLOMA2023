@@ -56,11 +56,11 @@ struct TabBarView: View {
 //                    Image(systemName: "chart.bar")
 //                    Text("Measurements")
 //                }
-//            ProgressPhotosView()
-//                .tabItem {
-//                    Image(systemName: "camera.fill")
-//                    Text("Progress Photos")
-//                }
+            ProgressAlbumsView()
+                .tabItem {
+                    Image(systemName: "camera.fill")
+                    Text("Progress Photos")
+                }
         }
     }
 }

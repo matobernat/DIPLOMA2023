@@ -168,15 +168,18 @@ class PhaseSheetViewModel: ObservableObject {
     
     
     
-    // actually update client if not nil
+    // 1. Update Phase, 2. if has mezocycleID update Mezo 3. If has clientID update client
     func updatePhase(selectedPhase: Phase) {
+       
         if selectedPhase.clientID == nil{
             if selectedPhase.mezocycleID == nil{
+                // case 1
                 phasesDataStore.updatePhase(selectedPhase) { resule in
                     // Handle result
                 }
             }
             else{
+                // case 1 + 2
                 if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
                     AppDependencyContainer.shared.mezoDataStore.updateMezo(selectedMezo.updatePhase(phase:selectedPhase)) { result in
                         // handle error
@@ -184,6 +187,7 @@ class PhaseSheetViewModel: ObservableObject {
                 }
             }
         }else{
+            // case 1 + 3
             if selectedPhase.mezocycleID == nil{
                 if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
                     AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updatePhase(phase:selectedPhase)) { result in
@@ -192,8 +196,9 @@ class PhaseSheetViewModel: ObservableObject {
                 }
             }
             else{
+                // case 1 + 2 + 3
                 if let selectedClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedPhase.clientID) {
-                    if let selectedMezo = AppDependencyContainer.shared.mezoDataStore.getMezo(mezoID: selectedPhase.mezocycleID) {
+                    if let selectedMezo = selectedClient.getClientMezo(mezoID: selectedPhase.mezocycleID!) {
                         AppDependencyContainer.shared.clientsDataStore.updateClient(selectedClient.updateMezo(mezo: selectedMezo.updatePhase(phase: selectedPhase))) { result in
                             // handle error
                         }
@@ -255,6 +260,7 @@ class PhaseSheetViewModel: ObservableObject {
 // MARK: - PhaseSheet - View
 struct PhaseSheetView: View, DetailView {
     @Environment(\.presentationMode) var presentationMode
+
     
     @ObservedObject private var vm: PhaseSheetViewModel
 
@@ -265,6 +271,7 @@ struct PhaseSheetView: View, DetailView {
 
     
     var body: some View {
+        
         ScrollView{
             VStack(alignment: .center, spacing: 15){
                 
@@ -507,7 +514,7 @@ struct PhaseSheetTable: View {
                                      phase: $vm.selectedPhase,
                                      widths: Phase.Constants.SheetTable.width(isEditing: vm.isEditing),
                                      height: Phase.Constants.SheetTable.heightContent,
-                                     color: Color.white)
+                                     color: Color.white.opacity(0.1))
         }
     }
 }

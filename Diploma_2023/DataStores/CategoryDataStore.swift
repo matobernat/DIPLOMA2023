@@ -16,6 +16,9 @@ class CategoryDataStore: ObservableObject {
     @Published private(set) var categoriesClients: [Category] = []
     @Published private(set) var categoriesExercises: [Category] = []
     @Published private(set) var categoriesTrainingPlans: [Category] = []
+    @Published private(set) var categoriesProgressAlbum: [Category] = []
+
+    
     
     
     
@@ -48,12 +51,14 @@ class CategoryDataStore: ObservableObject {
     
     // Filtering
     
-    private func filterCategoriesByType() -> (clients: [Category], exercises: [Category], trainingPlans: [Category]) {
+    private func filterCategoriesByType() -> (clients: [Category], exercises: [Category], trainingPlans: [Category], progressAlbum: [Category]) {
         let clients = allCategories.filter { $0.dataType == .client }
         let exercises = allCategories.filter { $0.dataType == .exercise }
         let trainingPlans = allCategories.filter { $0.dataType == .trainingPlan }
+        let progressAlbum = allCategories.filter { $0.dataType == .progressAlbum }
+
         
-        return (clients: clients, exercises: exercises, trainingPlans: trainingPlans)
+        return (clients: clients, exercises: exercises, trainingPlans: trainingPlans, progressAlbum: progressAlbum)
     }
     
     private func updateCategories(_ categories: [Category]) {
@@ -64,6 +69,8 @@ class CategoryDataStore: ObservableObject {
             self.categoriesClients = filteredCategories.clients
             self.categoriesExercises = filteredCategories.exercises
             self.categoriesTrainingPlans = filteredCategories.trainingPlans
+            self.categoriesProgressAlbum = filteredCategories.progressAlbum
+
         }
         
     }
@@ -81,6 +88,8 @@ class CategoryDataStore: ObservableObject {
             categories = self.categoriesExercises
         case .trainingPlan:
             categories = self.categoriesTrainingPlans
+        case .progressAlbum:
+            categories = self.categoriesProgressAlbum
         default:
             categories = self.categoriesClients
             print("getCategoryID error")
@@ -90,6 +99,59 @@ class CategoryDataStore: ObservableObject {
             subStrings.contains(where: category.name.contains)
         }.map{$0.id}
     }
+    
+    
+    func getCategoryIDs(selectedCategory: Category) -> [String]{
+        var IDs=[String]()
+        
+        allCategories = [Category]()
+        
+        switch selectedCategory.dataType{
+        case .client:
+            allCategories = self.categoriesClients
+        case .exercise:
+            allCategories = self.categoriesExercises
+        case .trainingPlan:
+            allCategories = self.categoriesTrainingPlans
+        case .progressAlbum:
+            allCategories = self.categoriesProgressAlbum
+            
+        default:
+            print("getCategoryIDs ERROR")
+            allCategories = [Category]()
+        }
+        
+        for category in self.allCategories {
+            
+            // if archived, add only to archived
+            if selectedCategory.name.contains("Archived"){
+                if category.name.contains("Archived"){
+                    IDs.append(category.id)
+                }
+                continue
+            }
+                
+                
+            // This is the default rule
+            if category.name.contains("All") ||
+                category.name.contains("Recent") ||
+                category.name.contains("My") {
+                
+                IDs.append(category.id)
+            }
+            
+            // Favorites is optional
+            if selectedCategory.name.contains("Favorite"){
+                if category.name.contains("Favorite"){
+                    IDs.append(category.id)
+                }
+            }
+            
+        }
+        return IDs
+    }
+    
+    
     
     // Repository functions
     
@@ -205,7 +267,8 @@ class CategoryDataStore: ObservableObject {
         ]
         
         
-        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan]
+//        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan, .progressAlbum]
+        let dataTypes: [DataType] =  [.progressAlbum]
         let date = Date.now
         
         var results: [Result<Void, Error>] = []
@@ -316,7 +379,8 @@ class CategoryDataStore: ObservableObject {
 
         ]
         
-        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan]
+//        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan, .progressAlbum]
+        let dataTypes: [DataType] = [.progressAlbum]
         let date = Date.now.addingTimeInterval(200)
         
         var results: [Result<Void, Error>] = []
@@ -398,56 +462,5 @@ class CategoryDataStore: ObservableObject {
             }
         }
     }
-    
-    
-    func getCategoryIDs(selectedCategory: Category) -> [String]{
-        var IDs=[String]()
-        
-        allCategories = [Category]()
-        
-        switch selectedCategory.dataType{
-        case .client:
-            allCategories = self.categoriesClients
-        case .exercise:
-            allCategories = self.categoriesExercises
-        case .trainingPlan:
-            allCategories = self.categoriesTrainingPlans
-            
-        default:
-            print("getCategoryIDs ERROR")
-            allCategories = [Category]()
-        }
-        
-        for category in self.allCategories {
-            
-            // if archived, add only to archived
-            if selectedCategory.name.contains("Archived"){
-                if category.name.contains("Archived"){
-                    IDs.append(category.id)
-                }
-                continue
-            }
-                
-                
-            // This is the default rule
-            if category.name.contains("All") ||
-                category.name.contains("Recent") ||
-                category.name.contains("My") {
-                
-                IDs.append(category.id)
-            }
-            
-            // Favorites is optional
-            if selectedCategory.name.contains("Favorite"){
-                if category.name.contains("Favorite"){
-                    IDs.append(category.id)
-                }
-            }
-            
-        }
-        return IDs
-    }
-    
-    
     
 }

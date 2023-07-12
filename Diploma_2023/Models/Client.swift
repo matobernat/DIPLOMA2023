@@ -7,7 +7,26 @@
 
 import Foundation
 
+enum Gender: String, Decodable, Encodable, Hashable{
+    case male = "Male"
+    case female = "Female"
+    case other = "Other"
+    
+    static var allCases: [Gender] {
+        return [.male, .female, .other]
+    }
 
+    var placeholderImageName: String {
+        switch self {
+        case .male:
+            return "clientAvatarMale"
+        case .female:
+            return "clientAvatarFemale"
+        case .other:
+            return "clientAvatar"
+        }
+    }
+}
 
 
 
@@ -23,9 +42,12 @@ struct Client: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable  {
         return active ? "Active" : "Inactive"
     }
     var categoryIDs: [String]
-    var imageName = "client-photo"
+    
+    var placeholderName: String{
+        return gender.placeholderImageName
+    }
+    
     var dateOfCreation: Date
-
 
     var clientID: String? = nil
     var accountID: String
@@ -35,6 +57,8 @@ struct Client: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable  {
     // personal info
     var firstName: String
     var lastName: String
+    var gender: Gender = .other
+    var imageUrl: String? = nil
     
     var email: String
     var phone: String
@@ -56,6 +80,7 @@ struct Client: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable  {
 
     var phases = [Phase]()
     var mezocycles =  [Mezocycle]()
+    var progressAlbums: [ProgressAlbum]
     var foodPlanIDs: [String]
     var measurementIDs: [String]
     var progressAlbumIDs: [String]
@@ -106,6 +131,19 @@ extension Client{
 extension Client{
     
     //MARK: Client - Mezocycle related func
+    
+    /// This function gets a mezocycle based on ID
+    /// - Returns: Client's mezocycle
+    func getClientMezo(mezoID: String) -> Mezocycle? {
+        guard let index = self.mezocycles.firstIndex(where: { $0.id == mezoID }) else {
+            // Mezocycle with the given ID not found, return nil
+            return nil
+        }
+        return self.mezocycles[index]
+        
+    }
+    
+    
     /// This function add mezocycle to the client.
     func addMezo(mezo: Mezocycle) -> Client{
         var copy = self
@@ -167,8 +205,55 @@ extension Client{
     }
 }
 
+extension Client{
+
+    /// - Returns: The client with the updated ProgressAlbum
+    func updateAlbum(selectedAlbum: ProgressAlbum) -> Client {
+        guard let index = self.progressAlbums.firstIndex(where: { $0.id == selectedAlbum.id }) else {
+            // Mezocycle with the given ID not found, return the original client
+            return self
+        }
+        var copy = self
+        copy.progressAlbums[index] = selectedAlbum
+        
+        return copy
+    }
+    
+    
+    /// - Returns: The client with the updated ProgressAlbum
+    func addAlbum(selectedAlbum: ProgressAlbum) -> Client {
+        var copy = self
+        copy.progressAlbums.append(selectedAlbum)
+        return copy
+    }
+    
+    /// - Returns: The client with the deleted ProgressAlbum
+    func deleteAlbum(selectedAlbumId: String) -> Client {
+        
+        var copy = self
+        copy.progressAlbums.removeAll(where: { $0.id == selectedAlbumId })
+        return copy
+    }
+    
+    
+}
+
+
+
 // static factory methods
 extension Client{
+    
+    static func gender(from isMale: Bool?) -> Gender {
+        if let isMale = isMale {
+            return isMale ? .male : .female
+        } else {
+            return .other
+        }
+    }
+    
+    func getProgressAlbumIndex(progressAlbumId: String) -> Int?{
+        return self.progressAlbums.firstIndex(where: { $0.id == progressAlbumId})
+    }
     
     static func getNewClient( categoryIDs : [String], accountID: String, profileID: String) -> Client{
         return Client(
@@ -178,6 +263,7 @@ extension Client{
                 profileID: profileID,
                 firstName: "",
                 lastName: "",
+                gender: Gender.other,
                 email: "",
                 phone: "",
                 age: "",
@@ -190,6 +276,7 @@ extension Client{
                 paymentType: .perSession,
                 phases: [],
                 mezocycles: [],
+                progressAlbums: [],
                 foodPlanIDs: [],
                 measurementIDs: [],
                 progressAlbumIDs: [])
@@ -216,6 +303,7 @@ extension Client{
 
             firstName: randomFirstName,
             lastName: randomLastName,
+            gender: Gender.allCases.randomElement() ?? .other,
 
             email: randomEmail,
             phone: randomPhoneNumber,
@@ -232,6 +320,7 @@ extension Client{
 
             phases: [],
             mezocycles: [],
+            progressAlbums: [],
             foodPlanIDs: [],
             measurementIDs: [],
             progressAlbumIDs: []

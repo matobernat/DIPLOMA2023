@@ -33,7 +33,7 @@ struct ClientsView: View {
                                     item: client).environmentObject(self.vm),
                                 tag: client,
                                 selection: $vm.selectedClient) {
-                                SmallCardView(item: client)
+                                ClientSmallCardView(client: client)
                             }
                         }
                     }

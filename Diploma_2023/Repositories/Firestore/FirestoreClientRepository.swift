@@ -64,4 +64,20 @@ class FirestoreClientRepository: ClientRepository {
             }
         }
     }
+    
+    func clearClientImageUrl(clientId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        print(" \n clientId: \(clientId) \n ")
+        
+        
+        let clientRef = db.collection(collectionName).document(clientId)
+        clientRef.updateData(["imageUrl": FieldValue.delete()]) { error in
+            if let error = error {
+                print("Error clearing client imageUrl: \(error.localizedDescription)")
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 }

@@ -60,7 +60,7 @@ struct ClientMock: IdentifiableItem, Identifiable, Hashable {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = "client-photo"
+    var placeholderName = "client-photo"
     var dateOfCreation = Date.now
     var accountID = "MockAccount"
 
@@ -89,7 +89,7 @@ struct ExerciseMock: IdentifiableItem, Identifiable, Hashable {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = ""
+    var placeholderName = ""
     var dateOfCreation = Date.now
     var accountID = "MockAccount"
 
@@ -109,7 +109,7 @@ struct PhaseMock: IdentifiableItem {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = "peak-logo"
+    var placeholderName = "peak-logo"
     var clientID: String?
     var dateOfCreation = Date.now
     var accountID = "MockAccount"
@@ -126,7 +126,7 @@ struct MezocycleMock: IdentifiableItem {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = "peak-logo"
+    var placeholderName = "peak-logo"
     var dateOfCreation = Date.now
     var accountID = "MockAccount"
 
@@ -143,7 +143,7 @@ struct FoodPlanMock: IdentifiableItem {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = "foodplan-maintain-image"
+    var placeholderName = "foodplan-maintain-image"
     var dateOfCreation = Date.now
     var accountID = "MockAccount"
 
@@ -158,7 +158,7 @@ struct MeasurementMock: IdentifiableItem {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = "metric-image"
+    var placeholderName = "metric-image"
     var dateOfCreation = Date.now
     var accountID = "MockAccount"
 
@@ -173,7 +173,7 @@ struct ProgressAlbumMock: IdentifiableItem {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = "photo-image"
+    var placeholderName = "photo-image"
     var dateOfCreation = Date.now
     var accountID = "MockAccount"
 
@@ -197,7 +197,7 @@ struct PhaseMockNew: IdentifiableItem {
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = "peak-logo"
+    var placeholderName = "peak-logo"
     var clientID: String?
     var dateOfCreation = Date.now
     var accountID = "MockAccount"

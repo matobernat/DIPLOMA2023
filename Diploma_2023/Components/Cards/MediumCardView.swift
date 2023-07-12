@@ -16,7 +16,7 @@ struct MediumCardView: View, CardView {
     
     var body: some View {
         HStack(alignment: .center) {
-            Image(item.imageName)
+            Image(item.placeholderName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 100, height: 100)
@@ -62,7 +62,7 @@ struct ItemDetailView: View, DetailView{
     
     var body: some View {
         VStack {
-            Image(item.imageName)
+            Image(item.placeholderName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(9)

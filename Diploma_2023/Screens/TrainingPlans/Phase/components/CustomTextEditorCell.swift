@@ -19,6 +19,7 @@ struct CustomTextEditorCell: View {
             .frame(width: width, height: height)
             .background(color)
             .border(Color.gray, width: 1)
+            .opacity(0.8)
     }
 }
 

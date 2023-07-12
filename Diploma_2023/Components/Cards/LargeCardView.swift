@@ -52,7 +52,7 @@ struct LargeCardImage: View{
                     .frame(width: 160, height: 160)
                 
                 VStack(spacing: 11) {
-                    Image(item.imageName)
+                    Image(item.placeholderName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 44, height: 33)
@@ -75,7 +75,7 @@ struct LargeCardImage: View{
                     .frame(width: 160, height: 160)
                 
                 VStack(spacing: 11) {
-                    Image(mezoItem.imageName)
+                    Image(mezoItem.placeholderName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 44, height: 33)
@@ -93,7 +93,7 @@ struct LargeCardImage: View{
             }else{
                 
                 VStack(spacing: 11) {
-                    Image(item.imageName)
+                    Image(item.placeholderName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 44, height: 33)
@@ -120,6 +120,9 @@ struct LargeCardImage: View{
 struct LargeCardButtonLabel: View {
 
     var type: DataType
+    var title: String?
+    let cornerRadius: CGFloat = 9
+    let size: CGFloat = 160
     
     var typeToTitle: String {
         switch type {
@@ -127,19 +130,19 @@ struct LargeCardButtonLabel: View {
             return "New Phase"
         case .mezocycle:
             return "New Mezocycle"
+        case .progressAlbum:
+            return "New Album"
         default:
             return "New..."
         }
     }
     
-    
-    
     var body: some View {
         VStack(alignment: .leading){
             ZStack {
-                RoundedRectangle(cornerRadius: 9)
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .fill(type == .mezocycle ? Color(.systemGray4) : Color(.systemGray5))
-                    .frame(width: 160, height: 160)
+                    .frame(width: size, height: size)
                 
                 VStack(spacing: 11) {
                     Image(systemName: "plus")
@@ -150,19 +153,17 @@ struct LargeCardButtonLabel: View {
                         .font(.system(size: 10, weight: .thin))
                 }
             }
-            .frame(width: 160, height: 160)
-            Text(typeToTitle)
+            .frame(width: size, height: size)
+            Text(title ?? typeToTitle) // If title is nil, use typeToTitle
                 .font(.system(size: 10, weight: .medium))
                 .foregroundColor(.primary)
             Text("Add..")
                 .font(.system(size: 10, weight: .regular))
                 .foregroundColor(.secondary)
         }
-
-        
-
     }
 }
+
 
 
 struct LargeCardView_Previews: PreviewProvider {
@@ -203,7 +204,7 @@ struct GeneralMockDetailView: View, DetailView {
     
     var body: some View {
         VStack {
-            Image(item.imageName)
+            Image(item.placeholderName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(9)

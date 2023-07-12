@@ -16,13 +16,18 @@ class NewClientViewModel: ObservableObject {
     var loggedAccount: Account
     let categoryDataStore: CategoryDataStore
     
+    
     @Published var newClient: Client
+    @Published var newProfileImage: UIImage? = nil
+
 
     
-    init(selectedCategory: Category, loggedAccount: Account){
+    init(selectedCategory: Category,
+         loggedAccount: Account,
+         categoryDataStore: CategoryDataStore = AppDependencyContainer.shared.categoryDataStore){
         self.loggedAccount = loggedAccount
         self.selectedCategory = selectedCategory
-        self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
+        self.categoryDataStore = categoryDataStore
         
         // Create Empty Client
         let categories = categoryDataStore.getCategoryIDs(selectedCategory: selectedCategory)
@@ -68,6 +73,22 @@ struct NewClientView: View {
             
             Form {
                 
+                Section {
+                    EditProfileImageView(
+                        localImage: $vm.newProfileImage,
+                        imageUrl: vm.newClient.imageUrl,
+                        placeholderImageName: vm.newClient.placeholderName,
+                        size: 160,
+                        isEditButtonShowing: false,
+                        onClearPhoto: {
+                            print("Delete NEW")
+                        }
+                    )
+                }
+                .listRowBackground(Color.clear)
+                
+                    
+                    
                 Button("Create mocked Client") {
 
                     // parentVm uploads client to DB and updates allClients list
@@ -80,6 +101,14 @@ struct NewClientView: View {
                 Section(header: Text("Contact Information")) {
                     TextField("First Name", text: $vm.newClient.firstName)
                     TextField("Last Name", text: $vm.newClient.lastName)
+                    
+                    Picker("Gender", selection: $vm.newClient.gender) {
+                        ForEach(Gender.allCases, id: \.self) { gender in
+                            Text(gender.rawValue)
+                        }
+                    }
+                    
+                    
                     TextField("Email", text: $vm.newClient.email)
                         .keyboardType(.emailAddress)
                     TextField("Phone Number", text: $vm.newClient.phone)

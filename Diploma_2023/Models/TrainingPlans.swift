@@ -19,7 +19,7 @@ struct Mezocycle: IdentifiableItem,Identifiable, Hashable, Encodable, Decodable 
         return "\(durationInMonths) months"
     }
     var categoryIDs: [String] // fireBase UID
-    var imageName = "peak-logo"
+    var placeholderName = "peak-logo"
     var dateOfCreation: Date
     var accountID: String // The associated account ID
     var profileID: String
@@ -54,7 +54,7 @@ struct Phase: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable {
         return "\(phaseDurationInWeeks) weeks"
     }
     var categoryIDs: [String]
-    var imageName = "peak-logo"
+    var placeholderName = "peak-logo"
     var dateOfCreation: Date
     var accountID: String // The associated account ID
     var profileID: String // The associated account ID
@@ -87,7 +87,7 @@ struct Exercise: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable 
     var title: String
     var subTitle: String
     var categoryIDs: [String]
-    var imageName = ""
+    var placeholderName = ""
     var dateOfCreation: Date
     var accountID: String // The associated account ID
 

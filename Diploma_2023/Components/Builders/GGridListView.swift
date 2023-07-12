@@ -62,8 +62,8 @@ struct GeneralGridListView: View {
             GridListView(items: items,
                          title: title,
                          sizeModel: sizeModel,
-                         createCardView: { item in AnyCardView(MediumCardView(item: item)) },
-                         createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
+                         createCardView: { item in AnyCardView(ProgressAlbumCard(item: item)) },
+                         createDetailView: { item in AnyDetailView(ProgressAlbumsDetail(item: item)) }
             )
         case .trainingPlan:
             fatalError("Invalid data type: \(dataType)")

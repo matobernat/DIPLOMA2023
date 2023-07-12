@@ -72,10 +72,9 @@ protocol IdentifiableItem {
     var title: String { get }
     var subTitle: String { get }
     var categoryIDs: [String] { get }
-    var imageName: String { get }
+    var placeholderName: String { get }
     var dateOfCreation: Date { get }
     var accountID: String { get }
-
     var clientID: String? { get }
 
 }

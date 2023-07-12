@@ -5,7 +5,7 @@
 //  Created by Martin Bernát on 25/02/2023.
 import SwiftUI
 import Combine
-// MARK: - Exercises - ViewModel
+// MARK: - TrainingPlans - ViewModel
 class TrainingPlansViewModel: ObservableObject {
     
     @Published var columnVisibility = NavigationSplitViewVisibility.all

@@ -22,6 +22,7 @@ struct AppDependencyContainer {
     let exerciseRepository: ExerciseRepository
     let phaseRepository: PhaseRepository
     let mezoRepository: MezoRepository
+    let imageRepository: ImageRepository
     // Add other repositories and services as needed
 
     
@@ -42,6 +43,7 @@ struct AppDependencyContainer {
         exerciseRepository = FirestoreExerciseRepository()
         phaseRepository = FirestorePhaseRepository()
         mezoRepository = FirestoreMezoRepository()
+        imageRepository = FirebaseStorageImageRepository()
         // Initialize other repositories and services
 
         

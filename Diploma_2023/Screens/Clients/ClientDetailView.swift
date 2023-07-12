@@ -22,16 +22,21 @@ class ClientDetailViewModel: ObservableObject {
 
      private let clientsDataStore: ClientsDataStore
      private let categoryDataStore: CategoryDataStore
+     let profileImageSize: CGFloat = 150
+    
 
      private var selectedClientCancellable: AnyCancellable?
      private var selectedClientObserver: AnyCancellable?
      private var cancellables = Set<AnyCancellable>()
 
         
-    init(selectedClient: Client) {
+    init(selectedClient: Client,
+         clientsDataStore : ClientsDataStore = AppDependencyContainer.shared.clientsDataStore,
+         categoryDataStore : CategoryDataStore = AppDependencyContainer.shared.categoryDataStore
+        ) {
         self.selectedClient = selectedClient
-        self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
-        self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
+        self.clientsDataStore = clientsDataStore
+        self.categoryDataStore = categoryDataStore
         
         updateProgress()
         // Set up the observer for the selected client
@@ -55,9 +60,15 @@ class ClientDetailViewModel: ObservableObject {
         
      }
     
-    func archiveClient(){
-        self.selectedClient.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .client)
-        clientsDataStore.updateClient(self.selectedClient) { result in
+    func archiveClient(selectedClient: Client){
+        var selectedClient = selectedClient
+        selectedClient.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .client)
+        for album in selectedClient.progressAlbums{
+            var archivedAlbum = album
+            archivedAlbum.categoryIDs = categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .progressAlbum)
+            selectedClient = selectedClient.updateAlbum(selectedAlbum: archivedAlbum)
+        }
+        clientsDataStore.updateClient(selectedClient) { result in
             // handle error
         }
     }
@@ -128,10 +139,13 @@ struct ClientDetailView: View, DetailView {
                         progress: $vm.progress)
                     
                     ClientPhoto(
-                        imageUrl: vm.selectedClient.imageName,
+                        imageUrl: vm.selectedClient.imageUrl,
                         age: vm.selectedClient.age,
                         height: vm.selectedClient.height,
-                        weight: vm.selectedClient.weight)
+                        weight: vm.selectedClient.weight,
+                        placeholderImageName: vm.selectedClient.placeholderName,
+                        gender: vm.selectedClient.gender,
+                        imageSize: vm.profileImageSize)
                     
                     Divider()
                     
@@ -140,9 +154,9 @@ struct ClientDetailView: View, DetailView {
                     GeneralHorizontalListView(title: "Phases", items: vm.selectedClient.phases , titleSize: .medium
                                               ,sizeModel: .large, dataType: .phase)
                     GeneralHorizontalListView(title: "Mezocycles", items: vm.selectedClient.mezocycles, titleSize: .medium, sizeModel: .large, dataType: .mezocycle)
-                    GeneralHorizontalListView(title: "Food Protocols", items: DataModelMock.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
-                    GeneralHorizontalListView(title: "Measurements", items: DataModelMock.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
-                    GeneralHorizontalListView(title: "Progress Photos", items: DataModelMock.progressPhotos, titleSize: .medium, sizeModel: .medium, dataType: .progressAlbum)
+//                    GeneralHorizontalListView(title: "Food Protocols", items: DataModelMock.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
+//                    GeneralHorizontalListView(title: "Measurements", items: DataModelMock.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
+                    GeneralHorizontalListView(title: "Progress Photos", items: vm.selectedClient.progressAlbums, titleSize: .medium, sizeModel: .large, dataType: .progressAlbum)
                     
                 }
             }
@@ -170,7 +184,7 @@ struct ClientDetailView: View, DetailView {
             }
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
-                vm.archiveClient()
+                vm.archiveClient(selectedClient: vm.selectedClient)
                 // Call your function to delete the client here
             }, label: {
                 HStack{
@@ -234,33 +248,28 @@ struct ClientTitle: View {
 }
 
 struct ClientPhoto: View {
-    var imageUrl: String
+    var imageUrl: String?
     var age: String
     var height: String
     var weight: String
+    var placeholderImageName: String
+    var gender: Gender
+    var imageSize: CGFloat
 
     var body: some View {
         HStack(spacing: 37) {
-            if let imageURL = URL(string: "") {
-                RoundedRectangle(cornerRadius: 60)
-                    .fill(Color(.sRGB, red: 217/255, green: 217/255, blue: 217/255, opacity: 1))
-                    .overlay(
-                        AsyncImage(url: imageURL) { image in
-                            image.resizable()
-                        } placeholder: {
-                            ProgressView()
-                        }
-                    )
-                    .frame(width: 120, height: 120)
-            } else {
-                Image(imageUrl)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 120, height: 120)
-                    .clipShape(Circle())
-            }
             
+            ClientAsyncImage(placeholderImageName: placeholderImageName, imageUrl: imageUrl, size: imageSize)
             VStack(alignment: .leading, spacing: 10) {
+                HStack(spacing: 10) {
+                    Text("Gender")
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(.sRGB, red: 60/255, green: 60/255, blue: 67/255, opacity: 0.6))
+                    
+                    Text("\(gender.rawValue)")
+                        .fontWeight(.semibold)
+                }
+                
                 HStack(spacing: 10) {
                     Text("Age")
                         .fontWeight(.semibold)

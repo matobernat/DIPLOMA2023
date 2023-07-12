@@ -37,16 +37,20 @@ class ClientsViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     
-    init() {
+    init(
+        clientsDataStore: ClientsDataStore = AppDependencyContainer.shared.clientsDataStore,
+        categoryDataStore: CategoryDataStore = AppDependencyContainer.shared.categoryDataStore,
+        accountDataStore: AccountDataStore = AppDependencyContainer.shared.accountDataStore
+    ) {
         
-        self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
+        self.clientsDataStore = clientsDataStore
         self.clients = clientsDataStore.allClients
         
 
-        self.categoryDataStore = AppDependencyContainer.shared.categoryDataStore
+        self.categoryDataStore = categoryDataStore
         self.categories = categoryDataStore.categoriesClients
         
-        self.accountDataStore = AppDependencyContainer.shared.accountDataStore
+        self.accountDataStore = accountDataStore
         self.loggedAccount = accountDataStore.loggedAccount
         
         

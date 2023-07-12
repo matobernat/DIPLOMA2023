@@ -17,7 +17,7 @@ struct SmallCardView: View {
                     .fill(Color(.sRGB, red: 217/255, green: 217/255, blue: 217/255, opacity: 1))
                     .frame(width: 60, height: 60)
                 
-                Image(item.imageName)
+                Image(item.placeholderName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 60, height: 60)
@@ -32,6 +32,24 @@ struct SmallCardView: View {
         }
     }
 }
+
+
+struct ClientSmallCardView: View {
+    let size: CGFloat = 60
+    let client: Client
+    
+    var body: some View {
+        HStack {
+            ClientAsyncImage(placeholderImageName: client.placeholderName, imageUrl: client.imageUrl, size: size)
+            VStack(alignment: .leading) {
+                Text(client.title).font(.headline)
+                Text(client.subTitle).font(.subheadline)
+            }
+            Spacer()
+        }
+    }
+}
+
 
 struct SmallCardView_Previews: PreviewProvider {
     static var previews: some View {

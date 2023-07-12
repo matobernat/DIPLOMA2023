@@ -106,11 +106,13 @@ extension Mezocycle{
         return copy
     }
     
-    // duplicate
+    // duplicate (create new ID + assign new mezoID to all it's phases)
     func duplicate() -> Mezocycle {
         var copy = self
         copy.id = UUID().uuidString
         copy.dateOfCreation = Date()
+        
+        copy.phases = copy.phases.map { $0.setMezoID(mezoID: copy.id) }
 //        copy.title = keepName == true ? copy.title : String.duplicateTitle(copy.title, existingTitles: existingTitles)
         return copy
     }

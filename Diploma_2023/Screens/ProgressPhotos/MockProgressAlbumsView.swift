@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProgressPhotosView: View {
+struct MockProgressAlbumsView: View {
     let categories: [CategoryMock] = DataModelMock.categories
     let progressAlbums: [ProgressAlbumMock] = DataModelMock.progressPhotos
     let title = "Progress Photos"
@@ -29,7 +29,7 @@ struct ProgressPhotosView: View {
             NavigationStack{
                 
                 SearchBar(searchText: $searchText)
-                
+
                 if !searchText.isEmpty {
                     ProgressPhotoViewDetailSearch(
                         categories: categories,
@@ -44,6 +44,9 @@ struct ProgressPhotosView: View {
                         selectedCategory: $selectedCategory,
                         searchText: $searchText)
                 }
+                
+//                ImagePickerView()
+//                    .border(.black)
             }
             .navigationTitle(selectedCategory?.name ?? "Select a category")
         }
@@ -102,6 +105,6 @@ struct ProgressPhotoViewDetailSearch: View{
         
 struct ProgressPhotosView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgressPhotosView()
+        MockProgressAlbumsView()
     }
 }

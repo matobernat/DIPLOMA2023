@@ -216,6 +216,7 @@ struct NewPhaseInfoTable: View {
         HStack(spacing: 0) {
             ForEach(data.indices, id: \.self) { index in
                 TextFieldCellBuilder(textBinding: data[index], width: width[index ], height: height, color: Color.white.opacity(0.2))
+
             }
         }
     }
@@ -240,7 +241,7 @@ struct NewPhaseSheetTable: View {
                 SheetHeaderBuilder(labels: headerLabels, width: widths, height: headerHeight, color: Color.secondary)
                 
                 // TABLE
-                newPhaseTableContentBuilder(newPhase: $newPhase, widths: widths, height: height, color: Color.white)
+                newPhaseTableContentBuilder(newPhase: $newPhase, widths: widths, height: height, color: Color.white.opacity(0.1))
             }
 //        }
     }

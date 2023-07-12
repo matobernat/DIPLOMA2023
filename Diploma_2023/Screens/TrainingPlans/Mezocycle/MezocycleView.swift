@@ -103,19 +103,22 @@ class MezocycleViewModel: ObservableObject {
     }
     
     
+    // 1. in templates 2. in client's profile
     func duplicateMezo(selectedMezo: Mezocycle){
         
         var newMezo = selectedMezo.duplicate()
         
+        // case 1.
         if newMezo.clientID == nil{
             newMezo = newMezo.setNewName(existingTitles: AppDependencyContainer.shared.mezoDataStore.allMezos.map { $0.title })
             mezoDataStore.createMezo(newMezo) { result in
                 //handle result
             }
         }
+        // case 2.
         else{
             if var newClient = AppDependencyContainer.shared.clientsDataStore.getClient(clientID: selectedMezo.clientID) {
-                newMezo = newMezo.setNewName(existingTitles: AppDependencyContainer.shared.mezoDataStore.allMezos.map { $0.title })
+                newMezo = newMezo.setNewName(existingTitles: newClient.mezocycles.map { $0.title })
                 AppDependencyContainer.shared.clientsDataStore.updateClient(newClient.addMezo(mezo: newMezo)) { result in
                     // handle error
                 }

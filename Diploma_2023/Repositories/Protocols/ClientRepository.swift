@@ -12,4 +12,5 @@ protocol ClientRepository {
     func createClient(_ client: Client, for userId: String, completion: @escaping (Result<Void, Error>) -> Void)
     func updateClient(_ client: Client, for userId: String, completion: @escaping (Result<Void, Error>) -> Void)
     func deleteClient(_ client: Client, for userId: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func clearClientImageUrl(clientId: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
