@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-// MARK: - NewMezo - ViewModel
+// MARK: - EditMezo - ViewModel
 class EditMezocycleViewModel: ObservableObject {
     
     @Published var selectedMezo:Mezocycle
@@ -89,7 +89,7 @@ class EditMezocycleViewModel: ObservableObject {
 }
 
 
-// MARK: - NewMezo - View
+// MARK: - EditMezo - View
 struct EditMezocycleView: View {
     @Environment(\.presentationMode) var presentationMode
     

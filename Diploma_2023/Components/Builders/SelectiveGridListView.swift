@@ -11,7 +11,7 @@ struct SelectiveGridListViewAdd: View {
     let items: [Phase]
     let createCardView: (IdentifiableItem) -> AnyCardView
     let createDetailView: (IdentifiableItem) -> AnyDetailView
-    let sizeModel: SizeModelMock = .large
+    let sizeModel: SizeModel = .large
     @Binding var selectedItems: [Phase]
     @Binding var parentItem: Mezocycle
     @State var isSelected: [String: Bool] = [:]
@@ -59,7 +59,7 @@ struct SelectiveGridListViewAdd: View {
         }
     }
     
-    func columnSize(sizeModel: SizeModelMock) -> CGFloat {
+    func columnSize(sizeModel: SizeModel) -> CGFloat {
         switch sizeModel{
         case .large:
             return 160
@@ -76,7 +76,7 @@ struct SelectiveGridListViewEdit: View {
     let items: [Phase]
     let createCardView: (IdentifiableItem) -> AnyCardView
     let createDetailView: (IdentifiableItem) -> AnyDetailView
-    let sizeModel: SizeModelMock = .large
+    let sizeModel: SizeModel = .large
     @Binding var selectedItems: [Phase]
     @Binding var parentItem: Mezocycle
     @State var isSelected: [String: Bool] = [:]
@@ -118,7 +118,7 @@ struct SelectiveGridListViewEdit: View {
         }
     }
 
-    func columnSize(sizeModel: SizeModelMock) -> CGFloat {
+    func columnSize(sizeModel: SizeModel) -> CGFloat {
         switch sizeModel{
         case .large:
             return 160

@@ -11,13 +11,12 @@ struct ProgressAlbumCard: View, CardView {
     
     
     let album: ProgressAlbum
-    let cornerRadius: CGFloat = 9
     
     init(item: IdentifiableItem) {
         self.album = item as! ProgressAlbum
     }
     
-    
+    let cornerRadius: CGFloat = 9
     let imageSize: CGFloat = 160
     let LabelHeight: CGFloat = 50
     

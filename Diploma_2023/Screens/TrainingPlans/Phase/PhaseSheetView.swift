@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Combine
+import UIKit
+
 
 // MARK: - PhaseSheet - ViewModel
 class PhaseSheetViewModel: ObservableObject {
@@ -48,35 +50,54 @@ class PhaseSheetViewModel: ObservableObject {
     
     
     
+    
+    // Phase
     private let phasesDataStore: PhasesDataStore
     @Published var selectedPhase:Phase
-    private let clientsDataStore: ClientsDataStore
-    @Published var clients:[Client]
     
+    
+    
+    // Clients
+    private let clientsDataStore: ClientsDataStore
+    @Published private(set) var clients: [Client] = []
+    @Published var clientItems: [(Client, title: String, imageUrl: String?, placeholderName: String?)] = []
+    
+    
+    // Exercises
+    private let exercisesDataStore: ExercisesDataStore
+    @Published var exercises: [Exercise] = []
+    
+    
+    // Locals
+    private var autoSaveTimer: Timer?
     @Published var isEditing = false
     @Published var isShowingSheet: Bool = false
     @Published var isShowingEditExercises: Bool = false
     @Published var isShowingClientList: Bool = false
-
+    @Published var loadWasEdited: Bool = false
+    @Published var showSavedMessage: Bool = false
     
     @Published var searchText = ""
 
-
-    private let exercisesDataStore: ExercisesDataStore
-    @Published var exercises: [Exercise] = []
     private var cancellables = Set<AnyCancellable>()
     
+    
+    
+    // INIT
     init(selectedPhase: Phase, selectedClient: Client? = nil) {
         
-        
+       
+        // Data Stores
         self.phasesDataStore = AppDependencyContainer.shared.phasesDataStore
-        self.selectedPhase = selectedPhase
-        self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
-        self.clients = clientsDataStore.allClients
-        
-        
-        // EXERCISES MANAGEMENT
         self.exercisesDataStore = AppDependencyContainer.shared.exercisesDataStore
+        self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
+        
+        
+        // Phase
+        self.selectedPhase = selectedPhase
+
+        
+        // Exercises
         self.exercises = exercisesDataStore.allExercises
         // Subscribe to changes in Exercises
         exercisesDataStore.$allExercises.sink { [weak self] newExercises in
@@ -84,14 +105,85 @@ class PhaseSheetViewModel: ObservableObject {
         }
         .store(in: &cancellables)
         
+        
+        
+        // Clients
+        self.clients = clientsDataStore.allClients
         clientsDataStore.$allClients.sink { [weak self] newClients in
             self?.clients = newClients
+            // Transform newClients into clientItems
+            self?.clientItems = newClients.map { ($0, $0.title, $0.imageUrl, $0.placeholderName) }
         }
         .store(in: &cancellables)
         
+        
+        
+        
+        // Listen for changes in loadWasChanged
+        $loadWasEdited
+            .sink { [weak self] changed in
+                if changed == true {
+                    
+                    print("TIMER TRIGGER \n data was changed: \(changed)")
+                    
+//                    self?.recalculate()
+                    self?.setUpAutoSaveTimer()  // Call your function that sets up the timer
+                }
+                print("LOAD WAS CAHNGED")
+            }
+            .store(in: &cancellables)
+        
+        
+    }
+    
+    // Method to invalidate the timer
+    public func invalidateAutoSaveTimer() {
+        autoSaveTimer?.invalidate()
+    }
+    
+    private func setUpAutoSaveTimer() {
+        print("Setting up new timer")
+        autoSaveTimer?.invalidate()  // Invalidate any existing timer
+        autoSaveTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { [weak self] _ in
+            if let self = self, self.loadWasEdited == true  {
+                self.updatePhase(selectedPhase: self.selectedPhase)
+                
+                
+                self.loadWasEdited = false
+                
+                // Show saved message
+                self.showSavedMessage = true
+                
+                // Hide saved message after 2 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    self.showSavedMessage = false
+                }
+                
+            }
+        }
+    }
+    
+    func showSavedStatus() {
+        self.showSavedMessage = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            self?.showSavedMessage = false
+        }
     }
     
 
+    // Auto Filling LED
+    func syncLED(selectedItem: Phase){
+        if var selectedClient = clientsDataStore.getClient(clientID: selectedItem.clientID){
+            var updatedPhase = selectedItem.syncLED(client: selectedClient)
+            clientsDataStore.updateClient(selectedClient.updatePhase(phase: updatedPhase)) { result in
+                print("PhaseSheetView.syncLED() - \(result)")
+                self.selectedPhase = updatedPhase
+            }
+        }
+    }
+    
+    
 //MARK: CRUD operations
     func addPhaseToClient(phase: Phase, client: Client){
         
@@ -121,7 +213,6 @@ class PhaseSheetViewModel: ObservableObject {
             // handle error
         }
     }
-    
     
     // duplicate phase, within client or mezocycle
     func duplicatePhase(selectedPhase: Phase){
@@ -166,8 +257,6 @@ class PhaseSheetViewModel: ObservableObject {
         }
     }
     
-    
-    
     // 1. Update Phase, 2. if has mezocycleID update Mezo 3. If has clientID update client
     func updatePhase(selectedPhase: Phase) {
        
@@ -209,7 +298,6 @@ class PhaseSheetViewModel: ObservableObject {
         }
     }
         
-    
     func deletePhase(selectedPhase:Phase){
         if selectedPhase.clientID == nil{
             if selectedPhase.mezocycleID == nil{
@@ -245,7 +333,6 @@ class PhaseSheetViewModel: ObservableObject {
         }
     }
 
-    
     func archivePhase(selectedPhase: Phase) {
         self.selectedPhase.categoryIDs = AppDependencyContainer.shared.categoryDataStore.getCategoryIDs(subStrings: ["Archived"], section: .trainingPlan)
         self.updatePhase(selectedPhase: self.selectedPhase)
@@ -261,56 +348,69 @@ class PhaseSheetViewModel: ObservableObject {
 struct PhaseSheetView: View, DetailView {
     @Environment(\.presentationMode) var presentationMode
 
-    
     @ObservedObject private var vm: PhaseSheetViewModel
 
-    
     init(item: IdentifiableItem) {
+        print("NEW INIT PHASESHEET VIEW")
         self.vm = PhaseSheetViewModel(selectedPhase: item as! Phase)
     }
 
     
+    
     var body: some View {
-        
-        ScrollView{
-            VStack(alignment: .center, spacing: 15){
-                
-                // INFO TABLE
-                PhaseInfoTable(vm: vm)
-                    .padding(.vertical, 20)
-                
-                if vm.isEditing{
-                    // Add + Edit BUTTONS
-                    buttonsView()
-                        .padding(.horizontal, 20)
-                    Divider()
-                }
-
-                
-                // PHASE TABLE
-                if vm.isEditing || vm.selectedPhase.clientID == nil {
-                    PhaseSheetTable(vm: vm)
-                }else{
-                    ScrollView(.horizontal){
-                        PhaseSheetTable(vm: vm)
-                            .padding(.top, 30)
+        NavigationStack{
+            ScrollView{
+                VStack(alignment: .center, spacing: 15){
+                    
+                    // INFO TABLE
+                    PhaseInfoTable(vm: vm)
+                        .padding(.vertical, 20)
+                    
+                    if vm.isEditing{
+                        // Add + Edit BUTTONS
+                        buttonsView()
+                            .padding(.horizontal, 20)
+                        Divider()
                     }
+
+                    // PHASE TABLE
+                    if vm.isEditing || vm.selectedPhase.clientID == nil {
+                        PhaseSheetTable(vm: vm)
+                    }else{
+                        ScrollView(.horizontal){
+                            PhaseSheetTable(vm: vm)
+                                .padding(.top, 30)
+                        }
+                    }
+
+
+                    
                 }
-
-
-                
             }
         }
-        
         .navigationBarItems(trailing: Button(action: {
             // Empty action, button only used to present ContextMenu
         }, label: {
             Image(systemName: "ellipsis.circle") // This is the "more" button
         }).contextMenu {
 
+            // show this buton if Phase is not a template
+            if ((vm.selectedPhase.clientID) != nil){
+                Button(action: {
+                    vm.syncLED(selectedItem: vm.selectedPhase)
+                }, label: {
+                    HStack{
+                        Text("Sync Auto Filling")
+                        Spacer()
+                        Image(systemName: "square.and.arrow.down.on.square.fill")
+                    }
+                    .foregroundColor(.red)
+                })
+            }
+            
             Button(action: {
                 //addPhaseToClientSheet()
-                presentationMode.wrappedValue.dismiss()
+//                presentationMode.wrappedValue.dismiss()
                 vm.isShowingSheet = true
                 vm.isShowingClientList = true
             }, label: {
@@ -363,6 +463,30 @@ struct PhaseSheetView: View, DetailView {
         .navigationTitle(vm.selectedPhase.title)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
+                if vm.loadWasEdited {
+                    Button(action: {
+                        vm.updatePhase(selectedPhase: vm.selectedPhase)
+                        vm.loadWasEdited = false
+                        vm.invalidateAutoSaveTimer()  // Invalidate the timer when manually saving
+                        
+                        // Show saved message
+                        vm.showSavedStatus()
+                        
+                    }) {
+                        Text("Save")
+                    }
+                }
+                
+                if vm.showSavedMessage {
+                    Button {
+                    } label: {
+                        Text("Saved!")
+                    }
+
+                    
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
                 if vm.isEditing {
                     Button(action: {
                         vm.isEditing = false
@@ -385,7 +509,30 @@ struct PhaseSheetView: View, DetailView {
                 EditExersiseListPhase(phase: $vm.selectedPhase)
 
             } else if vm.isShowingClientList{
-                addPhaseToClientSheet(vm: vm, clients: $vm.clients, phase: $vm.selectedPhase)
+//                addPhaseToClientSheet(vm: vm, clients: $vm.clients, phase: $vm.selectedPhase)
+                
+                
+                
+                
+                SelectableListView(items: vm.clientItems, 
+                                   multipleSelection: false,
+                                   selectSfSymbolName: "plus.circle",
+                                   unselectSfSymbolName: "minus",
+                                   selectedItems: [],
+                                   onDone: { selectedItems in
+                                       // Use selectedItems as you need.
+                                       if let selectedItem = selectedItems.first {
+                                           vm.addPhaseToClient(phase: vm.selectedPhase, client: selectedItem)
+                                           vm.isShowingClientList = false
+                                           vm.isShowingSheet = false
+                                           print(selectedItems.first?.title)
+
+                                       }
+                                   }, onCancel: {
+                                       vm.isShowingSheet = false
+                                       vm.isShowingClientList = false
+                                   }
+                )
             }
             else {
                 AddExercisesPhaseView(exercises: $vm.exercises, phase: $vm.selectedPhase)
@@ -462,7 +609,7 @@ struct PhaseInfoTable: View {
             VStack(spacing: 0){
                 SheetHeaderBuilder(
                     labels: Phase.Constants.InfoTable.headerLabels(isEditing: vm.isEditing),
-                    width: Phase.Constants.InfoTable.width(isEditing: vm.isEditing),
+                    widths: Phase.Constants.InfoTable.width(isEditing: vm.isEditing),
                     height: Phase.Constants.InfoTable.height,
                                    color: Color.gray.opacity(0.2))
                 infoTableRowBuilder()
@@ -475,7 +622,7 @@ struct PhaseInfoTable: View {
         HStack(spacing: 0) {
             if vm.isEditing {
                 ForEach(data.indices, id: \.self) { index in
-                    TextFieldCellBuilder(textBinding: data[index],
+                    TextEditorCellBuilder(textBinding: data[index],
                                          width: Phase.Constants.InfoTable.width(isEditing: vm.isEditing)[index],
                                          height: Phase.Constants.InfoTable.height,
                                          color: Color.white.opacity(0.2))
@@ -504,13 +651,14 @@ struct PhaseSheetTable: View {
             // HEADER
             SheetHeaderBuilder(
                 labels: vm.isEditing || vm.selectedPhase.clientID == nil ? vm.phaseSheetTableHeaderExerciseSettingsLabels: vm.phaseSheetTableHeaderExerciseSettingsLabels + vm.phaseSheetTableHeaderLoadLabels(numberOfLoads: $vm.selectedPhase.numberOfLoads),
-                width: Phase.Constants.SheetTable.width(isEditing: vm.isEditing),
+                widths: Phase.Constants.SheetTable.width(isEditing: vm.isEditing),
                 height: Phase.Constants.SheetTable.heightHeader,
                                color: Color.secondary)
             
             // TABLE
             PhaseTableContentBuilder(
                                      isEditing: $vm.isEditing,
+                                     loadWasEdited: $vm.loadWasEdited,
                                      phase: $vm.selectedPhase,
                                      widths: Phase.Constants.SheetTable.width(isEditing: vm.isEditing),
                                      height: Phase.Constants.SheetTable.heightContent,
@@ -522,6 +670,7 @@ struct PhaseSheetTable: View {
 // PHASE TABLE (SHEET) - CONTENT
 struct PhaseTableContentBuilder: View {
     @Binding var isEditing: Bool
+    @Binding var loadWasEdited: Bool
     @Binding var phase: Phase
     var widths: [CGFloat]
     var height: CGFloat
@@ -534,6 +683,7 @@ struct PhaseTableContentBuilder: View {
                 SheetRowBuilder(
                     clientID: $phase.clientID,
                     isEditing: $isEditing,
+                    loadWasEdited: $loadWasEdited,
                     sheetRow: $phase.sheetRows[index],
                     phaseId: phase.id,
                     width: widths,
@@ -548,6 +698,7 @@ struct PhaseTableContentBuilder: View {
 struct SheetRowBuilder: View {
     @Binding var clientID: String?
     @Binding var isEditing: Bool
+    @Binding var loadWasEdited: Bool
     @Binding var sheetRow: SheetRow
     let phaseId : String
     
@@ -585,7 +736,7 @@ struct SheetRowBuilder: View {
             // Exercise Settings
             ForEach(data.indices, id: \.self) { index in
                 if isEditing{
-                    TextFieldCellBuilder(textBinding: data[index], width: width[index+1], height: height, color: color)
+                    TextEditorCellBuilder(textBinding: data[index], width: width[index+1], height: height, color: color)
                 }
                 else{
                     StaticBindingCellBuilder(textBinding: data[index], width: width[index+1], height: height, color: color)
@@ -601,7 +752,8 @@ struct SheetRowBuilder: View {
             // LOADS
             if !isEditing &&  clientID != nil {
                 ForEach($sheetRow.allLoadsPerPhase.indices, id: \.self) { index in
-                    TextFieldCellBuilder(textBinding: $sheetRow.allLoadsPerPhase[index].loadString,
+                    TextEditorCellBuilder(textBinding: $sheetRow.allLoadsPerPhase[index].loadString,
+                                          modified: $loadWasEdited,
                                          width: width[index + data.count+1],
                                          height: height,
                                          color: color)
@@ -612,3 +764,56 @@ struct SheetRowBuilder: View {
     }
 }
 
+
+
+
+
+
+
+// MARK: - PhaseSheet - View
+//struct PhaseSheetView: View, DetailView {
+//    @Environment(\.presentationMode) var presentationMode
+//
+//
+//    @ObservedObject private var vm: PhaseSheetViewModel
+//
+//
+//    init(item: IdentifiableItem) {
+//        self.vm = PhaseSheetViewModel(selectedPhase: item as! Phase)
+//    }
+//
+//
+//    var body: some View {
+//
+//        ScrollView{
+//            VStack(alignment: .center, spacing: 15){
+//
+//                // INFO TABLE
+//                PhaseInfoTable(vm: vm)
+//                    .padding(.vertical, 20)
+//
+//                if vm.isEditing{
+//                    // Add + Edit BUTTONS
+//                    buttonsView()
+//                        .padding(.horizontal, 20)
+//                    Divider()
+//                }
+//
+//
+//                // PHASE TABLE
+//                if vm.isEditing || vm.selectedPhase.clientID == nil {
+//                    PhaseSheetTable(vm: vm)
+//                }else{
+//                    ScrollView(.horizontal){
+//                        PhaseSheetTable(vm: vm)
+//                            .padding(.top, 30)
+//                    }
+//                }
+//
+//
+//
+//            }
+//        }
+//    }
+//
+//}

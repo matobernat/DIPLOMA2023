@@ -14,7 +14,7 @@ class SignInViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
     init() {
         self.authenticationService = AppDependencyContainer.shared.authenticationService

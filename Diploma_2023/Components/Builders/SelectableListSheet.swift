@@ -66,6 +66,7 @@ struct SelectableListItem: View {
 
 // Selectable List View
 struct SelectableListView<Item: IdentifiableItem>: View {
+//struct SelectableListView: View {
     
     let items: [(Item, title: String, imageUrl: String?, placeholderName: String? )]
     let multipleSelection: Bool

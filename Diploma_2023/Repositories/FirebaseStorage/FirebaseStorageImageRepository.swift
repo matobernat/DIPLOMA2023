@@ -12,13 +12,6 @@ import UIKit
 
 import FirebaseStorage
 
-protocol ImageRepository {
-    func uploadImage(_ image: UIImage, completion: @escaping (Result<String, Error>) -> ())
-    func fetchImage(with url: String?, completion: @escaping (Result<UIImage, Error>) -> ())
-    func deleteImage(url: String?, completion: @escaping (Result<Void, Error>) -> ())
-    func updateImage(oldUrl: String?, newImage: UIImage, completion: @escaping (Result<String, Error>) -> ())
-
-}
 
 class FirebaseStorageImageRepository: ImageRepository {
     

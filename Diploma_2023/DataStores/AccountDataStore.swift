@@ -11,19 +11,20 @@ import Foundation
 class AccountDataStore: ObservableObject {
     @Published var loggedAccount: Account?
     private let accountRepository: AccountRepository
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
 
     
     private var cancellable: AnyCancellable?
 
-    init(accountRepository: AccountRepository, authenticationService: AuthenticationService) {
+    init(accountRepository: AccountRepository, authenticationService: AnyAuthenticationService) {
         self.accountRepository = accountRepository
         self.authenticationService = authenticationService
 
         cancellable = authenticationService.$userId.sink { [weak self] userId in
             if userId != nil {
                 DispatchQueue.main.async {
+                    print("AccountDataService - fetching account")
                     self?.fetchAccount()
                 }
 

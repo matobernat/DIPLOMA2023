@@ -10,8 +10,8 @@ import SwiftUI
 struct GeneralHorizontalListView: View {
     let title: String
     let items: [IdentifiableItem]
-    let titleSize: SizeModelMock
-    let sizeModel: SizeModelMock
+    let titleSize: SizeModel
+    let sizeModel: SizeModel
     let dataType: DataType
     var hideDivider: Bool?
     
@@ -66,6 +66,17 @@ struct GeneralHorizontalListView: View {
                      addFunc: addFunc
 
             )
+        case .foodPlan:
+            ListView(title: title,
+                     items: items,
+                     titleSize: titleSize,
+                     sizeModel: sizeModel,
+                     dataType: dataType,
+                     hideDivider: hideDivider,
+                         createCardView: { item in AnyCardView(LargeCardView(item: item)) },
+                         createDetailView: { item in AnyDetailView(FoodPlanDetailView(item: item)) },
+                     addFunc: addFunc
+            )
         case .progressAlbum:
             ListView(title: title,
                      items: items,
@@ -77,16 +88,6 @@ struct GeneralHorizontalListView: View {
                          createDetailView: { item in AnyDetailView(ProgressAlbumsDetail(item: item)) },
                      addFunc: addFunc
             )
-        case .foodPlan:
-            ListView(title: title,
-                     items: items,
-                     titleSize: titleSize,
-                     sizeModel: sizeModel,
-                     dataType: dataType,
-                     hideDivider: hideDivider,
-                         createCardView: { item in AnyCardView(MediumCardView(item: item)) },
-                         createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
-            )
         case .measurement:
             ListView(title: title,
                      items: items,
@@ -94,8 +95,9 @@ struct GeneralHorizontalListView: View {
                      sizeModel: sizeModel,
                      dataType: dataType,
                      hideDivider: hideDivider,
-                         createCardView: { item in AnyCardView(MediumCardView(item: item)) },
-                         createDetailView: { item in AnyDetailView(ItemDetailView(item: item)) }
+                         createCardView: { item in AnyCardView(LargeCardView(item: item)) },
+                         createDetailView: { item in AnyDetailView(MeasurementsDetailView(item: item)) },
+                     addFunc: addFunc
             )
         case .trainingPlan:
             fatalError("Invalid data type: \(dataType)")
@@ -107,8 +109,8 @@ struct GeneralHorizontalListView: View {
 struct ListView: View {
     let title: String
     let items: [IdentifiableItem]
-    let titleSize: SizeModelMock
-    let sizeModel: SizeModelMock
+    let titleSize: SizeModel
+    let sizeModel: SizeModel
     let dataType: DataType
     var hideDivider: Bool?
     let createCardView: (IdentifiableItem) -> AnyCardView
@@ -127,12 +129,10 @@ struct ListView: View {
                 dataType: dataType,
                 sizeModel: sizeModel,
                 hideDivider: hideDivider)
-            
-            
+                        
             // ADD BUTTON + LIST OF ITEMS
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-
                     // ADD BUTTON
                     if let addFunc = addFunc {
                         Button(action: {
@@ -165,10 +165,10 @@ struct ListView: View {
 
 struct GHListViewHeader: View {
     let title: String
-    let titleSize: SizeModelMock
+    let titleSize: SizeModel
     let items: [IdentifiableItem]
     let dataType: DataType
-    let sizeModel: SizeModelMock
+    let sizeModel: SizeModel
     let hideDivider: Bool?
 //    let destination: ([IdentifiableItem]) -> AnyView
     
@@ -180,7 +180,7 @@ struct GHListViewHeader: View {
         
             HStack {
                 Text(title)
-                    .font(titleSize == SizeModelMock.large ? .title : .headline)
+                    .font(titleSize == SizeModel.large ? .title : .headline)
                     .padding(.leading, 16)
                     .padding(.top, 16)
                     .padding(.bottom, 8)

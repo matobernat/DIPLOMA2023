@@ -21,6 +21,8 @@ struct ClientsView: View {
     var body: some View {
         NavigationSplitView {
             SideBar(categories: vm.categories, title: vm.title, selectedCategory: $vm.selectedCategory)
+                .accessibilityIdentifier("SideBar")
+
         }
     detail: {
             NavigationStack{
@@ -34,14 +36,19 @@ struct ClientsView: View {
                                 tag: client,
                                 selection: $vm.selectedClient) {
                                 ClientSmallCardView(client: client)
+                                        
+
                             }
                         }
                     }
+                    .accessibilityIdentifier("LazyVGrid")
                     .searchable(text: $vm.searchText)
                     .padding()
                 }
             }
             .navigationTitle(vm.selectedCategory?.name ?? "Select a Category")
+            
+
             .navigationBarItems(trailing: Button(action: {
                 // Add your action here
                 vm.isShowingForm = true
@@ -51,6 +58,7 @@ struct ClientsView: View {
                     Text("New Client")
                 }
             }))
+            .accessibilityIdentifier("NewClientButton")
             .sheet(isPresented: $vm.isShowingForm) {
                 NewClientView(parentVm: vm)
             }

@@ -26,6 +26,7 @@ struct SmallCardView: View {
             
             VStack(alignment: .leading) {
                 Text(item.title).font(.headline)
+                    .accessibilityIdentifier("ClientItem-\(item.id)")
                 Text(item.subTitle).font(.subheadline)
             }
             Spacer()

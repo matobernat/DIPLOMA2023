@@ -12,11 +12,11 @@ import Foundation
 class PhasesDataStore: ObservableObject {
     @Published private(set) var allPhases: [Phase] = []
     private let phaseRepository: PhaseRepository
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
     private var cancellable: AnyCancellable?
     
-    init(phaseRepository: PhaseRepository, authenticationService: AuthenticationService) {
+    init(phaseRepository: PhaseRepository, authenticationService: AnyAuthenticationService) {
         self.phaseRepository = phaseRepository
         self.authenticationService = authenticationService
         

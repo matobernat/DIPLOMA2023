@@ -12,11 +12,11 @@ import Foundation
 class ExercisesDataStore: ObservableObject {
     @Published private(set) var allExercises: [Exercise] = []
     private let exerciseRepository: ExerciseRepository
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
     private var cancellable: AnyCancellable?
     
-    init(exerciseRepository: ExerciseRepository, authenticationService: AuthenticationService) {
+    init(exerciseRepository: ExerciseRepository, authenticationService: AnyAuthenticationService) {
         self.exerciseRepository = exerciseRepository
         self.authenticationService = authenticationService
         

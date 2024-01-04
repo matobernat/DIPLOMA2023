@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "D0365B72-326D-4DE5-9DE2-4F3C99BE6F51"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AD28C374-81FA-41FF-B01C-FED56BEBA53F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Diploma_2023/Screens/TrainingPlans/Mezocycle/MezocycleView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "archiveMezo(selectedMezo:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AD28C374-81FA-41FF-B01C-FED56BEBA53F - 43fdb863bb2f88b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Diploma_2023.MezocycleViewModel.archiveMezo(selectedMezo: Diploma_2023.Mezocycle) -&gt; ()"
+                  moduleName = "Diploma_2023"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/martinbernat/DIPLOMA2023/Diploma_2023/Screens/TrainingPlans/Mezocycle/MezocycleView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "AD28C374-81FA-41FF-B01C-FED56BEBA53F - 43fdb863bb2f88b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Diploma_2023.MezocycleViewModel.archiveMezo(selectedMezo: Diploma_2023.Mezocycle) -&gt; ()"
+                  moduleName = "Diploma_2023"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/martinbernat/DIPLOMA2023/Diploma_2023/Screens/TrainingPlans/Mezocycle/MezocycleView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "144">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "60557691-1AEC-4FAE-A934-A43AB899E874"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Diploma_2023Tests/MockedDataStores/MockClientDataStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3"
+            endingLineNumber = "3"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

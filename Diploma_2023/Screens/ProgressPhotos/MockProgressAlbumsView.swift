@@ -98,7 +98,7 @@ struct ProgressPhotoViewDetailSearch: View{
                 searchText: searchText),
             title: "Progress Photos",
             dataType: .progressAlbum,
-            sizeModel: SizeModelMock.medium
+            sizeModel: SizeModel.medium
         )
     }
 }

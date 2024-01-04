@@ -229,7 +229,7 @@ struct AddPhasesToMezo: View{
     let items: [IdentifiableItem]
     let createCardView: (IdentifiableItem) -> AnyCardView
     let createDetailView: (IdentifiableItem) -> AnyDetailView
-    let sizeModel: SizeModelMock
+    let sizeModel: SizeModel
     
 
     var body: some View{
@@ -258,7 +258,7 @@ struct AddPhasesToMezo: View{
         }
     }
     
-    func columnSize(sizeModel: SizeModelMock) -> CGFloat {
+    func columnSize(sizeModel: SizeModel) -> CGFloat {
         switch sizeModel{
             
         case .large:

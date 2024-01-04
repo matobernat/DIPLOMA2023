@@ -12,7 +12,7 @@ struct GeneralGridListView: View {
     let items: [IdentifiableItem]
     let title: String?
     let dataType: DataType
-    let sizeModel: SizeModelMock
+    let sizeModel: SizeModel
 
     var body: some View {
         switch dataType {
@@ -75,7 +75,7 @@ struct GeneralGridListView: View {
 struct GridListView: View {
     let items: [IdentifiableItem]
     let title: String?
-    let sizeModel: SizeModelMock
+    let sizeModel: SizeModel
     let createCardView: (IdentifiableItem) -> AnyCardView
     let createDetailView: (IdentifiableItem) -> AnyDetailView
 
@@ -100,7 +100,7 @@ struct Grid: View{
     let items: [IdentifiableItem]
     let createCardView: (IdentifiableItem) -> AnyCardView
     let createDetailView: (IdentifiableItem) -> AnyDetailView
-    let sizeModel: SizeModelMock
+    let sizeModel: SizeModel
     
 
     var body: some View{
@@ -129,7 +129,7 @@ struct Grid: View{
         }
     }
     
-    func columnSize(sizeModel: SizeModelMock) -> CGFloat {
+    func columnSize(sizeModel: SizeModel) -> CGFloat {
         switch sizeModel{
             
         case .large:

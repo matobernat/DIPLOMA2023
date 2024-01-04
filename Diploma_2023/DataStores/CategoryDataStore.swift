@@ -17,17 +17,19 @@ class CategoryDataStore: ObservableObject {
     @Published private(set) var categoriesExercises: [Category] = []
     @Published private(set) var categoriesTrainingPlans: [Category] = []
     @Published private(set) var categoriesProgressAlbum: [Category] = []
+    @Published private(set) var categoriesMeasurements: [Category] = []
+    @Published private(set) var categoriesFoodPlans: [Category] = []
 
     
     
     
     
     private let categoryRepository: CategoryRepository
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
     private var cancellable: AnyCancellable?
     
-    init(categoryRepository: CategoryRepository, authenticationService: AuthenticationService) {
+    init(categoryRepository: CategoryRepository, authenticationService: AnyAuthenticationService) {
         self.categoryRepository = categoryRepository
         self.authenticationService = authenticationService
         
@@ -51,14 +53,28 @@ class CategoryDataStore: ObservableObject {
     
     // Filtering
     
-    private func filterCategoriesByType() -> (clients: [Category], exercises: [Category], trainingPlans: [Category], progressAlbum: [Category]) {
+    private func filterCategoriesByType() -> (clients: [Category],
+                                              exercises: [Category],
+                                              trainingPlans: [Category],
+                                              progressAlbum: [Category],
+                                              measurements: [Category],
+                                              foodPlans: [Category]) {
+        
         let clients = allCategories.filter { $0.dataType == .client }
         let exercises = allCategories.filter { $0.dataType == .exercise }
         let trainingPlans = allCategories.filter { $0.dataType == .trainingPlan }
         let progressAlbum = allCategories.filter { $0.dataType == .progressAlbum }
+        let measurements = allCategories.filter { $0.dataType == .measurement }
+        let foodPlans = allCategories.filter { $0.dataType == .foodPlan }
+
 
         
-        return (clients: clients, exercises: exercises, trainingPlans: trainingPlans, progressAlbum: progressAlbum)
+        return (clients: clients,
+                exercises: exercises,
+                trainingPlans: trainingPlans,
+                progressAlbum: progressAlbum,
+                measurements: measurements,
+                foodPlans: foodPlans)
     }
     
     private func updateCategories(_ categories: [Category]) {
@@ -70,6 +86,8 @@ class CategoryDataStore: ObservableObject {
             self.categoriesExercises = filteredCategories.exercises
             self.categoriesTrainingPlans = filteredCategories.trainingPlans
             self.categoriesProgressAlbum = filteredCategories.progressAlbum
+            self.categoriesMeasurements = filteredCategories.measurements
+            self.categoriesFoodPlans = filteredCategories.foodPlans
 
         }
         
@@ -77,7 +95,7 @@ class CategoryDataStore: ObservableObject {
     
     
     
-    // Categories functions
+    // GET BY ID local functions
     func getCategoryIDs(subStrings: [String], section: DataType) -> [String]{
         var categories = [Category]()
 
@@ -90,6 +108,10 @@ class CategoryDataStore: ObservableObject {
             categories = self.categoriesTrainingPlans
         case .progressAlbum:
             categories = self.categoriesProgressAlbum
+        case .measurement:
+            categories = self.categoriesMeasurements
+        case .foodPlan:
+            categories = self.categoriesFoodPlans
         default:
             categories = self.categoriesClients
             print("getCategoryID error")
@@ -99,7 +121,6 @@ class CategoryDataStore: ObservableObject {
             subStrings.contains(where: category.name.contains)
         }.map{$0.id}
     }
-    
     
     func getCategoryIDs(selectedCategory: Category) -> [String]{
         var IDs=[String]()
@@ -115,7 +136,10 @@ class CategoryDataStore: ObservableObject {
             allCategories = self.categoriesTrainingPlans
         case .progressAlbum:
             allCategories = self.categoriesProgressAlbum
-            
+        case .measurement:
+            allCategories = self.categoriesMeasurements
+        case .foodPlan:
+            allCategories = self.categoriesFoodPlans
         default:
             print("getCategoryIDs ERROR")
             allCategories = [Category]()
@@ -177,12 +201,18 @@ class CategoryDataStore: ObservableObject {
         
     }
 
-    func createCategory(_ category: Category, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let userId = authenticationService.userId else {
-            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID is not available"])))
-            return
-        }
+    func createCategory(_ category: Category, forUserId userId: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
+        
+//        guard let userId = authenticationService.userId else {
+//            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID is not available"])))
+//            print("CategoryDataStore.createCategory() - userID is not available")
+//            return
+//        }
+        
+        
+        
+        print("func createCategory() - started")
         categoryRepository.createCategory(category, for: userId) { [weak self] result in
             switch result {
             case .success:
@@ -238,7 +268,7 @@ class CategoryDataStore: ObservableObject {
     // Category functions
     
     
-    func createCategoriesForAccount(for userId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func createCategoriesForAccount(forAccount userId: String, completion: @escaping (Result<Void, Error>) -> Void) {
 
         
         let iconDict: [String: String] = [
@@ -267,8 +297,10 @@ class CategoryDataStore: ObservableObject {
         ]
         
         
-//        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan, .progressAlbum]
-        let dataTypes: [DataType] =  [.progressAlbum]
+        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan, .progressAlbum, .measurement, .foodPlan]
+        
+//        let dataTypes: [DataType] =  [.foodPlan] // for manual add function
+        
         let date = Date.now
         
         var results: [Result<Void, Error>] = []
@@ -315,21 +347,22 @@ class CategoryDataStore: ObservableObject {
             
             dispatchGroup.enter()
 
-            createCategory(categoryAll) { result in
+            print("CategoryDataStore.createCategories() - try to call createCategory()")
+            createCategory(categoryAll, forUserId: userId) { result in
                 results.append(result)
                 dispatchGroup.leave()
             }
 
             dispatchGroup.enter()
 
-            createCategory(categoryRecent) { result in
+            createCategory(categoryRecent, forUserId: userId) { result in
                 results.append(result)
                 dispatchGroup.leave()
             }
             
             dispatchGroup.enter()
 
-            createCategory(categoryArchived) { result in
+            createCategory(categoryArchived, forUserId: userId) { result in
                 results.append(result)
                 dispatchGroup.leave()
             }
@@ -353,7 +386,7 @@ class CategoryDataStore: ObservableObject {
         }
     }
 
-    func createCategoriesForProfile(for profileID: String, for userId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func createCategoriesForProfile(forProfile profileID: String, forAccount userId: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
         let iconDict: [String: String] = [
             "Recent": "clock.fill",
@@ -379,8 +412,11 @@ class CategoryDataStore: ObservableObject {
 
         ]
         
-//        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan, .progressAlbum]
-        let dataTypes: [DataType] = [.progressAlbum]
+        let dataTypes: [DataType] = [.client, .exercise, .trainingPlan, .progressAlbum, .measurement, .foodPlan]
+        
+//        let dataTypes: [DataType] = [.foodPlan] // for manual add function
+        
+    
         let date = Date.now.addingTimeInterval(200)
         
         var results: [Result<Void, Error>] = []
@@ -426,21 +462,21 @@ class CategoryDataStore: ObservableObject {
             
             dispatchGroup.enter()
 
-            createCategory(categoryMy) { result in
+            createCategory(categoryMy, forUserId: userId) { result in
                 results.append(result)
                 dispatchGroup.leave()
             }
 
             dispatchGroup.enter()
 
-            createCategory(categoryFavorite) { result in
+            createCategory(categoryFavorite, forUserId: userId) { result in
                 results.append(result)
                 dispatchGroup.leave()
             }
             
             dispatchGroup.enter()
 
-            createCategory(categoryArchived) { result in
+            createCategory(categoryArchived, forUserId: userId) { result in
                 results.append(result)
                 dispatchGroup.leave()
             }

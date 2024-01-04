@@ -12,7 +12,15 @@ import SwiftUI
 
 
 
+
+
+
+
 // MARK: - Supportive Structures
+
+struct MyUser{
+    let uid: String
+}
 
 struct InfoRowItem: Identifiable{
     var id = UUID()
@@ -57,14 +65,6 @@ enum SizeModel: String {
     case small = "Small"
 }
 
-
-protocol DetailView: View {
-    init(item: IdentifiableItem)
-}
-
-protocol CardView: View {
-    init(item: IdentifiableItem)
-}
 
 protocol IdentifiableItem {
     var id: String { get }

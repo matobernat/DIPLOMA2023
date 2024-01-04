@@ -8,33 +8,41 @@ import Combine
 // MARK: - TrainingPlans - ViewModel
 class TrainingPlansViewModel: ObservableObject {
     
-    @Published var columnVisibility = NavigationSplitViewVisibility.all
     
     let title = "TrainingProtocols"
     
-    
+    // Categories
     private let categoryDataStore: CategoryDataStore
     @Published private(set) var categories: [Category] = []
     @Published  var selectedCategory: Category?
     
     
+    // Phases
     private let phasesDataStore: PhasesDataStore
     @Published private(set) var phases: [Phase] = []
 //    @Published  var selectedPhase: Phase?
     
+    // Mezocycles
     private let mezocycleDataStore: MezoDataStore
     @Published private(set) var mezocycles: [Mezocycle] = []
 //    @Published  var selectedMezocycle: Mezocycle?
     
-    @Published  var selectedItem: IdentifiableItem?
-    @Published  var  selectedType: DataType = DataType.phase
+
     
+    // Account
     private let accountDataStore: AccountDataStore
     @Published  var loggedAccount: Account?
     
+    
+    
+    // Local
     @Published  var searchText: String = ""
     @Published  var isShowingForm = false
     @Published  var isShowingNewPhase = false
+    @Published var columnVisibility = NavigationSplitViewVisibility.all
+
+    @Published  var selectedItem: IdentifiableItem?
+    @Published  var  selectedType: DataType = DataType.phase
     
 
     
@@ -122,7 +130,7 @@ struct TrainingPlansView: View {
         } detail: {
             NavigationStack{
                 
-                if let category = vm.selectedCategory{
+                if vm.selectedCategory != nil{
                     SearchBar(searchText: $vm.searchText)
 
                     if vm.searchText.isEmpty {
@@ -159,13 +167,47 @@ struct TrainingPlansViewDetail: View{
             ScrollView{ // might create performance issues
                 SegmentPicker(selectedType: $vm.selectedType)
                 if vm.selectedType == DataType.mezocycle{
-                                    
-                    GeneralHorizontalListView(title: "Mezocycles", items: selectedItemsByCategory(allItems: vm.mezocycles, selectedCategory: vm.selectedCategory), titleSize: .large, sizeModel: .large, dataType: .mezocycle, addFunc:{vm.isShowingForm = true; vm.columnVisibility = .detailOnly; vm.isShowingNewPhase = false})
+
+                    GeneralHorizontalListView(
+                        title: "Mezocycles",
+                        items: selectedItemsByCategory(
+                            allItems: vm.mezocycles,
+                            selectedCategory: vm.selectedCategory),
+                        titleSize: .large,
+                        sizeModel: .large,
+                        dataType: .mezocycle,
+                        addFunc:{
+                            vm.isShowingForm = true;
+                            vm.columnVisibility = .detailOnly;
+                            vm.isShowingNewPhase = false})
                 }else{
-                    
-                    GeneralHorizontalListView(title: "Phases", items: selectedItemsByCategory(allItems: vm.phases, selectedCategory: vm.selectedCategory), titleSize: .large, sizeModel: .large, dataType: .phase, addFunc:{vm.isShowingForm = true; vm.columnVisibility = .detailOnly; vm.isShowingNewPhase = true})
+
+                    GeneralHorizontalListView(title: "Phases",
+                                              items: selectedItemsByCategory(allItems: vm.phases, selectedCategory: vm.selectedCategory),
+                                              titleSize: .large,
+                                              sizeModel: .large,
+                                              dataType: .phase,
+                                              addFunc:
+                                                {
+                        vm.isShowingForm = true;
+                        vm.columnVisibility = .detailOnly;
+                        vm.isShowingNewPhase = true
+
+                    })
                 }
                 
+//                GeneralHorizontalListView(title: "Phases",
+//                                          items: selectedItemsByCategory(allItems: vm.phases, selectedCategory: vm.selectedCategory),
+//                                          titleSize: .large,
+//                                          sizeModel: .large,
+//                                          dataType: .phase,
+//                                          addFunc:
+//                                            {
+//                    vm.isShowingForm = true;
+//                    vm.columnVisibility = .detailOnly;
+//                    vm.isShowingNewPhase = true
+//                    
+//                })
                 
             }
             .navigationDestination(
@@ -177,13 +219,9 @@ struct TrainingPlansViewDetail: View{
                          NewMezocycleView(parentVm: vm)
                      }
                  }
-        
     }
     
 }
-
-
-
 
 struct TrainingPlansViewDetailSearch: View{
     
@@ -199,7 +237,7 @@ struct TrainingPlansViewDetailSearch: View{
                     searchText: vm.searchText),
                 title: "Mezocycles",
                 dataType: .mezocycle,
-                sizeModel: SizeModelMock.large
+                sizeModel: SizeModel.large
 
             )
         }else{
@@ -210,7 +248,7 @@ struct TrainingPlansViewDetailSearch: View{
                     searchText: vm.searchText),
                 title: "Phases",
                 dataType: .phase,
-                sizeModel: SizeModelMock.large
+                sizeModel: SizeModel.large
             )
         }
     }
@@ -258,3 +296,56 @@ struct TrainingPlansView_Previews: PreviewProvider {
         TrainingPlansView()
     }
 }
+
+
+
+
+
+
+
+
+// MARK: - TrainingPlans - View
+//struct TrainingPlansView: View {
+//
+//
+//    @StateObject private var vm = TrainingPlansViewModel()
+//
+//
+//    var body: some View {
+//        NavigationSplitView(columnVisibility: $vm.columnVisibility) {
+//            SideBar(categories: vm.categories, title: vm.title, selectedCategory: $vm.selectedCategory)
+//        } detail: {
+//            NavigationStack{
+//
+//                if let category = vm.selectedCategory{
+//                    SearchBar(searchText: $vm.searchText)
+//
+//                    if vm.searchText.isEmpty {
+//                        TrainingPlansViewDetail(vm: vm)
+//                    } else {
+//                        TrainingPlansViewDetailSearch(vm: vm)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//
+//    struct TrainingPlansViewDetail: View{
+//
+//        @ObservedObject var vm: TrainingPlansViewModel
+//
+//        var body: some View{
+//                ScrollView{
+//
+//                    // POPULATING TRAINING PLANS
+//                    GeneralHorizontalListView(title: "Phases", items: selectedItemsByCategory(allItems: vm.phases, selectedCategory: vm.selectedCategory), titleSize: .large, sizeModel: .large, dataType: .phase, addFunc:{vm.isShowingForm = true; vm.columnVisibility = .detailOnly; vm.isShowingNewPhase = true})
+//
+//
+//                }
+//
+//        }
+//
+//    }
+//

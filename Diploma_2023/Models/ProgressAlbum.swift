@@ -53,10 +53,10 @@ extension ProgressAlbum{
     static func getNewAlbum(accountID: String,
                             profileID: String,
                             clientID: String,
-                            title: String = "New Client's album",
+                            clientName: String,
                             subtitle: String = "New Progress Album") -> ProgressAlbum {
         return ProgressAlbum(
-            title: title,
+            title: "New \(clientName)' Album",
             subTitle: subtitle,
             categoryIDs: [],
             accountID: accountID,

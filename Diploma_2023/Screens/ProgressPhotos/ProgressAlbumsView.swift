@@ -31,7 +31,7 @@ class ProgressAlbumsViewModel: ObservableObject {
     @Published var newItem: ProgressAlbum?
     
     
-    // Local
+    // Local properties
     @Published var searchText: String = ""
     @Published var isShowingForm: Bool = false
     @Published var isShowingSelectableClientList: Bool = false
@@ -49,23 +49,24 @@ class ProgressAlbumsViewModel: ObservableObject {
     ) {
         
         
+        // Client Category Data Stores
         self.categoryDataStore = categoryDataStore
         self.clientsDataStore = clientsDataStore
         
         
-        // ProgressAlbums
-        clientsDataStore.$allProgressAlbums.sink { [weak self] newProgressAlbums in
+        // ProgressAlbums fetching
+        self.clientsDataStore.$allProgressAlbums.sink { [weak self] newProgressAlbums in
             self?.progressAlbums = newProgressAlbums
         }
         .store(in: &cancellables)
         
-        // Categories
-        categoryDataStore.$categoriesProgressAlbum.sink { [weak self] newCategories in
+        // Categories fetching
+        self.categoryDataStore.$categoriesProgressAlbum.sink { [weak self] newCategories in
             self?.categories = newCategories
         }
         .store(in: &cancellables)
         
-        // Clients
+        // Clients fetching
         self.clientsDataStore.$allClients.sink { [weak self] newClients in
             self?.clients = newClients
             // Transform newClients into clientItems
@@ -116,7 +117,8 @@ struct ProgressAlbumsView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $vm.columnVisibility) {
             SideBar(categories: vm.categories, title: vm.title, selectedCategory: $vm.selectedCategory)
-        } detail: {
+        } detail:
+        {
             NavigationStack{
                 
                 if let category = vm.selectedCategory{
@@ -217,7 +219,7 @@ struct ProgressAlbumsDetailSearchView: View{
                 searchText: vm.searchText),
             title: "Progress Albums",
             dataType: .progressAlbum,
-            sizeModel: SizeModelMock.large
+            sizeModel: SizeModel.large
 
         )
     }

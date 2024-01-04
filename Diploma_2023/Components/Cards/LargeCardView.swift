@@ -41,6 +41,10 @@ struct LargeCardImage: View{
     
     let item: IdentifiableItem
     
+    let cornerRadius: CGFloat = 9
+    let imageSize: CGFloat = 160
+    let LabelHeight: CGFloat = 50
+    
     var body: some View{
         ZStack {
             
@@ -92,21 +96,24 @@ struct LargeCardImage: View{
                 }
             }else{
                 
-                VStack(spacing: 11) {
+                VStack(alignment: .leading) {
+                    
+                    // Placeholder Image
                     Image(item.placeholderName)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 44, height: 33)
+                        .scaledToFit()
                     
-                    Text( item.dataType == DataType.mezocycle ? "Mezocycle - STATIC" : "PX - IN SEASON")
-                        .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(.primary)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: imageSize, height: imageSize)
+                    .background(.blue)
+                    .cornerRadius(cornerRadius)
                     
-                    Text(item.dataType == DataType.mezocycle ? "Hypertrophy" : "MAXIMAL STRENGTH & ACCELERATION")
-                        .font(.system(size: 10, weight: .bold))
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(5)
-                        .foregroundColor(.primary)
+//                    Text(album.title) // If title is nil, use typeToTitle
+//                        .font(.system(size: 10, weight: .medium))
+//                        .foregroundColor(.primary)
+//                    Text(album.subTitle)
+//                        .font(.system(size: 10, weight: .regular))
+//                        .foregroundColor(.secondary)
                 }
             }
             
@@ -132,6 +139,8 @@ struct LargeCardButtonLabel: View {
             return "New Mezocycle"
         case .progressAlbum:
             return "New Album"
+        case .measurement:
+            return "New Measuremets"
         default:
             return "New..."
         }
@@ -174,14 +183,14 @@ struct LargeCardView_Previews: PreviewProvider {
 
 
 struct TrainingPlanDetailView: View, DetailView {
-    
+
     var item: IdentifiableItem
-    
+
     init(item: IdentifiableItem) {
         self.item = item
     }
-    
-    
+
+
     var body: some View {
         if item.dataType == .phase{
             PhaseSheetView(item: item )

@@ -12,15 +12,12 @@ struct SideBar: View {
     let title: String
     @Binding var selectedCategory: Category?
 
-    
     var globalCategories: [Category] {
         categories.filter { $0.isGlobal }
     }
-
     var localCategories: [Category] {
         categories.filter { !$0.isGlobal }
     }
-    
     
     var body: some View {
         
@@ -34,6 +31,7 @@ struct SideBar: View {
                             Text(verbatim: category.name)
                         }
                     }
+                    .accessibilityIdentifier("GlobalCategory-\(category.id)") // Testing Identifier
                 }
                 Section(header: Text("My Library")){
                     ForEach(localCategories) { category in
@@ -44,6 +42,7 @@ struct SideBar: View {
                                 Text(verbatim: category.name)
                             }
                         }
+                        .accessibilityIdentifier("LocalCategory-\(category.id)") // Testing Identifier
                     }
                 }
         }

@@ -9,6 +9,8 @@ import SwiftUI
 import Combine
 
 
+// MARK: - ProgressAlbums Detail - ViewModel
+
 class ProgressAlbumsDetailViewModel: ObservableObject {
     
     @Published var selectedProgressAlbum: ProgressAlbum
@@ -112,6 +114,9 @@ class ProgressAlbumsDetailViewModel: ObservableObject {
 
 }
 
+
+
+// MARK: - ProgressAlbums Detail - View
 
 struct ProgressAlbumsDetail: View, DetailView  {
 

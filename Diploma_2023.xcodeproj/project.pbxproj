@@ -16,7 +16,7 @@
 		0210C64F29AA6B93001DAD74 /* ClientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C64E29AA6B93001DAD74 /* ClientsView.swift */; };
 		0210C65129AA6BA5001DAD74 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C65029AA6BA5001DAD74 /* ExerciseView.swift */; };
 		0210C65329AA6BBB001DAD74 /* TrainingPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C65229AA6BBB001DAD74 /* TrainingPlansView.swift */; };
-		0210C65529AA6BC4001DAD74 /* FoodPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C65429AA6BC4001DAD74 /* FoodPlansView.swift */; };
+		0210C65529AA6BC4001DAD74 /* MockFoodPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C65429AA6BC4001DAD74 /* MockFoodPlansView.swift */; };
 		0210C65729AA6C3A001DAD74 /* MeasurementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C65629AA6C3A001DAD74 /* MeasurementsView.swift */; };
 		0210C65929AA6C54001DAD74 /* MockProgressAlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C65829AA6C54001DAD74 /* MockProgressAlbumsView.swift */; };
 		0210C65B29AA6C62001DAD74 /* WhiteboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C65A29AA6C62001DAD74 /* WhiteboardView.swift */; };
@@ -34,6 +34,84 @@
 		023BA4D429D731BD00241B2B /* PhaseSheetString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BA4D329D731BD00241B2B /* PhaseSheetString.swift */; };
 		0243FB7029BC0188003ECC8C /* MockDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243FB6F29BC0188003ECC8C /* MockDataModel.swift */; };
 		0243FB7229C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243FB7129C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift */; };
+		0246EBC92AC4B0F000287612 /* ClientsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7F29EE95140038C658 /* ClientsDataStore.swift */; };
+		0246EBCA2AC4B1D000287612 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F06E0F29DC59CF008032B5 /* DataModels.swift */; };
+		0246EBCB2AC4B1D400287612 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE382A1FFF88007406EE /* Client.swift */; };
+		0246EBCC2AC4B1D600287612 /* TrainingPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3A2A1FFFD1007406EE /* TrainingPlans.swift */; };
+		0246EBCD2AC4B1D900287612 /* ProgressAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5D95D2A523CD8003EE5A1 /* ProgressAlbum.swift */; };
+		0246EBCE2AC4B1FE00287612 /* ClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8329EE95C00038C658 /* ClientRepository.swift */; };
+		0246EBD12AC4B30100287612 /* AnyAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBD02AC4B30100287612 /* AnyAuthenticationService.swift */; };
+		0246EBD22AC4B31500287612 /* AnyAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBD02AC4B30100287612 /* AnyAuthenticationService.swift */; };
+		0246EBD32AC4BDC800287612 /* PhasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC429F335DE000662D5 /* PhasesRepository.swift */; };
+		0246EBD42AC4BDCA00287612 /* MezocycleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC629F335EE000662D5 /* MezocycleRepository.swift */; };
+		0246EBD52AC4BDCE00287612 /* ExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC129F335C4000662D5 /* ExerciseRepository.swift */; };
+		0246EBD62AC4BDD300287612 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB529F04BAA000662D5 /* CategoryRepository.swift */; };
+		0246EBD72AC4BDD500287612 /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8929EF1FDE0038C658 /* AccountRepository.swift */; };
+		0246EBD82AC4C03A00287612 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE2F2A1B3916007406EE /* Extensions.swift */; };
+		0246EBDC2ACA0FCC00287612 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBDB2ACA0FCC00287612 /* Measurements.swift */; };
+		0246EBDE2ACB5F5300287612 /* MockMeasurementsVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBDD2ACB5F5300287612 /* MockMeasurementsVIew.swift */; };
+		0246EBE02ACC844700287612 /* MeasurementsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBDF2ACC844700287612 /* MeasurementsDetailView.swift */; };
+		025C6A7D2B2A6013001F1D70 /* Diploma_2023UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C6A7C2B2A6013001F1D70 /* Diploma_2023UITests.swift */; };
+		025C6A7F2B2A6013001F1D70 /* Diploma_2023UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C6A7E2B2A6013001F1D70 /* Diploma_2023UITestsLaunchTests.swift */; };
+		025F2EC62AD5D1CD0063C2B8 /* CellBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2EC52AD5D1CD0063C2B8 /* CellBuilders.swift */; };
+		025F2EC72AD7296C0063C2B8 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBDB2ACA0FCC00287612 /* Measurements.swift */; };
+		025F2EC82AD72A190063C2B8 /* MockDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243FB6F29BC0188003ECC8C /* MockDataModel.swift */; };
+		025F2EC92AD8A4D70063C2B8 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDA57D2AB9BEFA00EE16F6 /* MockAuthenticationService.swift */; };
+		025F2ECB2AE095510063C2B8 /* FoodPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ECA2AE095510063C2B8 /* FoodPlansView.swift */; };
+		025F2ECD2AE098350063C2B8 /* FoodPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ECC2AE098350063C2B8 /* FoodPlans.swift */; };
+		025F2ECF2AE0A90F0063C2B8 /* FoodPlansDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ECE2AE0A90F0063C2B8 /* FoodPlansDataStore.swift */; };
+		025F2ED12AE0AAA20063C2B8 /* FoodPlansRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ED02AE0AAA20063C2B8 /* FoodPlansRepository.swift */; };
+		025F2ED32AE0AAEF0063C2B8 /* FirestoreFoodPlansRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ED22AE0AAEF0063C2B8 /* FirestoreFoodPlansRepository.swift */; };
+		025F2ED52AE93FD10063C2B8 /* FirebaseStoragePdfRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ED42AE93FD10063C2B8 /* FirebaseStoragePdfRepository.swift */; };
+		025F2ED72AF185470063C2B8 /* PDFContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ED62AF185470063C2B8 /* PDFContentView.swift */; };
+		025F2ED92AF187E90063C2B8 /* FoodPlanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ED82AF187E90063C2B8 /* FoodPlanDetailView.swift */; };
+		025F2EDE2AF2BFA90063C2B8 /* PDFEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2EDD2AF2BFA90063C2B8 /* PDFEditView.swift */; };
+		0276B5192B44E1CE00F4C3B0 /* MockCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5182B44E1CE00F4C3B0 /* MockCategoryRepository.swift */; };
+		0276B51B2B44E20900F4C3B0 /* MockAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51A2B44E20900F4C3B0 /* MockAccountRepository.swift */; };
+		0276B51D2B44E32C00F4C3B0 /* MockExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51C2B44E32C00F4C3B0 /* MockExerciseRepository.swift */; };
+		0276B51F2B44E33800F4C3B0 /* MockPhasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51E2B44E33800F4C3B0 /* MockPhasesRepository.swift */; };
+		0276B5212B44E34C00F4C3B0 /* MockMezocycleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5202B44E34C00F4C3B0 /* MockMezocycleRepository.swift */; };
+		0276B5232B44E35D00F4C3B0 /* MockFoodPlansRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5222B44E35D00F4C3B0 /* MockFoodPlansRepository.swift */; };
+		0276B5252B44E39200F4C3B0 /* MockImageStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5242B44E39200F4C3B0 /* MockImageStorageRepository.swift */; };
+		0276B5272B44E3A300F4C3B0 /* MockPdfStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5262B44E3A300F4C3B0 /* MockPdfStorageRepository.swift */; };
+		0276B5292B45603900F4C3B0 /* MockClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDA57A2AB9B62A00EE16F6 /* MockClientRepository.swift */; };
+		0276B52A2B45605E00F4C3B0 /* AppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7629EE94770038C658 /* AppDependencyContainer.swift */; };
+		0276B52B2B45606000F4C3B0 /* AppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7629EE94770038C658 /* AppDependencyContainer.swift */; };
+		0276B52D2B46371200F4C3B0 /* AnyAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBD02AC4B30100287612 /* AnyAuthenticationService.swift */; };
+		0276B52E2B46372300F4C3B0 /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8929EF1FDE0038C658 /* AccountRepository.swift */; };
+		0276B52F2B46373600F4C3B0 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB529F04BAA000662D5 /* CategoryRepository.swift */; };
+		0276B5302B46373900F4C3B0 /* ClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8329EE95C00038C658 /* ClientRepository.swift */; };
+		0276B5312B46373B00F4C3B0 /* ExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC129F335C4000662D5 /* ExerciseRepository.swift */; };
+		0276B5322B46373D00F4C3B0 /* PhasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC429F335DE000662D5 /* PhasesRepository.swift */; };
+		0276B5332B46374000F4C3B0 /* MezocycleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCC629F335EE000662D5 /* MezocycleRepository.swift */; };
+		0276B5342B46374200F4C3B0 /* FoodPlansRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ED02AE0AAA20063C2B8 /* FoodPlansRepository.swift */; };
+		0276B5352B46374300F4C3B0 /* FoodPlansRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ED02AE0AAA20063C2B8 /* FoodPlansRepository.swift */; };
+		0276B53B2B46393000F4C3B0 /* PdfRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B53A2B46393000F4C3B0 /* PdfRepository.swift */; };
+		0276B53D2B46394900F4C3B0 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B53C2B46394900F4C3B0 /* ImageRepository.swift */; };
+		0276B53E2B46395A00F4C3B0 /* PdfRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B53A2B46393000F4C3B0 /* PdfRepository.swift */; };
+		0276B53F2B46395B00F4C3B0 /* PdfRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B53A2B46393000F4C3B0 /* PdfRepository.swift */; };
+		0276B5402B46397400F4C3B0 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B53C2B46394900F4C3B0 /* ImageRepository.swift */; };
+		0276B5412B46397400F4C3B0 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B53C2B46394900F4C3B0 /* ImageRepository.swift */; };
+		0276B5432B4639DF00F4C3B0 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE382A1FFF88007406EE /* Client.swift */; };
+		0276B5442B4639E100F4C3B0 /* TrainingPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3A2A1FFFD1007406EE /* TrainingPlans.swift */; };
+		0276B5452B4639E400F4C3B0 /* ProgressAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5D95D2A523CD8003EE5A1 /* ProgressAlbum.swift */; };
+		0276B5462B4639E600F4C3B0 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0246EBDB2ACA0FCC00287612 /* Measurements.swift */; };
+		0276B5472B463A1600F4C3B0 /* AccountDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7A29EE94DF0038C658 /* AccountDataStore.swift */; };
+		0276B5482B463A1800F4C3B0 /* CategoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */; };
+		0276B5492B463A1A00F4C3B0 /* ClientsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7F29EE95140038C658 /* ClientsDataStore.swift */; };
+		0276B54A2B463A1C00F4C3B0 /* ExercisesDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBB29F33534000662D5 /* ExercisesDataStore.swift */; };
+		0276B54B2B463A1E00F4C3B0 /* MezocycleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBF29F335B1000662D5 /* MezocycleDataStore.swift */; };
+		0276B54C2B463A2000F4C3B0 /* PhasesDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBD29F3358A000662D5 /* PhasesDataStore.swift */; };
+		0276B54D2B463A2200F4C3B0 /* FoodPlansDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ECE2AE0A90F0063C2B8 /* FoodPlansDataStore.swift */; };
+		0276B54E2B463A5A00F4C3B0 /* CategoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */; };
+		0276B54F2B463A6200F4C3B0 /* ExercisesDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBB29F33534000662D5 /* ExercisesDataStore.swift */; };
+		0276B5502B463A6700F4C3B0 /* PhasesDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBD29F3358A000662D5 /* PhasesDataStore.swift */; };
+		0276B5622B464ABE00F4C3B0 /* AccountDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7A29EE94DF0038C658 /* AccountDataStore.swift */; };
+		0276B5632B464ADC00F4C3B0 /* FoodPlansDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ECE2AE0A90F0063C2B8 /* FoodPlansDataStore.swift */; };
+		0276B5642B464AEB00F4C3B0 /* MezocycleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCBF29F335B1000662D5 /* MezocycleDataStore.swift */; };
+		0276B5652B464C6000F4C3B0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE2F2A1B3916007406EE /* Extensions.swift */; };
+		0276B5662B464F1900F4C3B0 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDA57D2AB9BEFA00EE16F6 /* MockAuthenticationService.swift */; };
+		0276B5672B4653C000F4C3B0 /* MockDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243FB6F29BC0188003ECC8C /* MockDataModel.swift */; };
 		02770C252A1931DD00BEE9BD /* NewPhaseTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02770C242A1931DD00BEE9BD /* NewPhaseTemplateView.swift */; };
 		02770C292A1999D200BEE9BD /* NewPhaseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02770C282A1999D200BEE9BD /* NewPhaseSheetView.swift */; };
 		02817F7529EE945E0038C658 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7429EE945E0038C658 /* AuthenticationService.swift */; };
@@ -41,16 +119,17 @@
 		02817F7B29EE94DF0038C658 /* AccountDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7A29EE94DF0038C658 /* AccountDataStore.swift */; };
 		02817F8029EE95140038C658 /* ClientsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F7F29EE95140038C658 /* ClientsDataStore.swift */; };
 		02817F8429EE95C00038C658 /* ClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8329EE95C00038C658 /* ClientRepository.swift */; };
-		02817F8629EE95E50038C658 /* FirestoreClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8529EE95E50038C658 /* FirestoreClientRepository.swift */; };
 		02817F8829EF1C8D0038C658 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8729EF1C8D0038C658 /* AccountView.swift */; };
 		02817F8A29EF1FDE0038C658 /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8929EF1FDE0038C658 /* AccountRepository.swift */; };
 		02817F8C29EF21620038C658 /* FirestoreAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8B29EF21620038C658 /* FirestoreAccountRepository.swift */; };
 		0292135E2A5CF60100BB9BF8 /* ProgressPhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0292135D2A5CF60100BB9BF8 /* ProgressPhotoDetailView.swift */; };
+		029DA6C02B3A993D000D9352 /* FoodPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ECC2AE098350063C2B8 /* FoodPlans.swift */; };
+		029DA6C12B3A993D000D9352 /* FoodPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F2ECC2AE098350063C2B8 /* FoodPlans.swift */; };
+		029DA6C22B3A9956000D9352 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F06E0F29DC59CF008032B5 /* DataModels.swift */; };
+		02A7AC9E2AFAC70F008D58F8 /* EditFoodPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7AC9D2AFAC70E008D58F8 /* EditFoodPlanView.swift */; };
 		02C49A8129DEE67600298E13 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8029DEE67600298E13 /* SignUpView.swift */; };
 		02C49A8329E0BB4C00298E13 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8229E0BB4C00298E13 /* SignInView.swift */; };
 		02C49A8A29EAEAEB00298E13 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C49A8929EAEAEB00298E13 /* Authentication.swift */; };
-		02C5D93E2A4BB7CB003EE5A1 /* Diploma_2023Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5D93D2A4BB7CB003EE5A1 /* Diploma_2023Tests.swift */; };
-		02C5D9452A4BB876003EE5A1 /* ClientsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5D9442A4BB876003EE5A1 /* ClientsViewModelTests.swift */; };
 		02C5D9482A4BBBE3003EE5A1 /* MockClientDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5D9472A4BBBE3003EE5A1 /* MockClientDataStore.swift */; };
 		02C5D94E2A4C8A77003EE5A1 /* ImagePickerBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5D94D2A4C8A77003EE5A1 /* ImagePickerBaseView.swift */; };
 		02C5D9542A4CB218003EE5A1 /* EditProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5D9532A4CB218003EE5A1 /* EditProfileImageView.swift */; };
@@ -72,6 +151,34 @@
 		02D3BE3B2A1FFFD1007406EE /* TrainingPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3A2A1FFFD1007406EE /* TrainingPlans.swift */; };
 		02D3BE3D2A20A5E6007406EE /* SelectiveGridListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3C2A20A5E6007406EE /* SelectiveGridListView.swift */; };
 		02D3BE3F2A20B70E007406EE /* MezoBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D3BE3E2A20B70E007406EE /* MezoBuilders.swift */; };
+		02D583052B4C5BA900DE40A8 /* FirestoreClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8529EE95E50038C658 /* FirestoreClientRepository.swift */; };
+		02D583132B4C636D00DE40A8 /* MockClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDA57A2AB9B62A00EE16F6 /* MockClientRepository.swift */; };
+		02D583142B4C636E00DE40A8 /* MockClientRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDA57A2AB9B62A00EE16F6 /* MockClientRepository.swift */; };
+		02D583152B4C637400DE40A8 /* MockCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5182B44E1CE00F4C3B0 /* MockCategoryRepository.swift */; };
+		02D583162B4C637400DE40A8 /* MockCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5182B44E1CE00F4C3B0 /* MockCategoryRepository.swift */; };
+		02D583172B4C637700DE40A8 /* MockAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51A2B44E20900F4C3B0 /* MockAccountRepository.swift */; };
+		02D583182B4C637700DE40A8 /* MockAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51A2B44E20900F4C3B0 /* MockAccountRepository.swift */; };
+		02D583192B4C637900DE40A8 /* MockExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51C2B44E32C00F4C3B0 /* MockExerciseRepository.swift */; };
+		02D5831A2B4C637A00DE40A8 /* MockExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51C2B44E32C00F4C3B0 /* MockExerciseRepository.swift */; };
+		02D5831B2B4C637C00DE40A8 /* MockPhasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51E2B44E33800F4C3B0 /* MockPhasesRepository.swift */; };
+		02D5831C2B4C637C00DE40A8 /* MockPhasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B51E2B44E33800F4C3B0 /* MockPhasesRepository.swift */; };
+		02D5831D2B4C637E00DE40A8 /* MockMezocycleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5202B44E34C00F4C3B0 /* MockMezocycleRepository.swift */; };
+		02D5831E2B4C637F00DE40A8 /* MockMezocycleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5202B44E34C00F4C3B0 /* MockMezocycleRepository.swift */; };
+		02D5831F2B4C638100DE40A8 /* MockFoodPlansRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5222B44E35D00F4C3B0 /* MockFoodPlansRepository.swift */; };
+		02D583202B4C638100DE40A8 /* MockFoodPlansRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5222B44E35D00F4C3B0 /* MockFoodPlansRepository.swift */; };
+		02D583212B4C638400DE40A8 /* MockImageStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5242B44E39200F4C3B0 /* MockImageStorageRepository.swift */; };
+		02D583222B4C638500DE40A8 /* MockImageStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5242B44E39200F4C3B0 /* MockImageStorageRepository.swift */; };
+		02D583232B4C638800DE40A8 /* MockPdfStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5262B44E3A300F4C3B0 /* MockPdfStorageRepository.swift */; };
+		02D583242B4C638800DE40A8 /* MockPdfStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276B5262B44E3A300F4C3B0 /* MockPdfStorageRepository.swift */; };
+		02D583282B4CBF9300DE40A8 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D583272B4CBF9200DE40A8 /* MockedData.swift */; };
+		02D583292B4CBF9300DE40A8 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D583272B4CBF9200DE40A8 /* MockedData.swift */; };
+		02D5832A2B4CBF9300DE40A8 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D583272B4CBF9200DE40A8 /* MockedData.swift */; };
+		02D5832C2B4D9FEC00DE40A8 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C64C29AA6B84001DAD74 /* TodayView.swift */; };
+		02D5832D2B4D9FEC00DE40A8 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C64C29AA6B84001DAD74 /* TodayView.swift */; };
+		02D5832E2B4DA07600DE40A8 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8729EF1C8D0038C658 /* AccountView.swift */; };
+		02D5832F2B4DA07600DE40A8 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02817F8729EF1C8D0038C658 /* AccountView.swift */; };
+		02D583302B4DA0D900DE40A8 /* RotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C66129B9EAAB001DAD74 /* RotationViewModifier.swift */; };
+		02D583312B4DA0DA00DE40A8 /* RotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0210C66129B9EAAB001DAD74 /* RotationViewModifier.swift */; };
 		02D5906329C35AFD007C6AAB /* ClientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906229C35AFD007C6AAB /* ClientDetailView.swift */; };
 		02D5906529C36917007C6AAB /* AppDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906429C36917007C6AAB /* AppDetailView.swift */; };
 		02D5906729C4F41B007C6AAB /* InfoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5906629C4F41B007C6AAB /* InfoRowView.swift */; };
@@ -79,6 +186,7 @@
 		02D5907329C766F7007C6AAB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907229C766F7007C6AAB /* SearchBar.swift */; };
 		02D5907629C7684C007C6AAB /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907529C7684C007C6AAB /* ExerciseDetailView.swift */; };
 		02D5908029C7A795007C6AAB /* MockSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5907F29C7A795007C6AAB /* MockSideBar.swift */; };
+		02DDA57E2AB9BEFA00EE16F6 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDA57D2AB9BEFA00EE16F6 /* MockAuthenticationService.swift */; };
 		02E0BCBE2A20C760007B5CEF /* AccountTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0BCBD2A20C760007B5CEF /* AccountTabView.swift */; };
 		02E9FCB229F04B7B000662D5 /* CategoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */; };
 		02E9FCB429F04BA1000662D5 /* FirestoreCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9FCB329F04BA1000662D5 /* FirestoreCategoryRepository.swift */; };
@@ -109,10 +217,16 @@
 		02F06E0C29DB8446008032B5 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = 02F06E0B29DB8446008032B5 /* FirebaseInstallations */; };
 		02F06E0E29DB8446008032B5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 02F06E0D29DB8446008032B5 /* FirebaseStorage */; };
 		02F06E1029DC59CF008032B5 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F06E0F29DC59CF008032B5 /* DataModels.swift */; };
-		02F06E1229DC7905008032B5 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F06E1129DC7905008032B5 /* Repositories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		025C6A802B2A6013001F1D70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0210C63129AA001C001DAD74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0210C63829AA001C001DAD74;
+			remoteInfo = Diploma_2023;
+		};
 		02C5D93F2A4BB7CB003EE5A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0210C63129AA001C001DAD74 /* Project object */;
@@ -133,7 +247,7 @@
 		0210C64E29AA6B93001DAD74 /* ClientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsView.swift; sourceTree = "<group>"; };
 		0210C65029AA6BA5001DAD74 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		0210C65229AA6BBB001DAD74 /* TrainingPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingPlansView.swift; sourceTree = "<group>"; };
-		0210C65429AA6BC4001DAD74 /* FoodPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPlansView.swift; sourceTree = "<group>"; };
+		0210C65429AA6BC4001DAD74 /* MockFoodPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFoodPlansView.swift; sourceTree = "<group>"; };
 		0210C65629AA6C3A001DAD74 /* MeasurementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsView.swift; sourceTree = "<group>"; };
 		0210C65829AA6C54001DAD74 /* MockProgressAlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProgressAlbumsView.swift; sourceTree = "<group>"; };
 		0210C65A29AA6C62001DAD74 /* WhiteboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardView.swift; sourceTree = "<group>"; };
@@ -150,6 +264,35 @@
 		023BA4D329D731BD00241B2B /* PhaseSheetString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSheetString.swift; sourceTree = "<group>"; };
 		0243FB6F29BC0188003ECC8C /* MockDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataModel.swift; sourceTree = "<group>"; };
 		0243FB7129C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSplitViewThreeColumn.swift; sourceTree = "<group>"; };
+		0246EBD02AC4B30100287612 /* AnyAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAuthenticationService.swift; sourceTree = "<group>"; };
+		0246EBD92AC4E78400287612 /* CodeCoverage.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CodeCoverage.xctestplan; sourceTree = "<group>"; };
+		0246EBDA2AC4E78F00287612 /* Diploma_2023.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Diploma_2023.xctestplan; sourceTree = "<group>"; };
+		0246EBDB2ACA0FCC00287612 /* Measurements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurements.swift; sourceTree = "<group>"; };
+		0246EBDD2ACB5F5300287612 /* MockMeasurementsVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMeasurementsVIew.swift; sourceTree = "<group>"; };
+		0246EBDF2ACC844700287612 /* MeasurementsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsDetailView.swift; sourceTree = "<group>"; };
+		025C6A7A2B2A6013001F1D70 /* Diploma_2023UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Diploma_2023UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		025C6A7C2B2A6013001F1D70 /* Diploma_2023UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diploma_2023UITests.swift; sourceTree = "<group>"; };
+		025C6A7E2B2A6013001F1D70 /* Diploma_2023UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diploma_2023UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		025F2EC52AD5D1CD0063C2B8 /* CellBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBuilders.swift; sourceTree = "<group>"; };
+		025F2ECA2AE095510063C2B8 /* FoodPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPlansView.swift; sourceTree = "<group>"; };
+		025F2ECC2AE098350063C2B8 /* FoodPlans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPlans.swift; sourceTree = "<group>"; };
+		025F2ECE2AE0A90F0063C2B8 /* FoodPlansDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPlansDataStore.swift; sourceTree = "<group>"; };
+		025F2ED02AE0AAA20063C2B8 /* FoodPlansRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPlansRepository.swift; sourceTree = "<group>"; };
+		025F2ED22AE0AAEF0063C2B8 /* FirestoreFoodPlansRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreFoodPlansRepository.swift; sourceTree = "<group>"; };
+		025F2ED42AE93FD10063C2B8 /* FirebaseStoragePdfRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStoragePdfRepository.swift; sourceTree = "<group>"; };
+		025F2ED62AF185470063C2B8 /* PDFContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFContentView.swift; sourceTree = "<group>"; };
+		025F2ED82AF187E90063C2B8 /* FoodPlanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPlanDetailView.swift; sourceTree = "<group>"; };
+		025F2EDD2AF2BFA90063C2B8 /* PDFEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFEditView.swift; sourceTree = "<group>"; };
+		0276B5182B44E1CE00F4C3B0 /* MockCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCategoryRepository.swift; sourceTree = "<group>"; };
+		0276B51A2B44E20900F4C3B0 /* MockAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountRepository.swift; sourceTree = "<group>"; };
+		0276B51C2B44E32C00F4C3B0 /* MockExerciseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExerciseRepository.swift; sourceTree = "<group>"; };
+		0276B51E2B44E33800F4C3B0 /* MockPhasesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhasesRepository.swift; sourceTree = "<group>"; };
+		0276B5202B44E34C00F4C3B0 /* MockMezocycleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMezocycleRepository.swift; sourceTree = "<group>"; };
+		0276B5222B44E35D00F4C3B0 /* MockFoodPlansRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFoodPlansRepository.swift; sourceTree = "<group>"; };
+		0276B5242B44E39200F4C3B0 /* MockImageStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageStorageRepository.swift; sourceTree = "<group>"; };
+		0276B5262B44E3A300F4C3B0 /* MockPdfStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPdfStorageRepository.swift; sourceTree = "<group>"; };
+		0276B53A2B46393000F4C3B0 /* PdfRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfRepository.swift; sourceTree = "<group>"; };
+		0276B53C2B46394900F4C3B0 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		02770C242A1931DD00BEE9BD /* NewPhaseTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhaseTemplateView.swift; sourceTree = "<group>"; };
 		02770C282A1999D200BEE9BD /* NewPhaseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhaseSheetView.swift; sourceTree = "<group>"; };
 		02817F7429EE945E0038C658 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
@@ -162,12 +305,11 @@
 		02817F8929EF1FDE0038C658 /* AccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRepository.swift; sourceTree = "<group>"; };
 		02817F8B29EF21620038C658 /* FirestoreAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreAccountRepository.swift; sourceTree = "<group>"; };
 		0292135D2A5CF60100BB9BF8 /* ProgressPhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPhotoDetailView.swift; sourceTree = "<group>"; };
+		02A7AC9D2AFAC70E008D58F8 /* EditFoodPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodPlanView.swift; sourceTree = "<group>"; };
 		02C49A8029DEE67600298E13 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		02C49A8229E0BB4C00298E13 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		02C49A8929EAEAEB00298E13 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		02C5D93B2A4BB7CB003EE5A1 /* Diploma_2023Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Diploma_2023Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		02C5D93D2A4BB7CB003EE5A1 /* Diploma_2023Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diploma_2023Tests.swift; sourceTree = "<group>"; };
-		02C5D9442A4BB876003EE5A1 /* ClientsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewModelTests.swift; sourceTree = "<group>"; };
 		02C5D9472A4BBBE3003EE5A1 /* MockClientDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClientDataStore.swift; sourceTree = "<group>"; };
 		02C5D94D2A4C8A77003EE5A1 /* ImagePickerBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerBaseView.swift; sourceTree = "<group>"; };
 		02C5D9532A4CB218003EE5A1 /* EditProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageView.swift; sourceTree = "<group>"; };
@@ -189,6 +331,7 @@
 		02D3BE3A2A1FFFD1007406EE /* TrainingPlans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingPlans.swift; sourceTree = "<group>"; };
 		02D3BE3C2A20A5E6007406EE /* SelectiveGridListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveGridListView.swift; sourceTree = "<group>"; };
 		02D3BE3E2A20B70E007406EE /* MezoBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MezoBuilders.swift; sourceTree = "<group>"; };
+		02D583272B4CBF9200DE40A8 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		02D5906229C35AFD007C6AAB /* ClientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailView.swift; sourceTree = "<group>"; };
 		02D5906429C36917007C6AAB /* AppDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailView.swift; sourceTree = "<group>"; };
 		02D5906629C4F41B007C6AAB /* InfoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRowView.swift; sourceTree = "<group>"; };
@@ -197,6 +340,8 @@
 		02D5907229C766F7007C6AAB /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		02D5907529C7684C007C6AAB /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
 		02D5907F29C7A795007C6AAB /* MockSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSideBar.swift; sourceTree = "<group>"; };
+		02DDA57A2AB9B62A00EE16F6 /* MockClientRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClientRepository.swift; sourceTree = "<group>"; };
+		02DDA57D2AB9BEFA00EE16F6 /* MockAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthenticationService.swift; sourceTree = "<group>"; };
 		02E0BCBD2A20C760007B5CEF /* AccountTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTabView.swift; sourceTree = "<group>"; };
 		02E9FCB129F04B7B000662D5 /* CategoryDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataStore.swift; sourceTree = "<group>"; };
 		02E9FCB329F04BA1000662D5 /* FirestoreCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCategoryRepository.swift; sourceTree = "<group>"; };
@@ -220,7 +365,6 @@
 		02F06DF629DA10A4008032B5 /* CustomTextEditorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditorCell.swift; sourceTree = "<group>"; };
 		02F06DF829DB8021008032B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		02F06E0F29DC59CF008032B5 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
-		02F06E1129DC7905008032B5 /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +383,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		025C6A772B2A6013001F1D70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		02C5D9382A4BB7CB003EE5A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,10 +403,13 @@
 		0210C63029AA001C001DAD74 = {
 			isa = PBXGroup;
 			children = (
+				0246EBDA2AC4E78F00287612 /* Diploma_2023.xctestplan */,
+				0246EBD92AC4E78400287612 /* CodeCoverage.xctestplan */,
 				02F06DF829DB8021008032B5 /* GoogleService-Info.plist */,
 				02D5907029C73FAC007C6AAB /* Archived */,
 				0210C63B29AA001C001DAD74 /* Diploma_2023 */,
 				02C5D93C2A4BB7CB003EE5A1 /* Diploma_2023Tests */,
+				025C6A7B2B2A6013001F1D70 /* Diploma_2023UITests */,
 				0210C63A29AA001C001DAD74 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -265,6 +419,7 @@
 			children = (
 				0210C63929AA001C001DAD74 /* Diploma_2023.app */,
 				02C5D93B2A4BB7CB003EE5A1 /* Diploma_2023Tests.xctest */,
+				025C6A7A2B2A6013001F1D70 /* Diploma_2023UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -319,6 +474,8 @@
 				02D3BE382A1FFF88007406EE /* Client.swift */,
 				02D3BE3A2A1FFFD1007406EE /* TrainingPlans.swift */,
 				02C5D95D2A523CD8003EE5A1 /* ProgressAlbum.swift */,
+				0246EBDB2ACA0FCC00287612 /* Measurements.swift */,
+				025F2ECC2AE098350063C2B8 /* FoodPlans.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -365,6 +522,7 @@
 		0243FB7329C0E64E003ECC8C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				025F2EC42AD5D1B10063C2B8 /* Table */,
 				02C5D9522A4CB1FC003EE5A1 /* Image */,
 				02E9FCD529F9199F000662D5 /* SideBar */,
 				023BA4BD29D2FD2C00241B2B /* Cards */,
@@ -374,6 +532,32 @@
 				023BA4C029D4320C00241B2B /* Headers.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		025C6A7B2B2A6013001F1D70 /* Diploma_2023UITests */ = {
+			isa = PBXGroup;
+			children = (
+				025C6A7C2B2A6013001F1D70 /* Diploma_2023UITests.swift */,
+				025C6A7E2B2A6013001F1D70 /* Diploma_2023UITestsLaunchTests.swift */,
+			);
+			path = Diploma_2023UITests;
+			sourceTree = "<group>";
+		};
+		025F2EC42AD5D1B10063C2B8 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				025F2EC52AD5D1CD0063C2B8 /* CellBuilders.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		025F2EDC2AF2BF950063C2B8 /* PDF */ = {
+			isa = PBXGroup;
+			children = (
+				025F2ED62AF185470063C2B8 /* PDFContentView.swift */,
+				025F2EDD2AF2BFA90063C2B8 /* PDFEditView.swift */,
+			);
+			path = PDF;
 			sourceTree = "<group>";
 		};
 		02770C262A193FB400BEE9BD /* Phase */ = {
@@ -410,6 +594,7 @@
 			isa = PBXGroup;
 			children = (
 				02817F7429EE945E0038C658 /* AuthenticationService.swift */,
+				0246EBD02AC4B30100287612 /* AnyAuthenticationService.swift */,
 				02817F7629EE94770038C658 /* AppDependencyContainer.swift */,
 			);
 			path = Services;
@@ -418,10 +603,10 @@
 		02817F7829EE949D0038C658 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				02DDA5792AB9B60300EE16F6 /* MockedRepositories */,
 				02E9FCDA29FD727A000662D5 /* FirebaseStorage */,
 				02E9FCD929FD71DF000662D5 /* Firestore */,
 				02E9FCD829FD71D0000662D5 /* Protocols */,
-				02F06E1129DC7905008032B5 /* Repositories.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -435,6 +620,7 @@
 				02E9FCBB29F33534000662D5 /* ExercisesDataStore.swift */,
 				02E9FCBD29F3358A000662D5 /* PhasesDataStore.swift */,
 				02E9FCBF29F335B1000662D5 /* MezocycleDataStore.swift */,
+				025F2ECE2AE0A90F0063C2B8 /* FoodPlansDataStore.swift */,
 			);
 			path = DataStores;
 			sourceTree = "<group>";
@@ -442,7 +628,6 @@
 		02C5D9342A4B9D9B003EE5A1 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				02C5D9442A4BB876003EE5A1 /* ClientsViewModelTests.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -450,9 +635,9 @@
 		02C5D93C2A4BB7CB003EE5A1 /* Diploma_2023Tests */ = {
 			isa = PBXGroup;
 			children = (
+				02DDA57C2AB9BED900EE16F6 /* Services */,
 				02C5D9462A4BBBBC003EE5A1 /* MockedDataStores */,
 				02C5D9342A4B9D9B003EE5A1 /* Clients */,
-				02C5D93D2A4BB7CB003EE5A1 /* Diploma_2023Tests.swift */,
 			);
 			path = Diploma_2023Tests;
 			sourceTree = "<group>";
@@ -554,7 +739,11 @@
 		02D5908929C8EC0F007C6AAB /* FoodPlans */ = {
 			isa = PBXGroup;
 			children = (
-				0210C65429AA6BC4001DAD74 /* FoodPlansView.swift */,
+				025F2EDC2AF2BF950063C2B8 /* PDF */,
+				0210C65429AA6BC4001DAD74 /* MockFoodPlansView.swift */,
+				025F2ECA2AE095510063C2B8 /* FoodPlansView.swift */,
+				025F2ED82AF187E90063C2B8 /* FoodPlanDetailView.swift */,
+				02A7AC9D2AFAC70E008D58F8 /* EditFoodPlanView.swift */,
 			);
 			path = FoodPlans;
 			sourceTree = "<group>";
@@ -563,8 +752,35 @@
 			isa = PBXGroup;
 			children = (
 				0210C65629AA6C3A001DAD74 /* MeasurementsView.swift */,
+				0246EBDD2ACB5F5300287612 /* MockMeasurementsVIew.swift */,
+				0246EBDF2ACC844700287612 /* MeasurementsDetailView.swift */,
 			);
 			path = Measurements;
+			sourceTree = "<group>";
+		};
+		02DDA5792AB9B60300EE16F6 /* MockedRepositories */ = {
+			isa = PBXGroup;
+			children = (
+				02DDA57A2AB9B62A00EE16F6 /* MockClientRepository.swift */,
+				0276B5182B44E1CE00F4C3B0 /* MockCategoryRepository.swift */,
+				0276B51A2B44E20900F4C3B0 /* MockAccountRepository.swift */,
+				0276B51C2B44E32C00F4C3B0 /* MockExerciseRepository.swift */,
+				0276B51E2B44E33800F4C3B0 /* MockPhasesRepository.swift */,
+				0276B5202B44E34C00F4C3B0 /* MockMezocycleRepository.swift */,
+				0276B5222B44E35D00F4C3B0 /* MockFoodPlansRepository.swift */,
+				0276B5242B44E39200F4C3B0 /* MockImageStorageRepository.swift */,
+				0276B5262B44E3A300F4C3B0 /* MockPdfStorageRepository.swift */,
+				02D583272B4CBF9200DE40A8 /* MockedData.swift */,
+			);
+			path = MockedRepositories;
+			sourceTree = "<group>";
+		};
+		02DDA57C2AB9BED900EE16F6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				02DDA57D2AB9BEFA00EE16F6 /* MockAuthenticationService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		02E9FCB729F2A719000662D5 /* Landing Page */ = {
@@ -623,6 +839,9 @@
 				02E9FCC129F335C4000662D5 /* ExerciseRepository.swift */,
 				02E9FCC429F335DE000662D5 /* PhasesRepository.swift */,
 				02E9FCC629F335EE000662D5 /* MezocycleRepository.swift */,
+				025F2ED02AE0AAA20063C2B8 /* FoodPlansRepository.swift */,
+				0276B53A2B46393000F4C3B0 /* PdfRepository.swift */,
+				0276B53C2B46394900F4C3B0 /* ImageRepository.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -636,6 +855,7 @@
 				02E9FCC829F41A50000662D5 /* FirestoreExerciseRepository.swift */,
 				02E9FCCA29F41AED000662D5 /* FirestorePhasesRepository.swift */,
 				02E9FCCC29F41AFF000662D5 /* FirestoreMezocycleRepository.swift */,
+				025F2ED22AE0AAEF0063C2B8 /* FirestoreFoodPlansRepository.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -644,6 +864,7 @@
 			isa = PBXGroup;
 			children = (
 				02E9FCDB29FD729D000662D5 /* FirebaseStorageImageRepository.swift */,
+				025F2ED42AE93FD10063C2B8 /* FirebaseStoragePdfRepository.swift */,
 			);
 			path = FirebaseStorage;
 			sourceTree = "<group>";
@@ -687,6 +908,24 @@
 			productReference = 0210C63929AA001C001DAD74 /* Diploma_2023.app */;
 			productType = "com.apple.product-type.application";
 		};
+		025C6A792B2A6013001F1D70 /* Diploma_2023UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 025C6A842B2A6013001F1D70 /* Build configuration list for PBXNativeTarget "Diploma_2023UITests" */;
+			buildPhases = (
+				025C6A762B2A6013001F1D70 /* Sources */,
+				025C6A772B2A6013001F1D70 /* Frameworks */,
+				025C6A782B2A6013001F1D70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				025C6A812B2A6013001F1D70 /* PBXTargetDependency */,
+			);
+			name = Diploma_2023UITests;
+			productName = Diploma_2023UITests;
+			productReference = 025C6A7A2B2A6013001F1D70 /* Diploma_2023UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		02C5D93A2A4BB7CB003EE5A1 /* Diploma_2023Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02C5D9412A4BB7CB003EE5A1 /* Build configuration list for PBXNativeTarget "Diploma_2023Tests" */;
@@ -712,11 +951,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					0210C63829AA001C001DAD74 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					025C6A792B2A6013001F1D70 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 0210C63829AA001C001DAD74;
 					};
 					02C5D93A2A4BB7CB003EE5A1 = {
 						CreatedOnToolsVersion = 14.3;
@@ -743,6 +986,7 @@
 			targets = (
 				0210C63829AA001C001DAD74 /* Diploma_2023 */,
 				02C5D93A2A4BB7CB003EE5A1 /* Diploma_2023Tests */,
+				025C6A792B2A6013001F1D70 /* Diploma_2023UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -755,6 +999,13 @@
 				0210C64429AA001E001DAD74 /* Preview Assets.xcassets in Resources */,
 				0210C64129AA001E001DAD74 /* Assets.xcassets in Resources */,
 				02F06DF929DB8021008032B5 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C6A782B2A6013001F1D70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,14 +1023,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0276B53B2B46393000F4C3B0 /* PdfRepository.swift in Sources */,
 				02817F8C29EF21620038C658 /* FirestoreAccountRepository.swift in Sources */,
 				02817F8429EE95C00038C658 /* ClientRepository.swift in Sources */,
+				025F2ECF2AE0A90F0063C2B8 /* FoodPlansDataStore.swift in Sources */,
 				0243FB7229C0DC9F003ECC8C /* NavigationSplitViewThreeColumn.swift in Sources */,
 				02D5906529C36917007C6AAB /* AppDetailView.swift in Sources */,
+				0276B5272B44E3A300F4C3B0 /* MockPdfStorageRepository.swift in Sources */,
+				0276B51D2B44E32C00F4C3B0 /* MockExerciseRepository.swift in Sources */,
 				0210C65729AA6C3A001DAD74 /* MeasurementsView.swift in Sources */,
 				02E9FCE129FFBB94000662D5 /* NewExerciseView.swift in Sources */,
 				02E9FCB629F04BAA000662D5 /* CategoryRepository.swift in Sources */,
 				0292135E2A5CF60100BB9BF8 /* ProgressPhotoDetailView.swift in Sources */,
+				02A7AC9E2AFAC70F008D58F8 /* EditFoodPlanView.swift in Sources */,
 				02D5907629C7684C007C6AAB /* ExerciseDetailView.swift in Sources */,
 				02D3BE3B2A1FFFD1007406EE /* TrainingPlans.swift in Sources */,
 				023BA4C129D4320C00241B2B /* Headers.swift in Sources */,
@@ -788,45 +1044,59 @@
 				02817F7529EE945E0038C658 /* AuthenticationService.swift in Sources */,
 				02D26F6229CF8557000A49E0 /* GGridListView.swift in Sources */,
 				023BA4C329D48A1000241B2B /* MezocycleDetailView.swift in Sources */,
+				0276B51F2B44E33800F4C3B0 /* MockPhasesRepository.swift in Sources */,
 				02C5D9542A4CB218003EE5A1 /* EditProfileImageView.swift in Sources */,
 				02D3BE352A1BA484007406EE /* MezocycleView.swift in Sources */,
 				02C49A8329E0BB4C00298E13 /* SignInView.swift in Sources */,
 				02D5906F29C607C8007C6AAB /* NavigationSplitViewThreeX.swift in Sources */,
 				02F06DF729DA10A4008032B5 /* CustomTextEditorCell.swift in Sources */,
+				0276B5292B45603900F4C3B0 /* MockClientRepository.swift in Sources */,
 				02E9FCD429F9197F000662D5 /* SideBar.swift in Sources */,
+				0276B5252B44E39200F4C3B0 /* MockImageStorageRepository.swift in Sources */,
 				0210C65129AA6BA5001DAD74 /* ExerciseView.swift in Sources */,
 				02C5D9602A5244D1003EE5A1 /* ProgressAlbumsView.swift in Sources */,
 				02E9FCBC29F33534000662D5 /* ExercisesDataStore.swift in Sources */,
 				02C49A8129DEE67600298E13 /* SignUpView.swift in Sources */,
 				02D3BE2D2A1AE8A9007406EE /* PhaseSheetView.swift in Sources */,
 				02770C252A1931DD00BEE9BD /* NewPhaseTemplateView.swift in Sources */,
+				0246EBD12AC4B30100287612 /* AnyAuthenticationService.swift in Sources */,
+				025F2ECD2AE098350063C2B8 /* FoodPlans.swift in Sources */,
 				02E9FCC929F41A50000662D5 /* FirestoreExerciseRepository.swift in Sources */,
 				023BA4CF29D4E25900241B2B /* StaticPhaseSheetView.swift in Sources */,
+				025F2EC62AD5D1CD0063C2B8 /* CellBuilders.swift in Sources */,
 				02D3BE3F2A20B70E007406EE /* MezoBuilders.swift in Sources */,
-				02817F8629EE95E50038C658 /* FirestoreClientRepository.swift in Sources */,
 				02E9FCCF29F586CB000662D5 /* SmallCardView.swift in Sources */,
 				02E9FCBE29F3358A000662D5 /* PhasesDataStore.swift in Sources */,
 				02C5D95E2A523CD8003EE5A1 /* ProgressAlbum.swift in Sources */,
+				025F2ED72AF185470063C2B8 /* PDFContentView.swift in Sources */,
 				02E0BCBE2A20C760007B5CEF /* AccountTabView.swift in Sources */,
 				02C5D9642A5799B5003EE5A1 /* SelectableListSheet.swift in Sources */,
 				02D5907329C766F7007C6AAB /* SearchBar.swift in Sources */,
 				02D3BE3D2A20A5E6007406EE /* SelectiveGridListView.swift in Sources */,
 				0210C66429BA6A10001DAD74 /* TestModel.swift in Sources */,
 				02817F7729EE94770038C658 /* AppDependencyContainer.swift in Sources */,
+				025F2ED92AF187E90063C2B8 /* FoodPlanDetailView.swift in Sources */,
 				020460832A2EE02D00A08CC1 /* EditMezocycleView.swift in Sources */,
 				02E9FCC229F335C4000662D5 /* ExerciseRepository.swift in Sources */,
 				02E9FCCD29F41AFF000662D5 /* FirestoreMezocycleRepository.swift in Sources */,
 				02E9FCB429F04BA1000662D5 /* FirestoreCategoryRepository.swift in Sources */,
+				025F2ECB2AE095510063C2B8 /* FoodPlansView.swift in Sources */,
+				0276B53D2B46394900F4C3B0 /* ImageRepository.swift in Sources */,
+				025F2EC92AD8A4D70063C2B8 /* MockAuthenticationService.swift in Sources */,
 				023BA4D429D731BD00241B2B /* PhaseSheetString.swift in Sources */,
+				0246EBDE2ACB5F5300287612 /* MockMeasurementsVIew.swift in Sources */,
 				02E9FCDC29FD729D000662D5 /* FirebaseStorageImageRepository.swift in Sources */,
 				02C5D94E2A4C8A77003EE5A1 /* ImagePickerBaseView.swift in Sources */,
+				025F2EDE2AF2BFA90063C2B8 /* PDFEditView.swift in Sources */,
 				02D3BE302A1B3916007406EE /* Extensions.swift in Sources */,
 				02C5D9562A4CB914003EE5A1 /* MyAsyncImage.swift in Sources */,
 				023BA4BF29D3024600241B2B /* AnyViews.swift in Sources */,
+				025F2ED32AE0AAEF0063C2B8 /* FirestoreFoodPlansRepository.swift in Sources */,
 				02D3BE372A1BC9BB007406EE /* NewMezocycleView.swift in Sources */,
 				02D5906329C35AFD007C6AAB /* ClientDetailView.swift in Sources */,
 				023BA4C529D4A85400241B2B /* GHListView.swift in Sources */,
 				02C49A8A29EAEAEB00298E13 /* Authentication.swift in Sources */,
+				0276B5192B44E1CE00F4C3B0 /* MockCategoryRepository.swift in Sources */,
 				0210C64B29AA6A53001DAD74 /* TabBarView.swift in Sources */,
 				02E9FCCB29F41AED000662D5 /* FirestorePhasesRepository.swift in Sources */,
 				02817F8A29EF1FDE0038C658 /* AccountRepository.swift in Sources */,
@@ -834,13 +1104,21 @@
 				02E9FCC729F335EE000662D5 /* MezocycleRepository.swift in Sources */,
 				0243FB7029BC0188003ECC8C /* MockDataModel.swift in Sources */,
 				0210C65329AA6BBB001DAD74 /* TrainingPlansView.swift in Sources */,
+				0276B5212B44E34C00F4C3B0 /* MockMezocycleRepository.swift in Sources */,
 				023BA4CD29D4CCA000241B2B /* MediumCardView.swift in Sources */,
+				0246EBDC2ACA0FCC00287612 /* Measurements.swift in Sources */,
+				02D583052B4C5BA900DE40A8 /* FirestoreClientRepository.swift in Sources */,
 				02E9FCC029F335B1000662D5 /* MezocycleDataStore.swift in Sources */,
 				02D3BE392A1FFF88007406EE /* Client.swift in Sources */,
+				025F2ED52AE93FD10063C2B8 /* FirebaseStoragePdfRepository.swift in Sources */,
+				0276B5232B44E35D00F4C3B0 /* MockFoodPlansRepository.swift in Sources */,
 				0210C64D29AA6B84001DAD74 /* TodayView.swift in Sources */,
+				0246EBE02ACC844700287612 /* MeasurementsDetailView.swift in Sources */,
+				025F2ED12AE0AAA20063C2B8 /* FoodPlansRepository.swift in Sources */,
 				023BA4CB29D4CC6100241B2B /* LargeCardView.swift in Sources */,
 				02E9FCD229F83D6F000662D5 /* NewClientView.swift in Sources */,
 				02F06E1029DC59CF008032B5 /* DataModels.swift in Sources */,
+				02D583282B4CBF9300DE40A8 /* MockedData.swift in Sources */,
 				0210C63D29AA001C001DAD74 /* Diploma_2023App.swift in Sources */,
 				02C5D9622A560768003EE5A1 /* NewAlbumView.swift in Sources */,
 				02E9FCDE29FDB91C000662D5 /* EditClientView.swift in Sources */,
@@ -853,14 +1131,63 @@
 				0210C66D29BB41A7001DAD74 /* ClientsViewModel.swift in Sources */,
 				0210C65B29AA6C62001DAD74 /* WhiteboardView.swift in Sources */,
 				02817F8829EF1C8D0038C658 /* AccountView.swift in Sources */,
-				0210C65529AA6BC4001DAD74 /* FoodPlansView.swift in Sources */,
+				0210C65529AA6BC4001DAD74 /* MockFoodPlansView.swift in Sources */,
 				0210C66229B9EAAB001DAD74 /* RotationViewModifier.swift in Sources */,
 				02D5906729C4F41B007C6AAB /* InfoRowView.swift in Sources */,
 				02E9FCB229F04B7B000662D5 /* CategoryDataStore.swift in Sources */,
-				02F06E1229DC7905008032B5 /* Repositories.swift in Sources */,
 				02C5D9582A4E4426003EE5A1 /* ClientAsyncImage.swift in Sources */,
+				0276B51B2B44E20900F4C3B0 /* MockAccountRepository.swift in Sources */,
 				02817F8029EE95140038C658 /* ClientsDataStore.swift in Sources */,
 				02770C292A1999D200BEE9BD /* NewPhaseSheetView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C6A762B2A6013001F1D70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0276B52E2B46372300F4C3B0 /* AccountRepository.swift in Sources */,
+				0276B5462B4639E600F4C3B0 /* Measurements.swift in Sources */,
+				025C6A7F2B2A6013001F1D70 /* Diploma_2023UITestsLaunchTests.swift in Sources */,
+				0276B54D2B463A2200F4C3B0 /* FoodPlansDataStore.swift in Sources */,
+				0276B54A2B463A1C00F4C3B0 /* ExercisesDataStore.swift in Sources */,
+				0276B52F2B46373600F4C3B0 /* CategoryRepository.swift in Sources */,
+				0276B5452B4639E400F4C3B0 /* ProgressAlbum.swift in Sources */,
+				0276B5672B4653C000F4C3B0 /* MockDataModel.swift in Sources */,
+				02D583202B4C638100DE40A8 /* MockFoodPlansRepository.swift in Sources */,
+				0276B5302B46373900F4C3B0 /* ClientRepository.swift in Sources */,
+				0276B5332B46374000F4C3B0 /* MezocycleRepository.swift in Sources */,
+				02D583312B4DA0DA00DE40A8 /* RotationViewModifier.swift in Sources */,
+				0276B5662B464F1900F4C3B0 /* MockAuthenticationService.swift in Sources */,
+				0276B5322B46373D00F4C3B0 /* PhasesRepository.swift in Sources */,
+				02D5832F2B4DA07600DE40A8 /* AccountView.swift in Sources */,
+				02D583222B4C638500DE40A8 /* MockImageStorageRepository.swift in Sources */,
+				0276B5402B46397400F4C3B0 /* ImageRepository.swift in Sources */,
+				02D583182B4C637700DE40A8 /* MockAccountRepository.swift in Sources */,
+				02D5831A2B4C637A00DE40A8 /* MockExerciseRepository.swift in Sources */,
+				02D5832A2B4CBF9300DE40A8 /* MockedData.swift in Sources */,
+				0276B54B2B463A1E00F4C3B0 /* MezocycleDataStore.swift in Sources */,
+				0276B5492B463A1A00F4C3B0 /* ClientsDataStore.swift in Sources */,
+				02D5831C2B4C637C00DE40A8 /* MockPhasesRepository.swift in Sources */,
+				0276B5442B4639E100F4C3B0 /* TrainingPlans.swift in Sources */,
+				0276B5652B464C6000F4C3B0 /* Extensions.swift in Sources */,
+				0276B5432B4639DF00F4C3B0 /* Client.swift in Sources */,
+				0276B53F2B46395B00F4C3B0 /* PdfRepository.swift in Sources */,
+				02D5831E2B4C637F00DE40A8 /* MockMezocycleRepository.swift in Sources */,
+				0276B52D2B46371200F4C3B0 /* AnyAuthenticationService.swift in Sources */,
+				0276B5342B46374200F4C3B0 /* FoodPlansRepository.swift in Sources */,
+				029DA6C22B3A9956000D9352 /* DataModels.swift in Sources */,
+				0276B5482B463A1800F4C3B0 /* CategoryDataStore.swift in Sources */,
+				025C6A7D2B2A6013001F1D70 /* Diploma_2023UITests.swift in Sources */,
+				02D583242B4C638800DE40A8 /* MockPdfStorageRepository.swift in Sources */,
+				02D583152B4C637400DE40A8 /* MockCategoryRepository.swift in Sources */,
+				0276B52B2B45606000F4C3B0 /* AppDependencyContainer.swift in Sources */,
+				0276B54C2B463A2000F4C3B0 /* PhasesDataStore.swift in Sources */,
+				02D583142B4C636E00DE40A8 /* MockClientRepository.swift in Sources */,
+				0276B5472B463A1600F4C3B0 /* AccountDataStore.swift in Sources */,
+				029DA6C12B3A993D000D9352 /* FoodPlans.swift in Sources */,
+				02D5832D2B4D9FEC00DE40A8 /* TodayView.swift in Sources */,
+				0276B5312B46373B00F4C3B0 /* ExerciseRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,15 +1195,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02C5D93E2A4BB7CB003EE5A1 /* Diploma_2023Tests.swift in Sources */,
+				0276B53E2B46395A00F4C3B0 /* PdfRepository.swift in Sources */,
+				0246EBCC2AC4B1D600287612 /* TrainingPlans.swift in Sources */,
+				0276B5632B464ADC00F4C3B0 /* FoodPlansDataStore.swift in Sources */,
 				02C5D9482A4BBBE3003EE5A1 /* MockClientDataStore.swift in Sources */,
-				02C5D9452A4BB876003EE5A1 /* ClientsViewModelTests.swift in Sources */,
+				02D5832E2B4DA07600DE40A8 /* AccountView.swift in Sources */,
+				02D5831F2B4C638100DE40A8 /* MockFoodPlansRepository.swift in Sources */,
+				0276B52A2B45605E00F4C3B0 /* AppDependencyContainer.swift in Sources */,
+				02D583212B4C638400DE40A8 /* MockImageStorageRepository.swift in Sources */,
+				0276B5642B464AEB00F4C3B0 /* MezocycleDataStore.swift in Sources */,
+				02D583132B4C636D00DE40A8 /* MockClientRepository.swift in Sources */,
+				0276B54F2B463A6200F4C3B0 /* ExercisesDataStore.swift in Sources */,
+				0246EBD32AC4BDC800287612 /* PhasesRepository.swift in Sources */,
+				02D583232B4C638800DE40A8 /* MockPdfStorageRepository.swift in Sources */,
+				02D583292B4CBF9300DE40A8 /* MockedData.swift in Sources */,
+				0246EBD72AC4BDD500287612 /* AccountRepository.swift in Sources */,
+				0246EBD42AC4BDCA00287612 /* MezocycleRepository.swift in Sources */,
+				02D583162B4C637400DE40A8 /* MockCategoryRepository.swift in Sources */,
+				029DA6C02B3A993D000D9352 /* FoodPlans.swift in Sources */,
+				02D5831D2B4C637E00DE40A8 /* MockMezocycleRepository.swift in Sources */,
+				0246EBCB2AC4B1D400287612 /* Client.swift in Sources */,
+				02D5832C2B4D9FEC00DE40A8 /* TodayView.swift in Sources */,
+				0246EBCD2AC4B1D900287612 /* ProgressAlbum.swift in Sources */,
+				0246EBCA2AC4B1D000287612 /* DataModels.swift in Sources */,
+				02D5831B2B4C637C00DE40A8 /* MockPhasesRepository.swift in Sources */,
+				0246EBCE2AC4B1FE00287612 /* ClientRepository.swift in Sources */,
+				0246EBD52AC4BDCE00287612 /* ExerciseRepository.swift in Sources */,
+				02D583172B4C637700DE40A8 /* MockAccountRepository.swift in Sources */,
+				0246EBD82AC4C03A00287612 /* Extensions.swift in Sources */,
+				0276B54E2B463A5A00F4C3B0 /* CategoryDataStore.swift in Sources */,
+				0246EBC92AC4B0F000287612 /* ClientsDataStore.swift in Sources */,
+				02D583302B4DA0D900DE40A8 /* RotationViewModifier.swift in Sources */,
+				0276B5352B46374300F4C3B0 /* FoodPlansRepository.swift in Sources */,
+				0246EBD62AC4BDD300287612 /* CategoryRepository.swift in Sources */,
+				0276B5412B46397400F4C3B0 /* ImageRepository.swift in Sources */,
+				02D583192B4C637900DE40A8 /* MockExerciseRepository.swift in Sources */,
+				025F2EC72AD7296C0063C2B8 /* Measurements.swift in Sources */,
+				0276B5622B464ABE00F4C3B0 /* AccountDataStore.swift in Sources */,
+				025F2EC82AD72A190063C2B8 /* MockDataModel.swift in Sources */,
+				0246EBD22AC4B31500287612 /* AnyAuthenticationService.swift in Sources */,
+				02DDA57E2AB9BEFA00EE16F6 /* MockAuthenticationService.swift in Sources */,
+				0276B5502B463A6700F4C3B0 /* PhasesDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		025C6A812B2A6013001F1D70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0210C63829AA001C001DAD74 /* Diploma_2023 */;
+			targetProxy = 025C6A802B2A6013001F1D70 /* PBXContainerItemProxy */;
+		};
 		02C5D9402A4BB7CB003EE5A1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0210C63829AA001C001DAD74 /* Diploma_2023 */;
@@ -1018,6 +1388,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1049,6 +1420,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1062,6 +1434,57 @@
 			};
 			name = Release;
 		};
+		025C6A822B2A6013001F1D70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R6H92NGBR5;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.martinbernat.Diploma-2023UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Diploma_2023;
+			};
+			name = Debug;
+		};
+		025C6A832B2A6013001F1D70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R6H92NGBR5;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.martinbernat.Diploma-2023UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Diploma_2023;
+			};
+			name = Release;
+		};
 		02C5D9422A4BB7CB003EE5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1070,10 +1493,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R6H92NGBR5;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "co.martinbernat.Diploma-2023Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1089,10 +1514,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R6H92NGBR5;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "co.martinbernat.Diploma-2023Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1117,6 +1544,15 @@
 			buildConfigurations = (
 				0210C64829AA001E001DAD74 /* Debug */,
 				0210C64929AA001E001DAD74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		025C6A842B2A6013001F1D70 /* Build configuration list for PBXNativeTarget "Diploma_2023UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				025C6A822B2A6013001F1D70 /* Debug */,
+				025C6A832B2A6013001F1D70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

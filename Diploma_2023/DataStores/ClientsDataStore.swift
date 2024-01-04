@@ -8,21 +8,24 @@
 import Combine
 import Foundation
 
-
-class ClientsDataStore: ObservableObject {
+// MARK: - ClientsDataStore - Client
+public class ClientsDataStore: ObservableObject {
     @Published private(set) var allClients: [Client] = []
     @Published private(set) var allProgressAlbums: [ProgressAlbum] = []
+    @Published private(set) var allMeasurements: [Measurements] = []
 
     private let clientRepository: ClientRepository
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
     private var cancellable: AnyCancellable?
     
-    init(clientRepository: ClientRepository, authenticationService: AuthenticationService) {
+    init(clientRepository: ClientRepository, authenticationService: AnyAuthenticationService) {
         self.clientRepository = clientRepository
         self.authenticationService = authenticationService
         
         cancellable = authenticationService.$userId.sink { [weak self] userId in
+            print("\n ClientDataStore userId.sink: \(userId) \n")
+            print("Current Thread: \(Thread.current)")
             if let userId = userId {
                 self?.fetchClients(forUserId: userId)
             } else {
@@ -48,12 +51,15 @@ class ClientsDataStore: ObservableObject {
                     self?.allClients = clients
                     // When the clients are updated, update the progress albums list too
                     self?.allProgressAlbums = clients.flatMap { $0.progressAlbums }
+                    // When the clients are updated, update the measurements list too
+                    self?.allMeasurements = clients.flatMap { $0.measurements }
                 }
             case .failure(let error):
                 print("Error fetching clients: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     self?.allClients = []
                     self?.allProgressAlbums = []  // If clients fetch fails, clear the progress albums too
+                    self?.allMeasurements = []  // If clients fetch fails, clear the measurements too
 
                 }
             }
@@ -66,7 +72,11 @@ class ClientsDataStore: ObservableObject {
 
     func createClient(_ client: Client, completion: @escaping (Result<Void, Error>) -> Void) {
             
+        print("ClientDataStore.createClient() \n userID:  \(authenticationService.userId) \n")
+        print("Current Thread: \(Thread.current)")
+        
         guard let userId = authenticationService.userId else {
+            print("\n userID nil \n")
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID is not available"])))
             return
         }
@@ -152,7 +162,7 @@ class ClientsDataStore: ObservableObject {
         }
     }
     
-    // ProgressAlbum function
+    // MARK: - ClientsDataStore - Progress Album
     func updateProgressAlbum( progressAlbum: ProgressAlbum, completion: @escaping (Result<Void, Error>) -> Void) {
         
         // fetch Client from Almbum's clientID
@@ -170,9 +180,28 @@ class ClientsDataStore: ObservableObject {
             // Update the client in the repository
             updateClient(updatedClient, completion: completion)
         }
-        
-
     }
+    
+    // MARK: - ClientsDataStore - Measurements
+    func updateMeasurements(measurements: Measurements, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        // Fetch Client from Measurement's clientID
+        if var updatedClient = self.getClient(clientID: measurements.clientID) {
+            
+            // Updating existing measurement
+            if let measurementIndex = updatedClient.getMeasurementIndex(measurementId: measurements.id) {
+                updatedClient.measurements[measurementIndex] = measurements
+            }
+            // Adding new measurement
+            else {
+                updatedClient.measurements.append(measurements)
+            }
+            
+            // Update the client in the repository
+            updateClient(updatedClient, completion: completion)
+        }
+    }
+
     
     
 }

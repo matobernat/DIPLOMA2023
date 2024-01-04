@@ -11,7 +11,7 @@ import Combine
 class MezocycleViewModel: ObservableObject {
     
     
-    //FORM MEZO PROPERTIES
+    //Local inputs from Mezocycle item
     @Published var title: String = ""
     @Published var durationInMonths: String = ""
     @Published var trainingFocus: String = ""
@@ -23,9 +23,23 @@ class MezocycleViewModel: ObservableObject {
     
     
     
+    // Mezo
     private let mezoDataStore: MezoDataStore
     @Published var selectedMezo:Mezocycle
-    private var selectedClient: Client? = nil
+    
+    //Phase
+    private let phaseDataStore: PhasesDataStore
+    @Published var phases: [Phase] = []
+
+    
+    //Client
+    private let clientsDataStore: ClientsDataStore
+    @Published  var clients: [Client] = []
+    @Published var clientItems: [(Client, title: String, imageUrl: String?, placeholderName: String?)] = []
+    
+    
+    
+    // Local
     @Published var isEditing = false
     @Published var isShowingSheet: Bool = false
     @Published var isShowingSheetList = false
@@ -34,38 +48,45 @@ class MezocycleViewModel: ObservableObject {
 
     @Published var searchText = ""
 
-    private let clientsDataStore: ClientsDataStore
-    @Published var clients:[Client]
-    
-    private let phaseDataStore: PhasesDataStore
-    @Published var phases: [Phase] = []
     private var cancellables = Set<AnyCancellable>()
     
-    init(selectedMezo: Mezocycle, selectedClient: Client? = nil) {
+    
+    
+    
+    // INIT
+    init(selectedMezo: Mezocycle) {
         
+
+        // Data Stored
+        self.mezoDataStore = AppDependencyContainer.shared.mezoDataStore
+        self.phaseDataStore = AppDependencyContainer.shared.phasesDataStore
+        self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
+        
+        
+        // Mezocycle
         self.selectedMezo = selectedMezo
         
-        // Mezo MANAGEMENT
-        self.mezoDataStore = AppDependencyContainer.shared.mezoDataStore
         
-        // Phase MANAGEMENT
-        self.phaseDataStore = AppDependencyContainer.shared.phasesDataStore
-        
-        
-        self.clientsDataStore = AppDependencyContainer.shared.clientsDataStore
-        self.clients = clientsDataStore.allClients
-        
-        
-        clientsDataStore.$allClients.sink { [weak self] newClients in
-            self?.clients = newClients
-        }
-        .store(in: &cancellables)
-        
+        // Phases
+        self.phases = phaseDataStore.allPhases
         // Subscribe to changes in Phases
         phaseDataStore.$allPhases.sink { [weak self] newPhases in
             self?.phases = newPhases
         }
         .store(in: &cancellables)
+        
+        
+        
+        // Clients
+        self.clients = clientsDataStore.allClients
+        clientsDataStore.$allClients.sink { [weak self] newClients in
+            self?.clients = newClients
+            // Transform newClients into clientItems
+            self?.clientItems = newClients.map { ($0, $0.title, $0.imageUrl, $0.placeholderName) }
+        }
+        .store(in: &cancellables)
+        
+        
         
     }
 
@@ -168,6 +189,7 @@ struct MezocycleView: View, DetailView {
     
     
     init(item: IdentifiableItem) {
+        print("MEZO INIT")
         self.vm = MezocycleViewModel(selectedMezo: item  as! Mezocycle)
     }
     
@@ -196,8 +218,8 @@ struct MezocycleView: View, DetailView {
         }).contextMenu {
             
             Button(action: {
-                //addMezoToClientSheet()
-                presentationMode.wrappedValue.dismiss()
+//                addMezoToClientSheet()
+                
                 vm.isShowingSheetList = true
                 vm.isShowingSheet = true
                 // Call your function to delete the client here
@@ -263,7 +285,33 @@ struct MezocycleView: View, DetailView {
         .sheet(isPresented: $vm.isShowingSheet) {
 
             if vm.isShowingSheetList{
-                addMezoToClientSheet(vm: vm, clients: $vm.clients, mezo: $vm.selectedMezo)
+                
+                // OLD SELECTABLE LIST VIEW
+//                addMezoToClientSheet(vm: vm, clients: $vm.clients, mezo: $vm.selectedMezo)
+                
+                SelectableListView(items: vm.clientItems,
+                                   multipleSelection: false,
+                                   selectSfSymbolName: "plus.circle",
+                                   unselectSfSymbolName: "minus",
+                                   selectedItems: [],
+                                   onDone: { selectedItems in
+                                       // Use selectedItems as you need.
+                                       if let selectedItem = selectedItems.first {
+                                           vm.addMezoToClient(selectedMezo: vm.selectedMezo, client: selectedItem)
+//                                           vm.isShowingClientList = false
+                                           vm.isShowingSheet = false
+                                           vm.isShowingSheetList = false
+                                           print(selectedItems.first?.title)
+
+                                       }
+                                   }, onCancel: {
+                                       vm.isShowingSheet = false
+//                                       vm.isShowingClientList = false
+                                       vm.isShowingSheetList = false
+
+                                   }
+                )
+                
             }
 
         }
@@ -324,7 +372,7 @@ struct MezocycleViewHeader: View{
 }
 
 
-// ADD PHASE TO CLIENT
+// ADD PHASE TO CLIENT - not used anymore, already using general selectItemList
 struct addMezoToClientSheet: View {
     @ObservedObject var vm: MezocycleViewModel
     @Binding var clients: [Client]

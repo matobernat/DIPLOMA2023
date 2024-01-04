@@ -207,7 +207,7 @@ struct NewPhaseInfoTable: View {
 
     var body: some View {
             VStack(spacing: 0){
-                SheetHeaderBuilder(labels: labels, width: width, height: 50, color: Color.gray.opacity(0.2))
+                SheetHeaderBuilder(labels: labels, widths: width, height: 50, color: Color.gray.opacity(0.2))
                 infoTableRowBuilder()
             }
     }
@@ -215,7 +215,7 @@ struct NewPhaseInfoTable: View {
     func infoTableRowBuilder() -> some View {
         HStack(spacing: 0) {
             ForEach(data.indices, id: \.self) { index in
-                TextFieldCellBuilder(textBinding: data[index], width: width[index ], height: height, color: Color.white.opacity(0.2))
+                TextEditorCellBuilder(textBinding: data[index], width: width[index ], height: height, color: Color.white.opacity(0.2))
 
             }
         }
@@ -238,7 +238,7 @@ struct NewPhaseSheetTable: View {
             VStack(spacing: 0){
                 
                 // HEADER
-                SheetHeaderBuilder(labels: headerLabels, width: widths, height: headerHeight, color: Color.secondary)
+                SheetHeaderBuilder(labels: headerLabels, widths: widths, height: headerHeight, color: Color.secondary)
                 
                 // TABLE
                 newPhaseTableContentBuilder(newPhase: $newPhase, widths: widths, height: height, color: Color.white.opacity(0.1))
@@ -254,7 +254,6 @@ struct newPhaseTableContentBuilder: View {
     var widths: [CGFloat]
     var height: CGFloat
     var color: Color
-
     
     var body: some View {
         VStack(spacing: 0) {
@@ -306,7 +305,7 @@ struct NewSheetRowBuilder: View {
 
             // Exercise Settings
             ForEach(data.indices, id: \.self) { index in
-                TextFieldCellBuilder(textBinding: data[index], width: width[index+1], height: height, color: color)
+                TextEditorCellBuilder(textBinding: data[index], width: width[index+1], height: height, color: color)
             }
         }
     }

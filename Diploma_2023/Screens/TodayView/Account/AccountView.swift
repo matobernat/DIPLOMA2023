@@ -12,7 +12,7 @@ class AccountViewModel: ObservableObject {
     @Published var loggedAccount: Account?
 
     private let accountDataStore: AccountDataStore
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     private var cancellable: AnyCancellable?
 
     init() {

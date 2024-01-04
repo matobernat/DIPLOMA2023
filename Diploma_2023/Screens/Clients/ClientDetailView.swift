@@ -154,8 +154,8 @@ struct ClientDetailView: View, DetailView {
                     GeneralHorizontalListView(title: "Phases", items: vm.selectedClient.phases , titleSize: .medium
                                               ,sizeModel: .large, dataType: .phase)
                     GeneralHorizontalListView(title: "Mezocycles", items: vm.selectedClient.mezocycles, titleSize: .medium, sizeModel: .large, dataType: .mezocycle)
-//                    GeneralHorizontalListView(title: "Food Protocols", items: DataModelMock.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
-//                    GeneralHorizontalListView(title: "Measurements", items: DataModelMock.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
+                    GeneralHorizontalListView(title: "Food Protocols", items: vm.selectedClient.foodPlans, titleSize: .medium, sizeModel: .medium, dataType: .foodPlan)
+                    GeneralHorizontalListView(title: "Measurements", items: vm.selectedClient.measurements, titleSize: .medium, sizeModel: .medium, dataType: .measurement)
                     GeneralHorizontalListView(title: "Progress Photos", items: vm.selectedClient.progressAlbums, titleSize: .medium, sizeModel: .large, dataType: .progressAlbum)
                     
                 }

@@ -24,12 +24,10 @@ struct TabBarView: View {
                 .tabItem {
                     Image(systemName: "person.3")
                     Text("Clients")
+                    .accessibilityIdentifier("TabItemClient")
                 }
-//            WhiteboardView()
-//                .tabItem {
-//                    Image(systemName: "pencil")
-//                    Text("Whiteboard")
-//                }
+                
+
             TrainingPlansView()
                 .tabItem {
                     Image(systemName: "doc.plaintext")
@@ -40,22 +38,21 @@ struct TabBarView: View {
                     Image(systemName: "figure.walk")
                     Text("Exercise")
                 }
-            AccountTabView()
+//            AccountTabView()
+//                .tabItem {
+//                    Image(systemName: "person.circle")
+//                    Text("Account")
+//                }
+            FoodPlansView()
                 .tabItem {
-                    Image(systemName: "person.circle")
-                    Text("Account")
+                    Image(systemName: "leaf")
+                    Text("Food Plans")
                 }
-            
-//            FoodPlansView()
-//                .tabItem {
-//                    Image(systemName: "leaf")
-//                    Text("Food Plans")
-//                }
-//            MeasurementsView()
-//                .tabItem {
-//                    Image(systemName: "chart.bar")
-//                    Text("Measurements")
-//                }
+            MeasurementsView()
+                .tabItem {
+                    Image(systemName: "chart.bar")
+                    Text("Measurements")
+                }
             ProgressAlbumsView()
                 .tabItem {
                     Image(systemName: "camera.fill")

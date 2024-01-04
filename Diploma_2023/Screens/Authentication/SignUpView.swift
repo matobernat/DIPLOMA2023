@@ -15,7 +15,7 @@ class SignUpViewModel: ObservableObject {
 
     private let accountDataStore: AccountDataStore
     private let categoryDataStore: CategoryDataStore
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
 
     init() {
@@ -30,13 +30,17 @@ class SignUpViewModel: ObservableObject {
             case .success(let user):
                 let accountId = user.uid
                 
+                print("SingUpView - userId: \(accountId)")
+                
                 // Create Account + Profile
                 self?.accountDataStore.createAccount(userID: accountId, email: self?.email ?? "", profileName: self?.profileName ?? "Main Coach"){ result in
                     switch result {
                     case .success(let account):
                         
+                        print("SingUpView - account.ic: \(account.id)")
+                        
                         // Create Account's categories
-                        self?.categoryDataStore.createCategoriesForAccount(for: account.id) { result in
+                        self?.categoryDataStore.createCategoriesForAccount(forAccount: account.id) { result in
                             switch result {
                             case .success:
                                 print("Successfully created categories for account")
@@ -47,7 +51,7 @@ class SignUpViewModel: ObservableObject {
                         
                         // Create Profile's categories
                         if let profileId = account.loggedProfile?.id {
-                            self?.categoryDataStore.createCategoriesForProfile(for: profileId, for: account.id) { result in
+                            self?.categoryDataStore.createCategoriesForProfile(forProfile: profileId, forAccount: account.id) { result in
                                                 switch result {
                                                 case .success:
                                                     print("Successfully created categories for profile")

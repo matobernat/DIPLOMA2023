@@ -81,6 +81,8 @@ struct Client: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable  {
     var phases = [Phase]()
     var mezocycles =  [Mezocycle]()
     var progressAlbums: [ProgressAlbum]
+    var measurements: [Measurements]
+    var foodPlans: [FoodPlan]
     var foodPlanIDs: [String]
     var measurementIDs: [String]
     var progressAlbumIDs: [String]
@@ -92,39 +94,27 @@ struct Client: IdentifiableItem, Identifiable, Hashable, Encodable, Decodable  {
 
 
 
+// GET functions of the client
+extension Client {
+    func getAllPhases() -> [Phase] {
+        var phases = self.phases
 
-// Remaining Tranings
-extension Client{
-    
-    func calculateFinishedPhasesPercentage() -> Double {
-
-        let totalAvailableSessions = self.getTotalAvailableSessions()
-        let totalFinishedSessions = self.getTotalFinishedSessions()
-        
-        if totalAvailableSessions == 0 {
-            return 0 // Avoid division by zero
+        for mezocycle in self.mezocycles {
+            phases += mezocycle.phases
         }
-        let finishedPercentage = Double(totalFinishedSessions) / Double(totalAvailableSessions) * 100.0
-        print ("PERCENTAGE:\(finishedPercentage)  \(totalFinishedSessions) finished   \(totalAvailableSessions) available ")
 
-        return finishedPercentage
+        return phases
     }
-    
-    func getTotalAvailableSessions() ->Int{
-        let totalAvailableSessions = self.phases.reduce(0) { $0 + $1.getNumberOfAllAvailableSessions() } +
-        self.mezocycles.reduce(0) { $0 + $1.getNumberOfAllAvailableSessions() }
-        return totalAvailableSessions
-    }
-    
-    func getTotalFinishedSessions() ->Int{
-        let totalFinishedSessions = self.phases.reduce(0) { $0 + $1.getNumberOfAllFinishedSessions() } +
-        self.mezocycles.reduce(0) { $0 + $1.getNumberOfAllFinishedSessions() }
-        return totalFinishedSessions
-    }
-    
-    
-
 }
+
+
+
+
+
+
+
+
+
 
 
 // Phases + Mezos CRUD functions
@@ -205,6 +195,10 @@ extension Client{
     }
 }
 
+
+
+
+// ProgressAlbum CRUD functions
 extension Client{
 
     /// - Returns: The client with the updated ProgressAlbum
@@ -238,6 +232,41 @@ extension Client{
     
 }
 
+// FoodProtocol CRUD functions
+extension Client{
+
+    /// - Returns: The client with the updated FoodProtocol
+    func updateFoodPlan(selectedItem: FoodPlan) -> Client {
+        guard let index = self.foodPlans.firstIndex(where: { $0.id == selectedItem.id }) else {
+            // FoodPlan with the given ID not found, return the original client
+            return self
+        }
+        var copy = self
+        copy.foodPlans[index] = selectedItem
+        
+        return copy
+    }
+    
+    
+    /// - Returns: The client with the updated FoodProtocol
+    func addFoodPlan(selectedItem: FoodPlan) -> Client {
+        var copy = self
+        copy.foodPlans.append(selectedItem)
+        return copy
+    }
+    
+    /// - Returns: The client with the deleted FoodProtocol
+    func deleteFoodPlan(selectedItemId: String) -> Client {
+        
+        var copy = self
+        copy.foodPlans.removeAll(where: { $0.id == selectedItemId })
+        return copy
+    }
+    
+    
+}
+
+
 
 
 // static factory methods
@@ -253,6 +282,10 @@ extension Client{
     
     func getProgressAlbumIndex(progressAlbumId: String) -> Int?{
         return self.progressAlbums.firstIndex(where: { $0.id == progressAlbumId})
+    }
+    
+    func getMeasurementIndex(measurementId: String) -> Int? {
+        return measurements.firstIndex { $0.id == measurementId }
     }
     
     static func getNewClient( categoryIDs : [String], accountID: String, profileID: String) -> Client{
@@ -277,6 +310,8 @@ extension Client{
                 phases: [],
                 mezocycles: [],
                 progressAlbums: [],
+                measurements: [],
+                foodPlans: [],
                 foodPlanIDs: [],
                 measurementIDs: [],
                 progressAlbumIDs: [])
@@ -321,9 +356,75 @@ extension Client{
             phases: [],
             mezocycles: [],
             progressAlbums: [],
+            measurements: [],
+            foodPlans: [],
             foodPlanIDs: [],
             measurementIDs: [],
             progressAlbumIDs: []
         )
     }
+}
+
+
+
+
+
+// Remaining Tranings Logic calculations
+extension Client{
+    
+    func calculateFinishedPhasesPercentage() -> Double {
+
+        let totalAvailableSessions = self.getTotalAvailableSessions()
+        let totalFinishedSessions = self.getTotalFinishedSessions()
+        
+        if totalAvailableSessions == 0 {
+            return 0 // Avoid division by zero
+        }
+        let finishedPercentage = Double(totalFinishedSessions) / Double(totalAvailableSessions) * 100.0
+        print ("PERCENTAGE:\(finishedPercentage)  \(totalFinishedSessions) finished   \(totalAvailableSessions) available ")
+
+        return finishedPercentage
+    }
+    
+    
+    
+//The compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+    
+//    func getTotalAvailableSessions() ->Int{
+//        let totalAvailableSessions = self.phases.reduce(0) { $0 + $1.getNumberOfAllAvailableSessions() } +
+//        self.mezocycles.reduce(0) { $0 + $1.getNumberOfAllAvailableSessions() }
+//        return totalAvailableSessions
+//    }
+    
+    func getTotalAvailableSessions() -> Int {
+        let phaseSessions: Int = self.phases.reduce(0) { (total, phase) in
+            total + phase.getNumberOfAllAvailableSessions()
+        }
+        let mezoSessions: Int = self.mezocycles.reduce(0) { (total, mezo) in
+            total + mezo.getNumberOfAllAvailableSessions()
+        }
+        return phaseSessions + mezoSessions
+    }
+
+    
+    
+//    func getTotalFinishedSessions() ->Int{
+//        let totalFinishedSessions = self.phases.reduce(0) { $0 + $1.getNumberOfAllFinishedSessions() } +
+//        self.mezocycles.reduce(0) { $0 + $1.getNumberOfAllFinishedSessions() }
+//        return totalFinishedSessions
+//    }
+//
+    
+    
+    func getTotalFinishedSessions() -> Int {
+        let phaseFinishedSessions: Int = self.phases.reduce(0) { (total, phase) in
+            total + phase.getNumberOfAllFinishedSessions()
+        }
+        let mezoFinishedSessions: Int = self.mezocycles.reduce(0) { (total, mezo) in
+            total + mezo.getNumberOfAllFinishedSessions()
+        }
+        return phaseFinishedSessions + mezoFinishedSessions
+    }
+
+
 }

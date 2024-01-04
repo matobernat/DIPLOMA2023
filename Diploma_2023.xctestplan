@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "1D773205-FBA7-453F-8E1D-224A6D82136D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Diploma_2023.xcodeproj",
+      "identifier" : "0210C63829AA001C001DAD74",
+      "name" : "Diploma_2023"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Diploma_2023.xcodeproj",
+        "identifier" : "02C5D93A2A4BB7CB003EE5A1",
+        "name" : "Diploma_2023Tests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Diploma_2023.xcodeproj",
+        "identifier" : "025C6A792B2A6013001F1D70",
+        "name" : "Diploma_2023UITests"
+      }
+    }
+  ],
+  "version" : 1
+}

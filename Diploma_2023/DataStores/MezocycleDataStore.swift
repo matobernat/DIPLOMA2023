@@ -12,11 +12,11 @@ import Foundation
 class MezoDataStore: ObservableObject {
     @Published private(set) var allMezos: [Mezocycle] = []
     private let mezoRepository: MezoRepository
-    private let authenticationService: AuthenticationService
+    private let authenticationService: AnyAuthenticationService
     
     private var cancellable: AnyCancellable?
     
-    init(mezoRepository: MezoRepository, authenticationService: AuthenticationService) {
+    init(mezoRepository: MezoRepository, authenticationService: AnyAuthenticationService) {
         self.mezoRepository = mezoRepository
         self.authenticationService = authenticationService
         

@@ -8,8 +8,42 @@
 import SwiftUI
 
 
-//MARK: MOCKED DATA FOR STATIC TESTING OF UI
 
+
+
+
+
+
+
+//MARK: MOCKED DATA FOR STATIC TESTING OF UI - ACTIVE
+
+struct MockAccount{
+    static let accountID = "TestAccountID"
+    static let profileID = "TestProfileID"
+    static let accountEmail = "testAccount@gmail.com"
+
+}
+struct MockCategory{
+    static let catClientIDs = ["cc1","cc2","cc3"]
+    static let catTrainingIDs = ["ct1","ct2","ct3"]
+    // Exercise
+    // Measure
+}
+
+struct MockClient{
+    static func getClient() -> Client{
+        return Client.createMockClient(categoryIDs: MockCategory.catClientIDs,
+                                       accountID: MockAccount.accountID,
+                                       profileID: MockAccount.profileID)
+    }
+}
+
+
+
+
+
+
+//MARK: MOCKED DATA FOR STATIC TESTING OF UI - DEPRICATED
 struct MockInfoRowData {
      let cardTitles = ["AGE", "CHART", "DEVELOPER", "LANGUAGE"]
      let cardValues = ["4+", "No.3", "SF Symbol", "EN"]
@@ -44,14 +78,6 @@ struct CategoryMock: Identifiable, Hashable {
     var isGlobal: Bool
     var iconName: String
 }
-
-
-enum SizeModelMock: String {
-    case large = "Large"
-    case medium = "Medium"
-    case small = "Small"
-}
-
 
 
 struct ClientMock: IdentifiableItem, Identifiable, Hashable {

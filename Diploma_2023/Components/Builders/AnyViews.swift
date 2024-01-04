@@ -8,6 +8,10 @@
 import SwiftUI
 
 
+protocol DetailView: View {
+    init(item: IdentifiableItem)
+}
+
 struct AnyDetailView: View {
     private let view: AnyView
 
@@ -18,6 +22,11 @@ struct AnyDetailView: View {
     var body: some View {
         view
     }
+}
+
+
+protocol CardView: View {
+    init(item: IdentifiableItem)
 }
 
 struct AnyCardView: View {

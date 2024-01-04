@@ -5,25 +5,38 @@
 //  Created by Martin Bernát on 25/02/2023.
 //
 
+//    @StateObject private var authenticationService = AppDependencyContainer.shared.authenticationService
+
+
 import SwiftUI
 import FirebaseCore
-
 
 @main
 struct Diploma_2023App: App {
 
-    private var appDependencyContainer: AppDependencyContainer
+    private var appDependencyContainer: AppDependencyContainer?
     @State private var userID: String?
-
-    @StateObject private var authenticationService: AuthenticationService
+    @StateObject private var authenticationService: AnyAuthenticationService  //type-erased wrapper
 
     init() {
-        FirebaseApp.configure()
-        self.appDependencyContainer =  AppDependencyContainer()
         
-        // Initalize the StateObject inside of the shared instance
-        self._authenticationService = StateObject(wrappedValue: AppDependencyContainer.shared.authenticationService)
-        
+        // RUN
+        if NSClassFromString("XCTest") == nil{
+            
+            FirebaseApp.configure()
+            self.appDependencyContainer = AppDependencyContainer()
+
+            // Initalizing the StateObject inside of the shared instance
+            self._authenticationService = StateObject(wrappedValue: AppDependencyContainer.shared.authenticationService)
+            
+        // TEST
+        }else{
+            self.appDependencyContainer = nil
+            self.appDependencyContainer = AppDependencyContainer(useMockedRepositories: true)
+
+            self._authenticationService = StateObject(wrappedValue: AnyAuthenticationService((MockAuthenticationService())))
+
+        }
     }
 
         var body: some Scene {
@@ -35,5 +48,4 @@ struct Diploma_2023App: App {
             }
         }
     }
-         
 }
