@@ -1,11 +1,16 @@
 //
+<<<<<<< HEAD
 //  MockAuthenticationService.swift
+=======
+//  MuckAuthenticationService.swift
+>>>>>>> main
 //  Diploma_2023Tests
 //
 //  Created by Martin Bernát on 19/09/2023.
 //
 
 import Foundation
+<<<<<<< HEAD
 
 class MockAuthenticationService: AuthenticationServiceProtocol {
 //    @Published var userId: String? = MockAccount.accountID
@@ -68,3 +73,5 @@ class MockAuthenticationService: AuthenticationServiceProtocol {
 }
 
 
+=======
+>>>>>>> main

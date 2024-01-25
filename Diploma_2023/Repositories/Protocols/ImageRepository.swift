@@ -2,6 +2,7 @@
 //  ImageRepository.swift
 //  Diploma_2023
 //
+<<<<<<< HEAD
 //  Created by Martin Bernát on 29/04/2023.
 //
 
@@ -16,3 +17,9 @@ protocol ImageRepository {
     func updateImage(oldUrl: String?, newImage: UIImage, completion: @escaping (Result<String, Error>) -> ())
 
 }
+=======
+//  Created by Martin Bernát on 04/01/2024.
+//
+
+import Foundation
+>>>>>>> main

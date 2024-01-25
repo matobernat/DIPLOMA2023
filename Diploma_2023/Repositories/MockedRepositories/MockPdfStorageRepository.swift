@@ -2,6 +2,7 @@
 //  MockPdfStorageRepository.swift
 //  Diploma_2023
 //
+<<<<<<< HEAD
 //  Created by Martin Bernát on 19/09/2023.
 //
 
@@ -46,3 +47,9 @@ class MockPdfRepository: PdfRepository {
 }
 
 
+=======
+//  Created by Martin Bernát on 03/01/2024.
+//
+
+import Foundation
+>>>>>>> main

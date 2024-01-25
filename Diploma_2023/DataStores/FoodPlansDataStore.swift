@@ -1,5 +1,9 @@
 //
+<<<<<<< HEAD
 //  FoodPlansDataStore.swift
+=======
+//  FoodPlanDataStore.swift
+>>>>>>> main
 //  Diploma_2023
 //
 //  Created by Martin Bernát on 19/10/2023.
@@ -43,7 +47,11 @@ class FoodPlansDataStore: ObservableObject {
     
     
     func fetchFoodPlans(forUserId userId: String) {
+<<<<<<< HEAD
         foodPlansRepository.fetchFoodPlans(forUserId: userId) { [weak self] result in
+=======
+        foodPlanRepository.fetchFoodPlans(forUserId: userId) { [weak self] result in
+>>>>>>> main
             switch result {
             case .success(let foodPlans):
                 DispatchQueue.main.async {
@@ -58,13 +66,21 @@ class FoodPlansDataStore: ObservableObject {
         }
     }
     
+<<<<<<< HEAD
     func createFoodPlan(_ foodPlan: FoodPlan, completion: @escaping (Result<Void, Error>) -> Void) {
+=======
+    func createMezo(_ foodPlan: FoodPlan, completion: @escaping (Result<Void, Error>) -> Void) {
+>>>>>>> main
         guard let userId = authenticationService.userId else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID is not available"])))
             return
         }
         
+<<<<<<< HEAD
         foodPlansRepository.createFoodPlan(foodPlan, for: userId) { [weak self] result in
+=======
+        mezoRepository.createFoodplan(foodPlan, for: userId) { [weak self] result in
+>>>>>>> main
             switch result {
             case .success:
                 // Fetch the updated mezos
@@ -77,18 +93,30 @@ class FoodPlansDataStore: ObservableObject {
         }
     }
     
+<<<<<<< HEAD
     func updateFoodPlan(_ foodPlan: FoodPlan, completion: @escaping (Result<Void, Error>) -> Void) {
+=======
+    func updateMezo(_ foodPlan: FoodPlan, completion: @escaping (Result<Void, Error>) -> Void) {
+>>>>>>> main
         guard let userId = authenticationService.userId else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID is not available"])))
             return
         }
         
+<<<<<<< HEAD
         foodPlansRepository.updateFoodPlan(foodPlan, for: userId) { [weak self] result in
+=======
+        mezoRepository.updateFoodPlan(foodPlan, for: userId) { [weak self] result in
+>>>>>>> main
             switch result {
             case .success:
                 print("FoodPlan updated successfully")
                 // Fetch the updated mezos
+<<<<<<< HEAD
                 self?.fetchFoodPlans(forUserId: userId)
+=======
+                self?.fetchFoodplans(forUserId: userId)
+>>>>>>> main
                 completion(.success(()))
             case .failure(let error):
                 print("Error updating foodPlan: \(error.localizedDescription)")
@@ -104,7 +132,11 @@ class FoodPlansDataStore: ObservableObject {
             return
         }
         
+<<<<<<< HEAD
         foodPlansRepository.deleteFoodPlan(foodPlan, for: userId) { [weak self] result in
+=======
+        mezoRepository.deleteFoodPlan(foodPlan, for: userId) { [weak self] result in
+>>>>>>> main
             switch result {
             case .success:
                 print("FoodPlan deleted successfully")
@@ -124,17 +156,64 @@ class FoodPlansDataStore: ObservableObject {
 
 
 // MARK: - FoodPLan - PDFmonkey extension
+<<<<<<< HEAD
 extension FoodPlansDataStore {
+=======
+extension FoodPlansDatastore {
+
+    func createPDF(for foodPlan: FoodPlan, completion: @escaping (Result<String, Error>) -> Void) {
+        // Set up the URL and request
+        let url = URL(string: "https://api.pdfmonkey.io/api/v1/documents")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        // Use your API key here, but remember to shift this to Cloud Functions later
+        request.setValue("vzAExYeQ7_Q_fxmYT9zdzdB8VcARhYi_", forHTTPHeaderField: "Authorization")
+
+        // Get the JSON body
+        let jsonBody = foodPlan.getDocumentJSON(templateId: "YOUR_TEMPLATE_ID")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: jsonBody)
+
+        // Send the request
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            // Handle the response
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            if let data = data, let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any], let documentId = jsonResponse["id"] as? String {
+                completion(.success(documentId))
+            } else {
+                // Handle any error scenario
+                completion(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+            }
+        }
+
+        task.resume()
+    }
+
+>>>>>>> main
 
 }
 
 
 
+<<<<<<< HEAD
 extension FoodPlansDataStore {
     
     func sendInputToPDFMonkey(requestBody: Data, apiKey:String, completion: @escaping (Result<Data, Error>) -> ()) {
         let apiUrl = "https://api.pdfmonkey.io/api/v1/documents"
         
+=======
+extension FoodPlansDatastore {
+
+    func sendInputToPDFMonkey(jsonData: Data, completion: @escaping (Result<Data, Error>) -> ()) {
+        
+        let apiUrl = "https://api.pdfmonkey.io/api/v1/documents" // Replace this with the appropriate PDFMonkey endpoint if it's different
+        
+        // Create a URL object
+>>>>>>> main
         guard let url = URL(string: apiUrl) else {
             completion(.failure(NSError(domain: "FoodPlanDatastore",
                                         code: -1,
@@ -142,6 +221,7 @@ extension FoodPlansDataStore {
             return
         }
         
+<<<<<<< HEAD
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -149,6 +229,16 @@ extension FoodPlansDataStore {
 //        request.addValue("Bearer vzAExYeQ7_Q_fxmYT9zdzdB8VcARhYi_", forHTTPHeaderField: "Authorization")
         request.httpBody = requestBody
         
+=======
+        // Set up the request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("vzAExYeQ7_Q_fxmYT9zdzdB8VcARhYi_", forHTTPHeaderField: "Authorization") // Replace with your actual API key
+        request.httpBody = jsonData
+        
+        // Start the data task
+>>>>>>> main
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
@@ -156,6 +246,7 @@ extension FoodPlansDataStore {
                 return
             }
             
+<<<<<<< HEAD
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(.failure(NSError(domain: "FoodPlanDatastore",
                                             code: -1,
@@ -173,6 +264,12 @@ extension FoodPlansDataStore {
                                                 code: httpResponse.statusCode,
                                                 userInfo: [NSLocalizedDescriptionKey: "Server error. Code: \(httpResponse.statusCode)."])))
                 }
+=======
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "FoodPlanDatastore",
+                                            code: -1,
+                                            userInfo: [NSLocalizedDescriptionKey: "Server error"])))
+>>>>>>> main
                 return
             }
             
@@ -185,6 +282,7 @@ extension FoodPlansDataStore {
             }
         }
         
+<<<<<<< HEAD
 //        print("URL: \(request.url?.absoluteString ?? "None")")
 //        print("HTTP Method: \(request.httpMethod ?? "None")")
 //        print("Headers: \(request.allHTTPHeaderFields ?? [:])")
@@ -194,10 +292,13 @@ extension FoodPlansDataStore {
 //            print("Body: None")
 //        }
 
+=======
+>>>>>>> main
         task.resume()
     }
     
     
+<<<<<<< HEAD
     
     func sendGetRequest(url: URL, apiKey:String, completion: @escaping (Result<Data, Error>) -> Void) {
         var request = URLRequest(url: url)
@@ -244,19 +345,39 @@ extension FoodPlansDataStore {
         print(String(data: responseData, encoding: .utf8) ?? "Failed to print response as string")
 
         
+=======
+
+    // Define a custom error type for better error handling
+    enum PDFMonkeyError: Error {
+        case invalidStatus
+        case missingDownloadURL
+        case downloadFailed
+    }
+
+    func receiveResponseFromPDFMonkey(responseData: Data, completion: @escaping (Result<Data, Error>) -> Void) {
+>>>>>>> main
         // Parse the response
         do {
             let parsedResponse = try JSONDecoder().decode(PDFMonkeyDocumentResponse.self, from: responseData)
 
+<<<<<<< HEAD
             print("parsedResponse: \(parsedResponse)")
             // Check the status
             guard parsedResponse.document.status == "success" else {
+=======
+            // Check the status
+            guard parsedResponse.status == "success" else {
+>>>>>>> main
                 completion(.failure(PDFMonkeyError.invalidStatus))
                 return
             }
 
             // Confirm the download URL exists
+<<<<<<< HEAD
             guard let downloadURLString = parsedResponse.document.download_url,
+=======
+            guard let downloadURLString = parsedResponse.download_url,
+>>>>>>> main
                   let downloadURL = URL(string: downloadURLString) else {
                 completion(.failure(PDFMonkeyError.missingDownloadURL))
                 return
@@ -278,6 +399,7 @@ extension FoodPlansDataStore {
             }.resume()
 
         } catch {
+<<<<<<< HEAD
             print("receiveResponseFromPDFMonkey catch")
             completion(.failure(error))
         }
@@ -343,12 +465,23 @@ extension FoodPlansDataStore {
             print("retrievePDFMonkeyRequest catch")
             completion(.failure(error))
         }
+=======
+            completion(.failure(error))
+        }
+    }
+
+    // Define the structure for parsing the response from PDFMonkey
+    struct PDFMonkeyDocumentResponse: Decodable {
+        let status: String
+        let download_url: String?
+>>>>>>> main
     }
 
     
     
     
     
+<<<<<<< HEAD
     
     
     
@@ -356,6 +489,11 @@ extension FoodPlansDataStore {
     func sendPDFtoFirestore(data: Data, completion: @escaping (Result<String, Error>) -> ()) {
         
         pdfRepository.uploadPdf(data) { result in
+=======
+    func sendPDFtoFirestore(data: Data, completion: @escaping (Result<String, Error>) -> ()) {
+        
+        foodPlanRepository.uploadPdf(data) { result in
+>>>>>>> main
             switch result {
             case .success(let urlKey):
                 completion(.success(urlKey))
@@ -374,6 +512,7 @@ extension FoodPlansDataStore {
 
 
 // MARK: - FoodPLan - Complete Processes extension
+<<<<<<< HEAD
 extension FoodPlansDataStore {
 
     // returns URL key
@@ -453,6 +592,12 @@ extension FoodPlansDataStore {
     
     func createAndRetrieveDocument(withPayload payloadString: String, forFoodPlan foodPlan: FoodPlan, completion: @escaping (Result<String, Error>) -> Void) {
 
+=======
+extension FoodPlansDatastore {
+
+    // returns URL key
+    func createFoodPlan(json: Data, completion: @escaping (Result<URL, Error>) -> ()) {
+>>>>>>> main
         
         // 1. Send the JSON to PDFMonkey using the function from the previous extension.
         // 2. Receive the generated PDF.
@@ -460,6 +605,7 @@ extension FoodPlansDataStore {
         // 4. Retrieve the URL from Firebase Storage.
         // 5. Create and upload the FoodPlan object to Firestore.
         // 6. Return the URL or any other relevant data to the caller.
+<<<<<<< HEAD
         
         let apiKey = foodPlan.apiKey
         let documentID = foodPlan.pdfMonkeyTemplateID
@@ -704,4 +850,45 @@ extension FoodPlansDataStore {
 
 
 }
+=======
+
+        if let bodyData = createRequestBody(forTemplate: templateID, withData: jsonData) {
+            sendInputToPDFMonkey(jsonData: bodyData) { result in
+                switch result {
+                case .success(let responseData):
+                    receiveResponseFromPDFMonkey(responseData: responseData) { result in
+                        switch result {
+                        case .success(let pdfData):
+                            // Upload the PDF to Firestore
+                            sendPDFtoFirestore(data: pdfData) { result in
+                                switch result {
+                                case .success(let urlKey):
+                                    // Further processing, maybe saving the FoodPlan object to Firestore?
+                                    // ...
+
+                                    // For now, just return the URL key
+                                    completion(.success(URL(string: urlKey)!))
+                                case .failure(let error):
+                                    completion(.failure(error))
+                                }
+                            }
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        } else {
+            // Handle the error creating the request body
+        }
+    }
+
+
+}
+
+
+
+>>>>>>> main
 

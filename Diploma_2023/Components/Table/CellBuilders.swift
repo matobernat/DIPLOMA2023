@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+<<<<<<< HEAD
 // CELL BUILDER - STATIC BINDIND
 struct StaticBindingCellBuilder: View {
     var textBinding: Binding<String>
@@ -152,3 +153,16 @@ struct SheetHeaderBuilder: View {
     }
 }
 
+=======
+struct CellBuilders: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct CellBuilders_Previews: PreviewProvider {
+    static var previews: some View {
+        CellBuilders()
+    }
+}
+>>>>>>> main

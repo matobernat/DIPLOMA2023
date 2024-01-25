@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ////
 ////  MeasurementsView.swift
 ////  Diploma_2023
@@ -103,3 +104,25 @@
 //        MeasurementsView()
 //    }
 //}
+=======
+//
+//  MockMeasurementsVIew.swift
+//  Diploma_2023
+//
+//  Created by Martin Bernát on 02/10/2023.
+//
+
+import SwiftUI
+
+struct MockMeasurementsVIew: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct MockMeasurementsVIew_Previews: PreviewProvider {
+    static var previews: some View {
+        MockMeasurementsVIew()
+    }
+}
+>>>>>>> main

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+<<<<<<< HEAD
 
 // MARK: [UnifiedPage] needs to be decoupled into ObservableObjects to prevent re-rendering of whole Views
 // and then it needs to be "coupled back" by manually updating all poperties back so the whole [UnifiedPage] can be passed into parent view for saving
@@ -424,3 +425,16 @@ struct BulletGroupEditorView: View {
 //}
 
 
+=======
+struct PDFEditView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct PDFEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        PDFEditView()
+    }
+}
+>>>>>>> main

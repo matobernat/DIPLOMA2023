@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+<<<<<<< HEAD
 
 // MARK: - FoodPlans - ViewModel
 class FoodPlansViewModel: ObservableObject {
@@ -206,3 +207,16 @@ struct FoodPlansContentSearchView: View {
 
 
 
+=======
+struct FoodPlansView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct FoodPlansView_Previews: PreviewProvider {
+    static var previews: some View {
+        FoodPlansView()
+    }
+}
+>>>>>>> main

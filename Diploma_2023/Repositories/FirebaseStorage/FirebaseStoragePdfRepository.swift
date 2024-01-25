@@ -2,6 +2,7 @@
 //  FirebaseStoragePdfRepository.swift
 //  Diploma_2023
 //
+<<<<<<< HEAD
 //  Created by Martin Bernát on 29/04/2023.
 //
 
@@ -91,3 +92,9 @@ class FirebaseStoragePdfRepository: PdfRepository {
         }
     }
 }
+=======
+//  Created by Martin Bernát on 25/10/2023.
+//
+
+import Foundation
+>>>>>>> main

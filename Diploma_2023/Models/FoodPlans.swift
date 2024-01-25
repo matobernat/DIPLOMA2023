@@ -6,6 +6,7 @@
 //
 
 import Foundation
+<<<<<<< HEAD
 
 
 enum PDFmonkeyStatus: String, Codable {
@@ -506,3 +507,5 @@ func backToOriginalFormat(pages: [UnifiedPage]) -> FoodPlanData {
         bulletpointsDoubled: bulletpointsDoubled.isEmpty ? nil : bulletpointsDoubled
     )
 }
+=======
+>>>>>>> main

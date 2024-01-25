@@ -6,6 +6,7 @@
 //
 
 import Foundation
+<<<<<<< HEAD
 
 
 import Foundation
@@ -63,3 +64,5 @@ class FirestoreFoodPlansRepository: FoodPlansRepository {
         }
     }
 }
+=======
+>>>>>>> main

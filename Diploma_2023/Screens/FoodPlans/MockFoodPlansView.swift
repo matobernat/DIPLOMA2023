@@ -7,7 +7,11 @@
 
 import SwiftUI
 
+<<<<<<< HEAD
 struct MockFoodPlansView: View {
+=======
+struct FoodPlansView: View {
+>>>>>>> main
     let categories: [CategoryMock] = DataModelMock.categories
     let foodProtocols: [FoodPlanMock] = DataModelMock.foodPlans
     let title = "Food Protocols"
@@ -26,14 +30,22 @@ struct MockFoodPlansView: View {
                 SearchBar(searchText: $searchText)
                 
                 if !searchText.isEmpty {
+<<<<<<< HEAD
                     MockFoodPlansViewDetailSearch(
+=======
+                    FoodPlansViewDetailSearch(
+>>>>>>> main
                         categories: categories,
                         foodProtocols: foodProtocols,
                         selectedCategory: $selectedCategory,
                         searchText: $searchText
                     )
                 } else {
+<<<<<<< HEAD
                     MockFoodPlansViewDetail(
+=======
+                    FoodPlansViewDetail(
+>>>>>>> main
                         categories: categories,
                         foodProtocols: foodProtocols,
                         selectedCategory: $selectedCategory,
@@ -53,7 +65,11 @@ struct MockFoodPlansView: View {
 }
 
 
+<<<<<<< HEAD
 struct MockFoodPlansViewDetail: View{
+=======
+struct FoodPlansViewDetail: View{
+>>>>>>> main
     
     let categories: [CategoryMock]
     let foodProtocols: [FoodPlanMock]
@@ -80,7 +96,11 @@ struct MockFoodPlansViewDetail: View{
 
 
 
+<<<<<<< HEAD
 struct MockFoodPlansViewDetailSearch: View{
+=======
+struct FoodPlansViewDetailSearch: View{
+>>>>>>> main
     
     let categories: [CategoryMock]
     let foodProtocols: [FoodPlanMock]
@@ -95,7 +115,11 @@ struct MockFoodPlansViewDetailSearch: View{
                 searchText: searchText),
             title: nil,
             dataType: .foodPlan,
+<<<<<<< HEAD
             sizeModel: SizeModel.medium
+=======
+            sizeModel: SizeModelMock.medium
+>>>>>>> main
         )
         
     }

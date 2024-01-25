@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+<<<<<<< HEAD
 
 // MARK: - EditFoodPlan - View
 struct EditFoodPlanView: View {
@@ -71,3 +72,16 @@ struct EditFoodPlanView: View {
     }
 }
 
+=======
+struct EditFoodPlanView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct EditFoodPlanView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditFoodPlanView()
+    }
+}
+>>>>>>> main

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+<<<<<<< HEAD
 import Combine
 import UIKit
 
@@ -354,5 +355,17 @@ struct MeasurementRowBuilder: View {
                 .frame(height: 1)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         )
+=======
+
+struct MeasurementsDetailView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct MeasurementsDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        MeasurementsDetailView()
+>>>>>>> main
     }
 }

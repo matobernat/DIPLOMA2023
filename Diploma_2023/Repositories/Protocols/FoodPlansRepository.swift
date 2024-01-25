@@ -6,6 +6,7 @@
 //
 
 import Foundation
+<<<<<<< HEAD
 
 protocol FoodPlansRepository {
     func fetchFoodPlans(forUserId userId: String, completion: @escaping (Result<[FoodPlan], Error>) -> Void)
@@ -13,3 +14,5 @@ protocol FoodPlansRepository {
     func updateFoodPlan(_ foodPlan: FoodPlan, for userId: String, completion: @escaping (Result<Void, Error>) -> Void)
     func deleteFoodPlan(_ foodPlan: FoodPlan, for userId: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
+=======
+>>>>>>> main

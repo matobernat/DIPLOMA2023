@@ -10,7 +10,11 @@ import Foundation
 
 class MockClientRepository: ClientRepository {
     // You can use these arrays to hold your mock data for each function
+<<<<<<< HEAD
     var fetchedClients: [Client] = MockedData.clients
+=======
+    var fetchedClients: [Client] = []
+>>>>>>> main
     var createdClients: [Client] = []
     var updatedClients: [Client] = []
     var deletedClients: [Client] = []
