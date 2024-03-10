@@ -5,6 +5,19 @@ Fitness Trainer Companion App by Martin Bernat
 This application is a complex solution for fitness trainers, designed to handle multiple clients and create customized fitness plans. 
 Developed primarily for iPad (iOS), the app is built using SwiftUI and Firebase Firestore for the database. Users can log in via email and password.
 
+
+
+
+
+
+https://github.com/matobernat/DIPLOMA2023/assets/36670189/9ba6bef6-0aa1-4a0a-9b2a-5eaf0b5ef46b
+
+
+
+
+
+
+
 ## Try the app online for yourself!
 
 1. Go to [appetize.io ](https://appetize.io)
