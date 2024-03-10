@@ -1,14 +1,23 @@
 # DIPLOMA2023
 Fitness Trainer Companion App by Martin Bernat
 
+## App Description
+This application is for teams of fitness trainers or individuals,  designed to handle multiple clients and create customized fitness plans, food protocols, skinfold measurements and progres photo albums. Developed primarily for iPad (iOS), the app is built using SwiftUI and Firebase Firestore for the database.
+
 ## Project Description
-This application is a complex solution for fitness trainers, designed to handle multiple clients and create customized fitness plans. 
-Developed primarily for iPad (iOS), the app is built using SwiftUI and Firebase Firestore for the database. Users can log in via email and password.
+The project started user research. Analysis of existing solutions, literature and focus group.
+On the focus group (fitness trainers) were then conducted qualitative analysis with numerous interviews.
+Based on the analysis were created functional requirements for the app.
+Design of the app started by Lofi Prototype and later a Hifi prototype done in Figma. 
+After successful design of the app, structural diagrams were made as a bridge between design and development
+Based on these diagrams was then the app developed and tested. 
 
 
 
 
 
+
+Figma Hifi prototype:
 
 https://github.com/matobernat/DIPLOMA2023/assets/36670189/9ba6bef6-0aa1-4a0a-9b2a-5eaf0b5ef46b
 
