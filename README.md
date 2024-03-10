@@ -22,6 +22,10 @@ Figma Hifi prototype:
 https://github.com/matobernat/DIPLOMA2023/assets/36670189/9ba6bef6-0aa1-4a0a-9b2a-5eaf0b5ef46b
 
 
+Final app:
+
+https://github.com/matobernat/DIPLOMA2023/assets/36670189/79c89204-ca9a-4d9b-9b62-3905806a65d1
+
 
 
 
