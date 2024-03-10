@@ -18,11 +18,10 @@ Developed primarily for iPad (iOS), the app is built using SwiftUI and Firebase 
 7. set iOS to iOS 16.0 and higher
 8. Ideally set orientation to Landscape
 9. Play The App
-
-When the app is running:
-10. use my account Email: matobernat@gmail.com password: matobernat
-11. Now you should be able to use the app.
-12. You can list trhough Client and their respective data or other sections of the app.
+10. To access already created data, use my app account.
+11. Email: matobernat@gmail.com password: matobernat
+12. Now you should be able to use the app.
+13. You can list trhough Client and their respective data or other sections of the app.
 
 
 
