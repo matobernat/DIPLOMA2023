@@ -5,7 +5,7 @@ Fitness Trainer Companion App by Martin Bernat
 This application is for teams of fitness trainers or individuals,  designed to handle multiple clients and create customized fitness plans, food protocols, skinfold measurements and progres photo albums. Developed primarily for iPad (iOS), the app is built using SwiftUI and Firebase Firestore for the database.
 
 ## Project Description
-The project started user research. Analysis of existing solutions, literature and focus group.
+The project started with user research. Analysis of existing solutions, literature and focus group.
 On the focus group (fitness trainers) were then conducted qualitative analysis with numerous interviews.
 Based on the analysis were created functional requirements for the app.
 Design of the app started by Lofi Prototype and later a Hifi prototype done in Figma. 
