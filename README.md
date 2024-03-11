@@ -8,7 +8,16 @@ This application is for teams of fitness trainers or individuals,  designed to h
 This diploma thesis began with user research, analyzing current solutions and gathering insights from a focus group of fitness trainers. This research informed the creation of the app's functional requirements. We designed a low-fidelity prototype, followed by a high-fidelity prototype in Figma, to visualize the app's design. Structural diagrams were then developed to link design to development, leading to the app's creation and thorough testing. This process ensured the app met our targeted needs and standards efficiently.
 
 
+## App Architecture
 
+![MyMVVM](https://github.com/matobernat/DIPLOMA2023/assets/36670189/fe470791-2bd1-4bbd-bca0-9fcef895fc06)
+
+![ClassDiagram02CMP](https://github.com/matobernat/DIPLOMA2023/assets/36670189/03204539-250d-44e2-90cb-8ac9c1bbd320)
+
+![WireframeSimplified](https://github.com/matobernat/DIPLOMA2023/assets/36670189/945b2c04-36e3-44f5-8d00-d5f44c488608)
+
+
+![ComponentFunky](https://github.com/matobernat/DIPLOMA2023/assets/36670189/b8ac8645-dc28-4e3f-a804-538bbdaa013d)
 
 
 
