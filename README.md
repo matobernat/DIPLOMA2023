@@ -17,7 +17,7 @@ Simplified App Structure
 <img width="6224" alt="ComponendDiagramSimplified" src="https://github.com/matobernat/DIPLOMA2023/assets/36670189/f4ef629b-810e-4e4e-8e06-2cbf9909fc1a">
 
 
-Class Diagram
+Simplified Class Diagram
 ![ClassDiagram02CMP](https://github.com/matobernat/DIPLOMA2023/assets/36670189/03204539-250d-44e2-90cb-8ac9c1bbd320)
 
 Simplified Wireframe Diagram
