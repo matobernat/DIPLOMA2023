@@ -10,15 +10,21 @@ This diploma thesis began with user research, analyzing current solutions and ga
 
 ## App Architecture
 
+Architecture Model 
 ![MyMVVM](https://github.com/matobernat/DIPLOMA2023/assets/36670189/fe470791-2bd1-4bbd-bca0-9fcef895fc06)
 
+Simplified App Structure
+<img width="6224" alt="ComponendDiagramSimplified" src="https://github.com/matobernat/DIPLOMA2023/assets/36670189/f4ef629b-810e-4e4e-8e06-2cbf9909fc1a">
+
+
+Class Diagram
 ![ClassDiagram02CMP](https://github.com/matobernat/DIPLOMA2023/assets/36670189/03204539-250d-44e2-90cb-8ac9c1bbd320)
 
+Simplified Wireframe Diagram
 ![WireframeSimplified](https://github.com/matobernat/DIPLOMA2023/assets/36670189/945b2c04-36e3-44f5-8d00-d5f44c488608)
 
-
-![ComponentFunky](https://github.com/matobernat/DIPLOMA2023/assets/36670189/b8ac8645-dc28-4e3f-a804-538bbdaa013d)
-
+Domain Structure
+<img width="6145" alt="DomainGraph" src="https://github.com/matobernat/DIPLOMA2023/assets/36670189/6f8cdd31-0667-4f99-b5c0-3d01cf37d05e">
 
 
 Figma Hifi prototype:
