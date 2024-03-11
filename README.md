@@ -10,7 +10,7 @@ This diploma thesis began with user research, analyzing current solutions and ga
 
 ## App Architecture
 
-Architecture Model 
+Architecture Model - modified MVVM 
 ![MyMVVM](https://github.com/matobernat/DIPLOMA2023/assets/36670189/fe470791-2bd1-4bbd-bca0-9fcef895fc06)
 
 Simplified App Structure
